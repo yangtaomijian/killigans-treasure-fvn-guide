@@ -56,6 +56,7 @@ description: "Eddio 的 Killigan’s Treasure Public v0.57a 非官方中文攻�
 ## 官方入口 {#kt-official}
 
 - [Eddio 的 Killigan’s Treasure 官方发布页](https://eddio.itch.io/killigans-treasure)：作品与公开版本入口。
+- [Eddio 的 Patreon](https://www.patreon.com/killiganstreasure)：支持作者与游戏创作。
 - [官方 FAQ](https://itch.io/t/1320696/faq-updated-11302025)：关系、设置和章节起点等基础说明。
 - [官方回归／换设备指南](https://itch.io/t/2741741/returning-player-new-device-click-here)：旧档、设备更换与 Trailmarkers 的回归入口。
 

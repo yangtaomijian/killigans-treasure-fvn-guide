@@ -56,6 +56,7 @@ Understand regular saves and Trailmarkers, and troubleshoot locked images, Dress
 ## Official links {#kt-official}
 
 - [Eddio's official Killigan’s Treasure release page](https://eddio.itch.io/killigans-treasure): the game and public releases.
+- [Eddio's Patreon](https://www.patreon.com/killiganstreasure): support the creator and the game's development.
 - [Official FAQ](https://itch.io/t/1320696/faq-updated-11302025): basic help with relationships, settings, and chapter starts.
 - [Official returning-player / new-device guide](https://itch.io/t/2741741/returning-player-new-device-click-here): old saves, changing devices, and Trailmarkers.
 
