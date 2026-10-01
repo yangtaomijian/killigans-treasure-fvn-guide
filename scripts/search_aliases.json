@@ -123,6 +123,42 @@
         "装备"
       ],
       "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "topic:personality",
+      "forms": [
+        "Personality",
+        "性格"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "personality:neutral-unique",
+      "forms": [
+        "中立性格独有",
+        "Neutral unique",
+        "Neutral 的独特动作",
+        "Neutral’s distinct action"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "location:bathhouse",
+      "forms": [
+        "Bathhouse",
+        "浴池"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "presentation:undressed",
+      "forms": [
+        "裸体",
+        "不穿衣服",
+        "naked",
+        "undressed"
+      ],
+      "evidence": "public-bilingual-equivalent"
     }
   ]
 }

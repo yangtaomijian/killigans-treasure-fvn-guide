@@ -163,7 +163,8 @@ def main():
     en_ids = {anchor for rel, contract in contracts.items() if "en" in rel.parts for anchor in contract[0]}
     for locale, ids in (("ZH", zh_ids), ("EN", en_ids)):
         count = sum(len(contract[0]) for rel, contract in contracts.items() if ("en" in rel.parts) == (locale == "EN"))
-        if count != 125:
+        # Frozen baseline plus eight approved bilingual Personality sections.
+        if count != 133:
             errors.append(f"{locale} source explicit anchor contract changed: occurrences={count}, unique={len(ids)}")
     if zh_ids != en_ids:
         errors.append(f"locale anchor sets differ: ZH-only={sorted(zh_ids - en_ids)}, EN-only={sorted(en_ids - zh_ids)}")

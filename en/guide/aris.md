@@ -53,6 +53,8 @@ On Day 7 morning, choose `I need to get in there` at the outhouse question, then
 
 </details>
 
+During Day 7 free exploration, a sufficiently Noble-leaning response can open a short Purescale Entryway visit. Every attempt uses one slot, even if you choose to leave, and closes the entryway for the day. Save first to compare; see the [guard responses and entry choice](../reference/personality.md#aris-purescale-personality).
+
 The Day 7 Shipyard leads to the evening talk with Taavi. `Forgive her` / `Don't forgive her` change the immediate response; this is not a permanent gate on your traveling party. For Macsen's bed image that night, follow his [early preparation](../reference/relationships.md#prepare-macsen), then choose `Invite him to my bed` if it appears. If Killigan was left dirty by the morning, a two-slot visit to the Bathhouse can clean him up. Those two slots can coexist with a Day 7 Prime claim after all its conditions are ready, but will use all four slots. See [later chances for the bed Memory](../collectibles/memories.md#aris-mac-bedhug).
 
 ### Day 8: feelings for Macsen

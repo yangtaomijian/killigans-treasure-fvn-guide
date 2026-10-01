@@ -1209,6 +1209,274 @@
         "n": 5,
         "id": "collectibles/equipment.html#equipment-ouros"
       }
+    },
+    {
+      "id": "closure-personality-root-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-root",
+      "query": "性格",
+      "top": "reference/personality.html"
+    },
+    {
+      "id": "closure-personality-root-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-root",
+      "query": "Personality",
+      "top": "reference/personality.html"
+    },
+    {
+      "id": "closure-personality-neutral-unique-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-neutral-unique",
+      "query": "中立性格独有",
+      "top": "reference/personality.html#spiceport-day2-personality"
+    },
+    {
+      "id": "closure-personality-neutral-unique-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-neutral-unique",
+      "query": "Neutral unique",
+      "top": "reference/personality.html#spiceport-day2-personality"
+    },
+    {
+      "id": "closure-personality-neutral-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-neutral",
+      "query": "Neutral",
+      "top": "reference/personality.html#spiceport-day2-personality"
+    },
+    {
+      "id": "closure-personality-neutral-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-neutral",
+      "query": "Neutral",
+      "top": "reference/personality.html#spiceport-day2-personality"
+    },
+    {
+      "id": "closure-personality-noble-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-noble",
+      "query": "Noble",
+      "within": {
+        "id": "reference/personality.html#aris-komoli-personality",
+        "n": 5
+      }
+    },
+    {
+      "id": "closure-personality-noble-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-noble",
+      "query": "Noble",
+      "within": {
+        "id": "reference/personality.html#aris-komoli-personality",
+        "n": 5
+      }
+    },
+    {
+      "id": "closure-personality-barbaric-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-barbaric",
+      "query": "Barbaric",
+      "within": {
+        "id": "reference/personality.html#aris-day8-personality",
+        "n": 5
+      }
+    },
+    {
+      "id": "closure-personality-barbaric-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-barbaric",
+      "query": "Barbaric",
+      "within": {
+        "id": "reference/personality.html#aris-day8-personality",
+        "n": 5
+      }
+    },
+    {
+      "id": "closure-personality-purescale-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-purescale",
+      "query": "Purescale",
+      "top": "reference/personality.html#aris-purescale-personality"
+    },
+    {
+      "id": "closure-personality-purescale-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-purescale",
+      "query": "Purescale personality",
+      "top": "reference/personality.html#aris-purescale-personality"
+    },
+    {
+      "id": "closure-personality-question-reasoning-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-question-reasoning",
+      "query": "Question their reasoning",
+      "top": "reference/personality.html#aris-purescale-personality"
+    },
+    {
+      "id": "closure-personality-question-reasoning-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-question-reasoning",
+      "query": "Question their reasoning",
+      "top": "reference/personality.html#aris-purescale-personality"
+    },
+    {
+      "id": "closure-personality-komoli-defend-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-komoli-defend",
+      "query": "Komoli Defend myself",
+      "top": "reference/personality.html#aris-komoli-personality"
+    },
+    {
+      "id": "closure-personality-komoli-defend-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-komoli-defend",
+      "query": "Komoli Defend myself",
+      "top": "reference/personality.html#aris-komoli-personality"
+    },
+    {
+      "id": "closure-personality-bathhouse-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-bathhouse",
+      "query": "浴池 性格",
+      "top": "reference/personality.html#aris-bathhouse-personality"
+    },
+    {
+      "id": "closure-personality-bathhouse-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-bathhouse",
+      "query": "Bathhouse personality",
+      "top": "reference/personality.html#aris-bathhouse-personality"
+    },
+    {
+      "id": "closure-personality-undressed-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-undressed",
+      "query": "裸体 性格",
+      "top": "reference/personality.html#spiceport-day7-personality"
+    },
+    {
+      "id": "closure-personality-undressed-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-undressed",
+      "query": "undressed personality",
+      "top": "reference/personality.html#spiceport-day7-personality"
+    },
+    {
+      "id": "closure-personality-day7-dress-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-day7-dress",
+      "query": "Day 7 不穿衣服",
+      "top": "reference/personality.html#spiceport-day7-personality"
+    },
+    {
+      "id": "closure-personality-day7-dress-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-day7-dress",
+      "query": "stay naked Day 7",
+      "top": "reference/personality.html#spiceport-day7-personality"
+    },
+    {
+      "id": "closure-personality-banquet-direction-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-banquet-direction",
+      "query": "宴会 2000 Ouros 性格",
+      "top": "reference/personality.html#aris-banquet-personality"
+    },
+    {
+      "id": "closure-personality-banquet-direction-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-banquet-direction",
+      "query": "banquet personality",
+      "top": "reference/personality.html#aris-banquet-personality"
+    },
+    {
+      "id": "closure-personality-zhokhar-room-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-zhokhar-room",
+      "query": "Zhokhar 房间 性格",
+      "top": "reference/personality.html#spiceport-day2-personality"
+    },
+    {
+      "id": "closure-personality-zhokhar-room-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-zhokhar-room",
+      "query": "Zhokhar room personality",
+      "top": "reference/personality.html#spiceport-day2-personality"
+    },
+    {
+      "id": "closure-personality-stargazing-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-stargazing",
+      "query": "水晶平原 Macsen 观星 性格",
+      "top": "reference/personality.html#crystal-stargazing-personality"
+    },
+    {
+      "id": "closure-personality-stargazing-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-stargazing",
+      "query": "Crystal Plains Macsen stargazing personality",
+      "top": "reference/personality.html#crystal-stargazing-personality"
+    },
+    {
+      "id": "closure-personality-library-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-library",
+      "query": "斯派斯港 Day 5 Library 性格",
+      "top": "reference/personality.html#spiceport-day5-personality"
+    },
+    {
+      "id": "closure-personality-library-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-library",
+      "query": "Spiceport Day 5 Library personality",
+      "top": "reference/personality.html#spiceport-day5-personality"
+    },
+    {
+      "id": "closure-personality-purescale-day7-zh",
+      "locale": "zh",
+      "category": "personality-closure",
+      "pair": "closure-personality-purescale-day7",
+      "query": "阿瑞斯 Day 7 Purescale 性格",
+      "top": "reference/personality.html#aris-purescale-personality"
+    },
+    {
+      "id": "closure-personality-purescale-day7-en",
+      "locale": "en",
+      "category": "personality-closure",
+      "pair": "closure-personality-purescale-day7",
+      "query": "Aris Day 7 Purescale personality",
+      "top": "reference/personality.html#aris-purescale-personality"
     }
   ]
 }

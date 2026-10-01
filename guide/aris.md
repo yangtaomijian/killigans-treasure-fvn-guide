@@ -53,6 +53,8 @@ Day 7 早晨，在是否使用厕所的提问中选 `I need to get in there`，�
 
 </details>
 
+Day 7 自由探索时，足够偏 Noble 的回应可让你短暂进入 Purescale Entryway。每次尝试都花一格，即使选择离开，之后当天的入口也会关闭。想比较请先存档；[守卫回应与进入方法](../reference/personality.md#aris-purescale-personality)。
+
 Day 7 的 Shipyard 会接入当晚与 Taavi 的谈话。`Forgive her`／`Don't forgive her` 改变当下回应；无需把这道选择当作永久决定同行者的门槛。若还想看当晚 Macsen 的同床画面，可按[早期相处准备](../reference/relationships.md#prepare-macsen)安排；晚间若出现 `Invite him to my bed`，选它邀他同床。早晨若留下弄脏的状态，下午花两格去 Bathhouse 可以清理；这两格可与准备齐全后第 7 天领取参赛服的两格进场并存，但会用完当天四格。[同床画面的后续机会](../collectibles/memories.md#aris-mac-bedhug)。
 
 ### Day 8：Macsen 的交往意向

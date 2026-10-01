@@ -63,7 +63,10 @@ def check_aliases(cache):
     # E02 removes search-task phrasing from prose. These two query forms map
     # to canonical, still-visible Aris optional-equipment wording; retrieval
     # is asserted by test_equipment_queries.cjs, without reinserting the query.
-    query_only = {'equipment:missing-boots': {'缺少 boots', 'missing boots'}}
+    query_only = {
+        'equipment:missing-boots': {'缺少 boots', 'missing boots'},
+        'personality:neutral-unique': {'中立性格独有', 'neutral unique'},
+    }
     concepts = set()
     surfaces = {}
     for group in data["groups"]:
@@ -87,6 +90,14 @@ def check_aliases(cache):
     missing_boots = next(g for g in data['groups'] if g['id'] == 'equipment:missing-boots')
     assert {'Aris 的可选装备', 'Aris optional equipment'} <= set(missing_boots['forms'])
     assert all(f.casefold() in visible for f in ('Aris 的可选装备', 'Aris optional equipment'))
+    neutral = next(g for g in data['groups'] if g['id'] == 'personality:neutral-unique')
+    assert {'Neutral 的独特动作', "Neutral’s distinct action"} <= set(neutral['forms'])
+    for locale, wording in (('', 'Neutral 的独特动作'), ('en/', "Neutral’s distinct action")):
+        document = html_document(OUTPUT / locale / 'reference/personality.html', cache)
+        target = next(n for n in document.root.walk()
+                      if n.attrs.get('id') == 'spiceport-day2-personality')
+        assert target.tag == 'a'
+        assert wording.casefold() in label(document.root).casefold()
     return len(concepts), len(surfaces), Counter(group["evidence"] for group in data["groups"])
 
 
