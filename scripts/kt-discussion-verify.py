@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-pages = ['guide/redroot', 'guide/aris', 'guide/crystal-plains-shieldfall', 'guide/spiceport',
+pages = ['help', 'guide/redroot', 'guide/aris', 'guide/crystal-plains-shieldfall', 'guide/spiceport',
          'guide/blueleaf-grove', 'reference/relationships', 'reference/personality', 'reference/combat',
          'collectibles/memories', 'collectibles/equipment', 'collectibles/dressing-room', 'collectibles/codex']
 expected = {f'/{prefix}{page}.html': page.replace('/', '.') for prefix in ('', 'en/') for page in pages}
@@ -15,7 +15,7 @@ assert "const guideVersion = 'Public v0.57a'" in runtime
 config = (root / 'assets/kt-discussion-config.html').read_text()
 assets = ['kt-discussion-remote.html', 'kt-discussion-runtime.html', 'kt-discussion-ui.html', 'kt-feedback-ui.html']
 for prefix in ('', 'en/'):
-    for route in ['index', 'help', *pages]:
+    for route in ['index', *pages]:
         relative = f'{prefix}{route}.html'
         text = (root / '_site' / relative).read_text()
         for marker in re.findall(r'<meta[^>]+>', config):
@@ -36,4 +36,4 @@ for name in ['kt-discussion.css', 'kt-feedback.css']:
     tokens = set(re.findall(r'var\((--kt-[a-z-]+)\)', css))
     foundation = (root / 'assets/kt-foundation.css').read_text()
     assert all(token + ':' in foundation for token in tokens), (name, tokens)
-print('KT Discussion static QA: 24 exact content contexts, 28 production configs/feedback slots, no About pages, include order and native theme tokens PASS')
+print('KT Discussion static QA: 26 exact content contexts, 28 production configs/feedback slots, no About pages, include order and native theme tokens PASS')

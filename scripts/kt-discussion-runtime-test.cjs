@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, '..');
 const assembled = process.env.KT_DISCUSSION_ASSEMBLED === '1';
 const asset = name => fs.readFileSync(path.join(root, 'assets', name), 'utf8');
 const files = ['kt-discussion-remote.html', 'kt-discussion-runtime.html', 'kt-discussion-ui.html', 'kt-feedback-ui.html'];
-const pages = ['guide/redroot', 'guide/aris', 'guide/crystal-plains-shieldfall', 'guide/spiceport',
+const pages = ['help', 'guide/redroot', 'guide/aris', 'guide/crystal-plains-shieldfall', 'guide/spiceport',
   'guide/blueleaf-grove', 'reference/relationships', 'reference/personality', 'reference/combat',
   'collectibles/memories', 'collectibles/equipment', 'collectibles/dressing-room', 'collectibles/codex'];
 const version = 'Public v0.57a';
@@ -146,7 +146,7 @@ async function run(engine, launch) {
     await page.locator('.kt-discussion-comment').nth(1).waitFor();
     assert.equal(await page.locator('.kt-discussion-body img').count(), 0, 'Comment body must stay text');
     assert.equal(reads.at(-1).cursor, 'local-cursor');
-    for (const prefix of ['', 'en/']) for (const route of ['index.html', 'help.html']) {
+    for (const prefix of ['', 'en/']) for (const route of ['index.html']) {
       await go(prefix + route); assert.equal(await page.locator('#kt-public-discussion').count(), 0);
       assert.equal(await page.locator('.kt-feedback-slot').isEnabled(), true);
     }
@@ -156,10 +156,24 @@ async function run(engine, launch) {
       assert.equal(await page.locator('.kt-feedback-slot').isEnabled(), false);
       assert.equal(await page.locator('#kt-public-discussion').isVisible(), false);
     }
+    paginated = false; postError = null;
+    for (const prefix of ['', 'en/']) {
+      await go(prefix + 'help.html');
+      await page.locator('.kt-discussion-add').click();
+      const body = prefix ? 'English help question' : 'Chinese help question';
+      await page.locator('#kt-discussion-new-body').fill(body);
+      await page.locator('.kt-discussion-submit').click();
+      await page.locator('.kt-discussion-body').filter({ hasText:body }).waitFor();
+      assert.equal(posted.at(-1).pageKey, 'help');
+      assert.equal(posted.at(-1).locale, prefix ? 'en' : 'zh-CN');
+      assert.equal(await page.locator('.kt-discussion-body').count(), 1, 'Help comments stay separate by locale');
+    }
+    paginated = true;
+    for (const geometryRoute of ['en/reference/combat.html', 'help.html', 'en/help.html'])
     for (dark of [false, true]) for (const width of [320, 390, 960, 1280, 1440]) {
       await page.setViewportSize({ width, height:844 });
       await page.emulateMedia({ colorScheme:dark ? 'dark' : 'light' });
-      await go('en/reference/combat.html');
+      await go(geometryRoute);
       if (assembled) await page.waitForFunction(dark => document.body.classList.contains(`quarto-${dark ? 'dark' : 'light'}`)
         && getComputedStyle(document.body).backgroundColor === (dark ? 'rgb(36, 35, 33)' : 'rgb(251, 250, 247)'), dark);
       await page.locator('.kt-discussion-comment').waitFor();
@@ -210,7 +224,7 @@ async function run(engine, launch) {
       }
       await page.locator('.kt-feedback-close').click();
     }
-    console.log(`${engine}: 24 route contexts, post/reply/report/private feedback, pagination, lock, rate draft, host exclusion, 10 width/${assembled ? 'native-theme' : 'theme-token'} checks PASS`);
+    console.log(`${engine}: 26 route contexts, bilingual Help posting/isolation, post/reply/report/private feedback, pagination, lock, rate draft, host exclusion, 30 width/${assembled ? 'native-theme' : 'theme-token'} checks PASS`);
   } finally { await browser.close(); }
 }
 (async () => { await run('Chromium', chromium); await run('WebKit', webkit); })().catch(error => { console.error(error); process.exitCode = 1; });
