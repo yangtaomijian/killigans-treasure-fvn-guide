@@ -8,7 +8,10 @@ import sys
 SITE = Path(__file__).resolve().parents[1]
 OUTPUT = SITE / "_site"
 HOSTNAME = "killigans-treasure.carambi.com"
-REQUIRED = ("index.html", "en/index.html", "404.html", "CNAME", "robots.txt", "sitemap.xml")
+REQUIRED = ("index.html", "en/index.html", "404.html", "CNAME", "robots.txt", "sitemap.xml",
+            "assets/social/killigans-treasure-guide-zh.png", "assets/social/killigans-treasure-guide-en.png",
+            "assets/favicon.svg", "assets/favicon-32x32.png", "assets/apple-touch-icon.png",
+            "en/assets/favicon.svg", "en/assets/favicon-32x32.png", "en/assets/apple-touch-icon.png")
 PRIVATE_DIRS = {"research", "archive", "runtime-evidence", "private-inputs", "source", ".git", ".github", ".wrangler"}
 PRIVATE_SUFFIXES = {".rpy", ".rpyc", ".rpa", ".save", ".persistent", ".zip", ".tar", ".gz", ".md", ".csv", ".py", ".sh", ".sqlite", ".db", ".pem", ".key"}
 

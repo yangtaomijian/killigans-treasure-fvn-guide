@@ -3,6 +3,13 @@ lang: zh-CN
 project:
   type: website
   output-dir: _site
+  resources:
+    - assets/favicon.svg
+    - assets/favicon-32x32.png
+    - assets/apple-touch-icon.png
+    - assets/social/killigans-treasure-guide-zh.png
+    - assets/social/killigans-treasure-guide-en.png
+    - "!en/_site/**"
   render:
     - index.md
     - help.md
@@ -20,6 +27,7 @@ project:
     - collectibles/codex.md
 
 website:
+  favicon: assets/favicon.svg
   search: false
   page-footer:
     left: |

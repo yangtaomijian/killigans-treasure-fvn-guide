@@ -12,6 +12,10 @@ python3 -B "$site_dir/scripts/generate_dressing_room.py"
 quarto render "$site_dir"
 quarto render "$site_dir/en"
 
+mkdir -p "$site_dir/en/_site/assets"
+for asset in favicon.svg favicon-32x32.png apple-touch-icon.png; do
+  cp "$site_dir/assets/$asset" "$site_dir/en/_site/assets/$asset"
+done
 mkdir -p "$site_dir/_site/en"
 cp -R "$site_dir/en/_site/." "$site_dir/_site/en/"
 mkdir -p "$site_dir/_site/assets"

@@ -20,6 +20,7 @@ project:
     - collectibles/codex.md
 
 website:
+  favicon: ../assets/favicon.svg
   search: false
   page-footer:
     left: |

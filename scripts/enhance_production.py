@@ -11,19 +11,35 @@ from xml.etree import ElementTree as ET
 from verify_render import OUTPUT, PAGES, SITE
 
 ORIGIN = "https://killigans-treasure.carambi.com"
+FAVICON_ASSETS = ('favicon.svg', 'favicon-32x32.png', 'apple-touch-icon.png')
+SOCIAL_IMAGES = {locale: f'assets/social/killigans-treasure-guide-{locale}.png' for locale in ('zh', 'en')}
 
 
 def canonical(relative):
     return ORIGIN + "/" + (relative[:-10] if relative.endswith("index.html") else relative)
 
 
+def favicon_links(path, asset_root, root_relative=False):
+    links = []
+    for name, attributes in (
+        ('favicon-32x32.png', 'rel="icon" type="image/png" sizes="32x32"'),
+        ('favicon.svg', 'rel="icon" type="image/svg+xml"'),
+        ('apple-touch-icon.png', 'rel="apple-touch-icon" sizes="180x180"'),
+    ):
+        href = ('/' + (asset_root / name).relative_to(OUTPUT).as_posix()
+                if root_relative else os.path.relpath(asset_root / name, path.parent))
+        links.append(f'<link {attributes} href="{href}">')
+    return links
+
+
 def finalize():
     token = os.environ.get("KT_CF_ANALYTICS_TOKEN", "")
     if token and not re.fullmatch(r"[a-fA-F0-9]{32}", token):
         raise SystemExit("KT_CF_ANALYTICS_TOKEN must be a 32-character public Cloudflare beacon ID")
-    visual_paths = [SITE / 'assets/favicon.svg'] + [SITE / f'assets/social/kt-public-v0.57a-{locale}.png' for locale in ('zh', 'en')]
-    if not all(path.is_file() for path in visual_paths):
-        print('Final user-provided favicon/social cards pending; omitting references to missing assets.')
+    visual_paths = [SITE / 'assets' / name for name in FAVICON_ASSETS] + [SITE / image for image in SOCIAL_IMAGES.values()]
+    for path in visual_paths:
+        if not path.is_file():
+            raise SystemExit(f'Missing publication asset: {path.relative_to(SITE)}')
     urls = []
     for locale in ("", "en/"):
         english = bool(locale)
@@ -40,10 +56,9 @@ def finalize():
             target = page + ".html"
             url = canonical(locale + target)
             zh, en = canonical(target), canonical("en/" + target)
-            social_ready = (SITE / ('assets/social/kt-public-v0.57a-' + ('en' if english else 'zh') + '.png')).is_file()
-            image = ORIGIN + "/assets/social/kt-public-v0.57a-" + ("en" if english else "zh") + ".png"
+            image = ORIGIN + '/' + SOCIAL_IMAGES['en' if english else 'zh']
             # Idempotence: replace only publication-owned metadata in <head>.
-            head = re.sub(r'\s*<link\b[^>]*\brel="(?:canonical|alternate|icon)"[^>]*>', '', head)
+            head = re.sub(r'\s*<link\b[^>]*\brel="(?:canonical|alternate|icon|apple-touch-icon)"[^>]*>', '', head)
             head = re.sub(r'\s*<meta\b[^>]*(?:property="og:[^"]+"|name="(?:twitter:[^"]+|description|robots|theme-color|msvalidate\.01)")[^>]*>', '', head)
             head = re.sub(r'\s*<!-- KT production metadata -->.*?<!-- /KT production metadata -->', '', head, flags=re.S)
             def meta(name, value, prop=False):
@@ -55,19 +70,16 @@ def finalize():
                     meta('theme-color', '#fbfaf7'), meta('description', description),
                     # Public ownership marker supplied by Bing Webmaster Tools.
                     meta('msvalidate.01', 'CE5B12344E8DBB0290A70A12A1D2B19E')]
-            if (SITE / 'assets/favicon.svg').is_file():
-                tags.append(f'<link rel="icon" type="image/svg+xml" href="{os.path.relpath(OUTPUT / "assets/favicon.svg", path.parent)}">')
+            tags.extend(favicon_links(path, OUTPUT / locale / 'assets'))
             for key, value in {'type':'website', 'site_name':'Carambi', 'title':title,
                     'description':description, 'url':url, 'locale':'en_US' if english else 'zh_CN',
                     'locale:alternate':'zh_CN' if english else 'en_US', 'image':image,
                     'image:type':'image/png', 'image:width':'1200', 'image:height':'630',
                     'image:alt':'Killigan’s Treasure Public v0.57a · Carambi'}.items():
-                if not key.startswith('image') or social_ready:
-                    tags.append(meta('og:' + key, value, True))
-            for key, value in {'card':'summary_large_image' if social_ready else 'summary','title':title,'description':description,
+                tags.append(meta('og:' + key, value, True))
+            for key, value in {'card':'summary_large_image','title':title,'description':description,
                     'image':image,'image:alt':'Killigan’s Treasure Public v0.57a · Carambi'}.items():
-                if not key.startswith('image') or social_ready:
-                    tags.append(meta('twitter:' + key, value))
+                tags.append(meta('twitter:' + key, value))
             urls.append((url, zh, en))
             head = re.sub(r'<script data-kt-analytics>.*?</script>', '', head, flags=re.S)
             head += '\n<!-- KT production metadata -->\n' + '\n'.join(tags) + '\n<!-- /KT production metadata -->\n'
@@ -93,15 +105,14 @@ def finalize():
     (OUTPUT / '.nojekyll').touch()
     for asset in visual_paths:
         destination = OUTPUT / asset.relative_to(SITE)
-        if asset.is_file():
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(asset, destination)
-        else:
-            destination.unlink(missing_ok=True)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(asset, destination)
     (OUTPUT / '404.html').write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>Page not found · Killigan’s Treasure</title><style>body{background:#fbfaf7;color:#28251f;font:1.1rem system-ui;max-width:40rem;margin:12vh auto;padding:1.5rem}a{color:inherit}@media(prefers-color-scheme:dark){body{background:#242321;color:#eee9df}}</style></head><body><h1>Page not found / 未找到页面</h1><p><a href="/">中文首页</a> · <a href="/en/">English home</a></p></body></html>''')
+    not_found = OUTPUT / '404.html'
+    not_found.write_text(not_found.read_text().replace('</head>', '\n'.join(favicon_links(not_found, OUTPUT / 'assets', root_relative=True)) + '</head>'))
     for metadata in OUTPUT.rglob('.DS_Store'):
         metadata.unlink()
-    print('Publication visuals: '+('user final assets present' if all(path.is_file() for path in visual_paths) else 'PENDING user-supplied favicon/social cards; site publication allowed'))
+    print('Publication visuals: SVG/PNG favicons and bilingual social cards present')
     print('PASS: production metadata; 28 canonical sitemap routes; analytics '+('configured' if token else 'awaiting dedicated KT beacon ID'))
 
 

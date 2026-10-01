@@ -48,9 +48,13 @@ jobs:
         run: |
           test -n "$KT_CF_ANALYTICS_TOKEN" || { echo 'Set KT_CF_ANALYTICS_TOKEN to the KT public beacon ID before deployment.'; exit 1; }
           sh scripts/build.sh
-          if [ ! -f assets/favicon.svg ] || [ ! -f assets/social/kt-public-v0.57a-zh.png ] || [ ! -f assets/social/kt-public-v0.57a-en.png ]; then
-            echo 'Final user-provided favicon/social cards remain pending; publishing the verified site without missing-asset references.' >> "$GITHUB_STEP_SUMMARY"
-          fi
+          for locale in '' 'en/'; do
+            test -f "_site/${locale}assets/favicon.svg"
+            test -f "_site/${locale}assets/favicon-32x32.png"
+            test -f "_site/${locale}assets/apple-touch-icon.png"
+          done
+          test -f _site/assets/social/killigans-treasure-guide-zh.png
+          test -f _site/assets/social/killigans-treasure-guide-en.png
           python3 -B scripts/verify_deployment.py
           git diff --exit-code
 
