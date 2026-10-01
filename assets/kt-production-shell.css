@@ -79,6 +79,12 @@ footer.footer .kt-publication-footer p { margin: 0; }
   cursor: default;
   text-decoration: none;
 }
+@media (max-width: 767.98px) {
+  /* Let the final controls scroll above persistent mobile browser chrome. */
+  footer.footer:has(.kt-publication-footer) .nav-footer {
+    padding-bottom: calc(1.35rem + 5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
 @media (max-width: 389px) {
   .kt-publication-footer-links { column-gap: .6rem; }
 }
