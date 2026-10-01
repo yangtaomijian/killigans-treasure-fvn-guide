@@ -54,5 +54,5 @@ for prefix in ('','en/'):
         for folded in re.findall(r'<details class="kt-read-more">(.*?)</details>',new,re.S):
             assert '<a id=' not in folded
     ids=[source_contract(SITE/prefix/(p+'.md'))[0] for p in PAGES]
-    assert sum(map(len,ids))==125
-print('PASS: four shared map contracts; current map links across locales; Relationship / Spiceport / Journey semantics; 125 anchors per locale; public source checksums unchanged')
+    assert sum(map(len,ids))==133
+print('PASS: four shared map contracts; current map links across locales; Relationship / Spiceport / Journey semantics; 133 anchors per locale; public source checksums unchanged')
