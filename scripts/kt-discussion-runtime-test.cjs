@@ -168,6 +168,8 @@ async function run(engine, launch) {
         const dialog = document.querySelector('.kt-feedback-dialog');
         const mount = document.querySelector('#kt-public-discussion');
         const r = dialog.getBoundingClientRect(); const m = mount.getBoundingClientRect();
+        const main = document.querySelector('main').getBoundingClientRect();
+        const footer = document.querySelector('footer.footer').getBoundingClientRect();
         const probe = document.createElement('span'); document.body.append(probe);
         const color = token => { probe.style.color = `var(${token})`; return getComputedStyle(probe).color; };
         const tokens = { bg:color('--kt-bg'), text:color('--kt-text'), heading:color('--kt-heading'), surface:color('--kt-surface') };
@@ -180,7 +182,8 @@ async function run(engine, launch) {
           dialog:{ open:dialog.open, visible:r.width > 0 && r.height > 0, background:getComputedStyle(dialog).backgroundColor,
             text:getComputedStyle(dialog).color, input:getComputedStyle(dialog.querySelector('.kt-feedback-input')).backgroundColor,
             scroll:dialog.scrollWidth, client:dialog.clientWidth },
-          discussion:{ left:m.left, right:m.right, visible:m.width > 0 && m.height > 0 && !mount.hidden,
+          content:{ bottom:main.bottom, left:main.left, width:main.width, footerTop:footer.top },
+          discussion:{ left:m.left, right:m.right, top:m.top, bottom:m.bottom, width:m.width, visible:m.width > 0 && m.height > 0 && !mount.hidden,
             text:getComputedStyle(mount).color, heading:getComputedStyle(mount.querySelector('h2')).color,
             scroll:mount.scrollWidth, client:mount.clientWidth }, tokens };
       });
@@ -189,6 +192,12 @@ async function run(engine, launch) {
       assert(dimensions.dialog.open && dimensions.dialog.visible && dimensions.discussion.visible);
       assert(dimensions.dialog.scroll <= dimensions.dialog.client + 1 && dimensions.discussion.scroll <= dimensions.discussion.client + 1);
       assert(dimensions.discussion.left >= 0 && dimensions.discussion.right <= width + 1);
+      assert(dimensions.discussion.top >= dimensions.content.bottom - 1, 'Discussion follows the guide body');
+      assert(dimensions.content.footerTop >= dimensions.discussion.bottom - 1, 'Discussion precedes the footer');
+      if (assembled && width >= 992) {
+        assert(Math.abs(dimensions.discussion.left - dimensions.content.left) <= 1, 'Discussion uses the guide column');
+        assert(Math.abs(dimensions.discussion.width - dimensions.content.width) <= 1, 'Discussion has the guide column width');
+      }
       assert.equal(dimensions.dialog.background, dimensions.tokens.bg);
       assert.equal(dimensions.dialog.text, dimensions.tokens.text);
       assert.equal(dimensions.dialog.input, dimensions.tokens.surface);
