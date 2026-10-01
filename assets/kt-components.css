@@ -1,0 +1,741 @@
+/* Visual styles for existing controls and native components. */
+#quarto-header #kt-search-launcher {
+  justify-content: center;
+  width: var(--kt-control-height);
+  min-height: 2.25rem;
+  padding-inline: 0;
+  border: 1px solid transparent;
+  border-radius: var(--kt-control-radius);
+  color: var(--kt-text-muted);
+  background: transparent;
+  box-shadow: none;
+}
+
+#quarto-header #kt-search-launcher .kt-search-icon {
+  display: block;
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+#quarto-header #kt-search-launcher:is(:hover, :focus-visible) {
+  color: var(--kt-heading);
+  background: var(--kt-surface-muted);
+}
+
+#quarto-header #kt-search-launcher:focus-visible,
+#quarto-header .navbar-toggler:focus-visible,
+#quarto-header #kt-page-toc-trigger:focus-visible,
+#kt-search-dialog :is(#kt-search-input, #kt-search-clear, #kt-search-close):focus-visible,
+#kt-page-toc-panel #kt-page-toc-close:focus-visible,
+#quarto-document-content details > summary:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 2px;
+}
+
+#kt-global-nav-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--kt-control-height);
+  min-height: var(--kt-control-height);
+  padding: 0 .55rem;
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-control-radius);
+  color: var(--kt-text);
+  background: var(--kt-surface);
+  cursor: pointer;
+}
+
+#kt-global-nav-close:is(:hover, :focus-visible) {
+  color: var(--kt-heading);
+  border-color: var(--kt-accent);
+  background: var(--kt-surface-muted);
+}
+
+#kt-global-nav-close:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 991px) {
+  #quarto-header .navbar-toggler,
+  #quarto-header #kt-page-toc-trigger,
+  #quarto-header #kt-search-launcher {
+    box-sizing: border-box;
+    height: var(--kt-control-height);
+    min-height: var(--kt-control-height);
+    border: 1px solid var(--kt-border-strong);
+    border-radius: var(--kt-control-radius);
+    color: var(--kt-text);
+    background: var(--kt-surface);
+    box-shadow: none;
+  }
+
+  #quarto-header .navbar-toggler {
+    width: var(--kt-control-height);
+    min-width: var(--kt-control-height);
+    padding: 0;
+  }
+
+  #quarto-header .navbar-toggler-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  #quarto-header #kt-page-toc-trigger {
+    padding-inline: .65rem;
+  }
+
+  #quarto-header #kt-search-launcher {
+    margin: 0 .25rem 0 auto;
+  }
+
+  #quarto-header .quarto-navbar-tools {
+    gap: var(--kt-control-gap);
+  }
+
+  #quarto-header :is(.navbar-toggler, #kt-page-toc-trigger, #kt-search-launcher):is(:hover, [aria-expanded="true"]) {
+    color: var(--kt-heading);
+    border-color: var(--kt-accent);
+    background: var(--kt-surface-muted);
+  }
+}
+
+body #kt-search-dialog {
+  --kt-search-top: clamp(3.5rem, 10dvh, 7rem);
+  position: fixed;
+  top: var(--kt-search-top);
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+  width: min(52rem, calc(100vw - 2.5rem));
+  max-width: 52rem;
+  max-height: calc(100dvh - var(--kt-search-top) - 1rem);
+  overflow: hidden;
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-radius-md);
+  color: var(--kt-text);
+  background: var(--kt-surface-raised);
+  box-shadow: var(--kt-shadow-float);
+}
+
+body #kt-search-dialog::backdrop {
+  background: rgb(41 39 32 / 54%);
+}
+
+#kt-search-dialog .kt-search-panel {
+  max-height: calc(100dvh - var(--kt-search-top) - 1rem);
+  min-height: 0;
+  overflow: hidden;
+}
+
+#kt-search-dialog .kt-search-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .7rem;
+  padding: .75rem var(--kt-panel-padding);
+  border-bottom: 1px solid var(--kt-border);
+}
+
+#kt-search-dialog #kt-search-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#kt-search-dialog .kt-search-field {
+  position: relative;
+  min-width: 0;
+}
+
+#kt-search-dialog #kt-search-input {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--kt-control-height);
+  padding: .45rem 2.6rem .45rem .65rem;
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-radius-sm);
+  color: var(--kt-text);
+  background: var(--kt-bg);
+  box-shadow: none;
+}
+
+#kt-search-dialog #kt-search-input::placeholder {
+  color: var(--kt-text-muted);
+  opacity: 1;
+}
+
+#kt-search-dialog #kt-search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+#kt-search-dialog #kt-search-clear {
+  right: .3rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kt-radius-sm);
+  color: var(--kt-text-muted);
+  background: transparent;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+#kt-search-dialog #kt-search-clear[hidden] {
+  display: none;
+}
+
+#kt-page-toc-panel #kt-page-toc-close {
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-control-radius);
+  color: var(--kt-text);
+  background: var(--kt-surface-panel);
+  min-height: var(--kt-control-height);
+}
+
+#kt-search-dialog #kt-search-close {
+  width: auto;
+  min-height: var(--kt-control-height);
+  padding: .4rem .55rem;
+  border: 0;
+  border-radius: var(--kt-control-radius);
+  color: var(--kt-text-muted);
+  background: transparent;
+  white-space: nowrap;
+}
+
+#kt-search-dialog #kt-search-clear:is(:hover, :focus-visible),
+#kt-search-dialog #kt-search-close:is(:hover, :focus-visible),
+#kt-page-toc-panel #kt-page-toc-close:is(:hover, :focus-visible) {
+  color: var(--kt-heading);
+  background: var(--kt-surface-muted);
+}
+
+#kt-search-dialog #kt-search-status {
+  padding: .6rem 1rem;
+  color: var(--kt-text-muted);
+  font-size: .88rem;
+  line-height: 1.45;
+}
+
+#kt-search-dialog #kt-search-status:empty {
+  display: none;
+}
+
+#kt-search-dialog #kt-search-results {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: min(60dvh, 32rem);
+  overflow-y: auto;
+  padding: 0 .55rem .5rem;
+}
+
+#kt-search-dialog #kt-search-results:empty {
+  display: none;
+}
+
+#kt-search-dialog .kt-search-result {
+  padding: .7rem .55rem;
+  border-bottom: 1px solid var(--kt-border);
+  border-radius: 0;
+  color: var(--kt-text);
+  background: transparent;
+  text-decoration: none;
+  line-height: 1.45;
+}
+
+#kt-search-dialog .kt-search-result:is(:hover, :focus-visible) {
+  color: var(--kt-heading);
+  background: color-mix(in srgb, var(--kt-accent) 5%, transparent);
+  box-shadow: inset 2px 0 var(--kt-accent);
+}
+
+#kt-search-dialog .kt-search-result:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: -2px;
+}
+
+#kt-search-dialog .kt-search-result-title {
+  color: var(--kt-heading);
+  font-weight: 660;
+}
+
+#kt-search-dialog .kt-search-result-section {
+  margin-top: .13rem;
+  color: var(--kt-accent);
+  font-size: .85rem;
+  line-height: 1.4;
+}
+
+#kt-search-dialog .kt-search-result-text {
+  margin-top: .25rem;
+  color: var(--kt-text-muted);
+  font-size: .91rem;
+  line-height: 1.5;
+}
+
+#quarto-document-content mark.kt-search-mark {
+  color: inherit;
+  background: transparent;
+  box-shadow: inset 0 -.45em var(--kt-accent-soft);
+  border-bottom: 1px solid var(--kt-accent);
+}
+
+@media (max-width: 575px) {
+  body #kt-search-dialog {
+    --kt-search-top: max(12px, env(safe-area-inset-top));
+    width: min(40rem, calc(100vw - 1rem));
+  }
+
+  #kt-search-dialog .kt-search-head {
+    gap: .35rem;
+    padding: .7rem .8rem;
+  }
+
+  #kt-search-dialog #kt-search-close {
+    padding-inline: .4rem;
+  }
+
+  #kt-search-dialog #kt-search-status {
+    padding-inline: .8rem;
+  }
+}
+
+body #quarto-document-content #kt-memory-locator {
+  margin: .25rem 0 1.45rem;
+  padding: .8rem 0;
+  border: 0;
+  border-top: 1px solid var(--kt-border);
+  border-bottom: 1px solid var(--kt-border);
+  border-radius: 0;
+  background: transparent;
+}
+
+body #quarto-document-content #kt-memory-locator li {
+  column-gap: .65rem;
+  row-gap: .2rem;
+}
+
+body #quarto-document-content #kt-memory-locator li + li {
+  margin-top: .4rem;
+}
+
+body #quarto-document-content #kt-memory-locator a {
+  padding: .17rem .07rem;
+  border: 0;
+  border-radius: 0;
+  color: var(--kt-link);
+  background: transparent;
+  text-decoration: underline;
+  text-decoration-color: var(--kt-border-strong);
+  text-underline-offset: .16em;
+}
+
+body #quarto-document-content #kt-memory-locator a:hover {
+  color: var(--kt-link-hover);
+  text-decoration-color: currentColor;
+}
+
+body #quarto-document-content #kt-memory-locator a[aria-current="location"] {
+  color: var(--kt-heading);
+  background: var(--kt-accent-soft);
+  box-shadow: inset 0 -2px var(--kt-accent);
+  font-weight: 650;
+  text-decoration-color: transparent;
+}
+
+body #quarto-document-content #kt-memory-locator a:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 2px;
+}
+
+#quarto-document-content details {
+  margin: 1.05rem 0 1.3rem;
+  padding: 0 .95rem .9rem;
+  border: 1px solid var(--kt-border);
+  border-left: 3px solid var(--kt-accent);
+  border-radius: .5rem;
+  background: var(--kt-surface);
+}
+
+#quarto-document-content details:not([open]) {
+  padding-bottom: 0;
+}
+
+#quarto-document-content details > summary {
+  display: list-item;
+  min-height: 2.6rem;
+  margin: 0 -.95rem .75rem;
+  padding: .72rem .95rem;
+  color: var(--kt-heading);
+  background: color-mix(in srgb, var(--kt-accent) 5%, var(--kt-surface));
+  border-radius: .4rem .4rem 0 0;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.45;
+  list-style-position: inside;
+  cursor: pointer;
+}
+
+#quarto-document-content details > summary::marker {
+  color: var(--kt-accent);
+}
+
+#quarto-document-content details > summary:hover {
+  background: color-mix(in srgb, var(--kt-accent) 8%, var(--kt-surface));
+}
+
+#quarto-document-content details > summary:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: -4px;
+}
+
+#quarto-document-content details[open] > summary {
+  border-bottom: 1px solid var(--kt-border);
+}
+
+#quarto-document-content details:not([open]) > summary {
+  margin-bottom: 0;
+  border-radius: .4rem;
+}
+
+#quarto-document-content details[open] > :last-child {
+  margin-bottom: 0;
+}
+
+/* Ordinary publication tables: native structure, separate from Memory/Codex entry tables. */
+@media (max-width: 991px) {
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) {
+    border-top: 1px solid var(--kt-border-strong);
+    border-bottom: 1px solid var(--kt-border);
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) :is(th,td) {
+    padding: .35rem .375rem;
+    vertical-align: top;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) thead th {
+    border-bottom: 1px solid var(--kt-border-strong);
+    font-weight: 650;
+  }
+}
+
+/* Shared conventional desktop chrome; compact table systems keep their own narrow rules. */
+@media (min-width: 992px) {
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) {
+    width: auto !important;
+    min-width: 0;
+    max-width: 100%;
+    table-layout: auto !important;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) :is(col, th, td) {
+    width: auto !important;
+    min-width: 0;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) th {
+    white-space: nowrap;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) td {
+    white-space: normal;
+  }
+
+  #quarto-document-content :is(.quarto-table-container, .quarto-bootstrap-table, .table-responsive):has(> table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table)) {
+    width: fit-content;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Memory lookup: narrow order, readable native title, remaining space for the scene. */
+  #quarto-document-content table.kt-memory-responsive-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  #quarto-document-content :is(table.kt-memory-responsive-table, table.kt-codex-responsive-table) col {
+    width: auto !important;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table :is(th, td):nth-child(1) {
+    width: 3.25rem;
+    white-space: nowrap;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table :is(th, td):nth-child(2) {
+    width: 38%;
+  }
+
+  /* These early categories have short titles; give their scene descriptions more room. */
+  #quarto-document-content table.kt-memory-responsive-table:has(#memory-redroot-memories-1) :is(th, td):nth-child(2) {
+    width: 9rem;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table:has(#memory-redroot-wilds-memories-1) :is(th, td):nth-child(2) {
+    width: 13rem;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table:has(#memory-aris-memories-1) :is(th, td):nth-child(2) {
+    width: 11rem;
+  }
+
+  /* Codex categories differ in how much text belongs in the final note column. */
+  #quarto-document-content table.kt-codex-responsive-table {
+    --kt-codex-entry-width: 17%;
+    --kt-codex-first-width: 27%;
+    --kt-codex-later-width: 29%;
+    --kt-codex-note-width: auto;
+    width: 100%;
+    table-layout: auto;
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table:has(#codex-species-1) {
+    --kt-codex-entry-width: 24%;
+    --kt-codex-first-width: 38%;
+    --kt-codex-later-width: auto;
+    --kt-codex-note-width: 1%;
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table:has(#codex-magic-1) {
+    --kt-codex-entry-width: 24%;
+    --kt-codex-first-width: 32%;
+    --kt-codex-later-width: 27%;
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table:has(#codex-history-1) {
+    --kt-codex-entry-width: 23%;
+    --kt-codex-first-width: 29%;
+    --kt-codex-later-width: 25%;
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table:has(#codex-world-1) {
+    --kt-codex-entry-width: 19%;
+    --kt-codex-first-width: 21%;
+    --kt-codex-later-width: 30%;
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table th {
+    white-space: nowrap;
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table :is(th, td):nth-child(1) {
+    width: var(--kt-codex-entry-width);
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table :is(th, td):nth-child(2) {
+    width: var(--kt-codex-first-width);
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table :is(th, td):nth-child(3) {
+    width: var(--kt-codex-later-width);
+  }
+
+  #quarto-document-content table.kt-codex-responsive-table :is(th, td):nth-child(4) {
+    width: var(--kt-codex-note-width);
+  }
+
+  /* Shared bilingual anchors identify the date/time and activity/time schedules. */
+  #quarto-document-content section:has(> p > :is(#spiceport-early-excursions, #spiceport-day5)) + section > table.table {
+    width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  #quarto-document-content section:has(> p > #spiceport-early-excursions) + section > table.table :is(th, td):nth-child(1) {
+    width: 4rem !important;
+    white-space: nowrap;
+  }
+
+  #quarto-document-content section:has(> p > #spiceport-early-excursions) + section > table.table :is(th, td):nth-child(2) {
+    width: 26% !important;
+  }
+
+  #quarto-document-content section:has(> p > #spiceport-day5) + section > table.table :is(th, td):nth-child(1) {
+    width: 26% !important;
+  }
+
+  #quarto-document-content section:has(> p > #spiceport-day5) + section > table.table :is(th, td):nth-child(2) {
+    width: 14% !important;
+  }
+
+  #quarto-document-content table.table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: transparent;
+    border: 1px solid var(--kt-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: .4rem;
+  }
+
+  #quarto-document-content table.table > :is(thead, tbody) > tr > :is(th, td) {
+    padding: .55rem .625rem;
+    border-bottom: 1px solid var(--kt-border);
+    vertical-align: top;
+  }
+
+  #quarto-document-content table.table > thead > tr > th {
+    color: var(--kt-heading);
+    background: var(--kt-surface-muted);
+    border-bottom-color: var(--kt-border-strong);
+    font-weight: 650;
+  }
+
+  #quarto-document-content table.table > thead > tr > th:first-child {
+    border-top-left-radius: .4rem;
+  }
+
+  #quarto-document-content table.table > thead > tr > th:last-child {
+    border-top-right-radius: .4rem;
+  }
+
+  #quarto-document-content table.table > tbody > tr:last-child > :is(th, td) {
+    border-bottom: 0;
+  }
+}
+
+@media (min-width: 992px) and (hover: hover) {
+  #quarto-document-content table.table > tbody > tr:hover:not(:target) > :is(th, td) {
+    background: color-mix(in srgb, var(--kt-accent) 4%, var(--kt-bg));
+  }
+}
+
+@media (max-width: 352px) {
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table):has(> thead > tr > th:nth-child(3):last-child),
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table):has(> thead > tr > th:nth-child(3):last-child) > thead,
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table):has(> thead > tr > th:nth-child(3):last-child) > tbody {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table):has(> thead > tr > th:nth-child(3):last-child) > colgroup {
+    display: none;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table):has(> thead > tr > th:nth-child(3):last-child) > :is(thead,tbody) > tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table):has(> thead > tr > th:nth-child(3):last-child) > :is(thead,tbody) > tr > :is(th,td) {
+    display: block;
+    width: auto;
+    min-width: 0;
+    padding: .35rem .375rem;
+    vertical-align: top;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table):has(> thead > tr > th:nth-child(3):last-child) > :is(thead,tbody) > tr > :is(th,td):first-child {
+    grid-column: 1 / -1;
+    overflow-wrap: normal;
+  }
+}
+
+/* Prime Attire's single three-column plan: give instructions room on narrow pages. */
+@media (max-width: 767px) {
+  #quarto-document-content #prime-attire > section.level3:first-of-type > table.table:has(> thead > tr > th:nth-child(3):last-child),
+  #quarto-document-content #prime-attire > section.level3:first-of-type > table.table:has(> thead > tr > th:nth-child(3):last-child) > :is(thead,tbody) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #quarto-document-content #prime-attire > section.level3:first-of-type > table.table > colgroup {
+    display: none;
+  }
+
+  #quarto-document-content #prime-attire > section.level3:first-of-type > table.table > :is(thead,tbody) > tr {
+    display: grid;
+    grid-template-columns: minmax(0, 64%) minmax(0, 36%);
+    width: 100%;
+  }
+
+  #quarto-document-content #prime-attire > section.level3:first-of-type > table.table > :is(thead,tbody) > tr > :is(th,td) {
+    display: block;
+    width: auto;
+    min-width: 0;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  #quarto-document-content #prime-attire > section.level3:first-of-type > table.table > :is(thead,tbody) > tr > :is(th,td):first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* One source table, DW's measured-container record reading pattern. */
+#quarto-document-content .kt-adaptive-records { width: 100%; min-width: 0; }
+#quarto-document-content .kt-adaptive-records .kt-record-label { display: none; }
+#quarto-document-content .kt-adaptive-records.kt-record-mode { overflow: visible; }
+#quarto-document-content .kt-adaptive-records.kt-record-mode > table.table,
+#quarto-document-content .kt-adaptive-records.kt-record-mode > table.table > tbody {
+  display: block !important; width: 100% !important; max-width: 100%; border: 0; border-radius: 0;
+}
+#quarto-document-content .kt-adaptive-records.kt-record-mode > table.table > colgroup { display: none; }
+#quarto-document-content .kt-adaptive-records.kt-record-mode > table.table > thead {
+  position: absolute; left: 0; width: 1px !important; max-width: 1px; height: 1px !important; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+#quarto-document-content .kt-adaptive-records.kt-record-mode > table.table > tbody > tr {
+  display: block !important; width: 100% !important; padding: .7rem 0;
+  border-top: 1px solid var(--kt-border-strong); background: transparent;
+}
+#quarto-document-content .kt-adaptive-records.kt-record-mode > table.table > tbody > tr > td {
+  display: block !important; width: 100% !important; min-width: 0; padding: .24rem 0 !important;
+  border: 0; background: transparent; line-height: 1.55; overflow-wrap: anywhere !important;
+}
+#quarto-document-content .kt-adaptive-records.kt-record-mode .kt-record-label {
+  display: block; margin-bottom: .08rem; color: var(--kt-text-soft);
+  font-size: .76rem; font-weight: 650; letter-spacing: .02em;
+}
+#quarto-document-content .kt-adaptive-records.kt-record-mode td:first-child { font-weight: 650; }
+#quarto-document-content .kt-adaptive-records.kt-record-mode td a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Equipment category labels and values share a line in narrow records. */
+#quarto-document-content .kt-adaptive-records.kt-record-mode .kt-record-category .kt-record-label,
+#quarto-document-content .kt-adaptive-records.kt-record-mode .kt-record-cost .kt-record-label,
+#quarto-document-content .kt-inline-category.kt-record-mode td:nth-child(2) .kt-record-label {
+  display: inline; margin-bottom: 0; margin-inline-end: .55rem;
+}
+
+/* Keep mobile heading permalinks in the page gutter, outside text layout. */
+@media (max-width: 991px) {
+  #quarto-document-content :is(h2, h3, h4).anchored { position: relative; padding-inline-end: .4rem; }
+  #quarto-document-content :is(h2, h3, h4).anchored > .anchorjs-link {
+    position: absolute; inset-inline-end: -.25rem; top: .2em;
+    margin: 0 !important; padding: 0 !important; font-size: .75em !important;
+  }
+}
+
+/* Travel schedules use full-width, left-aligned fields in narrow reading mode. */
+#quarto-document-content .kt-travel-schedule.kt-record-mode td {
+  text-align: start !important;
+}
+
+/* Keep Equipment and Dressing Room reference links beside their labels. */
+#quarto-document-content .kt-adaptive-records.kt-record-mode > table.table > tbody > tr > td.kt-record-detail {
+  display: flex !important; align-items: center; gap: .55rem;
+}
+#quarto-document-content .kt-adaptive-records.kt-record-mode .kt-record-detail .kt-record-label {
+  display: inline; margin: 0;
+}
+
+/* Separate the compact field label from its value, matching Codex records. */
+#quarto-document-content .kt-adaptive-records.kt-record-mode :is(.kt-record-category, .kt-record-cost, .kt-record-detail) .kt-record-label::after,
+#quarto-document-content .kt-inline-category.kt-record-mode td:nth-child(2) .kt-record-label::after {
+  content: " ·";
+}

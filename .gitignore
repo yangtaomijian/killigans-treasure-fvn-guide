@@ -1,0 +1,24 @@
+# Never publish game saves, persistent profiles, archives, or audit evidence.
+.DS_Store
+*.save
+*.persistent
+**/persistent
+**/sync/
+*.rpa
+*.rpy
+*.rpyc
+runtime-evidence/
+research/
+/_site/
+/en/_site/
+/.quarto/
+/en/.quarto/
+/index_files/
+
+**/*.quarto_ipynb
+
+/node_modules/
+/test-results/
+/FREEZE*.md
+__pycache__/
+*.py[cod]

@@ -1,0 +1,95 @@
+lang: en
+
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.md
+    - help.md
+    - guide/redroot.md
+    - guide/aris.md
+    - guide/crystal-plains-shieldfall.md
+    - guide/spiceport.md
+    - guide/blueleaf-grove.md
+    - reference/relationships.md
+    - reference/personality.md
+    - reference/combat.md
+    - collectibles/memories.md
+    - collectibles/equipment.md
+    - collectibles/dressing-room.md
+    - collectibles/codex.md
+
+website:
+  search: false
+  page-footer:
+    left: |
+      <div class="kt-publication-footer"><p>Unofficial player guide · Killigan’s Treasure Public v0.57a</p><div class="kt-publication-footer-links"><span class="kt-publication-attribution">Maintained by <a class="kt-carambi-link" href="https://carambi.com/">Carambi</a></span><button class="kt-feedback-slot" type="button" disabled>Private feedback</button><button class="kt-back-to-top" type="button">↑ Back to top</button></div></div>
+  navbar:
+    left:
+      - text: Home
+        href: index.md
+      - text: Journey
+        menu:
+          - text: Redroot / Redroot Wilds
+            href: guide/redroot.md
+          - text: Aris
+            href: guide/aris.md
+          - text: Crystal Plains / ??? / Shieldfall Vale
+            href: guide/crystal-plains-shieldfall.md
+          - text: Spiceport
+            href: guide/spiceport.md
+          - text: Blueleaf Grove
+            href: guide/blueleaf-grove.md
+      - text: Reference
+        menu:
+          - text: Relationships
+            href: reference/relationships.md
+          - text: Personality
+            href: reference/personality.md
+          - text: Combat & QTEs
+            href: reference/combat.md
+      - text: Collectibles
+        menu:
+          - text: Memories
+            href: collectibles/memories.md
+          - text: Equipment
+            href: collectibles/equipment.md
+          - text: Dressing Room
+            href: collectibles/dressing-room.md
+          - text: Codex
+            href: collectibles/codex.md
+      - text: Help
+        href: help.md
+    right:
+      - text: 中文
+        href: ../index.html
+
+format:
+  html:
+    theme:
+      light: [default]
+      dark: [default, ../assets/kt-dark.scss]
+    respect-user-color-scheme: true
+    toc: true
+    toc-depth: 3
+    css:
+      - ../assets/kt-foundation.css
+      - ../assets/kt-publication.css
+      - ../assets/kt-layout.css
+      - ../assets/kt-components.css
+      - ../assets/kt-theme.css
+      - ../assets/kt-production-shell.css
+      - ../assets/kt-discussion.css
+      - ../assets/kt-feedback.css
+    include-in-header:
+      - ../assets/kt-discussion-config.html
+    include-after-body:
+      - ../assets/kt-language-switch.html
+      - ../assets/kt-search.html
+      - ../assets/kt-discussion-remote.html
+      - ../assets/kt-discussion-runtime.html
+      - ../assets/kt-discussion-ui.html
+      - ../assets/kt-feedback-ui.html
+      - ../assets/kt-production-shell.html
+    filters:
+      - ../scripts/preserve-explicit-anchors.lua

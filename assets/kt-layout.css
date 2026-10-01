@@ -1,0 +1,346 @@
+/* One page TOC, in a left rail or narrow drawer. */
+#kt-page-toc-trigger,
+#kt-page-toc-close,
+#kt-page-toc-backdrop,
+#kt-global-nav-toolbar,
+#kt-global-nav-backdrop {
+  display: none;
+}
+
+#quarto-header .kt-language-icon {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  /* The pinned masthead is approximately 68.3px high at desktop widths. */
+  :root {
+    --kt-desktop-header-height: 68.3px;
+    --kt-desktop-toc-gutter: 12.5px;
+  }
+
+  #quarto-content.page-columns {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    grid-template-columns: 192px minmax(0, 840px) minmax(0, 1fr);
+    gap: 20px;
+    padding-inline: max(16px, calc((100vw - 1440px) / 2 + 16px));
+  }
+
+  #quarto-content.page-columns > #kt-page-toc-panel {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    height: calc(100dvh - var(--kt-desktop-header-height));
+    /* Quarto writes top/max-height inline; this rail fills the visible desktop viewport. */
+    max-height: calc(100dvh - var(--kt-desktop-header-height)) !important;
+    /* Pull the grid's initial top spacing under the sticky header offset. */
+    margin: -4px 0 0;
+    padding: calc(.65rem + var(--kt-desktop-toc-gutter)) .7rem .65rem .35rem;
+    position: sticky;
+    top: var(--kt-desktop-header-height) !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    background: var(--kt-bg);
+    border-right: 1px solid var(--kt-border);
+  }
+
+  #quarto-content.page-columns > main.content {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    max-width: 840px;
+    min-width: 0;
+    margin: 0;
+    padding: 1.5rem 0 0 2rem;
+  }
+
+  #kt-page-toc-panel #TOC {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#kt-page-toc-panel #TOC .nav-link.active {
+  border-left-color: var(--kt-accent);
+  color: var(--kt-heading);
+  font-weight: 650;
+  background: transparent;
+}
+
+#kt-page-toc-panel #TOC #toc-title {
+  margin: 0 0 .7rem;
+  color: var(--kt-text-muted);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .035em;
+  line-height: 1.4;
+}
+
+#kt-page-toc-panel #TOC .nav-link {
+  padding-block: .3rem;
+  border-radius: 0;
+  background: transparent;
+}
+
+#kt-page-toc-panel #TOC ul ul .nav-link:not(.active) {
+  color: var(--kt-text-muted);
+}
+
+@media (max-width: 991px) {
+  #quarto-header #navbarCollapse {
+    display: block !important;
+    position: fixed;
+    inset: var(--kt-global-nav-top, 0px) auto 0 0;
+    z-index: 1060;
+    width: min(86vw, 320px);
+    max-width: 100vw;
+    height: calc(100dvh - var(--kt-global-nav-top, 0px));
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0 0 1rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-100%);
+    transition: transform .18s ease;
+    background: var(--kt-surface-panel);
+    border: 0;
+    border-right: 1px solid var(--kt-border-strong);
+    box-shadow: var(--kt-shadow-panel);
+  }
+
+  body.kt-global-nav-open #quarto-header #navbarCollapse {
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  #quarto-header #kt-global-nav-backdrop {
+    display: none;
+    position: fixed;
+    top: var(--kt-global-nav-top, 0px);
+    left: 0;
+    width: 100vw;
+    height: calc(100dvh - var(--kt-global-nav-top, 0px));
+    z-index: 1050;
+    background: rgb(41 39 32 / 38%);
+  }
+
+  body.kt-global-nav-open #quarto-header #kt-global-nav-backdrop {
+    display: block;
+  }
+
+  body.kt-global-nav-open {
+    overflow: hidden;
+  }
+
+  #quarto-header #kt-global-nav-toolbar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.2rem;
+    padding: .45rem var(--kt-panel-padding);
+    color: var(--kt-heading);
+    background: var(--kt-surface-panel);
+    border-bottom: 1px solid var(--kt-border);
+    font-weight: 650;
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav {
+    display: block;
+    width: 100%;
+    max-height: none;
+    padding: .55rem .75rem;
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav.ms-auto {
+    margin: .7rem 0 0 !important;
+    padding: .55rem .85rem;
+    border-top: 1px solid var(--kt-border);
+    background: var(--kt-surface-muted);
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav.ms-auto .kt-language-utility {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .45rem .55rem;
+    color: var(--kt-heading);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--kt-radius-sm);
+    font-size: .9rem;
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav.ms-auto .kt-language-utility:is(:hover, :focus-visible) {
+    border-color: var(--kt-accent);
+  }
+
+  #quarto-header #navbarCollapse .kt-language-icon {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  #quarto-header #navbarCollapse .nav-link {
+    display: block;
+    padding: .58rem .65rem;
+    white-space: normal;
+  }
+
+  #quarto-header #navbarCollapse .dropdown-menu {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    float: none;
+    width: 100%;
+    margin: 0 0 .25rem;
+    padding: .15rem 0 .25rem .8rem;
+    border: 0;
+    border-left: 1px solid var(--kt-border);
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  #quarto-header #navbarCollapse .dropdown-menu:not(.show) {
+    display: none;
+  }
+
+  #quarto-header #navbarCollapse .dropdown-menu.show {
+    display: block;
+  }
+
+  #quarto-header #navbarCollapse .dropdown-item {
+    padding: .45rem .65rem;
+  }
+
+  #quarto-content.page-columns {
+    display: block;
+    width: 100%;
+    max-width: none;
+    padding-inline: 24px;
+  }
+
+  #quarto-content.page-columns > main.content {
+    width: 100%;
+    max-width: 840px;
+    min-width: 0;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  #quarto-header #kt-page-toc-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    padding: .35rem .45rem;
+    border: 1px solid var(--kt-border-strong);
+    border-radius: var(--kt-control-radius);
+    background: var(--kt-surface);
+    color: var(--kt-heading);
+    font: inherit;
+    line-height: 1.3;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  #quarto-header #kt-page-toc-trigger:is(:hover, [aria-expanded="true"]) {
+    background: var(--kt-surface-muted);
+  }
+
+  #quarto-header #kt-page-toc-trigger:focus-visible {
+    outline: 2px solid var(--kt-focus);
+    outline-offset: 2px;
+  }
+
+  #quarto-content.page-columns > #kt-page-toc-panel {
+    display: none;
+    position: fixed;
+    inset: 0 0 0 auto;
+    top: 0 !important;
+    z-index: 1060;
+    width: min(21rem, calc(100vw - 1.5rem));
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh !important;
+    margin: 0;
+    padding: .55rem var(--kt-panel-padding) 1.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--kt-surface-panel);
+    border-left: 1px solid var(--kt-border-strong);
+    box-shadow: var(--kt-shadow-panel);
+  }
+
+  body.kt-page-toc-open #quarto-content.page-columns > #kt-page-toc-panel {
+    display: block;
+  }
+
+  body.kt-page-toc-open {
+    overflow: hidden;
+  }
+
+  #quarto-content.page-columns > #kt-page-toc-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background: rgb(41 39 32 / 42%);
+  }
+
+  body.kt-page-toc-open #quarto-content.page-columns > #kt-page-toc-backdrop {
+    display: block;
+  }
+
+  #kt-page-toc-panel #kt-page-toc-close {
+    display: block;
+    margin: 0 0 .65rem auto;
+    padding: .3rem .55rem;
+    border: 1px solid var(--kt-border-strong);
+    border-radius: var(--kt-control-radius);
+    background: var(--kt-surface-panel);
+    color: var(--kt-heading);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  #kt-page-toc-panel #kt-page-toc-close:is(:hover, :focus-visible) {
+    background: var(--kt-surface-muted);
+  }
+
+  #kt-page-toc-panel #kt-page-toc-close:focus-visible {
+    outline: 2px solid var(--kt-focus);
+    outline-offset: 2px;
+  }
+
+  #kt-page-toc-panel #TOC {
+    display: block;
+    max-height: none;
+    overflow: visible;
+    padding-top: .7rem;
+    border-top: 1px solid var(--kt-border);
+  }
+
+  #kt-page-toc-panel #TOC #toc-title {
+    position: absolute;
+    top: 1.28rem;
+    left: var(--kt-panel-padding);
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #quarto-header #navbarCollapse {
+    transition: none;
+  }
+}

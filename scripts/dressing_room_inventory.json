@@ -1,0 +1,1621 @@
+{
+  "version": "Public v0.57a",
+  "groups": [
+    {
+      "id": "treasure-crew",
+      "name": "Treasure Crew"
+    },
+    {
+      "id": "redroot",
+      "name": "Redroot"
+    },
+    {
+      "id": "redroot-wilds",
+      "name": "Redroot Wilds"
+    },
+    {
+      "id": "aris",
+      "name": "Aris"
+    },
+    {
+      "id": "arcane-academy",
+      "name": "Arcane Academy"
+    },
+    {
+      "id": "athlima-summit",
+      "name": "Athlima Summit"
+    },
+    {
+      "id": "aris-contd",
+      "name": "Aris (contd.)"
+    },
+    {
+      "id": "crystal-plains",
+      "name": "Crystal Plains"
+    },
+    {
+      "id": "unknown",
+      "name": "???"
+    }
+  ],
+  "characters": [
+    {
+      "id": "killigan",
+      "name": "Killigan",
+      "group": "treasure-crew",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "macsen",
+      "name": "Macsen",
+      "group": "treasure-crew",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "taavi",
+      "name": "Taavi",
+      "group": "treasure-crew",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "zhokhar",
+      "name": "Zhokhar",
+      "group": "treasure-crew",
+      "available": {
+        "zh": "盾落谷第 1 天日终加入同行团队（Treasure Crew）",
+        "en": "Joins Treasure Crew at the end of Shieldfall Vale Day 1"
+      }
+    },
+    {
+      "id": "riff",
+      "name": "Riff (Papa)",
+      "group": "redroot",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "silvatto",
+      "name": "Mr. Silvatto",
+      "group": "redroot",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "sunny",
+      "name": "Sunny",
+      "group": "redroot",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "cabotte",
+      "name": "Cabotte",
+      "group": "redroot-wilds",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "guards",
+      "name": "Guards",
+      "group": "aris",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "carlimard",
+      "name": "Carlimard",
+      "group": "aris",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "rajine",
+      "name": "Rajine",
+      "group": "aris",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "elise",
+      "name": "Elise",
+      "group": "aris",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "komoli",
+      "name": "Komoli",
+      "group": "arcane-academy",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "guster",
+      "name": "Guster",
+      "group": "arcane-academy",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "tofi",
+      "name": "Tofi",
+      "group": "athlima-summit",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "matagoffe",
+      "name": "Matagoffe",
+      "group": "athlima-summit",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "atama",
+      "name": "Atama",
+      "group": "athlima-summit",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "binini",
+      "name": "Binini",
+      "group": "athlima-summit",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "archcenaire",
+      "name": "Archcenaire",
+      "group": "aris-contd",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "noble",
+      "name": "Noble",
+      "group": "aris-contd",
+      "available": {
+        "zh": "起始人物分组",
+        "en": "Starting Dressing Room groups"
+      }
+    },
+    {
+      "id": "bovolian",
+      "name": "Bovolian",
+      "group": "crystal-plains",
+      "available": {
+        "zh": "水晶平原第 13 天返回画面后",
+        "en": "After the Crystal Plains Day 13 return image"
+      }
+    },
+    {
+      "id": "dion",
+      "name": "Dion",
+      "group": "crystal-plains",
+      "available": {
+        "zh": "水晶平原第 13 天返回画面后",
+        "en": "After the Crystal Plains Day 13 return image"
+      }
+    },
+    {
+      "id": "cyren",
+      "name": "Cyren",
+      "group": "unknown",
+      "available": {
+        "zh": "水晶平原第 13 天返回画面后",
+        "en": "After the Crystal Plains Day 13 return image"
+      }
+    },
+    {
+      "id": "ray",
+      "name": "Ray",
+      "group": "unknown",
+      "available": {
+        "zh": "水晶平原第 13 天返回画面后",
+        "en": "After the Crystal Plains Day 13 return image"
+      }
+    },
+    {
+      "id": "birdigan",
+      "name": "Birdigan",
+      "group": "unknown",
+      "available": {
+        "zh": "水晶平原第 13 天返回画面后",
+        "en": "After the Crystal Plains Day 13 return image"
+      }
+    },
+    {
+      "id": "tren",
+      "name": "Tren",
+      "group": "unknown",
+      "available": {
+        "zh": "水晶平原第 13 天返回画面后",
+        "en": "After the Crystal Plains Day 13 return image"
+      }
+    },
+    {
+      "id": "woodie",
+      "name": "Woodie",
+      "group": "unknown",
+      "available": {
+        "zh": "水晶平原第 13 天返回画面后",
+        "en": "After the Crystal Plains Day 13 return image"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "armor",
+      "nativeName": "Armor",
+      "label": {
+        "zh": "Armor · 上身",
+        "en": "Armor · upper body"
+      }
+    },
+    {
+      "id": "belt",
+      "nativeName": "Belt",
+      "label": {
+        "zh": "Belt · 腰带",
+        "en": "Belt"
+      }
+    },
+    {
+      "id": "boots",
+      "nativeName": "Boots",
+      "label": {
+        "zh": "Boots · 鞋靴",
+        "en": "Boots · footwear"
+      }
+    },
+    {
+      "id": "map",
+      "nativeName": "Map",
+      "label": {
+        "zh": "Map · 地图挂带",
+        "en": "Map · map display"
+      }
+    },
+    {
+      "id": "bottoms",
+      "nativeName": "Bottoms",
+      "label": {
+        "zh": "Bottoms · 下装",
+        "en": "Bottoms"
+      }
+    },
+    {
+      "id": "undies",
+      "nativeName": "Undies",
+      "label": {
+        "zh": "Undies · 内衣",
+        "en": "Undies"
+      }
+    },
+    {
+      "id": "weapon",
+      "nativeName": "Weapon",
+      "label": {
+        "zh": "Weapon · 武器",
+        "en": "Weapon"
+      }
+    },
+    {
+      "id": "special",
+      "nativeName": "Special",
+      "label": {
+        "zh": "Special · 专属变化",
+        "en": "Special · character options"
+      }
+    },
+    {
+      "id": "erect",
+      "nativeName": "Erect",
+      "label": {
+        "zh": "Erect · 成人表现",
+        "en": "Erect · adult presentation"
+      }
+    },
+    {
+      "id": "color",
+      "nativeName": "Color",
+      "label": {
+        "zh": "Color · 色彩",
+        "en": "Color"
+      }
+    },
+    {
+      "id": "accessory",
+      "nativeName": "Accessory",
+      "label": {
+        "zh": "Accessory · 配饰",
+        "en": "Accessory"
+      }
+    }
+  ],
+  "routes": {
+    "default": {
+      "kind": "default",
+      "unlock": {
+        "zh": "本人物起始服装列表中的选项；各部位可以独立切换。",
+        "en": "A selectable value in this character’s starting Outfit options; parts cycle independently."
+      },
+      "earliest": {
+        "zh": "该人物的 Dressing Room 入口开放后",
+        "en": "When this character’s Dressing Room entry is available"
+      },
+      "recovery": {
+        "zh": "起始换装选项与剧情存档中的物品持有、穿着分别记录。",
+        "en": "Starting appearance options are separate from item ownership and wearing in a story save."
+      },
+      "links": [
+        {
+          "href": "equipment.html",
+          "label": {
+            "zh": "装备状态与取得",
+            "en": "Equipment state and acquisition"
+          }
+        }
+      ]
+    },
+    "silvatto": {
+      "kind": "optional",
+      "unlock": {
+        "zh": "奖励界面逐件选中衣物并答 Yep.；同一界面可继续拿另外两件。实体衣物之后会移走，换装选项保留。",
+        "en": "Select each garment on the reward screen and answer Yep.; continue taking the other two there. Physical garments are removed later; appearance unlocks remain."
+      },
+      "earliest": {
+        "zh": "红根镇：Silvatto 的奖励界面",
+        "en": "Redroot: Silvatto’s reward screen"
+      },
+      "recovery": {
+        "zh": "回到离开奖励界面前的普通存档。",
+        "en": "Load a regular save before leaving the reward screen."
+      },
+      "links": [
+        {
+          "href": "equipment.html#silvatto-garments",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "aris-shop": {
+      "kind": "optional",
+      "unlock": {
+        "zh": "在阿瑞斯的杂货店（General Store）成功购买对应衣物后开放。",
+        "en": "Unlocks after a successful purchase of the corresponding garment at Aris General Store."
+      },
+      "earliest": {
+        "zh": "阿瑞斯第 2 天的商店机会",
+        "en": "Aris Day 2 shop visit"
+      },
+      "recovery": {
+        "zh": "在后续可自由进店的窗口购买；离开当地后，可从离城前的普通存档补收。",
+        "en": "Buy during a later available shop visit, or revisit a regular save before leaving Aris."
+      },
+      "links": [
+        {
+          "href": "../guide/aris.html",
+          "label": {
+            "zh": "阿瑞斯早期安排",
+            "en": "Early Aris planning"
+          }
+        }
+      ]
+    },
+    "langou": {
+      "kind": "optional",
+      "unlock": {
+        "zh": "编号 4 对应 Spare Langou 或商店 Aris Langou 的换装选项。没有 Marchanide Langou 时，Macsen 在阿瑞斯第 2 天赠衣时可给 Spare Langou；当地杂货店也可购入 Aris Langou。",
+        "en": "Value 4 is shared by Spare Langou and the shop’s Aris Langou appearance option. Without Marchanide Langou, Macsen’s Day 2 gift can be Spare Langou; Aris Langou can also be bought at Aris General Store."
+      },
+      "earliest": {
+        "zh": "阿瑞斯第 2 天赠衣／商店",
+        "en": "Aris Day 2 gift / shop"
+      },
+      "recovery": {
+        "zh": "在赠衣提问前分档，或成功购买 Aris Langou；物品名称不同，但对应同一个换装编号。",
+        "en": "Revisit the gift question or buy Aris Langou successfully; the item names differ while the appearance value is shared."
+      },
+      "links": [
+        {
+          "href": "equipment.html#aris-day2-garments",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "marchanide": {
+      "kind": "optional",
+      "unlock": {
+        "zh": "荒野第 8 天战败，或获胜后检查时已没有穿着腰带（Belt），取得并自动穿上 Marchanide Langou。",
+        "en": "Receive and wear Marchanide Langou after losing the Wilds Day 8 fight, or winning without the Belt still worn at the check."
+      },
+      "earliest": {
+        "zh": "红根荒野第 8 天战斗后",
+        "en": "After the Redroot Wilds Day 8 fight"
+      },
+      "recovery": {
+        "zh": "只补这件装备或外观时，离开斯派斯港、转入蓝叶森林的剧情中，尚未持有就会得到补发。比较早期 Cabotte 邀约、荒野分支或 Aris Day 2 赠衣时，仍须从相应早期选择前的普通存档分支。",
+        "en": "To recover the item or appearance, the story gives it to you if still missing when leaving Spiceport for Blueleaf Grove. To compare the early Cabotte invitation, Wilds branch or Aris Day 2 gift, return to a regular save before the relevant early choice."
+      },
+      "links": [
+        {
+          "href": "equipment.html#marchanide-langou",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "summit": {
+      "kind": "automatic",
+      "unlock": {
+        "zh": "普通参赛服（Summit Attire）随阿瑞斯剧情交付。",
+        "en": "Regular Summit Attire is supplied during the Aris story."
+      },
+      "earliest": {
+        "zh": "阿瑞斯的参赛准备剧情",
+        "en": "Aris Summit preparations"
+      },
+      "recovery": {
+        "zh": "从交付前的普通存档正常推进。",
+        "en": "Play forward from a regular save before its story delivery."
+      },
+      "links": [
+        {
+          "href": "equipment.html#prime-attire",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "prime": {
+      "kind": "optional",
+      "unlock": {
+        "zh": "完成四项参赛服准备后，在阿瑞斯第 7 或第 8 天当天第一次进入竞技场（Coliseum）时，领取特制参赛服（Prime Attire）。",
+        "en": "Complete the four Prime preparations and receive Prime Attire in the first-entry Coliseum reward window on Day 7 or Day 8."
+      },
+      "earliest": {
+        "zh": "阿瑞斯第 7 天；第 8 天还有最后机会",
+        "en": "Aris Day 7; Day 8 has the last window"
+      },
+      "recovery": {
+        "zh": "遗漏准备或错过当天首次入场的领取机会时，回到能补足准备的普通存档；四项准备和完整步骤见装备页。",
+        "en": "Return to a regular save early enough to complete missing preparations or the first-entry window; Equipment has the full chain."
+      },
+      "links": [
+        {
+          "href": "equipment.html#prime-attire",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "post-summit": {
+      "kind": "automatic",
+      "unlock": {
+        "zh": "赛后随剧情增加编号 3_h；换装选项与赛后纪念物分别记录。",
+        "en": "Option 3_h opens through the post-competition story, separately from the memento record."
+      },
+      "earliest": {
+        "zh": "参赛结束后的剧情",
+        "en": "The post-Summit story"
+      },
+      "recovery": {
+        "zh": "从参赛结束前的普通存档正常推进。",
+        "en": "Play forward from a regular save before the Summit ends."
+      },
+      "links": [
+        {
+          "href": "equipment.html#prime-attire",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "weapon": {
+      "kind": "automatic",
+      "unlock": {
+        "zh": "阿瑞斯第 12 天离城时取得 Echelle Warhammer；武器（Weapon）部位随后提供编号 0、1 两个选项。",
+        "en": "Receive Echelle Warhammer on departure from Aris on Day 12; Weapon then offers the visible values 0 and 1."
+      },
+      "earliest": {
+        "zh": "阿瑞斯第 12 天离城",
+        "en": "Aris Day 12 departure"
+      },
+      "recovery": {
+        "zh": "从离城前的普通存档正常推进；持有与穿着仍见装备页。",
+        "en": "Play forward from before departure; item ownership and wearing remain in Equipment."
+      },
+      "links": [
+        {
+          "href": "equipment.html#aris-story-equipment",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "spice-shop": {
+      "kind": "optional",
+      "unlock": {
+        "zh": "在斯派斯港的杂货店（General Store）成功购买对应普通库存衣物后开放。",
+        "en": "Unlocks after successfully buying the corresponding regular-stock garment at Spiceport General Store."
+      },
+      "earliest": {
+        "zh": "斯派斯港第 5 天的自由进店机会",
+        "en": "Spiceport Day 5 free shop visit"
+      },
+      "recovery": {
+        "zh": "可在第 5 天下午、第 6 天自由探索或第 8 天剧情商店购买这九件普通库存衣物；第 6 天须进入自由探索。后仓五件衣物另按后仓窗口补收。",
+        "en": "Buy the nine regular-stock garments on Day 5 afternoon, during Day 6 free exploration, or at the Day 8 story shop. Day 6 requires free exploration. The five back-room garments have their own earlier window."
+      },
+      "links": [
+        {
+          "href": "equipment.html#equipment-spiceport",
+          "label": {
+            "zh": "普通库存与购买窗口",
+            "en": "Regular stock and purchase windows"
+          }
+        },
+        {
+          "href": "../guide/spiceport.html#spiceport-day8",
+          "label": {
+            "zh": "第 8 天剧情商店",
+            "en": "Day 8 story shop"
+          }
+        }
+      ]
+    },
+    "backroom": {
+      "kind": "optional",
+      "unlock": {
+        "zh": "斯派斯港第 5 天下午或第 6 天自由探索，在 General Store 成功购买一件可穿装备并结束购物；在 Any other business? 中选择当前可选的 Anything else in the back?，再逐件购买后仓五件衣物。",
+        "en": "On Spiceport Day 5 afternoon or Day 6 free exploration, successfully buy a wearable item at General Store and finish shopping. At Any other business?, choose Anything else in the back? when selectable, then buy the five back-room garments individually."
+      },
+      "earliest": {
+        "zh": "斯派斯港第 5 天；或第 6 天自由探索",
+        "en": "Spiceport Day 5, or Day 6 free exploration"
+      },
+      "recovery": {
+        "zh": "回到第 5 天下午或能自由探索的第 6 天；只购买口粮或修理锤不会开启购买后的对话，第 8 天店内没有后仓话题。购买前调整已穿装备并在 Stats 核对当前 Charm。Old-Fashioned Suspenders 的实际穿戴还须同时穿上 Old-Fashioned Vest 与 Old-Fashioned Loinwear。",
+        "en": "Return to Day 5 afternoon or Day 6 free exploration. Buying only Rations or Repair Hammers does not open the post-shopping conversation; Day 8 has no back-room topic. Adjust worn gear and check current Charm in Stats before buying. Wearing the Suspenders also requires the Vest and Loinwear equipped."
+      },
+      "links": [
+        {
+          "href": "equipment.html#spiceport-old-fashioned",
+          "label": {
+            "zh": "装备取得说明",
+            "en": "Equipment acquisition"
+          }
+        }
+      ]
+    },
+    "crystal-return": {
+      "kind": "automatic",
+      "unlock": {
+        "zh": "从 ??? 返回水晶平原第 13 天，看到返回画面后开放人物分组与 Birdigan、Ray 的上身服装（Armor）选项。",
+        "en": "The return image on Crystal Plains Day 13, after ???, opens the groups and Birdigan / Ray Armor options."
+      },
+      "earliest": {
+        "zh": "水晶平原第 13 天返回画面",
+        "en": "Crystal Plains Day 13 return image"
+      },
+      "recovery": {
+        "zh": "从返回画面前正常推进；换装选项随场景开放。",
+        "en": "Play forward from before the return image; the scene opens the appearances."
+      },
+      "links": [
+        {
+          "href": "../guide/crystal-plains-shieldfall.html#crystal-return",
+          "label": {
+            "zh": "剧情开放位置",
+            "en": "Story unlock point"
+          }
+        }
+      ]
+    },
+    "shieldfall": {
+      "kind": "automatic",
+      "unlock": {
+        "zh": "盾落谷第 1 天日终随剧情开放；Zhokhar 同时加入主角的同行团队（Treasure Crew）。",
+        "en": "Unlocked at the end of Shieldfall Vale Day 1; Zhokhar also joins Treasure Crew."
+      },
+      "earliest": {
+        "zh": "盾落谷第 1 天日终",
+        "en": "End of Shieldfall Vale Day 1"
+      },
+      "recovery": {
+        "zh": "从该日结束前正常推进。",
+        "en": "Play forward from before that day ends."
+      },
+      "links": [
+        {
+          "href": "../guide/crystal-plains-shieldfall.html#shieldfall-vale",
+          "label": {
+            "zh": "剧情开放位置",
+            "en": "Story unlock point"
+          }
+        }
+      ]
+    }
+  },
+  "items": [
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-killigan-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-killigan-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "2",
+      "anchor": "dress-killigan-armor-2",
+      "route": "aris-shop",
+      "itemName": "Viscount Robe"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "3",
+      "anchor": "dress-killigan-armor-3",
+      "route": "aris-shop",
+      "itemName": "Fiendish Harness"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "5",
+      "anchor": "dress-killigan-armor-5",
+      "route": "spice-shop",
+      "itemName": "Peddler's Vest"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "6",
+      "anchor": "dress-killigan-armor-6",
+      "route": "spice-shop",
+      "itemName": "Scallywag Covering"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "7",
+      "anchor": "dress-killigan-armor-7",
+      "route": "backroom",
+      "itemName": "Old-Fashioned Vest"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "16",
+      "anchor": "dress-killigan-armor-16",
+      "route": "silvatto",
+      "itemName": "Silvatto Vest"
+    },
+    {
+      "character": "killigan",
+      "category": "armor",
+      "visibleValue": "17",
+      "anchor": "dress-killigan-armor-17",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "belt",
+      "visibleValue": "0",
+      "anchor": "dress-killigan-belt-0",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "belt",
+      "visibleValue": "1",
+      "anchor": "dress-killigan-belt-1",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "belt",
+      "visibleValue": "2",
+      "anchor": "dress-killigan-belt-2",
+      "route": "aris-shop",
+      "itemName": "Viscount Belt"
+    },
+    {
+      "character": "killigan",
+      "category": "belt",
+      "visibleValue": "3",
+      "anchor": "dress-killigan-belt-3",
+      "route": "aris-shop",
+      "itemName": "Fiendish Belt"
+    },
+    {
+      "character": "killigan",
+      "category": "belt",
+      "visibleValue": "5",
+      "anchor": "dress-killigan-belt-5",
+      "route": "spice-shop",
+      "itemName": "Peddler's Belt"
+    },
+    {
+      "character": "killigan",
+      "category": "belt",
+      "visibleValue": "7",
+      "anchor": "dress-killigan-belt-7",
+      "route": "backroom",
+      "itemName": "Old-Fashioned Suspenders"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "0",
+      "anchor": "dress-killigan-boots-0",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "1",
+      "anchor": "dress-killigan-boots-1",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "2",
+      "anchor": "dress-killigan-boots-2",
+      "route": "aris-shop",
+      "itemName": "Viscount Anklets"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "3",
+      "anchor": "dress-killigan-boots-3",
+      "route": "aris-shop",
+      "itemName": "Fiendish Greaves"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "5",
+      "anchor": "dress-killigan-boots-5",
+      "route": "spice-shop",
+      "itemName": "Peddler's Shoes"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "6",
+      "anchor": "dress-killigan-boots-6",
+      "route": "spice-shop",
+      "itemName": "Scallywag Scraps"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "7",
+      "anchor": "dress-killigan-boots-7",
+      "route": "backroom",
+      "itemName": "Custom-Made Sandals"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "16",
+      "anchor": "dress-killigan-boots-16",
+      "route": "silvatto",
+      "itemName": "Silvatto Anklets"
+    },
+    {
+      "character": "killigan",
+      "category": "boots",
+      "visibleValue": "17",
+      "anchor": "dress-killigan-boots-17",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "map",
+      "visibleValue": "0",
+      "anchor": "dress-killigan-map-0",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "map",
+      "visibleValue": "1",
+      "anchor": "dress-killigan-map-1",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "0",
+      "anchor": "dress-killigan-bottoms-0",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "1",
+      "anchor": "dress-killigan-bottoms-1",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "2",
+      "anchor": "dress-killigan-bottoms-2",
+      "route": "aris-shop",
+      "itemName": "Viscount Kilt"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "3",
+      "anchor": "dress-killigan-bottoms-3",
+      "route": "aris-shop",
+      "itemName": "Fiendish Garb"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "5",
+      "anchor": "dress-killigan-bottoms-5",
+      "route": "spice-shop",
+      "itemName": "Peddler's Leggings"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "6",
+      "anchor": "dress-killigan-bottoms-6",
+      "route": "spice-shop",
+      "itemName": "Scallywag Pantsleeve"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "7",
+      "anchor": "dress-killigan-bottoms-7",
+      "route": "backroom",
+      "itemName": "Old-Fashioned Loinwear"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "16",
+      "anchor": "dress-killigan-bottoms-16",
+      "route": "silvatto",
+      "itemName": "Silvatto Loinwrap"
+    },
+    {
+      "character": "killigan",
+      "category": "bottoms",
+      "visibleValue": "17",
+      "anchor": "dress-killigan-bottoms-17",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "0",
+      "anchor": "dress-killigan-undies-0",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "1",
+      "anchor": "dress-killigan-undies-1",
+      "route": "aris-shop",
+      "itemName": "Woven Britches"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "2",
+      "anchor": "dress-killigan-undies-2",
+      "route": "aris-shop",
+      "itemName": "Viscount Loinwrap"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "3",
+      "anchor": "dress-killigan-undies-3",
+      "route": "summit",
+      "itemName": "Summit Attire"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "3_r",
+      "anchor": "dress-killigan-undies-3-r",
+      "route": "prime",
+      "itemName": "Prime Attire",
+      "identityClass": "shared-appearance-with-distinct-unlock",
+      "visualNote": {
+        "zh": "本版本这两项不会显示对应衣物；即使其他服装部位全部选 0，也不会因此穿上参赛服。3_r 随取得特制参赛服（Prime Attire）开放，3_h 随赛后剧情开放，不是两套需要分别补齐的服装外观。",
+        "en": "Neither option displays its garment in this release, even with every other clothing part set to 0. 3_r opens when you receive Prime Attire; 3_h opens after the competition. They are not two separate clothing appearances to collect."
+      }
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "3_h",
+      "anchor": "dress-killigan-undies-3-h",
+      "route": "post-summit",
+      "identityClass": "shared-appearance-with-distinct-unlock",
+      "visualNote": {
+        "zh": "本版本这两项不会显示对应衣物；即使其他服装部位全部选 0，也不会因此穿上参赛服。3_r 随取得特制参赛服（Prime Attire）开放，3_h 随赛后剧情开放，不是两套需要分别补齐的服装外观。",
+        "en": "Neither option displays its garment in this release, even with every other clothing part set to 0. 3_r opens when you receive Prime Attire; 3_h opens after the competition. They are not two separate clothing appearances to collect."
+      }
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "4",
+      "anchor": "dress-killigan-undies-4",
+      "route": "langou",
+      "itemName": "Spare Langou / Aris Langou"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "5",
+      "anchor": "dress-killigan-undies-5",
+      "route": "spice-shop",
+      "itemName": "Peddler's Confidence"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "6",
+      "anchor": "dress-killigan-undies-6",
+      "route": "spice-shop",
+      "itemName": "Scallywag Bandana"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "7",
+      "anchor": "dress-killigan-undies-7",
+      "route": "backroom",
+      "itemName": "Old-Fashioned Langou"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "16",
+      "anchor": "dress-killigan-undies-16",
+      "route": "default"
+    },
+    {
+      "character": "killigan",
+      "category": "undies",
+      "visibleValue": "18",
+      "anchor": "dress-killigan-undies-18",
+      "route": "marchanide",
+      "itemName": "Marchanide Langou"
+    },
+    {
+      "character": "killigan",
+      "category": "weapon",
+      "visibleValue": "0",
+      "anchor": "dress-killigan-weapon-0",
+      "route": "weapon"
+    },
+    {
+      "character": "killigan",
+      "category": "weapon",
+      "visibleValue": "1",
+      "anchor": "dress-killigan-weapon-1",
+      "route": "weapon",
+      "itemName": "Echelle Warhammer"
+    },
+    {
+      "character": "macsen",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-macsen-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-macsen-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "armor",
+      "visibleValue": "2",
+      "anchor": "dress-macsen-armor-2",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "armor",
+      "visibleValue": "3",
+      "anchor": "dress-macsen-armor-3",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "armor",
+      "visibleValue": "4",
+      "anchor": "dress-macsen-armor-4",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "armor",
+      "visibleValue": "5",
+      "anchor": "dress-macsen-armor-5",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "armor",
+      "visibleValue": "6",
+      "anchor": "dress-macsen-armor-6",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "boots",
+      "visibleValue": "0",
+      "anchor": "dress-macsen-boots-0",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "boots",
+      "visibleValue": "1",
+      "anchor": "dress-macsen-boots-1",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "undies",
+      "visibleValue": "0",
+      "anchor": "dress-macsen-undies-0",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "undies",
+      "visibleValue": "1",
+      "anchor": "dress-macsen-undies-1",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "undies",
+      "visibleValue": "2",
+      "anchor": "dress-macsen-undies-2",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "undies",
+      "visibleValue": "3",
+      "anchor": "dress-macsen-undies-3",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "special",
+      "visibleValue": "0",
+      "anchor": "dress-macsen-special-0",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "special",
+      "visibleValue": "1",
+      "anchor": "dress-macsen-special-1",
+      "route": "default",
+      "visualNote": {
+        "zh": "本版本 Special 1 搭配部分表情时会出现图像读取错误，其他表情仍能正常显示。遇到时可换一个表情，或把 Special 切回 0；这不是整项外观都无法显示。",
+        "en": "In this release, Special 1 causes an image-loading error with some Expressions; it still displays normally with other Expressions. If this happens, choose another Expression or switch Special back to 0. The whole option is not invisible."
+      }
+    },
+    {
+      "character": "macsen",
+      "category": "erect",
+      "visibleValue": "0",
+      "anchor": "dress-macsen-erect-0",
+      "route": "default",
+      "setting": {
+        "zh": "成人内容设置开启时提供；SFW 隐藏此类。",
+        "en": "Available with adult content enabled; hidden in SFW mode."
+      }
+    },
+    {
+      "character": "macsen",
+      "category": "erect",
+      "visibleValue": "2",
+      "anchor": "dress-macsen-erect-2",
+      "route": "default",
+      "setting": {
+        "zh": "成人内容设置开启时提供；SFW 隐藏此类。",
+        "en": "Available with adult content enabled; hidden in SFW mode."
+      }
+    },
+    {
+      "character": "macsen",
+      "category": "color",
+      "visibleValue": "0",
+      "anchor": "dress-macsen-color-0",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "color",
+      "visibleValue": "1",
+      "anchor": "dress-macsen-color-1",
+      "route": "default"
+    },
+    {
+      "character": "macsen",
+      "category": "color",
+      "visibleValue": "2",
+      "anchor": "dress-macsen-color-2",
+      "route": "default"
+    },
+    {
+      "character": "zhokhar",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-zhokhar-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "zhokhar",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-zhokhar-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "zhokhar",
+      "category": "armor",
+      "visibleValue": "2",
+      "anchor": "dress-zhokhar-armor-2",
+      "route": "shieldfall"
+    },
+    {
+      "character": "zhokhar",
+      "category": "armor",
+      "visibleValue": "3",
+      "anchor": "dress-zhokhar-armor-3",
+      "route": "shieldfall"
+    },
+    {
+      "character": "zhokhar",
+      "category": "boots",
+      "visibleValue": "0",
+      "anchor": "dress-zhokhar-boots-0",
+      "route": "default"
+    },
+    {
+      "character": "zhokhar",
+      "category": "boots",
+      "visibleValue": "1",
+      "anchor": "dress-zhokhar-boots-1",
+      "route": "default"
+    },
+    {
+      "character": "zhokhar",
+      "category": "undies",
+      "visibleValue": "0",
+      "anchor": "dress-zhokhar-undies-0",
+      "route": "default"
+    },
+    {
+      "character": "zhokhar",
+      "category": "undies",
+      "visibleValue": "1",
+      "anchor": "dress-zhokhar-undies-1",
+      "route": "default"
+    },
+    {
+      "character": "zhokhar",
+      "category": "undies",
+      "visibleValue": "2",
+      "anchor": "dress-zhokhar-undies-2",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-cabotte-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-cabotte-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "boots",
+      "visibleValue": "0",
+      "anchor": "dress-cabotte-boots-0",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "boots",
+      "visibleValue": "1",
+      "anchor": "dress-cabotte-boots-1",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "undies",
+      "visibleValue": "0",
+      "anchor": "dress-cabotte-undies-0",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "undies",
+      "visibleValue": "1",
+      "anchor": "dress-cabotte-undies-1",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "accessory",
+      "visibleValue": "0",
+      "anchor": "dress-cabotte-accessory-0",
+      "route": "default"
+    },
+    {
+      "character": "cabotte",
+      "category": "accessory",
+      "visibleValue": "1",
+      "anchor": "dress-cabotte-accessory-1",
+      "route": "default"
+    },
+    {
+      "character": "guards",
+      "category": "accessory",
+      "visibleValue": "0",
+      "anchor": "dress-guards-accessory-0",
+      "route": "default"
+    },
+    {
+      "character": "guards",
+      "category": "accessory",
+      "visibleValue": "1",
+      "anchor": "dress-guards-accessory-1",
+      "route": "default"
+    },
+    {
+      "character": "carlimard",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-carlimard-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "carlimard",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-carlimard-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "rajine",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-rajine-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "rajine",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-rajine-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-elise-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-elise-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "boots",
+      "visibleValue": "0",
+      "anchor": "dress-elise-boots-0",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "boots",
+      "visibleValue": "1",
+      "anchor": "dress-elise-boots-1",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "undies",
+      "visibleValue": "0",
+      "anchor": "dress-elise-undies-0",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "undies",
+      "visibleValue": "1",
+      "anchor": "dress-elise-undies-1",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "special",
+      "visibleValue": "0",
+      "anchor": "dress-elise-special-0",
+      "route": "default"
+    },
+    {
+      "character": "elise",
+      "category": "special",
+      "visibleValue": "1",
+      "anchor": "dress-elise-special-1",
+      "route": "default"
+    },
+    {
+      "character": "tofi",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-tofi-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "tofi",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-tofi-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "tofi",
+      "category": "armor",
+      "visibleValue": "2",
+      "anchor": "dress-tofi-armor-2",
+      "route": "default"
+    },
+    {
+      "character": "tofi",
+      "category": "armor",
+      "visibleValue": "3",
+      "anchor": "dress-tofi-armor-3",
+      "route": "default"
+    },
+    {
+      "character": "tofi",
+      "category": "armor",
+      "visibleValue": "4",
+      "anchor": "dress-tofi-armor-4",
+      "route": "default"
+    },
+    {
+      "character": "tofi",
+      "category": "armor",
+      "visibleValue": "5",
+      "anchor": "dress-tofi-armor-5",
+      "route": "default"
+    },
+    {
+      "character": "tofi",
+      "category": "armor",
+      "visibleValue": "6",
+      "anchor": "dress-tofi-armor-6",
+      "route": "default"
+    },
+    {
+      "character": "matagoffe",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-matagoffe-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "matagoffe",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-matagoffe-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "matagoffe",
+      "category": "armor",
+      "visibleValue": "2",
+      "anchor": "dress-matagoffe-armor-2",
+      "route": "default"
+    },
+    {
+      "character": "matagoffe",
+      "category": "armor",
+      "visibleValue": "3",
+      "anchor": "dress-matagoffe-armor-3",
+      "route": "default"
+    },
+    {
+      "character": "atama",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-atama-armor-0",
+      "route": "default"
+    },
+    {
+      "character": "atama",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-atama-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "atama",
+      "category": "armor",
+      "visibleValue": "2",
+      "anchor": "dress-atama-armor-2",
+      "route": "default"
+    },
+    {
+      "character": "atama",
+      "category": "armor",
+      "visibleValue": "3",
+      "anchor": "dress-atama-armor-3",
+      "route": "default"
+    },
+    {
+      "character": "binini",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-binini-armor-1",
+      "route": "default"
+    },
+    {
+      "character": "binini",
+      "category": "armor",
+      "visibleValue": "2",
+      "anchor": "dress-binini-armor-2",
+      "route": "default"
+    },
+    {
+      "character": "binini",
+      "category": "armor",
+      "visibleValue": "3",
+      "anchor": "dress-binini-armor-3",
+      "route": "default"
+    },
+    {
+      "character": "binini",
+      "category": "armor",
+      "visibleValue": "4",
+      "anchor": "dress-binini-armor-4",
+      "route": "default"
+    },
+    {
+      "character": "binini",
+      "category": "armor",
+      "visibleValue": "5",
+      "anchor": "dress-binini-armor-5",
+      "route": "shieldfall"
+    },
+    {
+      "character": "ray",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-ray-armor-0",
+      "route": "crystal-return"
+    },
+    {
+      "character": "ray",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-ray-armor-1",
+      "route": "crystal-return"
+    },
+    {
+      "character": "birdigan",
+      "category": "armor",
+      "visibleValue": "0",
+      "anchor": "dress-birdigan-armor-0",
+      "route": "crystal-return"
+    },
+    {
+      "character": "birdigan",
+      "category": "armor",
+      "visibleValue": "1",
+      "anchor": "dress-birdigan-armor-1",
+      "route": "crystal-return"
+    }
+  ]
+}

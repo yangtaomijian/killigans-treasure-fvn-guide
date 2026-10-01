@@ -1,0 +1,8 @@
+/* Identity targets only; the Codex table presentation remains unchanged. */
+#quarto-document-content .kt-codex-entry {
+  scroll-margin-top: 5rem;
+}
+
+#quarto-document-content .kt-codex-entry:target {
+  background-color: var(--bs-warning-bg-subtle, #fff3cd);
+}

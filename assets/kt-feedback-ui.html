@@ -1,0 +1,323 @@
+<!-- Host-selected private Feedback and comment Report dialog. -->
+<script>
+(() => {
+  'use strict';
+  function start() {
+  if (window.__ktFeedbackDialog) return;
+  const runtime = window.__ktDiscussionRuntime;
+  const context = runtime?.getContext();
+  const transport = runtime?.transport;
+  const trigger = document.querySelector('footer.footer .kt-feedback-slot');
+  const remoteHost = location.hostname === 'killigans-treasure.carambi.com' && runtime?.mode === 'production';
+  if (!remoteHost || !context || typeof transport?.sendFeedback !== 'function' || !trigger) return;
+
+  const en = context.locale === 'en';
+  const words = en ? {
+    feedback: 'Feedback', privateFeedback: 'Private feedback', report: 'Report comment',
+    feedbackIntro: "Found something wrong, unclear, or difficult to use? Send me a private note — it won't appear in Discussion.",
+    reportIntro: 'Tell me what is wrong with this comment. Reports are sent privately to the maintainer.',
+    type: 'Type', message: 'Message', reason: 'Reason', contact: 'Contact (optional)',
+    contactHelp: 'Only used if I need to follow up on this feedback.',
+    reportContactHelp: 'Only used if I need to follow up on this report.',
+    sendFeedback: 'Send feedback', sendReport: 'Send report',
+    cancel: 'Cancel', close: 'Close', sending: 'Sending…',
+    feedbackSuccess: 'Thanks — your feedback was sent.',
+    reportSuccess: 'Thanks — the report was sent.',
+    messageShort: 'Enter at least 3 characters.',
+    messageLong: 'Message must be 2,000 characters or fewer.',
+    contactLong: 'Contact must be 200 characters or fewer.',
+    badHash: 'This section link is too long.',
+    verifyWait: 'Complete verification before sending.',
+    verifyLoad: 'Verification couldn’t load. Please try again.',
+    verifyFailed: 'Verification failed. Please try again.',
+    rateLimited: 'You’re sending feedback too quickly. Please wait and try again.',
+    reportRateLimited: 'You’re sending reports too quickly. Please wait and try again.',
+    feedbackFailed: 'Couldn’t send your feedback. Your message is still here — please try again.',
+    reportFailed: 'Couldn’t send the report. Your message is still here — please try again.',
+    verifyRetry: 'Try verification again',
+    categories: [
+      ['wrong', 'Something is wrong'], ['unclear', "I don't understand this part"],
+      ['help', 'I need help'], ['ui', 'Site / UI problem'],
+      ['suggestion', 'Suggestion'], ['other', 'Other'],
+    ],
+  } : {
+    feedback: '反馈', privateFeedback: '私下反馈', report: '举报评论',
+    feedbackIntro: '如果你发现内容有误、表述不清，或网站使用上有问题，可以私下告诉我；这条反馈不会显示在讨论区。',
+    reportIntro: '请告诉我这条评论有什么问题。举报内容只会私下发送给维护者。',
+    type: '类型', message: '内容', reason: '原因', contact: '联系方式（可选）',
+    contactHelp: '仅在需要进一步确认反馈时使用。',
+    reportContactHelp: '仅在需要进一步确认举报时使用。',
+    sendFeedback: '发送反馈', sendReport: '提交举报',
+    cancel: '取消', close: '关闭', sending: '正在发送…',
+    feedbackSuccess: '谢谢，你的反馈已经发送。',
+    reportSuccess: '谢谢，举报已经发送。',
+    messageShort: '请至少输入 3 个字符。',
+    messageLong: '内容不能超过 2,000 个字符。',
+    contactLong: '联系方式不能超过 200 个字符。',
+    badHash: '对应段落链接过长。',
+    verifyWait: '请先完成验证，再发送。',
+    verifyLoad: '验证组件无法加载，请重试。',
+    verifyFailed: '验证失败，请重试。',
+    rateLimited: '提交过于频繁，请稍后再试。',
+    reportRateLimited: '提交过于频繁，请稍后再试。',
+    feedbackFailed: '反馈未能发送。内容仍然保留，请重试。',
+    reportFailed: '举报未能发送。内容仍然保留，请重试。',
+    verifyRetry: '重试验证',
+    categories: [
+      ['wrong', '内容可能有误'], ['unclear', '这部分我没看懂'],
+      ['help', '我需要帮助'], ['ui', '网站 / 界面问题'],
+      ['suggestion', '建议'], ['other', '其他'],
+    ],
+  };
+  const make = (tag, className, value) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (value !== undefined) node.textContent = value;
+    return node;
+  };
+  const points = value => Array.from(value).length;
+  const drafts = new Map();
+  let active = null;
+  let sending = false;
+  let succeeded = false;
+  let token = null;
+  let widgetId = null;
+  let generation = 0;
+  let scriptPromise = null;
+
+  const dialog = make('dialog', 'kt-feedback-dialog');
+  dialog.setAttribute('aria-labelledby', 'kt-feedback-title');
+  const title = make('h2', '', words.feedback); title.id = 'kt-feedback-title';
+  const close = make('button', 'kt-feedback-close', words.close); close.type = 'button';
+  const header = make('div', 'kt-feedback-header'); header.append(title, close);
+  const intro = make('p', 'kt-feedback-intro');
+  const status = make('p', 'kt-feedback-status');
+  status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
+  const form = make('form', 'kt-feedback-form'); form.noValidate = true;
+  const typeRow = make('div', 'kt-feedback-field');
+  const typeLabel = make('label', '', words.type); typeLabel.htmlFor = 'kt-feedback-type';
+  const category = make('select', 'kt-feedback-input'); category.id = 'kt-feedback-type';
+  for (const [value, label] of words.categories) {
+    const option = make('option', '', label); option.value = value; category.append(option);
+  }
+  typeRow.append(typeLabel, category);
+  const messageRow = make('div', 'kt-feedback-field');
+  const messageLabel = make('label', '', words.message); messageLabel.htmlFor = 'kt-feedback-message';
+  const message = make('textarea', 'kt-feedback-input');
+  message.id = 'kt-feedback-message'; message.rows = 6;
+  const messageError = make('p', 'kt-feedback-field-error'); messageError.id = 'kt-feedback-message-error';
+  message.setAttribute('aria-describedby', messageError.id);
+  messageRow.append(messageLabel, message, messageError);
+  const contactRow = make('div', 'kt-feedback-field');
+  const contactLabel = make('label', '', words.contact); contactLabel.htmlFor = 'kt-feedback-contact';
+  const contact = make('input', 'kt-feedback-input');
+  contact.id = 'kt-feedback-contact'; contact.type = 'text'; contact.autocomplete = 'off';
+  const contactHelp = make('p', 'kt-feedback-help', words.contactHelp); contactHelp.id = 'kt-feedback-contact-help';
+  const contactError = make('p', 'kt-feedback-field-error'); contactError.id = 'kt-feedback-contact-error';
+  contact.setAttribute('aria-describedby', contactHelp.id + ' ' + contactError.id);
+  contactRow.append(contactLabel, contact, contactHelp, contactError);
+  const honeypot = make('input', 'kt-feedback-honeypot');
+  honeypot.type = 'text'; honeypot.name = 'website'; honeypot.tabIndex = -1;
+  honeypot.autocomplete = 'off'; honeypot.setAttribute('aria-hidden', 'true');
+  const verifySlot = make('div', 'kt-feedback-turnstile');
+  const verifyRetry = make('button', 'kt-feedback-action', words.verifyRetry);
+  verifyRetry.type = 'button'; verifyRetry.hidden = true;
+  const submit = make('button', 'kt-feedback-action kt-feedback-submit', words.sendFeedback);
+  submit.type = 'submit'; submit.disabled = true;
+  const cancel = make('button', 'kt-feedback-action', words.cancel); cancel.type = 'button';
+  const actions = make('div', 'kt-feedback-actions'); actions.append(submit, cancel);
+  form.append(typeRow, messageRow, contactRow, honeypot, verifySlot, verifyRetry, actions);
+  dialog.append(header, intro, status, form);
+  document.body.append(dialog);
+
+  function saveDraft() {
+    if (active && !succeeded) drafts.set(active.key, {
+      category: category.value, message: message.value, contact: contact.value,
+    });
+  }
+  function fieldError(input, node, text) {
+    node.textContent = text;
+    if (text) input.setAttribute('aria-invalid', 'true');
+    else input.removeAttribute('aria-invalid');
+  }
+  function clearErrors() {
+    fieldError(message, messageError, '');
+    fieldError(contact, contactError, '');
+  }
+  function updateSubmit() { submit.disabled = sending || !token || !dialog.open || succeeded; }
+  function clearWidget() {
+    generation++;
+    token = null;
+    if (widgetId !== null && window.turnstile) {
+      try { window.turnstile.remove(widgetId); } catch { /* Unusable widget. */ }
+    }
+    widgetId = null;
+    verifySlot.replaceChildren();
+    updateSubmit();
+  }
+  function ensureTurnstile() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (scriptPromise) return scriptPromise;
+    scriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      const timer = setTimeout(() => { script.remove(); reject(Error('TURNSTILE_UNAVAILABLE')); }, 10_000);
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.onload = () => {
+        clearTimeout(timer);
+        if (window.turnstile) resolve(window.turnstile);
+        else { script.remove(); reject(Error('TURNSTILE_UNAVAILABLE')); }
+      };
+      script.onerror = () => { clearTimeout(timer); script.remove(); reject(Error('TURNSTILE_UNAVAILABLE')); };
+      document.head.append(script);
+    }).catch(error => { scriptPromise = null; throw error; });
+    return scriptPromise;
+  }
+  async function renderChallenge(text = words.verifyWait) {
+    clearWidget();
+    if (!dialog.open || !active || succeeded) return;
+    const current = generation;
+    status.textContent = text;
+    verifyRetry.hidden = true;
+    try {
+      const turnstile = await ensureTurnstile();
+      if (current !== generation || !dialog.open) return;
+      widgetId = turnstile.render(verifySlot, {
+        sitekey: transport.turnstileSitekey,
+        action: active.mode === 'report' ? 'report_comment' : 'feedback_send',
+        theme: 'auto', size: matchMedia('(max-width: 370px)').matches ? 'compact' : 'flexible',
+        'response-field': false,
+        callback(value) {
+          if (current !== generation || sending) return;
+          token = value; updateSubmit(); verifyRetry.hidden = true;
+          if (status.textContent === words.verifyWait || status.textContent === words.verifyLoad)
+            status.textContent = '';
+        },
+        'error-callback'() {
+          queueMicrotask(() => {
+            if (current !== generation) return;
+            clearWidget(); status.textContent = words.verifyLoad; verifyRetry.hidden = false;
+          });
+          return true;
+        },
+        'expired-callback'() {
+          if (current === generation) renderChallenge();
+        },
+        'timeout-callback'() {
+          if (current === generation) renderChallenge();
+        },
+      });
+    } catch {
+      if (current !== generation) return;
+      clearWidget(); status.textContent = words.verifyLoad; verifyRetry.hidden = false;
+    }
+  }
+  function closeDialog() {
+    if (!dialog.open || sending) return;
+    saveDraft();
+    const opener = active?.opener;
+    active = null;
+    clearWidget();
+    dialog.close();
+    document.documentElement.classList.remove('kt-feedback-open');
+    document.body.classList.remove('kt-feedback-open');
+    if (opener?.isConnected && !opener.hidden) opener.focus({ preventScroll: true });
+  }
+  function openDialog(mode, commentId, opener) {
+    if (sending || !opener?.isConnected) return;
+    if (dialog.open) closeDialog();
+    const key = mode === 'report' ? 'report:' + commentId : 'feedback';
+    active = { mode, commentId, key, opener };
+    succeeded = false;
+    const draft = drafts.get(key);
+    category.value = draft?.category ?? 'wrong';
+    message.value = draft?.message ?? '';
+    contact.value = draft?.contact ?? '';
+    honeypot.value = '';
+    clearErrors();
+    title.textContent = mode === 'report' ? words.report : words.feedback;
+    intro.textContent = mode === 'report' ? words.reportIntro : words.feedbackIntro;
+    typeRow.hidden = mode === 'report';
+    messageLabel.textContent = mode === 'report' ? words.reason : words.message;
+    contactHelp.textContent = mode === 'report' ? words.reportContactHelp : words.contactHelp;
+    submit.textContent = mode === 'report' ? words.sendReport : words.sendFeedback;
+    form.hidden = false;
+    status.textContent = '';
+    dialog.showModal();
+    document.documentElement.classList.add('kt-feedback-open');
+    document.body.classList.add('kt-feedback-open');
+    (mode === 'report' ? message : category).focus({ preventScroll: true });
+    renderChallenge();
+  }
+  function validate() {
+    clearErrors();
+    const body = message.value.trim();
+    const replyTo = contact.value.trim();
+    let valid = true;
+    if (points(body) < 3) { fieldError(message, messageError, words.messageShort); valid = false; }
+    else if (points(body) > 2000) { fieldError(message, messageError, words.messageLong); valid = false; }
+    if (points(replyTo) > 200) { fieldError(contact, contactError, words.contactLong); valid = false; }
+    if (points(location.hash) > 256) { status.textContent = words.badHash; valid = false; }
+    if (active.mode === 'feedback' && !words.categories.some(([value]) => value === category.value)) valid = false;
+    if (!valid) (message.hasAttribute('aria-invalid') ? message : contact).focus();
+    return valid;
+  }
+  function failureText(error) {
+    if (error?.code === 'RATE_LIMITED') return active.mode === 'report' ? words.reportRateLimited : words.rateLimited;
+    if (error?.code === 'VERIFICATION_FAILED') return words.verifyFailed;
+    return active.mode === 'report' ? words.reportFailed : words.feedbackFailed;
+  }
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!active || sending || succeeded || !validate()) return;
+    if (!token) { status.textContent = words.verifyWait; return; }
+    const usedToken = token;
+    token = null;
+    sending = true; updateSubmit(); close.disabled = true; cancel.disabled = true;
+    status.textContent = words.sending;
+    const payload = {
+      category: active.mode === 'report' ? 'report' : category.value,
+      message: message.value, contact: contact.value, guideVersion: context.guideVersion,
+      locale: context.locale, pagePath: location.pathname, pageHash: location.hash,
+      viewportClass: innerWidth < 768 ? 'mobile' : 'desktop',
+      relatedCommentId: active.mode === 'report' ? active.commentId : '',
+      turnstileToken: usedToken, honeypot: honeypot.value,
+    };
+    try {
+      const response = await transport.sendFeedback(payload);
+      if (response?.httpStatus !== 202) throw Error('FEEDBACK_SEND_FAILED');
+      drafts.delete(active.key);
+      succeeded = true;
+      clearWidget();
+      form.hidden = true;
+      status.textContent = active.mode === 'report' ? words.reportSuccess : words.feedbackSuccess;
+      close.focus({ preventScroll: true });
+    } catch (error) {
+      saveDraft();
+      renderChallenge(failureText(error));
+    } finally {
+      sending = false; close.disabled = false; cancel.disabled = false; updateSubmit();
+    }
+  });
+  close.addEventListener('click', closeDialog);
+  cancel.addEventListener('click', closeDialog);
+  dialog.addEventListener('cancel', event => { event.preventDefault(); closeDialog(); });
+  verifyRetry.addEventListener('click', () => renderChallenge());
+  category.addEventListener('change', saveDraft);
+  message.addEventListener('input', () => { fieldError(message, messageError, ''); saveDraft(); });
+  contact.addEventListener('input', () => { fieldError(contact, contactError, ''); saveDraft(); });
+  trigger.disabled = false;
+  trigger.removeAttribute('title');
+  trigger.textContent = words.privateFeedback;
+  trigger.addEventListener('click', () => openDialog('feedback', '', trigger));
+  window.__ktFeedbackDialog = Object.freeze({
+    openReport(commentId, opener) {
+      if (typeof commentId === 'string' && commentId) openDialog('report', commentId, opener);
+    },
+  });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
+  if (document.readyState !== 'complete') window.addEventListener('load', start, { once: true });
+})();
+</script>

@@ -1,0 +1,64 @@
+/* The native Memory table reflows only on narrow screens. */
+@media (max-width: 575px) {
+  #quarto-document-content table.kt-memory-responsive-table,
+  #quarto-document-content table.kt-memory-responsive-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table {
+    max-width: 100%;
+    margin: 0 0 1.2rem;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table tr[id^="memory-"] {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: .45rem;
+    row-gap: .22rem;
+    width: 100%;
+    padding: .48rem .15rem;
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table td {
+    display: block;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    overflow-wrap: anywhere;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table td:nth-child(1) {
+    grid-column: 1;
+    font-weight: 600;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table td:nth-child(1)::after {
+    content: " ·";
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table td:nth-child(2) {
+    grid-column: 2;
+    font-weight: 600;
+  }
+
+  #quarto-document-content table.kt-memory-responsive-table td:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}

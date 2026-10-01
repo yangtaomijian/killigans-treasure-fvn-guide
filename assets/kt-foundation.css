@@ -1,0 +1,201 @@
+/* Shared visual tokens. Layout and specialized collection rows live elsewhere. */
+@font-face {
+  font-family: "KT Newsreader";
+  src: url("fonts/newsreader-latin-standard-normal.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --kt-bg: #fbfaf7;
+  --kt-surface: #fffdfa;
+  --kt-surface-muted: #f2efe8;
+  --kt-surface-panel: #f8f7f3;
+  --kt-surface-raised: #fffdfa;
+  --kt-shell: var(--kt-bg);
+  --kt-text: #30302c;
+  --kt-text-muted: #625e55;
+  --kt-heading: #292824;
+  --kt-border: #ded9d0;
+  --kt-border-strong: #b7aea0;
+  --kt-accent: #77613f;
+  --kt-accent-soft: #eee7da;
+  --kt-link: #6e4f2c;
+  --kt-link-hover: #4e371e;
+  --kt-focus: #765018;
+  --kt-code-bg: #efede6;
+  --kt-code-text: #79502f;
+  --kt-target-bg: #f6e9c5;
+  --kt-radius-sm: .3rem;
+  --kt-radius-md: .5rem;
+  --kt-control-height: 2.5rem;
+  --kt-control-radius: var(--kt-radius-sm);
+  --kt-control-gap: .375rem;
+  --kt-panel-padding: 1rem;
+  --kt-shadow-panel: 0 .4rem 1.15rem rgb(48 46 41 / 12%);
+  --kt-shadow-float: 0 .8rem 2rem rgb(48 46 41 / 18%);
+  --kt-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+  --kt-font-editorial: "KT Newsreader", "Songti SC", STSong, "Noto Serif CJK SC", SimSun, Georgia, serif;
+  --kt-font-mono: "SFMono-Regular", "SF Mono", Consolas, "Cascadia Code", monospace;
+
+  /* Only the native variables used by the current Quarto/Bootstrap output. */
+  --bs-body-font-family: var(--kt-font-sans);
+  --bs-body-bg: var(--kt-bg);
+  --bs-body-color: var(--kt-text);
+  --bs-secondary-color: var(--kt-text-muted);
+  --bs-secondary-bg: var(--kt-surface-muted);
+  --bs-tertiary-bg: var(--kt-surface-muted);
+  --bs-border-color: var(--kt-border);
+  --bs-code-color: var(--kt-code-text);
+  --bs-link-color-rgb: 110, 79, 44;
+  --bs-link-hover-color-rgb: 78, 55, 30;
+}
+
+body {
+  background: var(--kt-bg);
+  color: var(--kt-text);
+  font-family: var(--kt-font-sans);
+}
+
+#quarto-document-content {
+  color: var(--kt-text);
+}
+
+#quarto-document-content :is(p, li, dd) {
+  line-height: 1.68;
+}
+
+#quarto-document-content :is(p, ul, ol, dl) {
+  margin-bottom: 1rem;
+}
+
+main.content :is(h1, h2, h3) {
+  color: var(--kt-heading);
+}
+
+main.content h1.title {
+  font-size: clamp(1.95rem, 2.25vw, 2.3rem);
+  font-weight: 670;
+  line-height: 1.25;
+}
+
+main.content h2 {
+  font-size: 1.46rem;
+  font-weight: 680;
+  line-height: 1.36;
+  border-bottom-color: var(--kt-border);
+}
+
+main.content h3 {
+  font-size: 1.17rem;
+  font-weight: 660;
+  line-height: 1.42;
+}
+
+#quarto-document-content a[href]:not(.anchorjs-link) {
+  color: var(--kt-link);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--kt-link) 65%, transparent);
+  text-underline-offset: .17em;
+}
+
+#quarto-document-content a[href]:not(.anchorjs-link):hover {
+  color: var(--kt-link-hover);
+  text-decoration-color: currentColor;
+}
+
+/* Quarto hard-codes bright blue for active/hover page links. */
+#TOC a.nav-link:is(:hover, .active) {
+  color: var(--kt-link) !important;
+}
+
+#TOC a.nav-link.active {
+  border-left-color: var(--kt-accent);
+}
+
+#kt-page-toc-panel #TOC a.nav-link:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 2px;
+}
+
+#quarto-document-content code:not(pre code) {
+  color: var(--kt-code-text);
+  background: var(--kt-code-bg);
+  border: 1px solid var(--kt-border);
+  border-radius: .22rem;
+  padding: .06em .22em;
+  font-family: var(--kt-font-mono);
+  font-size: .88em;
+  font-weight: 550;
+  white-space: normal;
+}
+
+#quarto-document-content a[href] code:not(pre code) {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+#quarto-document-content .table {
+  --bs-table-color: var(--kt-text);
+  --bs-table-border-color: var(--kt-border);
+}
+
+#quarto-document-content .table th {
+  color: var(--kt-heading);
+  font-weight: 650;
+}
+
+#quarto-document-content details {
+  color: var(--kt-text);
+}
+
+hr {
+  border-color: var(--kt-border-strong);
+  opacity: 1;
+}
+
+::selection {
+  color: var(--kt-heading);
+  background: var(--kt-accent-soft);
+}
+
+:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 3px;
+}
+
+#quarto-header :is(.nav-link, .dropdown-item, .navbar-toggler):focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 3px;
+}
+
+/* These existing component styles load later and define their own outlines. */
+body #kt-search-launcher:focus-visible,
+body #kt-search-dialog .kt-search-result:focus-visible,
+body #quarto-document-content #kt-memory-locator a:focus-visible {
+  outline-color: var(--kt-focus);
+}
+
+#kt-search-dialog {
+  font-family: var(--kt-font-sans);
+}
+
+/* Floating-action contract: contextual above primary; one container owns geometry.
+   Future rail: set --kt-floating-rail-offset. Panel open: add the modifier below.
+   No primary action is installed until its feature is implemented. */
+.kt-floating-actions {
+ --kt-floating-rail-offset:0px;
+ position:fixed; inset-inline-end:calc(max(1rem,env(safe-area-inset-right)) + var(--kt-floating-rail-offset));
+ bottom:max(1rem,env(safe-area-inset-bottom)); display:flex; flex-direction:column;
+ align-items:flex-end; gap:.5rem; z-index:1035; max-width:calc(100vw - 2rem); pointer-events:none;
+}
+.kt-floating-actions > * { pointer-events:auto; }
+.kt-floating-action--contextual { order:0; }
+.kt-floating-action--primary { order:1; }
+.kt-floating-actions--panel-open > .kt-floating-action--contextual { display:none; }
+/* Override Quarto's generic aside layering at the shared container, not its buttons. */
+body > #kt-floating-actions { z-index:1035; }

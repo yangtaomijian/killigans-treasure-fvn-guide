@@ -1,0 +1,27 @@
+<!-- Footer controls preserve page and fragment history. -->
+<script>
+(() => {
+  'use strict';
+  function start() {
+    const footer = document.querySelector('footer.footer .kt-publication-footer');
+    if (!footer || footer.dataset.ktShellReady) return;
+    footer.dataset.ktShellReady = 'true';
+    const home = document.querySelector('nav.navbar ul.navbar-nav.me-auto a.nav-link');
+    footer.querySelector('.kt-back-to-top')?.addEventListener('click', () => {
+      const focusTarget = document.getElementById('kt-publication-brand') || document.querySelector('.navbar-brand') || home;
+      if (focusTarget) {
+        const oldTabindex = focusTarget.getAttribute('tabindex');
+        focusTarget.setAttribute('tabindex', '-1');
+        focusTarget.addEventListener('blur', () => {
+          if (oldTabindex === null) focusTarget.removeAttribute('tabindex');
+          else focusTarget.setAttribute('tabindex', oldTabindex);
+        }, { once: true });
+        focusTarget.focus({ preventScroll: true });
+      }
+      window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
+})();
+</script>

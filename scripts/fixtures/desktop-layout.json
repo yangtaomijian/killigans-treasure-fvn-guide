@@ -1,0 +1,5442 @@
+[
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1440,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1447.96875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1440,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3154.34375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1440,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 13893.359375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1440,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 5827.546875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1280,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1441.765625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1280,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3154.34375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1280,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 13893.359375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1280,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 5827.546875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1024,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 1441.578125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1024,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 3406.9375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1024,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 14741.75,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 1024,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 6145.734375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 992,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 1470.125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 992,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 3492.578125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 992,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 14954.890625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "zh",
+    "width": 992,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 6279.328125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.671875,
+        "y": 14.515625,
+        "w": 81.328125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1440,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1533.609375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1440,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3651.296875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1440,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 16036.84375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1440,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 6630.875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1280,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1527.40625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1280,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3651.296875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1280,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 16036.84375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1280,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 6630.875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1024,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 1584.3125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1024,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 3987.765625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1024,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 17047.375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 1024,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 7187.703125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 992,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 156.046875,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 1612.859375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 992,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 4038.765625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 992,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 17896.890625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "WebKit",
+    "locale": "en",
+    "width": 992,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.328125,
+        "w": 153.484375,
+        "h": 36.625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 7531.390625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.59375,
+        "y": 14.515625,
+        "w": 83.546875,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.875,
+        "y": 15.015625,
+        "w": 41.25,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1440,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1447.96875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1440,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3182.921875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1440,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 13902.53125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1440,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 5827.578125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1246.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1331.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1280,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1441.765625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1280,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3182.921875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1280,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 13902.53125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1280,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 5827.578125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1086.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1171.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1024,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 1441.578125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1024,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 3464.0625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1024,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 14716.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 1024,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 6145.765625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 830.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 915.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 992,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 1470.125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 992,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 3521.15625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 992,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 14929.421875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "zh",
+    "width": 992,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 6333.40625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 798.46875,
+        "y": 14.515625,
+        "w": 81.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 883.734375,
+        "y": 15.015625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1440,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1533.609375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1440,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3651.328125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1440,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 16036.875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1440,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 6630.90625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1240.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1327.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1372.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1280,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 1527.40625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1280,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 3651.328125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1280,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 16036.875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1280,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 840,
+        "h": 6630.90625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 1080.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 1167.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 1212.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1024,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 1584.3125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1024,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 3987.796875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1024,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 17047.40625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 1024,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 1024,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 760,
+        "h": 7187.734375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 824.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 911.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 956.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 992,
+    "route": "index",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 155.46875,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 1612.859375,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 992,
+    "route": "guide/aris",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 4038.796875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 992,
+    "route": "collectibles/memories",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 17896.921875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  },
+  {
+    "engine": "Edge",
+    "locale": "en",
+    "width": 992,
+    "route": "collectibles/codex",
+    "state": [
+      {
+        "s": "#quarto-header",
+        "x": 0,
+        "y": 0,
+        "w": 992,
+        "h": 68.28125,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-publication-brand",
+        "x": 29.75,
+        "y": 15.3125,
+        "w": 152.90625,
+        "h": 36.65625,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": "#quarto-document-content",
+        "x": 228,
+        "y": 68,
+        "w": 728,
+        "h": 7531.421875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-page-toc-panel",
+        "x": 16,
+        "y": 68.296875,
+        "w": 192,
+        "h": 831.6875,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgb(251, 250, 247)",
+        "font": "17px",
+        "display": "block"
+      },
+      {
+        "s": "#kt-theme-controls",
+        "x": 792.40625,
+        "y": 14.515625,
+        "w": 83.53125,
+        "h": 38.25,
+        "color": "rgb(48, 48, 44)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "flex"
+      },
+      {
+        "s": ".kt-language-utility",
+        "x": 879.671875,
+        "y": 15.015625,
+        "w": 41.453125,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "13.6px",
+        "display": "inline-flex"
+      },
+      {
+        "s": "#kt-search-launcher",
+        "x": 924.859375,
+        "y": 14.515625,
+        "w": 37.390625,
+        "h": 38.25,
+        "color": "rgb(98, 94, 85)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "17px",
+        "display": "inline-flex"
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+<script>
+(() => {
+  "use strict";
+
+  // The rendered navbar fallback identifies the other locale's homepage,
+  // including any hosting path prefix. The page path remains the identity.
+  function mapLanguageUrl(currentHref, fallbackHref, fromEnglish) {
+    const current = new URL(currentHref);
+    const fallback = new URL(fallbackHref, current);
+    const homePath = fallback.pathname.replace(/index\.html$/, "");
+    if (!fromEnglish && !homePath.endsWith("/en/")) return null;
+    const sourceRoot = fromEnglish
+      ? `${homePath}en/`
+      : homePath.slice(0, -"en/".length);
+    if (!current.pathname.startsWith(sourceRoot)) return null;
+    const relative = current.pathname.slice(sourceRoot.length);
+    const page = relative === "index.html" ? "" : relative;
+    const target = new URL(fallback.href);
+    target.pathname = `${homePath}${page}`;
+    target.search = current.search;
+    target.hash = current.hash;
+    return target.href;
+  }
+
+  // Expose only the pure mapper to the deterministic Node regression runner.
+  if (typeof globalThis !== "undefined") globalThis.ktMapLanguageUrl = mapLanguageUrl;
+
+  if (typeof document === "undefined") return;
+  const link = document.querySelector("nav.navbar ul.navbar-nav.ms-auto a.nav-link");
+  if (!link) return;
+  const fromEnglish = link.textContent.trim() === "中文";
+  const fallbackHref = link.href;
+  function update() {
+    const target = mapLanguageUrl(location.href, fallbackHref, fromEnglish);
+    if (target) link.href = target;
+  }
+  update();
+  window.addEventListener("hashchange", update);
+  window.addEventListener("kt:memory-navigation", update);
+  window.addEventListener("kt:dressing-navigation", update);
+  window.addEventListener("popstate", update);
+  link.addEventListener("focus", update);
+  link.addEventListener("pointerdown", update);
+  link.addEventListener("click", update);
+})();
+</script>

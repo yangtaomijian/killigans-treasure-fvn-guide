@@ -1,0 +1,128 @@
+{
+  "groups": [
+    {
+      "id": "region:redroot",
+      "forms": [
+        "Redroot",
+        "红根镇"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "region:redroot-wilds",
+      "forms": [
+        "Redroot Wilds",
+        "红根镇荒野"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "region:aris",
+      "forms": [
+        "Aris",
+        "阿瑞斯"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "region:crystal-plains",
+      "forms": [
+        "Crystal Plains",
+        "水晶平原"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "region:shieldfall-vale",
+      "forms": [
+        "Shieldfall Vale",
+        "盾落谷"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "region:spiceport",
+      "forms": [
+        "Spiceport",
+        "斯派斯港"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "region:blueleaf-grove",
+      "forms": [
+        "Blueleaf Grove",
+        "蓝叶森林"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "system:dressing-room",
+      "forms": [
+        "Dressing Room",
+        "换装"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "system:expressions",
+      "forms": [
+        "Expressions",
+        "表情"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "system:outfit",
+      "forms": [
+        "Outfit",
+        "服装"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "character:killigan",
+      "forms": [
+        "Killigan",
+        "主角"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "topic:combat",
+      "forms": [
+        "Combat",
+        "战斗",
+        "战斗与 QTE",
+        "Combat & QTEs"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "equipment:missing-boots",
+      "forms": [
+        "缺少 Boots",
+        "Missing boots",
+        "Aris 的可选装备",
+        "Aris optional equipment"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "equipment:complete-index",
+      "forms": [
+        "全装备",
+        "complete optional equipment"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    },
+    {
+      "id": "system:equipment",
+      "forms": [
+        "Equipment",
+        "装备"
+      ],
+      "evidence": "public-bilingual-equivalent"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+/* KT map surface. Shared site tokens keep both native themes coherent. */
+.kt-story-map { position:relative; margin: 1rem 0 1.5rem; border: 1px solid var(--kt-border); border-radius: var(--kt-radius-md); background: var(--kt-surface-panel); overflow: hidden; }
+.kt-map-hint, .kt-map-note { margin: .7rem 1rem; font-size: .88rem; color: var(--kt-text-muted); }
+.kt-map-controls, .kt-map-viewer-controls { display:flex; align-items:center; gap:.45rem; flex-wrap:wrap; }
+.kt-map-controls { margin: .5rem 1rem; }
+.kt-map-expand { margin-inline-start:auto; }
+.kt-map-button { min-height:44px; padding:.42rem .7rem; border:1px solid var(--kt-border-strong); border-radius:var(--kt-radius-sm); background:var(--kt-surface); color:var(--kt-text); font:inherit; font-size:.88rem; cursor:pointer; }
+.kt-map-button:hover { background:var(--kt-surface-muted); }
+.kt-map-button:focus-visible, .kt-story-map-scroll:focus-visible, .kt-map-viewer-stage:focus-visible { outline:2px solid var(--kt-focus); outline-offset:-2px; }
+.kt-story-map-scroll { height:var(--kt-map-inline-height,440px); width:100%; overflow:hidden; touch-action:none; cursor:grab; }
+.kt-story-map-scroll pre.mermaid { height:100%; width:100%; padding:0; margin:0; overflow:hidden; background:transparent; }
+.kt-map-compact-overview { display:none; }
+.kt-story-map-scroll .cell, .kt-story-map-scroll .cell-output-display, .kt-story-map-scroll .quarto-figure, .kt-story-map-scroll figure, .kt-story-map-scroll p { height:100%; margin:0 !important; }
+.kt-story-map-scroll svg, .kt-map-viewer-stage svg { display:block; width:100% !important; height:100% !important; max-width:none !important; }
+:is(.kt-story-map,.kt-map-viewer) svg a { cursor:pointer; color:var(--kt-link) !important; }
+.kt-map-dragging, .kt-map-dragging svg, .kt-map-dragging svg a { cursor:grabbing; }
+.kt-map-text-links { margin:.5rem 1rem .8rem; font-size:.9rem; }
+body.kt-map-viewer-open { overflow:hidden; }
+.kt-map-viewer { position:fixed; inset:0; width:100vw; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; border-radius:0; background:var(--kt-bg); color:var(--kt-text); overflow:hidden; }
+.kt-map-viewer::backdrop { background:rgba(0,0,0,.7); }
+.kt-map-viewer[open] { display:flex; flex-direction:column; }
+.kt-map-viewer-workspace { display:flex; flex:1; min-height:0; flex-direction:column; background:var(--kt-bg); }
+.kt-map-viewer-workspace:fullscreen { width:100vw; height:100dvh; }
+.kt-map-viewer-header { display:flex; align-items:center; justify-content:space-between; gap:.7rem; padding:.5rem .8rem; border-bottom:1px solid var(--kt-border-strong); background:var(--kt-surface); }
+.kt-map-viewer-header strong { font-size:.96rem; }
+.kt-map-viewer-controls { justify-content:flex-end; }
+.kt-map-viewer-stage { flex:1; min-height:0; min-width:0; overflow:hidden; touch-action:none; cursor:grab; }
+.kt-story-map-scroll, .kt-map-viewer-stage { user-select:none; -webkit-user-select:none; }
+.kt-map-rotate-hint { display:none; margin:0; padding:.3rem .8rem; color:var(--kt-text-muted); font-size:.78rem; text-align:center; }
+:is(.kt-story-map,.kt-map-viewer) svg .node :is(rect,polygon,path) { fill:var(--kt-surface) !important; stroke:var(--kt-border-strong) !important; }
+:is(.kt-story-map,.kt-map-viewer) svg :is(.nodeLabel,.edgeLabel) { color:var(--kt-text) !important; }
+:is(.kt-story-map,.kt-map-viewer) svg :is(.edgeLabel,.labelBkg) { background:var(--kt-surface-panel) !important; }
+:is(.kt-story-map,.kt-map-viewer) svg .flowchart-link { stroke:var(--kt-text-muted) !important; }
+:is(.kt-story-map,.kt-map-viewer) svg marker path { fill:var(--kt-text-muted) !important; stroke:var(--kt-text-muted) !important; }
+:is(.kt-story-map,.kt-map-viewer) svg a .nodeLabel { color:var(--kt-link) !important; text-decoration:underline; text-underline-offset:3px; }
+.kt-read-answer { padding:.8rem 1rem; border-left:3px solid var(--kt-accent); background:var(--kt-surface-muted); margin:1rem 0; }
+.kt-read-answer p:last-child { margin-bottom:0; }
+.kt-read-more { margin:.65rem 0 1.2rem; padding:.6rem .8rem; border:1px solid var(--kt-border); border-radius:var(--kt-radius-sm); }
+.kt-read-more > summary { cursor:pointer; color:var(--kt-link); font-weight:600; min-height:32px; }
+.kt-read-more[open] > summary { margin-bottom:.65rem; }
+@media (max-width:767.98px) {
+ .kt-story-map-scroll { height:var(--kt-map-mobile-height,300px); }
+ .kt-story-map[data-map-id="journey"] .kt-story-map-scroll { position:absolute; height:1px; clip-path:inset(100%); pointer-events:none; }
+ .kt-story-map[data-map-id="journey"] .kt-map-controls > :not(.kt-map-expand) { display:none; }
+ .kt-map-compact-overview { display:block; margin:.8rem 1rem; padding-inline-start:1.4rem; font-size:.9rem; }
+ .kt-map-compact-overview li { margin:.3rem 0; }
+ .kt-map-controls { margin-inline:.6rem; }
+ .kt-map-expand { flex:1; }
+ .kt-map-hint, .kt-map-note { margin-inline:.6rem; }
+ .kt-map-viewer-header { align-items:flex-start; flex-direction:column; padding:.4rem .6rem; }
+ .kt-map-viewer-controls { width:100%; justify-content:flex-start; gap:.25rem; }
+ .kt-map-viewer .kt-map-button { padding-inline:.45rem; }
+ .kt-map-rotate-hint { display:block; }
+}
+/* Mermaid applies its label background to nested spans as well as the group. */
+:is(.kt-story-map,.kt-map-viewer) svg .edgeLabel :is(span,p,div,rect) { background:var(--kt-surface-panel) !important; fill:var(--kt-surface-panel) !important; }
+:is(.kt-story-map,.kt-map-viewer) svg :is(.nodeLabel,.edgeLabel,.label) :is(p,span,div) { color:var(--kt-text) !important; }
+:is(.kt-story-map,.kt-map-viewer) svg a :is(p,span,div) { color:var(--kt-link) !important; }
+.kt-map-title { margin:.75rem 1rem .25rem; color:var(--kt-heading); }
+.kt-map-rule { margin:.65rem 1rem; padding:.55rem .7rem; border-left:3px solid var(--kt-accent); font-size:.88rem; line-height:1.5; }
+.kt-map-preparation { margin:.5rem 1rem; font-size:.82rem; color:var(--kt-text-muted); }
+.kt-map-local-invitations { margin:.8rem 1rem; }
+.kt-map-local-title { margin:0 0 .45rem; font-size:.9rem; }
+.kt-map-local-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; }
+.kt-map-local-card { min-width:0; padding-top:.5rem; border-top:1px solid var(--kt-border); font-size:.84rem; line-height:1.5; }
+.kt-map-local-card p { margin:0 0 .4rem; }
+:is(.kt-story-map,.kt-map-viewer) svg .node.ktMapConfirmed :is(rect,polygon,path) { fill:var(--kt-accent-soft) !important; stroke:var(--kt-accent) !important; stroke-width:3px !important; }
+:is(.kt-story-map,.kt-map-viewer) svg .node.ktMapDecision :is(rect,polygon,path) { stroke:var(--kt-accent) !important; stroke-width:2px !important; }
+:is(.kt-story-map,.kt-map-viewer) svg .node.ktMapConfirmed .nodeLabel { font-weight:700; }
+:is(.kt-story-map,.kt-map-viewer) svg .node.ktMapLocal { opacity:.78; }
+:is(.kt-story-map,.kt-map-viewer) svg .node.ktMapLocal .nodeLabel { font-size:13px; }
+:is(.kt-story-map,.kt-map-viewer) svg .kt-map-annotation { font-size:12px; }
+@media (max-width:575px) { .kt-map-local-grid { grid-template-columns:minmax(0,1fr); } }
+
+/* Lane surfaces follow live theme tokens, including the full interactive viewer. */
+:is(.kt-story-map,.kt-map-viewer) svg .cluster rect {
+ fill:color-mix(in srgb,var(--kt-bg) 94%,var(--kt-text) 6%) !important;
+ stroke:var(--kt-border) !important; stroke-width:1px !important;
+}
+:is(.kt-story-map,.kt-map-viewer) svg .cluster-label,
+:is(.kt-story-map,.kt-map-viewer) svg .cluster-label :is(span,p,div,text) {
+ color:var(--kt-text-muted) !important; fill:var(--kt-text-muted) !important;
+}
+
+/* The vertical Journey viewer already fits a narrow screen. */
+.kt-map-viewer-vertical .kt-map-rotate-hint { display: none; }

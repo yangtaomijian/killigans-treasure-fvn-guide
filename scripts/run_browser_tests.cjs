@@ -1,0 +1,8 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),{spawn}=require('node:child_process');
+if(!process.env.KT_BASE_URL||!process.env.KT_PREFIX_URL)throw Error('Set local KT_BASE_URL and KT_PREFIX_URL');
+const out=path.resolve(__dirname,'../test-results/browser');fs.mkdirSync(out,{recursive:true});
+const scripts=['test_language_switch.cjs','test_fragment_history_runtime.cjs','test_search_runtime.cjs','test_memories_runtime.cjs','test_codex_runtime.cjs','test_layout_runtime.cjs','test_components_runtime.cjs','test_memory_responsive_runtime.cjs','test_codex_responsive_runtime.cjs','test_ordinary_tables_runtime.cjs','test_global_nav_runtime.cjs','test_publication_polish_runtime.cjs','test_search_chrome_runtime.cjs','test_mobile_header_runtime.cjs','test_theme_runtime.cjs','test_gallery_navigation_runtime.cjs','test_story_maps_runtime.cjs'];
+const results=[];
+async function run(script){const logfile=path.join(out,script+'.log'),stream=fs.createWriteStream(logfile);const child=spawn(process.execPath,[path.join(__dirname,script)],{env:{...process.env,KT_THEME_DIR:out,KT_HEADER_DIR:out,KT_QA_DIR:out},stdio:['ignore','pipe','pipe']});for(const s of [child.stdout,child.stderr])s.on('data',c=>stream.write(c));const code=await new Promise(r=>child.on('exit',r));stream.end();results.push({script,code,log:logfile});fs.writeFileSync(path.join(out,'regressions.json'),JSON.stringify(results,null,2));console.log(script,code===0?'PASS':'FAIL');}
+(async()=>{let i=0;const work=async()=>{while(i<scripts.length)await run(scripts[i++]);};await Promise.all([work(),work()]);if(results.some(r=>r.code!==0))process.exitCode=1;})();

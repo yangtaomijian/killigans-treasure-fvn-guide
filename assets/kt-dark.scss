@@ -1,0 +1,137 @@
+/*-- scss:defaults --*/
+// Native Bootstrap/Quarto surfaces. The light theme keeps its existing defaults.
+$body-bg: #242321;
+$body-color: #e6e3dc;
+$headings-color: #eee9df;
+$primary: #d2b17b;
+$secondary: #b9b3a9;
+$link-color: #d2b17b;
+$link-hover-color: #ead0a5;
+$border-color: #3b3833;
+$input-bg: #2b2926;
+$input-color: #e6e3dc;
+$input-border-color: #71685b;
+$input-placeholder-color: #b9b3a9;
+$input-focus-border-color: #c5a16a;
+$input-focus-box-shadow: 0 0 0 .2rem rgba(#c5a16a, .25);
+$form-check-input-bg: #2b2926;
+$form-check-input-border: 1px solid #71685b;
+$form-select-bg: #2b2926;
+$form-select-color: #e6e3dc;
+$dropdown-bg: #2b2926;
+$dropdown-color: #e6e3dc;
+$dropdown-border-color: #71685b;
+$dropdown-link-color: #e6e3dc;
+$dropdown-link-hover-bg: #35322d;
+$dropdown-link-hover-color: #ead0a5;
+$component-active-bg: #353027;
+$component-active-color: #ead0a5;
+$navbar-bg: #272522;
+$navbar-fg: #b9b3a9;
+$navbar-hl: #d2b17b;
+$code-bg: #302f29;
+$code-color: #b6c79b;
+$modal-content-bg: #2b2926;
+$modal-content-color: #e6e3dc;
+$modal-content-border-color: #71685b;
+$modal-header-border-color: #3b3833;
+$modal-footer-border-color: #3b3833;
+$popover-bg: #2b2926;
+$popover-body-color: #e6e3dc;
+$popover-header-bg: #2e2c28;
+$popover-header-color: #eee9df;
+$tooltip-bg: #35322d;
+$tooltip-color: #eee9df;
+
+/*-- scss:rules --*/
+html:has(body.quarto-light) { color-scheme: light; }
+html:has(body.quarto-dark) { color-scheme: dark; }
+body.quarto-light { color-scheme: light; }
+body.quarto-dark {
+  color-scheme: dark;
+  --kt-bg: #242321;
+  --kt-surface: #2b2926;
+  --kt-surface-muted: #2e2c28;
+  --kt-surface-panel: #2b2926;
+  --kt-surface-raised: #2e2c28;
+  --kt-shell: #272522;
+  --kt-text: #e6e3dc;
+  --kt-text-muted: #b9b3a9;
+  --kt-heading: #eee9df;
+  --kt-border: #3b3833;
+  --kt-border-strong: #71685b;
+  --kt-accent: #c5a16a;
+  --kt-accent-soft: #353027;
+  --kt-link: #d2b17b;
+  --kt-link-hover: #ead0a5;
+  --kt-focus: #d2b17b;
+  --kt-code-bg: #302f29;
+  --kt-code-text: #b6c79b;
+  --kt-target-bg: #443a29;
+  --kt-shadow-panel: 0 .4rem 1.15rem rgb(17 16 14 / 28%);
+  --kt-shadow-float: 0 .8rem 2rem rgb(17 16 14 / 38%);
+  --bs-body-bg: var(--kt-bg);
+  --bs-body-color: var(--kt-text);
+  --bs-secondary-color: var(--kt-text-muted);
+  --bs-secondary-bg: var(--kt-surface-muted);
+  --bs-tertiary-color: #aaa397;
+  --bs-tertiary-bg: var(--kt-surface-muted);
+  --bs-emphasis-color: var(--kt-heading);
+  --bs-border-color: var(--kt-border);
+  --bs-border-color-translucent: var(--kt-border);
+  --bs-code-color: var(--kt-code-text);
+  --bs-link-color: var(--kt-link);
+  --bs-link-hover-color: var(--kt-link-hover);
+  --bs-link-color-rgb: 210, 177, 123;
+  --bs-link-hover-color-rgb: 234, 208, 165;
+  --bs-warning-bg-subtle: var(--kt-target-bg);
+}
+
+body.quarto-dark #quarto-document-content .table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--kt-text);
+  --bs-table-border-color: var(--kt-border);
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: var(--kt-surface-muted);
+  --bs-table-hover-color: var(--kt-text);
+}
+body.quarto-dark #quarto-document-content table.table > thead > tr > th {
+  background: #33302b;
+}
+body.quarto-dark #quarto-header .navbar-toggler-icon {
+  filter: none;
+}
+body.quarto-dark #TOC a.nav-link:not(.active) {
+  color: var(--kt-text-muted);
+}
+body.quarto-dark #quarto-header #kt-global-nav-backdrop,
+body.quarto-dark #kt-page-toc-backdrop {
+  background: rgb(17 16 14 / 58%);
+}
+body.quarto-dark #kt-search-dialog::backdrop {
+  background: rgb(17 16 14 / 66%);
+}
+body.quarto-dark #quarto-document-content :is(h1, h2, h3, h4):target,
+body.quarto-dark #quarto-document-content section:target > :is(h1, h2, h3, h4),
+body.quarto-dark #quarto-document-content p:has(> a[id]:target) + section > :is(h1, h2, h3, h4) {
+  background-color: var(--kt-target-bg);
+}
+body.quarto-dark #quarto-document-content div.callout {
+  --bs-callout-bg: var(--kt-surface);
+  background-color: var(--kt-surface);
+  color: var(--kt-text);
+  border-color: var(--kt-border);
+  border-left-color: var(--kt-accent);
+}
+body.quarto-dark #quarto-document-content div.callout .callout-header {
+  color: var(--kt-heading);
+  background-color: var(--kt-surface-muted);
+}
+body.quarto-dark #quarto-document-content tr[id^="memory-"]:target,
+body.quarto-dark #quarto-document-content tr[id^="memory-"]:target > td {
+  background-color: var(--kt-target-bg);
+}
+// A small contrast lift for the input boundary, using the existing warm tokens.
+body.quarto-dark #kt-search-dialog #kt-search-input {
+  border-color: color-mix(in srgb, var(--kt-border-strong) 80%, var(--kt-text-muted));
+}

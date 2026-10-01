@@ -1,0 +1,121 @@
+/* Responsive two-tier mobile header. */
+#kt-mobile-header-row { display: none; }
+
+@media (max-width: 991px) {
+  html.kt-two-tier-mobile #quarto-header {
+    top: 0;
+    transform: none;
+    /* Native will-change:transform otherwise makes fixed drawers header-relative. */
+    will-change: top;
+    transition: top .2s linear;
+  }
+  html.kt-two-tier-mobile #quarto-header.headroom--unpinned {
+    top: calc(-1 * var(--kt-mobile-header-height));
+    transform: none;
+  }
+  html.kt-two-tier-mobile #quarto-header .navbar {
+    padding: 0;
+  }
+  html.kt-two-tier-mobile #quarto-header .navbar-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 .4rem;
+    padding: 0 1rem;
+  }
+  html.kt-two-tier-mobile #quarto-header #kt-publication-brand {
+    display: flex;
+    grid-row: 1;
+    grid-column: 1;
+    order: initial;
+    min-width: 0;
+    min-height: 56px;
+    margin: 0;
+  }
+  html.kt-two-tier-mobile #quarto-header .kt-brand-name {
+    font-size: .94rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  html.kt-two-tier-mobile #quarto-header .quarto-navbar-tools {
+    grid-row: 1;
+    grid-column: 2;
+    order: initial;
+    margin: 0;
+    gap: 6px;
+  }
+  html.kt-two-tier-mobile #quarto-header .quarto-navbar-tools > #kt-theme-controls {
+    display: inline-flex;
+    gap: 6px;
+  }
+  html.kt-two-tier-mobile #kt-theme-controls :is(.quarto-color-scheme-toggle, #kt-theme-auto) {
+    box-sizing: border-box;
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: .25rem .2rem !important;
+  }
+  html.kt-two-tier-mobile #quarto-header #kt-search-launcher {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    margin: 0;
+    border-color: transparent;
+    background: transparent;
+  }
+  html.kt-two-tier-mobile #quarto-header #kt-search-launcher:is(:hover, :focus-visible) {
+    color: var(--kt-link);
+    background: var(--kt-accent-soft);
+  }
+  html.kt-two-tier-mobile #kt-mobile-header-row {
+    display: grid;
+    grid-row: 2;
+    grid-column: 1 / -1;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .5rem;
+    min-height: 52px;
+    padding-block: 4px;
+    border-top: 1px solid var(--kt-border);
+  }
+  html.kt-two-tier-mobile #quarto-header .navbar-toggler {
+    order: initial;
+    margin: 0;
+    padding: .35rem .45rem;
+  }
+  html.kt-two-tier-mobile #kt-mobile-header-context {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--kt-accent);
+    font-size: .78rem;
+    line-height: 1.4;
+  }
+  html.kt-two-tier-mobile #quarto-header #navbarCollapse {
+    width: min(78vw, 288px);
+    margin: 0;
+    padding-top: 0;
+  }
+  /* The existing drawer landmark identifies the English UI without changing labels. */
+  html.kt-two-tier-mobile #quarto-header #navbarCollapse[aria-label="Navigation"] {
+    width: min(82vw, 304px);
+  }
+  html.kt-two-tier-mobile #quarto-content.page-columns > #kt-page-toc-panel {
+    top: var(--kt-mobile-panel-top, 0px) !important;
+    height: calc(100dvh - var(--kt-mobile-panel-top, 0px));
+    max-height: calc(100dvh - var(--kt-mobile-panel-top, 0px)) !important;
+  }
+  html.kt-two-tier-mobile #quarto-content.page-columns > #kt-page-toc-backdrop {
+    top: var(--kt-mobile-panel-top, 0px);
+  }
+  /* Exact entries must clear the taller pinned header without changing targets. */
+  html.kt-two-tier-mobile #quarto-document-content :is(tr[id^="memory-"], .kt-codex-entry) {
+    scroll-margin-top: calc(var(--kt-mobile-header-height) + 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.kt-two-tier-mobile #quarto-header { transition: none; }
+}

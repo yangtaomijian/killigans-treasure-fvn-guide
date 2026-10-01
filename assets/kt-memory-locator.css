@@ -1,0 +1,52 @@
+#quarto-document-content #kt-memory-locator {
+  margin: 0 0 1.4rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--bs-border-color, #dee2e6);
+  border-radius: 0.35rem;
+  background: var(--bs-tertiary-bg, #f8f9fa);
+}
+
+#quarto-document-content #kt-memory-locator ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#quarto-document-content #kt-memory-locator li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+
+#quarto-document-content #kt-memory-locator li + li {
+  margin-top: 0.35rem;
+}
+
+#quarto-document-content #kt-memory-locator a {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--bs-border-color, #dee2e6);
+  border-radius: 0.3rem;
+  background: var(--bs-body-bg, #fff);
+  line-height: 1.35;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+#quarto-document-content #kt-memory-locator a:hover {
+  text-decoration: underline;
+}
+
+#quarto-document-content #kt-memory-locator a[aria-current="location"] {
+  border-color: currentColor;
+  background: var(--bs-secondary-bg, #e9ecef);
+  font-weight: 600;
+}
+
+#quarto-document-content #kt-memory-locator a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

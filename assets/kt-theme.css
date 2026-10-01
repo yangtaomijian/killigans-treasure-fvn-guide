@@ -1,0 +1,90 @@
+/* Portable theme utilities; shared with the header controls. */
+#kt-theme-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: .1rem;
+}
+#kt-theme-controls :is(.quarto-color-scheme-toggle, #kt-theme-auto) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2.25rem;
+  padding: .25rem .35rem !important;
+  border: 1px solid transparent;
+  border-radius: var(--kt-control-radius);
+  background: transparent;
+  color: var(--kt-text-muted);
+  font: inherit;
+  font-size: .78rem;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+}
+#kt-theme-controls .quarto-color-scheme-toggle .bi::before {
+  content: "";
+  display: block;
+  width: .95rem;
+  height: .95rem;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+#kt-theme-controls #kt-theme-auto[aria-pressed="true"] {
+  color: var(--kt-link);
+  text-decoration: underline;
+  text-decoration-color: var(--kt-accent);
+  text-underline-offset: .25em;
+}
+#kt-theme-controls :is(.quarto-color-scheme-toggle, #kt-theme-auto):is(:hover, :focus-visible) {
+  color: var(--kt-heading);
+  background: var(--kt-surface-muted);
+}
+#kt-theme-controls :is(.quarto-color-scheme-toggle, #kt-theme-auto):is(:focus, :focus-visible) {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 2px;
+}
+@media (min-width: 992px) {
+  /* One quiet desktop utility sequence: theme, Auto, language, Search. */
+  #kt-theme-controls {
+    flex: 0 0 auto;
+    gap: .22rem;
+  }
+  #kt-theme-controls :is(.quarto-color-scheme-toggle, #kt-theme-auto) {
+    min-width: 2.2rem;
+  }
+  #quarto-header #navbarCollapse .navbar-nav.ms-auto {
+    margin-left: .22rem !important;
+  }
+  #quarto-header #navbarCollapse .kt-language-utility {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.2rem;
+    min-height: 2.25rem;
+    padding-inline: .42rem;
+  }
+  #quarto-header .quarto-navbar-tools {
+    margin-left: .22rem;
+  }
+  #quarto-header #kt-search-launcher {
+    width: 2.2rem;
+    margin: 0;
+  }
+}
+@media (max-width: 991px) {
+  /* Keep the current one-row phone masthead. Utilities share its navigation drawer. */
+  .quarto-navbar-tools > #kt-theme-controls { display: none; }
+  #navbarCollapse > #kt-theme-controls {
+    display: flex;
+    gap: var(--kt-control-gap);
+    padding: .3rem 1.4rem .55rem;
+    background: var(--kt-surface-muted);
+  }
+  #navbarCollapse #kt-theme-controls :is(.quarto-color-scheme-toggle, #kt-theme-auto) {
+    min-width: var(--kt-control-height);
+    min-height: var(--kt-control-height);
+    border-color: var(--kt-border-strong);
+    background: var(--kt-surface);
+  }
+}

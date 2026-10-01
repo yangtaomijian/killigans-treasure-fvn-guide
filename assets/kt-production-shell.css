@@ -1,0 +1,84 @@
+/* Footer layout and controls. */
+footer.footer:has(.kt-publication-footer) {
+  color: var(--kt-text-muted);
+  background: var(--kt-bg);
+  border-top: 1px solid var(--kt-border);
+  font-family: var(--kt-font-sans);
+}
+footer.footer:has(.kt-publication-footer) .nav-footer {
+  padding: 1.15rem max(1rem, env(safe-area-inset-right)) 1.35rem max(1rem, env(safe-area-inset-left));
+}
+footer.footer:has(.kt-publication-footer) .nav-footer-left {
+  flex: 1 1 100%;
+  text-align: center;
+}
+footer.footer:has(.kt-publication-footer) :is(.nav-footer-center, .nav-footer-right) { display: none; }
+.kt-publication-footer {
+  color: var(--kt-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  min-width: 0;
+  max-width: 100%;
+  font-size: .8rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+footer.footer .kt-publication-footer p { margin: 0; }
+.kt-publication-footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 1.1rem;
+  row-gap: .2rem;
+}
+.kt-publication-footer-links > .kt-publication-attribution {
+  display: inline-flex;
+  align-items: center;
+  gap: .3em;
+  min-height: 2.75rem;
+}
+.kt-publication-footer a,
+.kt-publication-footer button {
+  color: var(--kt-link);
+  text-decoration: none;
+  text-underline-offset: .18em;
+}
+.kt-publication-footer .kt-carambi-link {
+  color: var(--kt-heading);
+  font-family: 'KT Newsreader', Georgia, serif;
+  font-size: 1.04rem;
+}
+.kt-publication-footer .kt-back-to-top { color: var(--kt-text-muted); }
+.kt-publication-footer-links > :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: .4rem .25rem;
+  border: 0;
+  border-radius: var(--kt-control-radius);
+  background: transparent;
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+.kt-publication-footer :is(a, button):is(:hover, :focus-visible) {
+  color: var(--kt-link-hover);
+  text-decoration: underline;
+}
+.kt-publication-footer :is(a, button):focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 2px;
+}
+.kt-publication-footer button:disabled {
+  color: var(--kt-text-muted);
+  cursor: default;
+  text-decoration: none;
+}
+@media (max-width: 389px) {
+  .kt-publication-footer-links { column-gap: .6rem; }
+}

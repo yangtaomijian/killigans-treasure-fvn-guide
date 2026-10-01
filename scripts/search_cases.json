@@ -1,0 +1,1214 @@
+{
+  "cases": [
+    {
+      "id": "alias-redroot-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "redroot",
+      "query": "Redroot Codex",
+      "top": "codex:codex-world:2"
+    },
+    {
+      "id": "alias-redroot-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "redroot",
+      "query": "红根镇 Codex",
+      "top": "codex:codex-world:2"
+    },
+    {
+      "id": "alias-wilds-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "wilds",
+      "query": "Redroot Wilds Codex",
+      "top": "codex:codex-world:3"
+    },
+    {
+      "id": "alias-wilds-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "wilds",
+      "query": "红根镇荒野 Codex",
+      "top": "codex:codex-world:3"
+    },
+    {
+      "id": "alias-aris-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "aris",
+      "query": "Aris Codex",
+      "top": "codex:codex-world:4"
+    },
+    {
+      "id": "alias-aris-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "aris",
+      "query": "阿瑞斯 Codex",
+      "top": "codex:codex-world:4"
+    },
+    {
+      "id": "alias-crystal-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "crystal",
+      "query": "Crystal Plains Codex",
+      "top": "codex:codex-world:5"
+    },
+    {
+      "id": "alias-crystal-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "crystal",
+      "query": "水晶平原 Codex",
+      "top": "codex:codex-world:5"
+    },
+    {
+      "id": "alias-shieldfall-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "shieldfall",
+      "query": "Shieldfall Vale Codex",
+      "top": "codex:codex-world:6"
+    },
+    {
+      "id": "alias-shieldfall-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "shieldfall",
+      "query": "盾落谷 Codex",
+      "top": "codex:codex-world:6"
+    },
+    {
+      "id": "alias-spiceport-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "spiceport",
+      "query": "Spiceport Codex",
+      "top": "codex:codex-world:7"
+    },
+    {
+      "id": "alias-spiceport-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "spiceport",
+      "query": "斯派斯港 Codex",
+      "top": "codex:codex-world:7"
+    },
+    {
+      "id": "alias-blueleaf-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "blueleaf",
+      "query": "Blueleaf Grove Codex",
+      "top": "codex:codex-world:8"
+    },
+    {
+      "id": "alias-blueleaf-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "blueleaf",
+      "query": "蓝叶森林 Codex",
+      "top": "codex:codex-world:8"
+    },
+    {
+      "id": "long-redroot-en",
+      "locale": "en",
+      "category": "longest",
+      "query": "Redroot Codex",
+      "top": "codex:codex-world:2",
+      "excludeTop": "codex:codex-world:3"
+    },
+    {
+      "id": "long-wilds-en",
+      "locale": "en",
+      "category": "longest",
+      "query": "Redroot Wilds Codex",
+      "top": "codex:codex-world:3",
+      "excludeTop": "codex:codex-world:2"
+    },
+    {
+      "id": "long-redroot-zh",
+      "locale": "zh",
+      "category": "longest",
+      "query": "红根镇Codex",
+      "top": "codex:codex-world:2",
+      "excludeTop": "codex:codex-world:3"
+    },
+    {
+      "id": "long-wilds-zh",
+      "locale": "zh",
+      "category": "longest",
+      "query": "红根镇荒野Codex",
+      "top": "codex:codex-world:3",
+      "excludeTop": "codex:codex-world:2"
+    },
+    {
+      "id": "nav-memories-zh",
+      "locale": "zh",
+      "category": "navigation",
+      "pair": "nav-memories",
+      "query": "Memories",
+      "top": "collectibles/memories.html"
+    },
+    {
+      "id": "nav-memories-en",
+      "locale": "en",
+      "category": "navigation",
+      "pair": "nav-memories",
+      "query": "Memories",
+      "top": "collectibles/memories.html"
+    },
+    {
+      "id": "nav-codex-zh",
+      "locale": "zh",
+      "category": "navigation",
+      "pair": "nav-codex",
+      "query": "Codex",
+      "top": "collectibles/codex.html"
+    },
+    {
+      "id": "nav-codex-en",
+      "locale": "en",
+      "category": "navigation",
+      "pair": "nav-codex",
+      "query": "Codex",
+      "top": "collectibles/codex.html"
+    },
+    {
+      "id": "nav-relations-zh",
+      "locale": "zh",
+      "category": "navigation",
+      "pair": "nav-relations",
+      "query": "关系",
+      "top": "reference/relationships.html"
+    },
+    {
+      "id": "nav-relations-en",
+      "locale": "en",
+      "category": "navigation",
+      "pair": "nav-relations",
+      "query": "Relationships",
+      "top": "reference/relationships.html"
+    },
+    {
+      "id": "nav-personality-zh",
+      "locale": "zh",
+      "category": "navigation",
+      "pair": "nav-personality",
+      "query": "性格",
+      "top": "reference/personality.html"
+    },
+    {
+      "id": "nav-personality-en",
+      "locale": "en",
+      "category": "navigation",
+      "pair": "nav-personality",
+      "query": "Personality",
+      "top": "reference/personality.html"
+    },
+    {
+      "id": "journey-redroot-zh",
+      "locale": "zh",
+      "category": "journey",
+      "pair": "journey-redroot",
+      "query": "红根镇 Day 8 Cabotte",
+      "within": {
+        "id": "guide/redroot.html#redroot-wilds-day8",
+        "n": 10
+      }
+    },
+    {
+      "id": "journey-redroot-en",
+      "locale": "en",
+      "category": "journey",
+      "pair": "journey-redroot",
+      "query": "Redroot Day 8 Cabotte",
+      "within": {
+        "id": "guide/redroot.html#redroot-wilds-day8",
+        "n": 10
+      }
+    },
+    {
+      "id": "journey-aris-zh",
+      "locale": "zh",
+      "category": "journey",
+      "pair": "journey-aris",
+      "query": "阿瑞斯 Day 7 可选场景",
+      "top": "guide/aris.html#aris-day7-tavern"
+    },
+    {
+      "id": "journey-aris-en",
+      "locale": "en",
+      "category": "journey",
+      "pair": "journey-aris",
+      "query": "Aris Day 7 optional adult scene",
+      "top": "guide/aris.html#aris-day7-tavern"
+    },
+    {
+      "id": "journey-crystal-zh",
+      "locale": "zh",
+      "category": "journey",
+      "pair": "journey-crystal",
+      "query": "水晶平原",
+      "within": {
+        "id": "guide/crystal-plains-shieldfall.html#crystal-plains",
+        "n": 10
+      }
+    },
+    {
+      "id": "journey-crystal-en",
+      "locale": "en",
+      "category": "journey",
+      "pair": "journey-crystal",
+      "query": "Crystal Plains",
+      "within": {
+        "id": "guide/crystal-plains-shieldfall.html#crystal-plains",
+        "n": 10
+      }
+    },
+    {
+      "id": "journey-spiceport-zh",
+      "locale": "zh",
+      "category": "journey",
+      "pair": "journey-spiceport",
+      "query": "斯派斯港 Day 7 海滩",
+      "top": "guide/spiceport.html#spiceport-day7"
+    },
+    {
+      "id": "journey-spiceport-en",
+      "locale": "en",
+      "category": "journey",
+      "pair": "journey-spiceport",
+      "query": "Spiceport Day 7 beach",
+      "top": "guide/spiceport.html#spiceport-day7"
+    },
+    {
+      "id": "journey-blueleaf-zh",
+      "locale": "zh",
+      "category": "journey",
+      "pair": "journey-blueleaf",
+      "query": "蓝叶森林 Day 10 赠礼",
+      "top": "guide/blueleaf-grove.html#blueleaf-day10"
+    },
+    {
+      "id": "journey-blueleaf-en",
+      "locale": "en",
+      "category": "journey",
+      "pair": "journey-blueleaf",
+      "query": "Blueleaf Grove Day 10 gift",
+      "top": "guide/blueleaf-grove.html#blueleaf-day10"
+    },
+    {
+      "id": "relation-macsen-zh",
+      "locale": "zh",
+      "category": "relationships",
+      "pair": "relation-macsen",
+      "query": "阳台 决定",
+      "top": "reference/relationships.html#macsen-balcony"
+    },
+    {
+      "id": "relation-macsen-en",
+      "locale": "en",
+      "category": "relationships",
+      "pair": "relation-macsen",
+      "query": "balcony decision",
+      "top": "reference/relationships.html#macsen-balcony"
+    },
+    {
+      "id": "relation-ray-zh",
+      "locale": "zh",
+      "category": "relationships",
+      "pair": "relation-ray",
+      "query": "Ray ??? 邀请",
+      "within": {
+        "id": "reference/relationships.html#question-mark-ray",
+        "n": 5
+      }
+    },
+    {
+      "id": "relation-ray-en",
+      "locale": "en",
+      "category": "relationships",
+      "pair": "relation-ray",
+      "query": "Ray ??? invitation",
+      "within": {
+        "id": "reference/relationships.html#question-mark-ray",
+        "n": 5
+      }
+    },
+    {
+      "id": "personality-banquet-zh",
+      "locale": "zh",
+      "category": "personality",
+      "pair": "personality-banquet",
+      "query": "阿瑞斯 宴会 2000 Ouros",
+      "top": "reference/personality.html#aris-banquet-personality"
+    },
+    {
+      "id": "personality-banquet-en",
+      "locale": "en",
+      "category": "personality",
+      "pair": "personality-banquet",
+      "query": "Aris banquet 2000 Ouros",
+      "top": "reference/personality.html#aris-banquet-personality"
+    },
+    {
+      "id": "personality-crystal-zh",
+      "locale": "zh",
+      "category": "personality",
+      "pair": "personality-crystal",
+      "query": "水晶平原 Help treat him",
+      "top": "reference/personality.html#crystal-day5-personality"
+    },
+    {
+      "id": "personality-crystal-en",
+      "locale": "en",
+      "category": "personality",
+      "pair": "personality-crystal",
+      "query": "Crystal Plains Help treat him",
+      "top": "reference/personality.html#crystal-day5-personality"
+    },
+    {
+      "id": "help-gallery-zh",
+      "locale": "zh",
+      "category": "help",
+      "pair": "help-gallery",
+      "query": "Gallery Memories 入口",
+      "top": "help.html#help-menu"
+    },
+    {
+      "id": "help-gallery-en",
+      "locale": "en",
+      "category": "help",
+      "pair": "help-gallery",
+      "query": "Gallery Memories menu",
+      "top": "help.html#help-menu"
+    },
+    {
+      "id": "help-nsfw-zh",
+      "locale": "zh",
+      "category": "help",
+      "pair": "help-nsfw",
+      "query": "NSFW Images Memories",
+      "top": "help.html#help-memories-lock"
+    },
+    {
+      "id": "help-nsfw-en",
+      "locale": "en",
+      "category": "help",
+      "pair": "help-nsfw",
+      "query": "NSFW Images Memory locked",
+      "top": "help.html#help-memories-lock"
+    },
+    {
+      "id": "help-trail-zh",
+      "locale": "zh",
+      "category": "help",
+      "pair": "help-trail",
+      "query": "Trailmarkers 存档",
+      "top": "help.html#help-trailmarkers"
+    },
+    {
+      "id": "help-trail-en",
+      "locale": "en",
+      "category": "help",
+      "pair": "help-trail",
+      "query": "Trailmarkers save",
+      "top": "help.html#help-trailmarkers"
+    },
+    {
+      "id": "help-codex-zh",
+      "locale": "zh",
+      "category": "help",
+      "pair": "help-codex",
+      "query": "Codex 缺一页",
+      "top": "help.html#help-codex"
+    },
+    {
+      "id": "help-codex-en",
+      "locale": "en",
+      "category": "help",
+      "pair": "help-codex",
+      "query": "Codex page missing",
+      "top": "help.html#help-codex"
+    },
+    {
+      "id": "memory-prologue-zh",
+      "locale": "zh",
+      "category": "memory",
+      "pair": "memory-prologue",
+      "query": "Prologue Memories",
+      "top": "memory:redroot-memories:1"
+    },
+    {
+      "id": "memory-prologue-en",
+      "locale": "en",
+      "category": "memory",
+      "pair": "memory-prologue",
+      "query": "Prologue Memories",
+      "top": "memory:redroot-memories:1"
+    },
+    {
+      "id": "memory-wilds-repeat-zh",
+      "locale": "zh",
+      "category": "memory",
+      "pair": "memory-wilds-repeat",
+      "query": "Redroot Wilds Day 8 Memories",
+      "allWithin": {
+        "ids": [
+          "memory:redroot-wilds-memories:4",
+          "memory:redroot-wilds-memories:5"
+        ],
+        "n": 10
+      }
+    },
+    {
+      "id": "memory-wilds-repeat-en",
+      "locale": "en",
+      "category": "memory",
+      "pair": "memory-wilds-repeat",
+      "query": "Redroot Wilds Day 8 Memories",
+      "allWithin": {
+        "ids": [
+          "memory:redroot-wilds-memories:4",
+          "memory:redroot-wilds-memories:5"
+        ],
+        "n": 10
+      }
+    },
+    {
+      "id": "memory-top-en",
+      "locale": "en",
+      "category": "memory",
+      "query": "Redroot Wilds Cabotte Killigan on top",
+      "top": "memory:redroot-wilds-memories:4"
+    },
+    {
+      "id": "memory-bottom-en",
+      "locale": "en",
+      "category": "memory",
+      "query": "Redroot Wilds Cabotte Killigan on bottom",
+      "top": "memory:redroot-wilds-memories:5"
+    },
+    {
+      "id": "memory-blueleaf-repeat-en",
+      "locale": "en",
+      "category": "memory",
+      "query": "Blueleaf Grove Day 11 Memories",
+      "allWithin": {
+        "ids": [
+          "memory:blueleaf-memories:2",
+          "memory:blueleaf-memories:3",
+          "memory:blueleaf-memories:4"
+        ],
+        "n": 10
+      }
+    },
+    {
+      "id": "memory-blueleaf-icon-en",
+      "locale": "en",
+      "category": "memory",
+      "query": "Blueleaf Grove Day 11 Zhokhar relationship icon",
+      "top": "memory:blueleaf-memories:4"
+    },
+    {
+      "id": "memory-spiceport-zh",
+      "locale": "zh",
+      "category": "memory",
+      "query": "Spiceport Day 3 Competition Memories",
+      "allWithin": {
+        "ids": [
+          "memory:spiceport-memories:3",
+          "memory:spiceport-memories:4"
+        ],
+        "n": 10
+      }
+    },
+    {
+      "id": "memory-spiceport-en",
+      "locale": "en",
+      "category": "memory",
+      "query": "Spiceport Day 3 Competition Memories",
+      "allWithin": {
+        "ids": [
+          "memory:spiceport-memories:3",
+          "memory:spiceport-memories:4"
+        ],
+        "n": 10
+      }
+    },
+    {
+      "id": "codex-macsen-zh",
+      "locale": "zh",
+      "category": "codex",
+      "pair": "codex-macsen",
+      "query": "People Macsen",
+      "top": "codex:codex-people:5"
+    },
+    {
+      "id": "codex-macsen-en",
+      "locale": "en",
+      "category": "codex",
+      "pair": "codex-macsen",
+      "query": "People Macsen",
+      "top": "codex:codex-people:5"
+    },
+    {
+      "id": "codex-clutchmates-zh",
+      "locale": "zh",
+      "category": "codex",
+      "pair": "codex-clutchmates",
+      "query": "People The Clutchmates",
+      "top": "codex:codex-people:9"
+    },
+    {
+      "id": "codex-clutchmates-en",
+      "locale": "en",
+      "category": "codex",
+      "pair": "codex-clutchmates",
+      "query": "People The Clutchmates",
+      "top": "codex:codex-people:9"
+    },
+    {
+      "id": "codex-hydronetics-zh",
+      "locale": "zh",
+      "category": "codex",
+      "pair": "codex-hydronetics",
+      "query": "Magic Hydronetics",
+      "top": "codex:codex-magic:4"
+    },
+    {
+      "id": "codex-hydronetics-en",
+      "locale": "en",
+      "category": "codex",
+      "pair": "codex-hydronetics",
+      "query": "Magic Hydronetics",
+      "top": "codex:codex-magic:4"
+    },
+    {
+      "id": "codex-timeline-en",
+      "locale": "en",
+      "category": "codex",
+      "query": "History Timeline",
+      "top": "codex:codex-history:1"
+    },
+    {
+      "id": "codex-species-en",
+      "locale": "en",
+      "category": "codex",
+      "query": "Species Softscales",
+      "top": "codex:codex-species:8"
+    },
+    {
+      "id": "codex-scald-en",
+      "locale": "en",
+      "category": "codex",
+      "query": "S.C.A.L.D.",
+      "top": "codex:codex-magic:12"
+    },
+    {
+      "id": "codex-world-zh",
+      "locale": "zh",
+      "category": "codex",
+      "query": "World Spiceport City",
+      "top": "codex:codex-world:7"
+    },
+    {
+      "id": "choice-take-zh",
+      "locale": "zh",
+      "category": "choice",
+      "pair": "choice-take",
+      "query": "Take it",
+      "top": "reference/personality.html#aris-banquet-personality"
+    },
+    {
+      "id": "choice-take-en",
+      "locale": "en",
+      "category": "choice",
+      "pair": "choice-take",
+      "query": "Take it",
+      "top": "reference/personality.html#aris-banquet-personality"
+    },
+    {
+      "id": "choice-treat-zh",
+      "locale": "zh",
+      "category": "choice",
+      "pair": "choice-treat",
+      "query": "Help treat him",
+      "top": "reference/personality.html#crystal-day5-personality"
+    },
+    {
+      "id": "choice-treat-en",
+      "locale": "en",
+      "category": "choice",
+      "pair": "choice-treat",
+      "query": "Help treat him",
+      "top": "reference/personality.html#crystal-day5-personality"
+    },
+    {
+      "id": "choice-join-zh",
+      "locale": "zh",
+      "category": "choice",
+      "pair": "choice-join",
+      "query": "Join in",
+      "within": {
+        "id": "guide/blueleaf-grove.html#blueleaf-day10",
+        "n": 5
+      }
+    },
+    {
+      "id": "choice-join-en",
+      "locale": "en",
+      "category": "choice",
+      "pair": "choice-join",
+      "query": "Join in",
+      "within": {
+        "id": "guide/blueleaf-grove.html#blueleaf-day10",
+        "n": 5
+      }
+    },
+    {
+      "id": "choice-undress-en",
+      "locale": "en",
+      "category": "choice",
+      "query": "Undress the dragon",
+      "top": "memory:blueleaf-memories:4"
+    },
+    {
+      "id": "choice-pour-en",
+      "locale": "en",
+      "category": "choice",
+      "query": "Pour one out",
+      "top": "memory:spiceport-memories:5"
+    },
+    {
+      "id": "choice-rub-en",
+      "locale": "en",
+      "category": "choice",
+      "query": "Rub one out",
+      "top": "memory:spiceport-memories:6"
+    },
+    {
+      "id": "choice-sure-punctuation-en",
+      "locale": "en",
+      "category": "choice",
+      "query": "Sure why not",
+      "within": {
+        "id": "reference/relationships.html#prepare-macsen",
+        "n": 5
+      }
+    },
+    {
+      "id": "literal-region-zh",
+      "locale": "zh",
+      "category": "literal",
+      "pair": "literal-region",
+      "query": "???",
+      "within": {
+        "id": "guide/crystal-plains-shieldfall.html#question-mark-sequence",
+        "n": 5
+      }
+    },
+    {
+      "id": "literal-region-en",
+      "locale": "en",
+      "category": "literal",
+      "pair": "literal-region",
+      "query": "???",
+      "within": {
+        "id": "guide/crystal-plains-shieldfall.html#question-mark-sequence",
+        "n": 5
+      }
+    },
+    {
+      "id": "literal-memory-zh",
+      "locale": "zh",
+      "category": "literal",
+      "pair": "literal-memory",
+      "query": "??? Memories",
+      "top": "collectibles/memories.html#question-mark-memories"
+    },
+    {
+      "id": "literal-memory-en",
+      "locale": "en",
+      "category": "literal",
+      "pair": "literal-memory",
+      "query": "??? Memories",
+      "top": "collectibles/memories.html#question-mark-memories"
+    },
+    {
+      "id": "and-character-en",
+      "locale": "en",
+      "category": "and-negative",
+      "query": "Macsen Hydronetics",
+      "none": true
+    },
+    {
+      "id": "and-region-en",
+      "locale": "en",
+      "category": "and-negative",
+      "query": "Spiceport Dreadstones",
+      "none": true
+    },
+    {
+      "id": "and-category-en",
+      "locale": "en",
+      "category": "and-negative",
+      "query": "Species Timeline",
+      "none": true
+    },
+    {
+      "id": "and-choice-en",
+      "locale": "en",
+      "category": "and-negative",
+      "query": "Redroot Wilds Take it",
+      "none": true
+    },
+    {
+      "id": "and-mixed-zh",
+      "locale": "zh",
+      "category": "and-negative",
+      "query": "蓝叶森林 Prologue",
+      "none": true
+    },
+    {
+      "id": "and-objects-zh",
+      "locale": "zh",
+      "category": "and-negative",
+      "query": "Hydronetics Cabotte",
+      "none": true
+    },
+    {
+      "id": "negative-typo-en",
+      "locale": "en",
+      "category": "and-negative",
+      "query": "Hydronetix",
+      "none": true
+    },
+    {
+      "id": "negative-empty-zh",
+      "locale": "zh",
+      "category": "and-negative",
+      "query": "   ",
+      "none": true
+    },
+    {
+      "id": "folded-topic-zh",
+      "locale": "zh",
+      "category": "disclosure",
+      "query": "Day 7 可选场景",
+      "top": "guide/aris.html#aris-day7-tavern"
+    },
+    {
+      "id": "folded-topic-en",
+      "locale": "en",
+      "category": "disclosure",
+      "query": "Aris optional adult scene",
+      "top": "guide/aris.html#aris-day7-tavern"
+    },
+    {
+      "id": "folded-body-zh",
+      "locale": "zh",
+      "category": "disclosure",
+      "query": "遇到陌生人的邀约后选",
+      "none": true
+    },
+    {
+      "id": "folded-body-en",
+      "locale": "en",
+      "category": "disclosure",
+      "query": "the stranger invites you",
+      "none": true
+    },
+    {
+      "id": "dressing-room-zh",
+      "locale": "zh",
+      "category": "navigation",
+      "pair": "dressing-room",
+      "query": "Dressing Room",
+      "within": {
+        "id": "collectibles/dressing-room.html",
+        "n": 10
+      }
+    },
+    {
+      "id": "dressing-room-en",
+      "locale": "en",
+      "category": "navigation",
+      "pair": "dressing-room",
+      "query": "Dressing Room",
+      "within": {
+        "id": "collectibles/dressing-room.html",
+        "n": 10
+      }
+    },
+    {
+      "id": "dressing-expressions-zh",
+      "locale": "zh",
+      "category": "alias",
+      "pair": "dressing-expressions",
+      "query": "Expressions",
+      "within": {
+        "id": "collectibles/dressing-room.html#dressing-room-expressions",
+        "n": 10
+      }
+    },
+    {
+      "id": "dressing-expressions-en",
+      "locale": "en",
+      "category": "alias",
+      "pair": "dressing-expressions",
+      "query": "表情",
+      "within": {
+        "id": "collectibles/dressing-room.html#dressing-room-expressions",
+        "n": 10
+      }
+    },
+    {
+      "id": "dressing-native-zh",
+      "locale": "zh",
+      "category": "dressing-room",
+      "pair": "dressing-native",
+      "query": "Killigan armor 17",
+      "top": "outfit:killigan:armor:17"
+    },
+    {
+      "id": "dressing-hash-zh",
+      "locale": "zh",
+      "category": "dressing-room",
+      "pair": "dressing-hash",
+      "query": "armor #17",
+      "top": "outfit:killigan:armor:17"
+    },
+    {
+      "id": "dressing-protagonist-zh",
+      "locale": "zh",
+      "category": "dressing-room",
+      "pair": "dressing-protagonist",
+      "query": "主角 Armor 17",
+      "top": "outfit:killigan:armor:17"
+    },
+    {
+      "id": "dressing-string-zh",
+      "locale": "zh",
+      "category": "dressing-room",
+      "pair": "dressing-string",
+      "query": "Killigan undies 3_r",
+      "top": "outfit:killigan:undies:3_r"
+    },
+    {
+      "id": "dressing-native-en",
+      "locale": "en",
+      "category": "dressing-room",
+      "pair": "dressing-native",
+      "query": "Killigan armor 17",
+      "top": "outfit:killigan:armor:17"
+    },
+    {
+      "id": "dressing-hash-en",
+      "locale": "en",
+      "category": "dressing-room",
+      "pair": "dressing-hash",
+      "query": "armor #17",
+      "top": "outfit:killigan:armor:17"
+    },
+    {
+      "id": "dressing-protagonist-en",
+      "locale": "en",
+      "category": "dressing-room",
+      "pair": "dressing-protagonist",
+      "query": "主角 Armor 17",
+      "top": "outfit:killigan:armor:17"
+    },
+    {
+      "id": "dressing-string-en",
+      "locale": "en",
+      "category": "dressing-room",
+      "pair": "dressing-string",
+      "query": "Killigan undies 3_r",
+      "top": "outfit:killigan:undies:3_r"
+    },
+    {
+      "id": "dressing-post-summit-zh",
+      "locale": "zh",
+      "category": "outfit",
+      "pair": "dressing-post-summit",
+      "query": "Killigan undies 3_h",
+      "top": "outfit:killigan:undies:3_h"
+    },
+    {
+      "id": "dressing-post-summit-en",
+      "locale": "en",
+      "category": "outfit",
+      "pair": "dressing-post-summit",
+      "query": "Killigan undies 3_h",
+      "top": "outfit:killigan:undies:3_h"
+    },
+    {
+      "id": "combat-quick-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-quick",
+      "query": "战斗 QTE",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-result"
+      }
+    },
+    {
+      "id": "combat-quick-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-quick",
+      "query": "Combat QTEs",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-result"
+      }
+    },
+    {
+      "id": "combat-matagoffe-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-matagoffe",
+      "query": "Matagoffe Handsome",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-matagoffe"
+      }
+    },
+    {
+      "id": "combat-matagoffe-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-matagoffe",
+      "query": "Matagoffe Handsome",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-matagoffe"
+      }
+    },
+    {
+      "id": "combat-atama-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-atama",
+      "query": "Atama Outsmart him",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-atama"
+      }
+    },
+    {
+      "id": "combat-atama-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-atama",
+      "query": "Atama Outsmart him",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-atama"
+      }
+    },
+    {
+      "id": "combat-tofi-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-tofi",
+      "query": "Tofi punch",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-tofi"
+      }
+    },
+    {
+      "id": "combat-tofi-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-tofi",
+      "query": "Tofi punch",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-tofi"
+      }
+    },
+    {
+      "id": "combat-summit-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-summit",
+      "query": "Summit Timed Bash",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-summit"
+      }
+    },
+    {
+      "id": "combat-summit-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-summit",
+      "query": "Summit Timed Bash",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-summit"
+      }
+    },
+    {
+      "id": "combat-air-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-air",
+      "query": "Airinetics Evade",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-echo"
+      }
+    },
+    {
+      "id": "combat-air-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-air",
+      "query": "Airinetics Evade",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-echo"
+      }
+    },
+    {
+      "id": "combat-hydro-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-hydro",
+      "query": "Hydronetics Attack",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-echo"
+      }
+    },
+    {
+      "id": "combat-hydro-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-hydro",
+      "query": "Hydronetics Attack",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-echo"
+      }
+    },
+    {
+      "id": "combat-arcanics-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-arcanics",
+      "query": "Arcanics No Rapids",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-echo"
+      }
+    },
+    {
+      "id": "combat-arcanics-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-arcanics",
+      "query": "Arcanics No Rapids",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-echo"
+      }
+    },
+    {
+      "id": "combat-bijouk-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-bijouk",
+      "query": "Bijouk Belt",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-bijouk"
+      }
+    },
+    {
+      "id": "combat-bijouk-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-bijouk",
+      "query": "Bijouk Belt",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-bijouk"
+      }
+    },
+    {
+      "id": "combat-spice-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-spice",
+      "query": "斯派斯港 Banni",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-spiceport-banni"
+      }
+    },
+    {
+      "id": "combat-spice-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-spice",
+      "query": "Spiceport Banni",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-spiceport-banni"
+      }
+    },
+    {
+      "id": "combat-blueleaf-zh",
+      "locale": "zh",
+      "category": "combat",
+      "pair": "combat-blueleaf",
+      "query": "Blueleaf Frontal Assault",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-blueleaf"
+      }
+    },
+    {
+      "id": "combat-blueleaf-en",
+      "locale": "en",
+      "category": "combat",
+      "pair": "combat-blueleaf",
+      "query": "Blueleaf Frontal Assault",
+      "within": {
+        "n": 10,
+        "id": "reference/combat.html#combat-blueleaf"
+      }
+    },
+    {
+      "id": "ouros-window-zh",
+      "locale": "zh",
+      "category": "ouros",
+      "pair": "ouros-window",
+      "query": "Ouros 购物",
+      "within": {
+        "n": 5,
+        "id": "collectibles/equipment.html#equipment-ouros"
+      }
+    },
+    {
+      "id": "ouros-window-en",
+      "locale": "en",
+      "category": "ouros",
+      "pair": "ouros-window",
+      "query": "Ouros shopping",
+      "within": {
+        "n": 5,
+        "id": "collectibles/equipment.html#equipment-ouros"
+      }
+    }
+  ]
+}

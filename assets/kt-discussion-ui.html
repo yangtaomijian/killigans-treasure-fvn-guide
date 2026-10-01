@@ -1,0 +1,523 @@
+<!-- Discussion UI. The runtime activates it on supported hosts only. -->
+<script>
+(() => {
+  'use strict';
+  const runtime = window.__ktDiscussionRuntime;
+  const context = runtime?.getContext();
+  const mount = document.getElementById('kt-public-discussion');
+  if (!mount || !context?.pageKey || !['fixture', 'staging', 'production'].includes(runtime.mode) || !runtime.transport) return;
+
+  const words = context.locale === 'en' ? {
+    title: 'Discussion', explainer: 'Public comments and replies about this guide page.',
+    current: 'Current guide version', empty: 'No comments for this guide version yet.',
+    locked: 'This discussion is locked. Existing comments remain available.', guest: 'Guest',
+    maintainer: 'Maintainer', pinned: 'Pinned', hidden: 'This comment was hidden by the maintainer.',
+    deleted: 'This comment was deleted.', fragment: 'Referenced section', earlier: 'Earlier guide versions',
+    loadMore: 'Load more', loading: 'Loading discussion…', error: 'Couldn’t load the discussion.',
+    retry: 'Try again', count: number => `${number} ${number === 1 ? 'comment' : 'comments'}`,
+    replies: 'Replies',
+    add: 'Add a comment', reply: 'Reply', report: 'Report', name: 'Name (optional)', body: 'Comment',
+    identity: 'No account required. Names are not verified.', rootSubmit: 'Post comment',
+    replySubmit: 'Post reply', cancel: 'Cancel', posting: 'Posting…',
+    rootSuccess: 'Comment posted.', replySuccess: 'Reply posted.',
+    emptyBody: 'Enter a comment.', nameLong: 'Name must be 40 characters or fewer.',
+    bodyLong: 'Comment must be 2,000 characters or fewer.',
+    badHash: 'This section link is too long.', badName: 'Choose another name.',
+    verifyWait: 'Complete verification before posting.',
+    verifyLoad: 'Verification couldn’t load. Please try again.',
+    verifyFailed: 'Verification failed. Please try again.',
+    rateLimited: 'You’re posting too quickly. Please wait and try again.',
+    postFailed: 'Couldn’t post your comment. Your draft is still here — please try again.',
+    postLocked: 'This discussion is locked. Your draft is still here.',
+    refreshFailed: 'Your comment was posted, but the discussion couldn’t refresh. Reload the page to see it.',
+    verifyRetry: 'Try verification again',
+  } : {
+    title: '讨论', explainer: '关于本页内容的公开评论与回复。',
+    current: '当前攻略版本', empty: '这个攻略版本还没有评论。',
+    locked: '此讨论已锁定；现有评论仍可查看。', guest: '访客',
+    maintainer: '维护者', pinned: '置顶', hidden: '此评论已由维护者隐藏。',
+    deleted: '此评论已删除。', fragment: '对应段落', earlier: '较早的攻略版本',
+    loadMore: '加载更多', loading: '正在加载讨论…', error: '无法加载讨论。',
+    retry: '重试', count: number => `${number} 条评论`, replies: '回复',
+    add: '发表评论', reply: '回复', report: '举报', name: '昵称（可选）', body: '评论',
+    identity: '无需账号；昵称不会验证身份。', rootSubmit: '发表评论',
+    replySubmit: '发布回复', cancel: '取消', posting: '正在发布…',
+    rootSuccess: '评论已发布。', replySuccess: '回复已发布。',
+    emptyBody: '请输入评论内容。', nameLong: '昵称不能超过 40 个字符。',
+    bodyLong: '评论不能超过 2,000 个字符。',
+    badHash: '对应段落链接过长。', badName: '请使用其他昵称。',
+    verifyWait: '请先完成验证，再发布评论。',
+    verifyLoad: '验证组件无法加载，请重试。',
+    verifyFailed: '验证失败，请重试。',
+    rateLimited: '提交过于频繁，请稍后再试。',
+    postFailed: '评论未能发布。草稿仍然保留，请重试。',
+    postLocked: '此讨论已锁定；你的草稿仍然保留。',
+    refreshFailed: '评论已发布，但讨论区未能刷新。重新加载页面即可查看。',
+    verifyRetry: '重试验证',
+  };
+  const dateFormat = new Intl.DateTimeFormat(context.locale, {
+    year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+  });
+  const make = (tag, className, value) => {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (value !== undefined) element.textContent = value;
+    return element;
+  };
+
+  const section = make('section', 'kt-discussion');
+  section.setAttribute('aria-labelledby', 'kt-discussion-title');
+  const heading = make('h2', '', words.title);
+  heading.id = 'kt-discussion-title';
+  const explainer = make('p', 'kt-discussion-explainer', words.explainer);
+  const versionContext = make('p', 'kt-discussion-version', `${words.current} · ${context.guideVersion}`);
+  const status = make('div', 'kt-discussion-status');
+  status.setAttribute('role', 'status');
+  status.setAttribute('aria-live', 'polite');
+  const postNotice = make('div', 'kt-discussion-post-notice');
+  postNotice.setAttribute('role', 'status');
+  postNotice.setAttribute('aria-live', 'polite');
+  postNotice.tabIndex = -1;
+  const lockedNotice = make('p', 'kt-discussion-locked', words.locked);
+  lockedNotice.hidden = true;
+  const rootAction = make('button', 'kt-discussion-action kt-discussion-add', words.add);
+  rootAction.type = 'button'; rootAction.hidden = true;
+  const composerHost = make('div', 'kt-discussion-composer-host');
+  composerHost.hidden = true;
+  const comments = make('div', 'kt-discussion-comments');
+  const more = make('button', 'kt-discussion-action', words.loadMore);
+  more.type = 'button'; more.hidden = true;
+  const versions = make('section', 'kt-discussion-versions');
+  versions.hidden = true;
+  const versionsTitle = make('h3', '', words.earlier);
+  const versionButtons = make('div', 'kt-discussion-version-buttons');
+  versions.append(versionsTitle, versionButtons);
+  section.append(heading, explainer, versionContext, status, postNotice, lockedNotice,
+    rootAction, composerHost, comments, more, versions);
+  mount.append(section);
+  mount.hidden = false;
+
+  const remoteMode = runtime.mode === 'staging' || runtime.mode === 'production';
+  const writeEnabled = remoteMode && typeof runtime.transport.postComment === 'function';
+  const reportEnabled = remoteMode && typeof runtime.transport.sendFeedback === 'function';
+  const state = { activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
+    drafts: new Map(), activeTarget: null, opener: null, posting: false, threadLocked: false };
+  const requestFor = (guideVersion, cursor = null) => ({
+    site: context.site, locale: context.locale, pageKey: context.pageKey, guideVersion, cursor,
+  });
+  const read = async (guideVersion, cursor) => {
+    const response = await runtime.transport.readDiscussion(requestFor(guideVersion, cursor));
+    if (response?.ok !== true || !response.thread || !Array.isArray(response.currentVersion?.comments) ||
+        response.currentVersion.guideVersion !== guideVersion || !Array.isArray(response.earlierVersions)) {
+      throw Error('INVALID_DISCUSSION_RESPONSE');
+    }
+    return response;
+  };
+  function message(kind, retry) {
+    status.replaceChildren();
+    if (!kind) return;
+    status.append(make('span', '', kind === 'loading' ? words.loading : words.error));
+    if (kind === 'error') {
+      const button = make('button', 'kt-discussion-action', words.retry);
+      button.type = 'button';
+      button.addEventListener('click', retry);
+      status.append(button);
+    }
+  }
+  function busy(value) {
+    state.pending = value;
+    comments.setAttribute('aria-busy', String(value));
+    more.disabled = value;
+    rootAction.disabled = value;
+    comments.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = value; });
+    versionButtons.querySelectorAll('button').forEach(button => { button.disabled = value; });
+  }
+  function dateTime(value) {
+    const time = make('time', 'kt-discussion-time');
+    time.dateTime = value;
+    const date = new Date(value);
+    time.textContent = Number.isNaN(date.getTime()) ? value : dateFormat.format(date);
+    return time;
+  }
+  function renderComment(comment, isRoot) {
+    const article = make('article', isRoot ? 'kt-discussion-comment' : 'kt-discussion-reply');
+    article.dataset.commentId = comment.id;
+    article.id = `kt-comment-${comment.id}`;
+    article.tabIndex = -1;
+    const published = comment.status === 'published';
+    if (published) {
+      const meta = make('div', 'kt-discussion-meta');
+      meta.append(make('strong', 'kt-discussion-author', comment.displayName || words.guest));
+      if (comment.authorKind === 'maintainer') meta.append(make('span', 'kt-discussion-tag', words.maintainer));
+      if (isRoot && comment.authorKind === 'maintainer' && comment.pinnedAt)
+        meta.append(make('span', 'kt-discussion-tag', words.pinned));
+      meta.append(dateTime(comment.createdAt));
+      article.append(meta, make('p', 'kt-discussion-body', comment.body ?? ''));
+      const actions = make('div', 'kt-discussion-actions');
+      if (isRoot && typeof comment.pageHash === 'string' && /^#[^?#]{1,255}$/.test(comment.pageHash)) {
+        const anchor = make('a', 'kt-discussion-fragment', words.fragment);
+        anchor.href = context.pagePath + comment.pageHash;
+        actions.append(anchor);
+      }
+      if (isRoot && writeEnabled && !state.threadLocked) {
+        const replyAction = make('button', 'kt-discussion-action kt-discussion-reply-action', words.reply);
+        replyAction.type = 'button'; replyAction.disabled = state.pending;
+        replyAction.addEventListener('click', () => openComposer(`reply:${comment.id}`, replyAction));
+        actions.append(replyAction);
+      }
+      if (reportEnabled) {
+        const reportAction = make('button', 'kt-discussion-action kt-discussion-report-action', words.report);
+        reportAction.type = 'button';
+        reportAction.addEventListener('click', () => window.__ktFeedbackDialog?.openReport(comment.id, reportAction));
+        actions.append(reportAction);
+      }
+      if (actions.childElementCount) article.append(actions);
+    } else {
+      article.append(make('p', 'kt-discussion-tombstone',
+        comment.status === 'hidden' ? words.hidden : words.deleted));
+      article.append(dateTime(comment.createdAt));
+    }
+    if (isRoot && Array.isArray(comment.replies) && comment.replies.length) {
+      const replies = make('div', 'kt-discussion-replies');
+      replies.setAttribute('aria-label', words.replies);
+      comment.replies.forEach(reply => replies.append(renderComment(reply, false)));
+      article.append(replies);
+    }
+    return article;
+  }
+  function renderVersions() {
+    versions.hidden = state.index.length === 0;
+    versionButtons.replaceChildren();
+    if (versions.hidden) return;
+    for (const item of [{ guideVersion: context.guideVersion, current: true },
+      ...state.index.map(summary => ({ ...summary, current: false }))]) {
+      const label = item.current ? `${words.current} · ${item.guideVersion}` :
+        `${item.guideVersion} · ${words.count(item.commentCount)}`;
+      const button = make('button', 'kt-discussion-action', label);
+      button.type = 'button';
+      button.setAttribute('aria-pressed', String(item.guideVersion === state.activeVersion));
+      button.disabled = state.pending;
+      button.addEventListener('click', () => loadVersion(item.guideVersion));
+      versionButtons.append(button);
+    }
+  }
+  function renderPage() {
+    const page = state.pages.get(state.activeVersion);
+    if (!page) return;
+    state.threadLocked = page.status === 'locked';
+    lockedNotice.hidden = page.status !== 'locked';
+    rootAction.hidden = !writeEnabled || state.threadLocked || state.activeVersion !== context.guideVersion;
+    rootAction.disabled = state.pending || state.posting;
+    comments.replaceChildren();
+    if (page.comments.length) page.comments.forEach(comment => comments.append(renderComment(comment, true)));
+    else comments.append(make('p', 'kt-discussion-empty', words.empty));
+    more.hidden = !page.nextCursor;
+    more.disabled = state.pending;
+    renderVersions();
+    if (state.threadLocked || (state.activeTarget === 'root' && state.activeVersion !== context.guideVersion))
+      closeComposer(false);
+    else placeComposer();
+  }
+
+  const form = make('form', 'kt-discussion-composer');
+  form.noValidate = true;
+  const identity = make('p', 'kt-discussion-identity', words.identity);
+  const nameLabel = make('label', '', words.name);
+  nameLabel.htmlFor = 'kt-discussion-name';
+  const nameInput = make('input', 'kt-discussion-input');
+  nameInput.id = 'kt-discussion-name'; nameInput.type = 'text'; nameInput.autocomplete = 'off';
+  const nameError = make('p', 'kt-discussion-field-error');
+  nameError.id = 'kt-discussion-name-error'; nameInput.setAttribute('aria-describedby', nameError.id);
+  const bodyLabel = make('label', '', words.body);
+  bodyLabel.htmlFor = 'kt-discussion-new-body';
+  const bodyInput = make('textarea', 'kt-discussion-input');
+  bodyInput.id = 'kt-discussion-new-body'; bodyInput.rows = 5;
+  const bodyError = make('p', 'kt-discussion-field-error');
+  bodyError.id = 'kt-discussion-body-error'; bodyInput.setAttribute('aria-describedby', bodyError.id);
+  const honeypot = make('input', 'kt-discussion-honeypot');
+  honeypot.type = 'text'; honeypot.name = 'website'; honeypot.autocomplete = 'off';
+  honeypot.tabIndex = -1; honeypot.setAttribute('aria-hidden', 'true');
+  const verifySlot = make('div', 'kt-discussion-turnstile');
+  const formStatus = make('p', 'kt-discussion-form-status');
+  formStatus.setAttribute('role', 'status'); formStatus.setAttribute('aria-live', 'polite');
+  const verifyRetry = make('button', 'kt-discussion-action', words.verifyRetry);
+  verifyRetry.type = 'button'; verifyRetry.hidden = true;
+  const actions = make('div', 'kt-discussion-composer-actions');
+  const submit = make('button', 'kt-discussion-action kt-discussion-submit', words.rootSubmit);
+  submit.type = 'submit'; submit.disabled = true;
+  const cancel = make('button', 'kt-discussion-action', words.cancel);
+  cancel.type = 'button';
+  actions.append(submit, cancel);
+  form.append(identity, nameLabel, nameInput, nameError, bodyLabel, bodyInput, bodyError,
+    honeypot, verifySlot, formStatus, verifyRetry, actions);
+  if (writeEnabled) composerHost.append(form);
+
+  let turnstileScript = null;
+  let widgetId = null;
+  let token = null;
+  let widgetGeneration = 0;
+  const points = value => Array.from(value).length;
+  function saveDraft() {
+    if (state.activeTarget) state.drafts.set(state.activeTarget,
+      { name: nameInput.value, body: bodyInput.value });
+  }
+  function fieldError(input, messageNode, messageText) {
+    messageNode.textContent = messageText || '';
+    if (messageText) input.setAttribute('aria-invalid', 'true');
+    else input.removeAttribute('aria-invalid');
+  }
+  function clearFieldErrors() {
+    fieldError(nameInput, nameError, '');
+    fieldError(bodyInput, bodyError, '');
+  }
+  function updateSubmit() { submit.disabled = state.posting || !token || !state.activeTarget; }
+  function clearWidget() {
+    widgetGeneration++;
+    token = null;
+    if (widgetId !== null && window.turnstile) {
+      try { window.turnstile.remove(widgetId); } catch { /* A failed widget is already unusable. */ }
+    }
+    widgetId = null;
+    verifySlot.replaceChildren();
+    updateSubmit();
+  }
+  function ensureTurnstile() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (turnstileScript) return turnstileScript;
+    turnstileScript = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      const timeout = setTimeout(() => { script.remove(); reject(Error('TURNSTILE_UNAVAILABLE')); }, 10_000);
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.onload = () => {
+        clearTimeout(timeout);
+        if (window.turnstile) resolve(window.turnstile);
+        else { script.remove(); reject(Error('TURNSTILE_UNAVAILABLE')); }
+      };
+      script.onerror = () => { clearTimeout(timeout); script.remove(); reject(Error('TURNSTILE_UNAVAILABLE')); };
+      document.head.append(script);
+    }).catch(error => { turnstileScript = null; throw error; });
+    return turnstileScript;
+  }
+  async function renderChallenge(messageText = words.verifyWait) {
+    clearWidget();
+    if (!state.activeTarget || !writeEnabled) return;
+    const generation = widgetGeneration;
+    formStatus.textContent = messageText;
+    verifyRetry.hidden = true;
+    try {
+      const turnstile = await ensureTurnstile();
+      if (generation !== widgetGeneration || !state.activeTarget) return;
+      const compactTurnstile = verifySlot.getBoundingClientRect().width < 300;
+      widgetId = turnstile.render(verifySlot, {
+        sitekey: runtime.transport.turnstileSitekey, action: 'discussion_post',
+        theme: 'auto', size: compactTurnstile ? 'compact' : 'flexible',
+        'response-field': false,
+        callback(value) {
+          if (generation !== widgetGeneration || state.posting) return;
+          token = value; updateSubmit(); verifyRetry.hidden = true;
+          if (formStatus.textContent === words.verifyWait || formStatus.textContent === words.verifyLoad)
+            formStatus.textContent = '';
+        },
+        'error-callback'() {
+          if (generation !== widgetGeneration) return true;
+          token = null; updateSubmit(); formStatus.textContent = words.verifyLoad;
+          verifyRetry.hidden = false; return true;
+        },
+        'expired-callback'() {
+          if (generation === widgetGeneration) renderChallenge(words.verifyWait);
+        },
+        'timeout-callback'() {
+          if (generation === widgetGeneration) renderChallenge(words.verifyWait);
+        },
+      });
+    } catch {
+      if (generation !== widgetGeneration) return;
+      token = null; updateSubmit(); formStatus.textContent = words.verifyLoad;
+      verifyRetry.hidden = false;
+    }
+  }
+  function closeComposer(restoreFocus = true) {
+    if (!state.activeTarget) return;
+    saveDraft();
+    const opener = state.opener;
+    state.activeTarget = null; state.opener = null;
+    clearWidget();
+    composerHost.hidden = true;
+    comments.before(composerHost);
+    if (restoreFocus && opener?.isConnected && !opener.hidden) opener.focus({ preventScroll: true });
+  }
+  function placeComposer() {
+    if (!state.activeTarget) return;
+    if (state.activeTarget === 'root') {
+      if (rootAction.hidden) { closeComposer(false); return; }
+      rootAction.after(composerHost);
+    } else {
+      const rootId = state.activeTarget.slice(6);
+      const root = [...comments.querySelectorAll('.kt-discussion-comment')]
+        .find(article => article.dataset.commentId === rootId);
+      const action = root?.querySelector('.kt-discussion-reply-action');
+      if (!action) { closeComposer(false); return; }
+      action.parentElement.after(composerHost);
+    }
+    composerHost.hidden = false;
+  }
+  function openComposer(target, opener) {
+    if (!writeEnabled || state.threadLocked || state.posting) return;
+    if (state.activeTarget === target) { nameInput.focus(); return; }
+    if (state.activeTarget) closeComposer(false);
+    state.activeTarget = target; state.opener = opener;
+    const draft = state.drafts.get(target);
+    nameInput.value = draft?.name ?? ''; bodyInput.value = draft?.body ?? '';
+    honeypot.value = '';
+    clearFieldErrors(); postNotice.textContent = '';
+    submit.textContent = target === 'root' ? words.rootSubmit : words.replySubmit;
+    placeComposer();
+    nameInput.focus({ preventScroll: true });
+    renderChallenge();
+  }
+  function validateDraft(target) {
+    clearFieldErrors();
+    const name = nameInput.value.trim();
+    const body = bodyInput.value.trim();
+    let valid = true;
+    if (points(name) > 40) { fieldError(nameInput, nameError, words.nameLong); valid = false; }
+    if (!body) { fieldError(bodyInput, bodyError, words.emptyBody); valid = false; }
+    else if (points(body) > 2000) { fieldError(bodyInput, bodyError, words.bodyLong); valid = false; }
+    const hash = target === 'root' ? location.hash : '';
+    if (target === 'root' && (points(hash) > 256 || (hash && !hash.startsWith('#')))) {
+      formStatus.textContent = words.badHash; valid = false;
+    }
+    if (!valid) (nameInput.hasAttribute('aria-invalid') ? nameInput : bodyInput).focus();
+    return valid;
+  }
+  async function refreshDiscussion() {
+    const response = await read(state.activeVersion, null);
+    const roots = response.currentVersion.comments;
+    state.pages.set(state.activeVersion, {
+      status: response.thread.status, comments: roots, seen: new Set(roots.map(root => root.id)),
+      nextCursor: response.currentVersion.nextCursor,
+    });
+    if (state.activeVersion === context.guideVersion) state.index = response.earlierVersions;
+    renderPage();
+  }
+  function postError(error) {
+    if (error?.code === 'RATE_LIMITED') return words.rateLimited;
+    if (error?.code === 'VERIFICATION_FAILED') return words.verifyFailed;
+    if (error?.code === 'THREAD_LOCKED') return words.postLocked;
+    if (error?.fieldErrors?.displayName) fieldError(nameInput, nameError, words.badName);
+    if (error?.fieldErrors?.body) fieldError(bodyInput, bodyError, words.emptyBody);
+    return words.postFailed;
+  }
+  async function submitDraft(event) {
+    event.preventDefault();
+    const target = state.activeTarget;
+    if (!target || state.posting || !validateDraft(target)) return;
+    if (!token) { formStatus.textContent = words.verifyWait; return; }
+    const usedToken = token;
+    token = null;
+    state.posting = true; updateSubmit(); cancel.disabled = true;
+    rootAction.disabled = true;
+    more.disabled = true;
+    comments.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = true; });
+    formStatus.textContent = words.posting;
+    const payload = {
+      pageKey: context.pageKey, locale: context.locale, guideVersion: context.guideVersion,
+      displayName: nameInput.value, body: bodyInput.value,
+      pageHash: target === 'root' ? location.hash : '',
+      parentCommentId: target === 'root' ? null : target.slice(6),
+      turnstileToken: usedToken, honeypot: honeypot.value,
+    };
+    try {
+      const posted = await runtime.transport.postComment(payload);
+      if (posted?.httpStatus !== 201) throw Error('DISCUSSION_POST_FAILED');
+      state.drafts.delete(target);
+      state.activeTarget = null; state.opener = null;
+      clearWidget(); composerHost.hidden = true; comments.before(composerHost);
+      postNotice.textContent = target === 'root' ? words.rootSuccess : words.replySuccess;
+      postNotice.dataset.state = 'success';
+      try {
+        await refreshDiscussion();
+        const rendered = posted.commentId && document.getElementById(`kt-comment-${posted.commentId}`);
+        (rendered || postNotice).focus({ preventScroll: true });
+      } catch {
+        postNotice.textContent = words.refreshFailed;
+        postNotice.focus({ preventScroll: true });
+      }
+    } catch (error) {
+      saveDraft();
+      const messageText = postError(error);
+      if (error?.code === 'THREAD_LOCKED') {
+        for (const page of state.pages.values()) page.status = 'locked';
+        closeComposer(false);
+        postNotice.textContent = messageText;
+        try { await refreshDiscussion(); } catch { renderPage(); }
+      } else {
+        state.posting = false;
+        renderChallenge(messageText);
+      }
+    } finally {
+      state.posting = false; cancel.disabled = false;
+      updateSubmit();
+      rootAction.disabled = state.pending;
+      more.disabled = state.pending;
+      comments.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = state.pending; });
+    }
+  }
+  if (writeEnabled) {
+    rootAction.addEventListener('click', () => openComposer('root', rootAction));
+    cancel.addEventListener('click', () => closeComposer());
+    verifyRetry.addEventListener('click', () => renderChallenge());
+    nameInput.addEventListener('input', saveDraft);
+    bodyInput.addEventListener('input', saveDraft);
+    form.addEventListener('submit', submitDraft);
+  }
+  async function loadVersion(guideVersion) {
+    if (state.pending || state.posting) return;
+    const cached = state.pages.get(guideVersion);
+    if (cached) {
+      state.activeVersion = guideVersion;
+      message(); renderPage();
+      return;
+    }
+    busy(true); message('loading');
+    try {
+      const response = await read(guideVersion, null);
+      const roots = response.currentVersion.comments;
+      state.pages.set(guideVersion, {
+        status: response.thread.status, comments: roots, seen: new Set(roots.map(root => root.id)),
+        nextCursor: response.currentVersion.nextCursor,
+      });
+      if (guideVersion === context.guideVersion && !state.index.length)
+        state.index = response.earlierVersions;
+      state.activeVersion = guideVersion;
+      message();
+    } catch {
+      message('error', () => loadVersion(guideVersion));
+    } finally {
+      busy(false); renderPage();
+    }
+  }
+  async function loadMore() {
+    const page = state.pages.get(state.activeVersion);
+    if (state.pending || state.posting || !page?.nextCursor) return;
+    const guideVersion = state.activeVersion;
+    const cursor = page.nextCursor;
+    busy(true); message('loading');
+    try {
+      const response = await read(guideVersion, cursor);
+      for (const root of response.currentVersion.comments) {
+        if (!page.seen.has(root.id)) { page.comments.push(root); page.seen.add(root.id); }
+      }
+      page.nextCursor = response.currentVersion.nextCursor;
+      message();
+    } catch {
+      message('error', loadMore);
+    } finally {
+      busy(false); renderPage();
+    }
+  }
+  more.addEventListener('click', loadMore);
+  loadVersion(context.guideVersion);
+})();
+</script>

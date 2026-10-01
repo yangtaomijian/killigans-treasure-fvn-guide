@@ -1,0 +1,71 @@
+<!-- Host-selected remote transport for staging and production. -->
+<script>
+(() => {
+  'use strict';
+  const environment = location.hostname === 'killigans-treasure.carambi.com' ? 'production' : null;
+  if (!environment) return;
+  const meta = name => document.querySelector(`meta[name="${name}"]`)?.content ?? '';
+  if (meta('kt-discussion-environment') !== environment) return;
+  const origin = meta('kt-discussion-api');
+  const turnstileSitekey = meta('kt-discussion-turnstile-sitekey');
+  const expectedApiHost = `discussion${environment === 'staging' ? '-staging' : ''}.carambi.com`;
+  if (origin !== `https://${expectedApiHost}` || !/^0x[A-Za-z0-9]+$/.test(turnstileSitekey)) return;
+  const config = Object.freeze({ origin, turnstileSitekey });
+  const endpoint = config.origin + '/v1/discussion';
+  window.__ktDiscussionRemoteTransport = Object.freeze({
+    turnstileSitekey: config.turnstileSitekey,
+    async readDiscussion(request) {
+      const url = new URL(endpoint);
+      for (const key of ['pageKey', 'locale', 'guideVersion'])
+        url.searchParams.set(key, request[key]);
+      for (const key of ['cursor', 'limit'])
+        if (request[key] !== null && request[key] !== undefined) url.searchParams.set(key, request[key]);
+      const response = await fetch(url, { method: 'GET', mode: 'cors', credentials: 'omit',
+        referrerPolicy: 'no-referrer' });
+      if (!response.ok) throw Error('DISCUSSION_READ_FAILED');
+      return response.json();
+    },
+    async postComment(input) {
+      const payload = {
+        schemaVersion: 1, pageKey: input.pageKey, locale: input.locale,
+        guideVersion: input.guideVersion, displayName: input.displayName, body: input.body,
+        pageHash: input.pageHash, parentCommentId: input.parentCommentId,
+        turnstileToken: input.turnstileToken, honeypot: input.honeypot,
+      };
+      const response = await fetch(endpoint + '/comments', {
+        method: 'POST', mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer',
+        headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload),
+      });
+      let data = null;
+      try { data = await response.json(); } catch { /* HTTP status remains authoritative. */ }
+      if (response.status === 201) return {
+        ok: true, httpStatus: 201, commentId: typeof data?.commentId === 'string' ? data.commentId : null,
+      };
+      const error = Error('DISCUSSION_POST_FAILED');
+      error.code = typeof data?.code === 'string' ? data.code : null;
+      error.fieldErrors = data?.fieldErrors && typeof data.fieldErrors === 'object' ? data.fieldErrors : null;
+      throw error;
+    },
+    async sendFeedback(input) {
+      const payload = {
+        schemaVersion: 1, category: input.category, message: input.message,
+        contact: input.contact, guideVersion: input.guideVersion, locale: input.locale,
+        pagePath: input.pagePath, pageHash: input.pageHash,
+        viewportClass: input.viewportClass, relatedCommentId: input.relatedCommentId,
+        turnstileToken: input.turnstileToken, honeypot: input.honeypot,
+      };
+      const response = await fetch(config.origin + '/v1/feedback', {
+        method: 'POST', mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer',
+        headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload),
+      });
+      let data = null;
+      try { data = await response.json(); } catch { /* HTTP status remains authoritative. */ }
+      if (response.status === 202) return { ok: true, httpStatus: 202 };
+      const error = Error('FEEDBACK_SEND_FAILED');
+      error.code = typeof data?.code === 'string' ? data.code : null;
+      error.fieldErrors = data?.fieldErrors && typeof data.fieldErrors === 'object' ? data.fieldErrors : null;
+      throw error;
+    },
+  });
+})();
+</script>

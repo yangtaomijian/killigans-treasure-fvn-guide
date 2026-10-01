@@ -1,0 +1,107 @@
+/* Staging Feedback and Report share one native modal dialog. */
+html.kt-feedback-open,
+body.kt-feedback-open { overflow: hidden; }
+.kt-feedback-slot:not(:disabled) { opacity: 1; cursor: pointer; color: var(--kt-link); }
+.kt-feedback-slot:not(:disabled):hover { color: var(--kt-link-hover); text-decoration: underline; }
+.kt-feedback-slot:focus-visible,
+.kt-feedback-dialog :is(button, select, input, textarea):focus-visible {
+  outline: 2px solid var(--kt-link);
+  outline-offset: 2px;
+}
+.kt-feedback-dialog {
+  box-sizing: border-box;
+  width: min(calc(100% - 1.5rem), 560px);
+  max-width: none;
+  max-height: calc(100dvh - 1.5rem);
+  margin: auto;
+  padding: 1.25rem;
+  overflow: auto;
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-radius-md);
+  background: var(--kt-bg);
+  color: var(--kt-text);
+  box-shadow: 0 14px 48px rgba(0, 0, 0, .25);
+}
+.kt-feedback-dialog::backdrop { background: rgba(0, 0, 0, .68); }
+.kt-feedback-dialog [hidden] { display: none !important; }
+.kt-feedback-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.kt-feedback-header h2 { margin: 0; color: var(--kt-heading); font-size: 1.5rem; }
+.kt-feedback-close {
+  flex: none;
+  min-height: 2.75rem;
+  padding: .45rem .7rem;
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-radius-sm);
+  background: var(--kt-surface);
+  color: var(--kt-link);
+  font: inherit;
+  cursor: pointer;
+}
+.kt-feedback-intro { margin: .75rem 0 1rem; color: var(--kt-text-muted); line-height: 1.6; }
+.kt-feedback-status:not(:empty) { margin: 0 0 .75rem; line-height: 1.5; }
+.kt-feedback-status:empty { display: none; }
+.kt-feedback-form { display: grid; gap: .85rem; min-width: 0; }
+.kt-feedback-field { display: grid; gap: .3rem; min-width: 0; }
+.kt-feedback-field label { color: var(--kt-heading); font-weight: 650; }
+.kt-feedback-input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: .6rem .7rem;
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-radius-sm);
+  background: var(--kt-surface);
+  color: var(--kt-text);
+  font: inherit;
+}
+.kt-feedback-input[aria-invalid='true'] { border-color: var(--kt-link); }
+.kt-feedback-dialog textarea { resize: vertical; }
+.kt-feedback-help { margin: 0; color: var(--kt-text-muted); font-size: .84rem; }
+.kt-feedback-field-error { margin: 0; color: var(--kt-link); font-size: .84rem; }
+.kt-feedback-field-error:empty { display: none; }
+.kt-feedback-turnstile { min-width: 0; min-height: 65px; overflow: hidden; }
+.kt-feedback-actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+.kt-feedback-action {
+  min-height: 2.75rem;
+  padding: .55rem .85rem;
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-radius-md);
+  background: var(--kt-surface);
+  color: var(--kt-link);
+  font: inherit;
+  cursor: pointer;
+}
+.kt-feedback-action:hover,
+.kt-feedback-close:hover { background: var(--kt-surface-muted); }
+.kt-feedback-action:disabled,
+.kt-feedback-close:disabled { opacity: .6; cursor: wait; }
+.kt-feedback-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  pointer-events: none;
+}
+#kt-public-discussion .kt-discussion-report-action {
+  margin: .25rem 0 .5rem .6rem;
+  padding-inline: .4rem;
+  border-color: transparent;
+  background: transparent;
+  color: var(--kt-text-muted);
+  font-size: .82rem;
+}
+#kt-public-discussion .kt-discussion-report-action:hover {
+  background: transparent;
+  color: var(--kt-link);
+  text-decoration: underline;
+}
+@media (max-width: 767.98px) {
+  .kt-feedback-dialog {
+    width: calc(100% - 1rem);
+    max-height: calc(100dvh - 1rem);
+    padding: 1rem;
+  }
+}

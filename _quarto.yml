@@ -1,0 +1,95 @@
+lang: zh-CN
+
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.md
+    - help.md
+    - guide/redroot.md
+    - guide/aris.md
+    - guide/crystal-plains-shieldfall.md
+    - guide/spiceport.md
+    - guide/blueleaf-grove.md
+    - reference/relationships.md
+    - reference/personality.md
+    - reference/combat.md
+    - collectibles/memories.md
+    - collectibles/equipment.md
+    - collectibles/dressing-room.md
+    - collectibles/codex.md
+
+website:
+  search: false
+  page-footer:
+    left: |
+      <div class="kt-publication-footer"><p>非官方玩家攻略 · Killigan’s Treasure Public v0.57a</p><div class="kt-publication-footer-links"><span class="kt-publication-attribution">由 <a class="kt-carambi-link" href="https://carambi.com/zh/">Carambi</a> 维护</span><button class="kt-feedback-slot" type="button" disabled>私下反馈</button><button class="kt-back-to-top" type="button">↑ 返回顶部</button></div></div>
+  navbar:
+    left:
+      - text: 首页
+        href: index.md
+      - text: 旅程
+        menu:
+          - text: 红根镇 / 红根镇荒野
+            href: guide/redroot.md
+          - text: 阿瑞斯
+            href: guide/aris.md
+          - text: 水晶平原 / ??? / 盾落谷
+            href: guide/crystal-plains-shieldfall.md
+          - text: 斯派斯港
+            href: guide/spiceport.md
+          - text: 蓝叶森林
+            href: guide/blueleaf-grove.md
+      - text: 参考
+        menu:
+          - text: 关系发展
+            href: reference/relationships.md
+          - text: 性格
+            href: reference/personality.md
+          - text: 战斗与 QTE
+            href: reference/combat.md
+      - text: 收集
+        menu:
+          - text: 回忆与画面
+            href: collectibles/memories.md
+          - text: 装备与物品
+            href: collectibles/equipment.md
+          - text: Dressing Room
+            href: collectibles/dressing-room.md
+          - text: 图鉴
+            href: collectibles/codex.md
+      - text: 帮助
+        href: help.md
+    right:
+      - text: EN
+        href: en/index.html
+
+format:
+  html:
+    theme:
+      light: [default]
+      dark: [default, assets/kt-dark.scss]
+    respect-user-color-scheme: true
+    toc: true
+    toc-depth: 3
+    css:
+      - assets/kt-foundation.css
+      - assets/kt-publication.css
+      - assets/kt-layout.css
+      - assets/kt-components.css
+      - assets/kt-theme.css
+      - assets/kt-production-shell.css
+      - assets/kt-discussion.css
+      - assets/kt-feedback.css
+    include-in-header:
+      - assets/kt-discussion-config.html
+    include-after-body:
+      - assets/kt-language-switch.html
+      - assets/kt-search.html
+      - assets/kt-discussion-remote.html
+      - assets/kt-discussion-runtime.html
+      - assets/kt-discussion-ui.html
+      - assets/kt-feedback-ui.html
+      - assets/kt-production-shell.html
+    filters:
+      - scripts/preserve-explicit-anchors.lua

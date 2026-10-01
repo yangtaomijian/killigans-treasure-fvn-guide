@@ -1,0 +1,70 @@
+<!-- Shared page context and transport boundary for Discussion and Feedback. -->
+<script>
+(() => {
+  'use strict';
+  if (window.__ktDiscussionRuntime) return;
+
+  const guideVersion = 'Public v0.57a';
+  const pageKeys = Object.freeze({
+    '/guide/redroot.html': 'guide.redroot',
+    '/guide/aris.html': 'guide.aris',
+    '/guide/crystal-plains-shieldfall.html': 'guide.crystal-plains-shieldfall',
+    '/guide/spiceport.html': 'guide.spiceport',
+    '/guide/blueleaf-grove.html': 'guide.blueleaf-grove',
+    '/reference/relationships.html': 'reference.relationships',
+    '/reference/personality.html': 'reference.personality',
+    '/reference/combat.html': 'reference.combat',
+    '/collectibles/memories.html': 'collectibles.memories',
+    '/collectibles/equipment.html': 'collectibles.equipment',
+    '/collectibles/dressing-room.html': 'collectibles.dressing-room',
+    '/collectibles/codex.html': 'collectibles.codex',
+    '/en/guide/redroot.html': 'guide.redroot',
+    '/en/guide/aris.html': 'guide.aris',
+    '/en/guide/crystal-plains-shieldfall.html': 'guide.crystal-plains-shieldfall',
+    '/en/guide/spiceport.html': 'guide.spiceport',
+    '/en/guide/blueleaf-grove.html': 'guide.blueleaf-grove',
+    '/en/reference/relationships.html': 'reference.relationships',
+    '/en/reference/personality.html': 'reference.personality',
+    '/en/reference/combat.html': 'reference.combat',
+    '/en/collectibles/memories.html': 'collectibles.memories',
+    '/en/collectibles/equipment.html': 'collectibles.equipment',
+    '/en/collectibles/dressing-room.html': 'collectibles.dressing-room',
+    '/en/collectibles/codex.html': 'collectibles.codex',
+  });
+
+  function getContext() {
+    const locale = document.documentElement.lang;
+    if (locale !== 'en' && locale !== 'zh-CN') return null;
+    const pagePath = location.pathname;
+    if ((locale === 'en') !== pagePath.startsWith('/en/')) return null;
+    return Object.freeze({
+      site: 'killigans-treasure',
+      locale,
+      pageKey: Object.hasOwn(pageKeys, pagePath) ? pageKeys[pagePath] : null,
+      guideVersion,
+      pagePath,
+      pageHash: location.hash,
+      viewportClass: matchMedia('(min-width: 768px)').matches ? 'desktop' : 'mobile',
+    });
+  }
+
+  const localHost = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  const productionHost = location.hostname === 'killigans-treasure.carambi.com';
+  const transport = localHost ? window.__ktDiscussionFixtureTransport ?? null :
+    productionHost ? window.__ktDiscussionRemoteTransport ?? null : null;
+  window.__ktDiscussionRuntime = Object.freeze({
+    getContext, transport, mode: transport ?
+      (localHost ? 'fixture' : 'production') : 'inactive',
+  });
+  const context = getContext();
+  if (!context?.pageKey) return;
+  const main = document.querySelector('#quarto-content > main#quarto-document-content');
+  if (!main || document.getElementById('kt-public-discussion')) return;
+  const mount = document.createElement('div');
+  mount.id = 'kt-public-discussion';
+  mount.hidden = true;
+  mount.setAttribute('data-kt-discussion-mount', '');
+  mount.dataset.pageKey = context.pageKey;
+  main.after(mount);
+})();
+</script>

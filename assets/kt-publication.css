@@ -1,0 +1,326 @@
+/* Publication typography and hierarchy. Quarto's navigation and article geometry stay intact. */
+#quarto-header .navbar {
+  background: var(--kt-shell);
+  color: var(--kt-text);
+  border-bottom: 1px solid var(--kt-border-strong);
+  box-shadow: none;
+  --bs-navbar-color: var(--kt-text-muted);
+  --bs-navbar-hover-color: var(--kt-heading);
+  --bs-navbar-active-color: var(--kt-heading);
+  --bs-navbar-toggler-border-color: var(--kt-border-strong);
+}
+
+/* One compact publication identity shares the existing header row. */
+#quarto-header #kt-publication-brand {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: .08rem;
+  margin-right: 1.4rem;
+  white-space: nowrap;
+}
+
+#quarto-header .kt-brand-name {
+  color: var(--kt-heading);
+  font-family: var(--kt-font-editorial);
+  font-optical-sizing: auto;
+  font-size: 1.24rem;
+  font-weight: 500;
+  letter-spacing: -.018em;
+  line-height: 1.05;
+}
+
+#quarto-header .kt-brand-edition {
+  color: var(--kt-text-muted);
+  font-size: .62rem;
+  font-weight: 620;
+  letter-spacing: .045em;
+  line-height: 1.25;
+}
+
+@media (min-width: 992px) {
+  #quarto-header .navbar {
+    padding-block: .7rem;
+  }
+
+  #quarto-header.headroom--unpinned {
+    transform: none;
+  }
+
+  #quarto-header #navbarCollapse .kt-language-utility {
+    font-size: .8rem;
+    font-weight: 670;
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav.me-auto {
+    gap: .08rem;
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav.me-auto > .nav-item > .nav-link {
+    padding-inline: .62rem;
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav.me-auto > .nav-item > .nav-link:is(.active, .kt-section-active) {
+    color: var(--kt-heading);
+    background: transparent;
+    border-radius: var(--kt-radius-sm);
+    box-shadow: inset 0 -2px var(--kt-accent);
+  }
+
+  #quarto-header #navbarCollapse .navbar-nav.me-auto > .nav-item > .nav-link:is(:hover, :focus-visible, .show) {
+    color: var(--kt-link);
+    background: var(--kt-accent-soft);
+  }
+}
+
+#quarto-header .navbar-nav .nav-link {
+  color: var(--kt-text-muted);
+  border-radius: var(--kt-radius-sm);
+  transition: color .15s ease, background-color .15s ease;
+}
+
+#quarto-header .navbar-nav .nav-link:is(:hover, :focus-visible),
+#quarto-header .navbar-nav .nav-link.show {
+  color: var(--kt-link);
+  background: var(--kt-accent-soft);
+}
+
+#quarto-header .navbar-nav .nav-link:is(:focus-visible, .show) {
+  box-shadow: none;
+}
+
+#quarto-header .navbar-nav .nav-link.active {
+  color: var(--kt-heading);
+  box-shadow: inset 0 -2px var(--kt-accent);
+}
+
+#quarto-header .navbar-nav .nav-link.active:focus-visible {
+  box-shadow: inset 0 -2px var(--kt-accent);
+}
+
+#quarto-header .dropdown-menu {
+  color: var(--kt-text);
+  background: var(--kt-surface-raised);
+  border: 1px solid var(--kt-border-strong);
+  border-radius: var(--kt-radius-md);
+  box-shadow: var(--kt-shadow-panel);
+  padding: .25rem;
+}
+
+#quarto-header .dropdown-item {
+  color: var(--kt-text);
+  border-radius: var(--kt-radius-sm);
+  padding: .43rem .7rem;
+  white-space: normal;
+}
+
+#quarto-header .dropdown-item:is(:hover, :focus-visible, :active) {
+  color: var(--kt-link);
+  background: var(--kt-accent-soft);
+}
+
+#quarto-header .navbar-toggler {
+  color: var(--kt-text);
+  border-color: var(--kt-border-strong);
+}
+
+#quarto-header .navbar-toggler-icon {
+  filter: brightness(0) opacity(.75);
+}
+
+#quarto-header .navbar-toggler:is(:hover, [aria-expanded="true"]) {
+  background: var(--kt-surface-muted);
+}
+
+#quarto-document-content .kt-page-breadcrumb {
+  color: var(--kt-accent);
+  font-size: .76rem;
+  line-height: 1.45;
+  margin: 0 0 .85rem;
+}
+
+#quarto-document-content .kt-page-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#quarto-document-content .kt-page-breadcrumb li + li::before {
+  content: "›";
+  color: currentColor;
+  margin-right: .3rem;
+}
+
+#quarto-document-content nav.kt-page-breadcrumb a[href] {
+  color: inherit;
+  text-decoration: none;
+}
+
+#quarto-document-content nav.kt-page-breadcrumb a[href]:is(:hover, :focus-visible) {
+  color: var(--kt-accent);
+  text-decoration: underline;
+}
+
+#quarto-document-content > section.kt-ordinary-page > h1 {
+  font-family: var(--kt-font-editorial);
+  font-optical-sizing: auto;
+  font-size: clamp(2.25rem, 2.65vw, 2.6rem);
+  font-weight: 470;
+  line-height: 1.18;
+  letter-spacing: -.018em;
+  margin: .2rem 0 .9rem;
+  padding: 0;
+  border: 0;
+}
+
+#quarto-document-content > section.kt-ordinary-page > h1 + p {
+  color: var(--kt-text-muted);
+  font-size: .88rem;
+  line-height: 1.62;
+  max-width: 52rem;
+  margin: 0 0 2rem;
+  padding-bottom: 1.35rem;
+  border-bottom: 1px solid var(--kt-border);
+}
+
+#quarto-document-content > section.kt-home-page > .kt-home-eyebrow {
+  color: var(--kt-accent);
+  font-family: var(--kt-font-sans);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  line-height: 1.4;
+  margin: 0 0 .8rem;
+}
+
+#quarto-document-content > section.kt-home-page > h1 {
+  font-family: var(--kt-font-editorial);
+  font-optical-sizing: auto;
+  font-size: clamp(2.55rem, 3.4vw, 3.25rem);
+  font-weight: 470;
+  line-height: 1.14;
+  letter-spacing: -.02em;
+  margin: 0 0 1.1rem;
+  padding: 0;
+  border: 0;
+}
+
+/* Match DW's Chinese title weight; Newsreader still owns the Latin glyphs. */
+html[lang^="zh"] #quarto-document-content > section:is(.kt-ordinary-page, .kt-home-page) > h1 {
+  font-weight: 500;
+}
+
+#quarto-document-content > section.kt-home-page > h1 + p {
+  color: var(--kt-text-muted);
+  font-size: .9rem;
+  line-height: 1.6;
+  max-width: 52rem;
+  margin: 0 0 2rem;
+  padding-bottom: 1.45rem;
+  border-bottom: 1px solid var(--kt-border);
+}
+
+#quarto-document-content > section.kt-home-page > h1 + p + p {
+  color: var(--kt-text);
+  font-size: 1rem;
+  line-height: 1.68;
+  max-width: 52rem;
+  margin: 0 0 1.4rem;
+}
+
+#quarto-document-content > section.kt-ordinary-page > :is(p, ul, ol, dl),
+#quarto-document-content > section.kt-ordinary-page :is(section.level2, section.level3) > :is(p, ul, ol, dl) {
+  margin-bottom: 1.12rem;
+}
+
+#quarto-document-content > section:is(.kt-ordinary-page, .kt-home-page) section.level2 > h2 {
+  position: relative;
+  font-family: var(--kt-font-sans);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.36;
+  margin: 3.1rem 0 1.05rem;
+  padding: 0 0 .5rem .85rem;
+  border-bottom: 1px solid var(--kt-border);
+}
+
+#quarto-document-content > section:is(.kt-ordinary-page, .kt-home-page) section.level2 > h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .1em;
+  bottom: .65em;
+  width: 2px;
+  background: var(--kt-accent);
+}
+
+#quarto-document-content > section:is(.kt-ordinary-page, .kt-home-page) section.level3 > h3 {
+  font-family: var(--kt-font-sans);
+  font-size: 1.13rem;
+  font-weight: 700;
+  line-height: 1.42;
+  margin: 1.8rem 0 .6rem;
+  padding: 0;
+  border: 0;
+}
+
+#quarto-document-content > section:is(.kt-ordinary-page, .kt-home-page) :is(h2, h3) + :is(ul, ol) {
+  margin-top: .2rem;
+}
+
+@media (max-width: 575px) {
+  #quarto-document-content > section.kt-ordinary-page > h1 {
+    font-size: 2rem;
+  }
+
+  #quarto-document-content > section.kt-home-page > h1 {
+    font-size: 2.35rem;
+  }
+}
+
+@media (max-width: 991px) {
+  #quarto-header .navbar-toggler {
+    order: 0;
+    margin-right: 0;
+  }
+
+  #quarto-header #kt-publication-brand {
+    order: 1;
+    margin: 0 auto 0 .58rem;
+  }
+
+  #quarto-header .kt-brand-name {
+    font-size: 1.05rem;
+  }
+
+  #quarto-header .kt-brand-edition {
+    display: none;
+  }
+
+  #quarto-header #navbarCollapse {
+    border-top: 1px solid var(--kt-border);
+    margin-top: .45rem;
+    padding-top: .35rem;
+  }
+
+  #quarto-header .dropdown-menu {
+    box-shadow: none;
+    border-color: var(--kt-border);
+  }
+}
+
+@media (min-width: 390px) and (max-width: 430px) {
+  #quarto-header .kt-brand-name {
+    font-size: .94rem;
+  }
+}
+
+@media (max-width: 389px) {
+  #quarto-header #kt-publication-brand {
+    display: none;
+  }
+}

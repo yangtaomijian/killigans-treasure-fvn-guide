@@ -1,0 +1,84 @@
+/* A centered publication home, with the same open entry layout as PW/DW. */
+@media (min-width: 992px) {
+  body.kt-home #quarto-content.page-columns {
+    grid-template-columns: minmax(0, 840px);
+    justify-content: center;
+    padding-inline: 32px;
+  }
+  body.kt-home #quarto-content.page-columns > main.content {
+    grid-column: 1;
+    padding-left: 0;
+  }
+}
+body.kt-home #kt-page-toc-panel { display: none; }
+#quarto-document-content > section.kt-home-page > h1 {
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--kt-border);
+}
+#quarto-document-content > section.kt-home-page > h1 + p {
+  color: var(--kt-text);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0;
+  border: 0;
+}
+#quarto-document-content > section.kt-home-page > h1 + p + p {
+  font-size: .93rem;
+  margin-bottom: 1.1rem;
+}
+#quarto-document-content .kt-home-entries {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2.1rem;
+  margin: .8rem 0 2.2rem;
+}
+#quarto-document-content .kt-home-entry {
+  padding: 1.1rem 0 .5rem;
+  border-top: 1px solid var(--kt-border);
+  min-width: 0;
+}
+#quarto-document-content > section.kt-home-page section.kt-home-entry > h3 {
+  font-size: 1.15rem;
+  margin: 0 0 .6rem;
+  border: 0;
+  padding: 0;
+}
+#quarto-document-content > section.kt-home-page section.kt-home-entry > h3 a[href] { color: var(--kt-heading); }
+#quarto-document-content .kt-home-entry p {
+  font-size: .9rem;
+  line-height: 1.65;
+  margin-bottom: .65rem;
+}
+#quarto-document-content .kt-home-entry p:first-of-type { color: var(--kt-text-muted); }
+#quarto-document-content .kt-home-route-list {
+  list-style: none;
+  margin: .8rem 0 .5rem;
+  padding: 0;
+}
+#quarto-document-content .kt-home-route-list > li { margin: 0; padding: 0; }
+#quarto-document-content .kt-home-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  min-height: 44px;
+  padding: .55rem .65rem;
+  border-top: 1px solid var(--kt-border);
+  font-size: .9rem;
+  line-height: 1.5;
+  text-decoration: none;
+}
+#quarto-document-content .kt-home-route > span:first-child { min-width: 0; }
+#quarto-document-content .kt-home-route-arrow { flex: none; }
+#quarto-document-content .kt-home-route:is(:hover, :focus-visible) {
+  background: color-mix(in srgb, var(--kt-accent) 5%, transparent);
+  color: var(--kt-link-hover);
+}
+#quarto-document-content .kt-home-entry a:focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 3px;
+}
+@media (max-width: 575px) {
+  #quarto-document-content .kt-home-entries { grid-template-columns: minmax(0, 1fr); }
+}

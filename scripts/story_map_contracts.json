@@ -1,0 +1,997 @@
+{
+  "authority": "Projection/navigation of current public prose; never an acquisition database.",
+  "maps": [
+    {
+      "id": "relationship",
+      "page": "reference/relationships",
+      "title": {
+        "zh": "正式关系：Macsen 与 Zhokhar",
+        "en": "Formal relationships: Macsen and Zhokhar"
+      },
+      "direction": "LR",
+      "nodes": [
+        {
+          "id": "intention",
+          "label": {
+            "zh": "Day 8 Romantic<br/>可选交往意向",
+            "en": "Day 8 Romantic<br/>Optional intention"
+          },
+          "href": {
+            "zh": "#macsen-early",
+            "en": "#macsen-early"
+          },
+          "kind": "intention"
+        },
+        {
+          "id": "massage",
+          "label": {
+            "zh": "Day 10 按摩<br/>局部事件",
+            "en": "Day 10 massage<br/>Local event"
+          },
+          "href": {
+            "zh": "#macsen-day10-massage",
+            "en": "#macsen-day10-massage"
+          },
+          "kind": "local"
+        },
+        {
+          "id": "friendly",
+          "label": {
+            "zh": "Day 8 Friendly",
+            "en": "Day 8 Friendly"
+          },
+          "href": {
+            "zh": "#macsen-early",
+            "en": "#macsen-early"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "balcony",
+          "label": {
+            "zh": "Day 11 阳台<br/>正式决定",
+            "en": "Day 11 balcony<br/>Formal decision"
+          },
+          "href": {
+            "zh": "#macsen-balcony",
+            "en": "#macsen-balcony"
+          },
+          "kind": "decision"
+        },
+        {
+          "id": "macYes",
+          "label": {
+            "zh": "Macsen 正式确认",
+            "en": "Macsen confirmed"
+          },
+          "href": {
+            "zh": "#macsen-balcony",
+            "en": "#macsen-balcony"
+          },
+          "kind": "confirmation"
+        },
+        {
+          "id": "macNo",
+          "label": {
+            "zh": "不确认 Macsen<br/>清除此前交往意向",
+            "en": "Macsen not confirmed<br/>Earlier intention cleared"
+          },
+          "href": {
+            "zh": "#macsen-balcony",
+            "en": "#macsen-balcony"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "zTalk",
+          "label": {
+            "zh": "Spiceport Day 3 私谈",
+            "en": "Spiceport Day 3 private talk"
+          },
+          "href": {
+            "zh": "#zhokhar-spiceport",
+            "en": "#zhokhar-spiceport"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "trial",
+          "label": {
+            "zh": "Competition<br/>可重新考虑的试探",
+            "en": "Competition<br/>Reconsiderable trial"
+          },
+          "href": {
+            "zh": "#zhokhar-spiceport",
+            "en": "#zhokhar-spiceport"
+          },
+          "kind": "trial"
+        },
+        {
+          "id": "support",
+          "label": {
+            "zh": "Support<br/>不建立试探",
+            "en": "Support<br/>No trial"
+          },
+          "href": {
+            "zh": "#zhokhar-spiceport",
+            "en": "#zhokhar-spiceport"
+          },
+          "kind": "early"
+        },
+        {
+          "id": "zPark",
+          "label": {
+            "zh": "Day 6 公园邀请<br/>局部事件",
+            "en": "Day 6 park invitation<br/>Local event"
+          },
+          "href": {
+            "zh": "#zhokhar-spiceport",
+            "en": "#zhokhar-spiceport"
+          },
+          "kind": "local"
+        },
+        {
+          "id": "zFormal",
+          "label": {
+            "zh": "Spiceport Day 7<br/>正式关系提问",
+            "en": "Spiceport Day 7<br/>Formal question"
+          },
+          "href": {
+            "zh": "#zhokhar-spiceport",
+            "en": "#zhokhar-spiceport"
+          },
+          "kind": "decision",
+          "annotation": {
+            "zh": "Competition 非必需；<br/>关系准备足够也可进入",
+            "en": "Competition is not required;<br/>sufficient closeness can also qualify"
+          }
+        },
+        {
+          "id": "zYes",
+          "label": {
+            "zh": "Zhokhar 正式确认",
+            "en": "Zhokhar confirmed"
+          },
+          "href": {
+            "zh": "#zhokhar-spiceport",
+            "en": "#zhokhar-spiceport"
+          },
+          "kind": "confirmation"
+        },
+        {
+          "id": "zNo",
+          "label": {
+            "zh": "不确认 Zhokhar<br/>结束已有试探",
+            "en": "Zhokhar not confirmed<br/>Existing trial ends"
+          },
+          "href": {
+            "zh": "#zhokhar-spiceport",
+            "en": "#zhokhar-spiceport"
+          },
+          "kind": "step"
+        }
+      ],
+      "edges": [
+        {
+          "from": "intention",
+          "to": "massage",
+          "kind": "optional",
+          "label": {
+            "zh": "开启局部内容",
+            "en": "Opens local content"
+          }
+        },
+        {
+          "from": "intention",
+          "to": "balcony",
+          "kind": "optional",
+          "label": {
+            "zh": "可重新考虑；非前置",
+            "en": "Can reconsider; not required"
+          }
+        },
+        {
+          "from": "friendly",
+          "to": "balcony",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "balcony",
+          "to": "macYes",
+          "kind": "confirmation",
+          "label": {
+            "zh": "Yes",
+            "en": "Yes"
+          }
+        },
+        {
+          "from": "balcony",
+          "to": "macNo",
+          "kind": "continuation",
+          "label": {
+            "zh": "No",
+            "en": "No"
+          }
+        },
+        {
+          "from": "zTalk",
+          "to": "trial",
+          "kind": "trial",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "zTalk",
+          "to": "support",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "trial",
+          "to": "zPark",
+          "kind": "required",
+          "label": {
+            "zh": "试探开启",
+            "en": "Trial opens invitation"
+          }
+        },
+        {
+          "from": "trial",
+          "to": "zFormal",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "support",
+          "to": "zFormal",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "zFormal",
+          "to": "zYes",
+          "kind": "confirmation",
+          "label": {
+            "zh": "Yes",
+            "en": "Yes"
+          }
+        },
+        {
+          "from": "zFormal",
+          "to": "zNo",
+          "kind": "continuation",
+          "label": {
+            "zh": "No",
+            "en": "No"
+          }
+        }
+      ],
+      "note": {
+        "zh": "Macsen 未正式确认时，Zhokhar 的可能性仍开放，但仍须满足 Zhokhar 自身条件。比较分支前，在 Day 11 阳台决定前留普通存档。",
+        "en": "Without confirmed Macsen, Zhokhar remains possible, subject to his own conditions. Keep a normal save before the Day 11 balcony decision to compare branches."
+      },
+      "lanes": [
+        {
+          "id": "macsenLane",
+          "title": {
+            "zh": "Macsen",
+            "en": "Macsen"
+          },
+          "nodes": [
+            "intention",
+            "friendly",
+            "massage",
+            "balcony",
+            "macYes",
+            "macNo"
+          ]
+        },
+        {
+          "id": "zhokharLane",
+          "title": {
+            "zh": "Zhokhar",
+            "en": "Zhokhar"
+          },
+          "nodes": [
+            "zTalk",
+            "trial",
+            "support",
+            "zPark",
+            "zFormal",
+            "zYes",
+            "zNo"
+          ]
+        }
+      ],
+      "rule": {
+        "zh": "当前版本只可正式确认一条伴侣路线；确认 Macsen 后，Zhokhar 的正式关系进展与 Ray 的同巢邀请不再开放。",
+        "en": "The current version allows one confirmed partner route. Confirming Macsen closes Zhokhar’s formal relationship progression and Ray’s nest invitation."
+      },
+      "preparation_note": {
+        "zh": "Warehouse 是其中一种关系准备方式，并非必需。",
+        "en": "Warehouse is one way to prepare the relationship, not a requirement."
+      },
+      "preparation_href": {
+        "zh": "#prepare-zhokhar",
+        "en": "#prepare-zhokhar"
+      },
+      "local_invitations": [
+        {
+          "id": "ray",
+          "name": "Ray",
+          "text": {
+            "zh": "??? 当晚的局部同巢邀请；需要对应准备且无 confirmed Macsen；接受不会确认伴侣。",
+            "en": "A local nest invitation that night in ???; requires the relevant preparation and no confirmed Macsen. Accepting does not confirm a partner."
+          },
+          "links": [
+            {
+              "href": "#prepare-ray",
+              "label": {
+                "zh": "准备",
+                "en": "Preparation"
+              }
+            },
+            {
+              "href": "#question-mark-ray",
+              "label": {
+                "zh": "当晚邀请",
+                "en": "That night’s invitation"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cabotte",
+          "name": "Cabotte",
+          "text": {
+            "zh": "Wilds Day 8 条件满足后的局部邀请；Sure 进入当晚事件，不会确认伴侣。",
+            "en": "A local invitation after the Wilds Day 8 conditions are met. Sure enters that night’s event without confirming a partner."
+          },
+          "links": [
+            {
+              "href": "#cabotte-wilds",
+              "label": {
+                "zh": "邀请条件",
+                "en": "Invitation conditions"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "inlineHeight": 380,
+        "mobileHeight": 300,
+        "flowchart": {
+          "nodeSpacing": 16,
+          "rankSpacing": 22,
+          "padding": 8
+        },
+        "parallelLanes": true
+      }
+    },
+    {
+      "id": "spiceport-planning",
+      "page": "guide/spiceport",
+      "title": {
+        "zh": "Day 2–4：远足安排与早期用途",
+        "en": "Days 2–4: excursions and early uses"
+      },
+      "direction": "TD",
+      "nodes": [
+        {
+          "id": "d2",
+          "label": {
+            "zh": "Day 2：两格，选一处远足",
+            "en": "Day 2: two slots, one excursion"
+          },
+          "href": {
+            "zh": "#spiceport-early-excursions",
+            "en": "#spiceport-early-excursions"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "d3",
+          "label": {
+            "zh": "Day 3：一格独行＋两格远足",
+            "en": "Day 3: one solo slot + two-slot excursion"
+          },
+          "href": {
+            "zh": "#spiceport-early-excursions",
+            "en": "#spiceport-early-excursions"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "d4",
+          "label": {
+            "zh": "Day 4：一格独行＋最后一处远足",
+            "en": "Day 4: one solo slot + last excursion"
+          },
+          "href": {
+            "zh": "#spiceport-early-excursions",
+            "en": "#spiceport-early-excursions"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "all",
+          "label": {
+            "zh": "三处远足均可完成",
+            "en": "All three excursions can be completed"
+          },
+          "href": {
+            "zh": "#spiceport-early-excursions",
+            "en": "#spiceport-early-excursions"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "wEarly",
+          "label": {
+            "zh": "Warehouse Day 2/3：可用于早期准备",
+            "en": "Warehouse Day 2/3: can help early preparation"
+          },
+          "href": {
+            "zh": "#spiceport-early-excursions",
+            "en": "#spiceport-early-excursions"
+          },
+          "kind": "optional"
+        },
+        {
+          "id": "talk",
+          "label": {
+            "zh": "Day 3 私谈：另看相处与关系条件",
+            "en": "Day 3 talk: also check closeness and relationship conditions"
+          },
+          "href": {
+            "zh": "../reference/relationships.html#prepare-zhokhar",
+            "en": "../reference/relationships.html#prepare-zhokhar"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "wLate",
+          "label": {
+            "zh": "Warehouse Day 4：远足本身仍可做",
+            "en": "Warehouse Day 4: excursion itself still available"
+          },
+          "href": {
+            "zh": "#spiceport-early-excursions",
+            "en": "#spiceport-early-excursions"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "miss",
+          "label": {
+            "zh": "但已赶不上 Day 3 私谈的早期用途",
+            "en": "Too late for its early use at the Day 3 talk"
+          },
+          "href": {
+            "zh": "#spiceport-early-excursions",
+            "en": "#spiceport-early-excursions"
+          },
+          "kind": "exclusion"
+        }
+      ],
+      "edges": [
+        {
+          "from": "d2",
+          "to": "d3",
+          "kind": "continuation",
+          "label": {
+            "zh": "次日安排",
+            "en": "next day"
+          }
+        },
+        {
+          "from": "d3",
+          "to": "d4",
+          "kind": "continuation",
+          "label": {
+            "zh": "次日安排",
+            "en": "next day"
+          }
+        },
+        {
+          "from": "d4",
+          "to": "all",
+          "kind": "continuation",
+          "label": {
+            "zh": "每次选尚未去过的一处",
+            "en": "choose an unvisited excursion each time"
+          }
+        },
+        {
+          "from": "wEarly",
+          "to": "talk",
+          "kind": "optional",
+          "label": {
+            "zh": "可用加成；不是逐项必需",
+            "en": "usable preparation; not individually required"
+          }
+        },
+        {
+          "from": "wLate",
+          "to": "all",
+          "kind": "continuation",
+          "label": {
+            "zh": "计入远足本身",
+            "en": "counts toward excursions"
+          }
+        },
+        {
+          "from": "wLate",
+          "to": "miss",
+          "kind": "exclusion",
+          "label": {
+            "zh": "早期窗口已过去",
+            "en": "early window has passed"
+          }
+        }
+      ],
+      "note": {
+        "zh": "活动还能完成，不等于依赖它的早期事件还能赶上。Warehouse Day 4 的远足与 Day 3 私谈必须分开判断；时间格的精确信息仍见下表。",
+        "en": "An activity can remain available after an earlier event that depended on it has passed. Day 4 Warehouse completion does not recover Day 3 preparation. The table below retains exact time-slot information."
+      },
+      "presentation": {
+        "inlineHeight": 440,
+        "mobileHeight": 300,
+        "flowchart": {
+          "nodeSpacing": 16,
+          "rankSpacing": 20,
+          "padding": 7
+        }
+      }
+    },
+    {
+      "id": "spiceport-recovery",
+      "page": "guide/spiceport",
+      "title": {
+        "zh": "Day 5–6：时间竞争与恢复分支",
+        "en": "Days 5–6: conflicts and recovery"
+      },
+      "direction": "TD",
+      "nodes": [
+        {
+          "id": "d5",
+          "label": {
+            "zh": "Day 5：两格，先留普通存档",
+            "en": "Day 5: two slots; save before choosing"
+          },
+          "href": {
+            "zh": "#spiceport-day5",
+            "en": "#spiceport-day5"
+          },
+          "kind": "recovery"
+        },
+        {
+          "id": "fish5",
+          "label": {
+            "zh": "Fishing Pier：两格",
+            "en": "Fishing Pier: two slots"
+          },
+          "href": {
+            "zh": "#spiceport-day5",
+            "en": "#spiceport-day5"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "clutch",
+          "label": {
+            "zh": "clutchmates：两格，Day 5 限定",
+            "en": "clutchmates: two slots, Day 5 only"
+          },
+          "href": {
+            "zh": "#spiceport-day5",
+            "en": "#spiceport-day5"
+          },
+          "kind": "local"
+        },
+        {
+          "id": "invite",
+          "label": {
+            "zh": "Day 6：Macsen 已确认／Zhokhar 已试探时邀请",
+            "en": "Day 6: invitation if Macsen confirmed / Zhokhar trial"
+          },
+          "href": {
+            "zh": "#spiceport-day6",
+            "en": "#spiceport-day6"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "sure",
+          "label": {
+            "zh": "Sure：直接进入人物公园场景",
+            "en": "Sure: straight into character park scene"
+          },
+          "href": {
+            "zh": "#spiceport-day6",
+            "en": "#spiceport-day6"
+          },
+          "kind": "local"
+        },
+        {
+          "id": "noFree",
+          "label": {
+            "zh": "无自由探索；不能补 Fishing",
+            "en": "No free exploration; cannot make up Fishing"
+          },
+          "href": {
+            "zh": "#spiceport-day6",
+            "en": "#spiceport-day6"
+          },
+          "kind": "exclusion"
+        },
+        {
+          "id": "decline",
+          "label": {
+            "zh": "Nah／无邀请",
+            "en": "Nah / no invitation"
+          },
+          "href": {
+            "zh": "#spiceport-day6",
+            "en": "#spiceport-day6"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "free",
+          "label": {
+            "zh": "两格 free exploration",
+            "en": "Two slots of free exploration"
+          },
+          "href": {
+            "zh": "#spiceport-day6",
+            "en": "#spiceport-day6"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "recover",
+          "label": {
+            "zh": "补 Fishing 或 General Store；其他入口看条件",
+            "en": "Make up Fishing or General Store; other entries conditional"
+          },
+          "href": {
+            "zh": "#spiceport-day6",
+            "en": "#spiceport-day6"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "save6",
+          "label": {
+            "zh": "邀请回答前分档：人物画面／补做活动",
+            "en": "Save split before answering: character image / recovery"
+          },
+          "href": {
+            "zh": "#spiceport-day6",
+            "en": "#spiceport-day6"
+          },
+          "kind": "recovery"
+        }
+      ],
+      "edges": [
+        {
+          "from": "d5",
+          "to": "fish5",
+          "kind": "condition",
+          "label": {
+            "zh": "本日安排 A",
+            "en": "today: plan A"
+          }
+        },
+        {
+          "from": "d5",
+          "to": "clutch",
+          "kind": "condition",
+          "label": {
+            "zh": "本日安排 B；与钓鱼互斥",
+            "en": "today: plan B; conflicts with fishing"
+          }
+        },
+        {
+          "from": "clutch",
+          "to": "recover",
+          "kind": "optional",
+          "label": {
+            "zh": "钓鱼留到 Day 6，须选择自由探索",
+            "en": "leave fishing to Day 6 only if free exploration"
+          }
+        },
+        {
+          "from": "invite",
+          "to": "decline",
+          "kind": "continuation",
+          "label": {
+            "zh": "无邀请：跳过回答",
+            "en": "no invitation: skip the answer"
+          }
+        },
+        {
+          "from": "invite",
+          "to": "save6",
+          "kind": "recovery",
+          "label": {
+            "zh": "先存档再回答",
+            "en": "save before answering"
+          }
+        },
+        {
+          "from": "save6",
+          "to": "sure",
+          "kind": "local",
+          "label": {
+            "zh": "接受邀请",
+            "en": "accept invitation"
+          }
+        },
+        {
+          "from": "sure",
+          "to": "noFree",
+          "kind": "exclusion",
+          "label": {
+            "zh": "当天跳过探索地图",
+            "en": "skip free map that day"
+          }
+        },
+        {
+          "from": "save6",
+          "to": "decline",
+          "kind": "continuation",
+          "label": {
+            "zh": "Nah：拒绝邀请",
+            "en": "Nah: decline invitation"
+          }
+        },
+        {
+          "from": "decline",
+          "to": "free",
+          "kind": "continuation",
+          "label": {
+            "zh": "进入地图",
+            "en": "enter map"
+          }
+        },
+        {
+          "from": "free",
+          "to": "recover",
+          "kind": "condition",
+          "label": {
+            "zh": "按两格预算和入口条件补做",
+            "en": "recover within two-slot budget and entry conditions"
+          }
+        }
+      ],
+      "note": {
+        "zh": "Day 5 clutchmates 成人邀约另须没有 Macsen 正式关系。Day 6 人物邀请并非自由地图中的一次活动：Sure 直接进入场景；Nah／无邀请才有两格探索。独自公园与托儿所入口另有条件，见正文。",
+        "en": "The Day 5 adult clutchmates invitation also requires no confirmed Macsen. Day 6 invitations are not one activity inside the free map: Sure enters the scene; Nah / no invitation gives two free slots. Solo park and nursery entries have separate conditions in the text."
+      }
+    },
+    {
+      "id": "journey",
+      "page": "index",
+      "title": {
+        "zh": "Journey Overview：当前版本旅程",
+        "en": "Journey Overview: this release"
+      },
+      "direction": "LR",
+      "nodes": [
+        {
+          "id": "redroot",
+          "label": {
+            "zh": "红根镇<br/>Town",
+            "en": "Redroot<br/>Town"
+          },
+          "href": {
+            "zh": "guide/redroot.html#redroot",
+            "en": "guide/redroot.html#redroot"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "wilds",
+          "label": {
+            "zh": "红根镇荒野<br/>Travel",
+            "en": "Redroot Wilds<br/>Travel"
+          },
+          "href": {
+            "zh": "guide/redroot.html#redroot-wilds",
+            "en": "guide/redroot.html#redroot-wilds"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "aris",
+          "label": {
+            "zh": "阿瑞斯<br/>Town / exploration",
+            "en": "Aris<br/>Town / exploration"
+          },
+          "href": {
+            "zh": "guide/aris.html#阿瑞斯aris",
+            "en": "guide/aris.html#aris"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "plains",
+          "label": {
+            "zh": "水晶平原<br/>Travel",
+            "en": "Crystal Plains<br/>Travel"
+          },
+          "href": {
+            "zh": "guide/crystal-plains-shieldfall.html#crystal-plains",
+            "en": "guide/crystal-plains-shieldfall.html#crystal-plains"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "unknown",
+          "label": {
+            "zh": "???<br/>Local activities",
+            "en": "???<br/>Local activities"
+          },
+          "href": {
+            "zh": "guide/crystal-plains-shieldfall.html#question-mark-sequence",
+            "en": "guide/crystal-plains-shieldfall.html#question-mark-sequence"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "vale",
+          "label": {
+            "zh": "盾落谷<br/>Travel / camp",
+            "en": "Shieldfall Vale<br/>Travel / camp"
+          },
+          "href": {
+            "zh": "guide/crystal-plains-shieldfall.html#shieldfall-vale",
+            "en": "guide/crystal-plains-shieldfall.html#shieldfall-vale"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "spice",
+          "label": {
+            "zh": "斯派斯港<br/>Town / exploration",
+            "en": "Spiceport<br/>Town / exploration"
+          },
+          "href": {
+            "zh": "guide/spiceport.html#spiceport-early-excursions",
+            "en": "guide/spiceport.html#spiceport-early-excursions"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "grove",
+          "label": {
+            "zh": "蓝叶森林<br/>Camp / local activities",
+            "en": "Blueleaf Grove<br/>Camp / local activities"
+          },
+          "href": {
+            "zh": "guide/blueleaf-grove.html#蓝叶森林blueleaf-grove",
+            "en": "guide/blueleaf-grove.html#blueleaf-grove"
+          },
+          "kind": "step"
+        },
+        {
+          "id": "cutoff",
+          "label": {
+            "zh": "Public v0.57a cutoff",
+            "en": "Public v0.57a cutoff"
+          },
+          "href": {
+            "zh": "guide/blueleaf-grove.html#public-v0.57a-当前截止位置",
+            "en": "guide/blueleaf-grove.html#where-public-v0.57a-ends"
+          },
+          "kind": "step"
+        }
+      ],
+      "edges": [
+        {
+          "from": "redroot",
+          "to": "wilds",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "wilds",
+          "to": "aris",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "aris",
+          "to": "plains",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "plains",
+          "to": "unknown",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "unknown",
+          "to": "vale",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "vale",
+          "to": "spice",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "spice",
+          "to": "grove",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        },
+        {
+          "from": "grove",
+          "to": "cutoff",
+          "kind": "continuation",
+          "label": {
+            "zh": "",
+            "en": ""
+          }
+        }
+      ],
+      "note": {
+        "zh": "只显示地区顺序与活动模式；点击节点回到旅程页。本图到 Public v0.57a 当前截止位置为止。",
+        "en": "Region order and activity modes only. Select a node to open its journey guide. The map ends at the Public v0.57a cutoff."
+      },
+      "presentation": {
+        "inlineHeight": 260,
+        "mobileHeight": 300,
+        "flowchart": {
+          "nodeSpacing": 14,
+          "rankSpacing": 8,
+          "padding": 4
+        }
+      }
+    }
+  ]
+}

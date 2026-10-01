@@ -1,0 +1,74 @@
+name: Deploy KT GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out public site repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.9.38"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build and verify bilingual production site
+        env:
+          KT_CF_ANALYTICS_TOKEN: ${{ vars.KT_CF_ANALYTICS_TOKEN }}
+        run: |
+          test -n "$KT_CF_ANALYTICS_TOKEN" || { echo 'Set KT_CF_ANALYTICS_TOKEN to the KT public beacon ID before deployment.'; exit 1; }
+          sh scripts/build.sh
+          if [ ! -f assets/favicon.svg ] || [ ! -f assets/social/kt-public-v0.57a-zh.png ] || [ ! -f assets/social/kt-public-v0.57a-en.png ]; then
+            echo 'Final user-provided favicon/social cards remain pending; publishing the verified site without missing-asset references.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          python3 -B scripts/verify_deployment.py
+          git diff --exit-code
+
+      - name: Upload only verified public output
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,284 @@
+<style>
+  #kt-search-launcher { display: inline-flex; align-items: center; gap: .4rem; margin: 0 .25rem; padding: .35rem .5rem; border: 0; border-radius: .3rem; background: transparent; color: inherit; cursor: pointer; white-space: nowrap; }
+  #kt-search-launcher:hover, #kt-search-launcher:focus-visible { background: rgba(255,255,255,.15); outline: 2px solid currentColor; outline-offset: 2px; }
+  #kt-search-dialog { width: min(52rem, calc(100vw - 2.5rem)); max-width: 52rem; max-height: calc(100dvh - 1.5rem); padding: 0; border: 1px solid #b8bdc5; border-radius: .6rem; color: #202124; background: #fff; box-shadow: 0 1rem 3rem #0005; }
+  #kt-search-dialog::backdrop { background: #0009; }
+  .kt-search-panel { display: flex; flex-direction: column; max-height: calc(100dvh - 1.5rem); }
+  .kt-search-head { display: flex; align-items: center; gap: .5rem; padding: .75rem; border-bottom: 1px solid #ddd; }
+  .kt-search-field { position: relative; display: flex; flex: 1; min-width: 0; }
+  #kt-search-input { flex: 1; width: 100%; min-width: 0; padding: .55rem 2.6rem .55rem .65rem; border: 1px solid #9aa0a6; border-radius: .35rem; font: inherit; }
+  #kt-search-clear { position: absolute; top: 50%; right: .3rem; transform: translateY(-50%); border: 0; background: transparent; font: inherit; cursor: pointer; }
+  #kt-search-clear[hidden], #kt-search-status:empty { display: none; }
+  #kt-search-close { flex: none; border: 0; background: transparent; font: inherit; cursor: pointer; padding: .45rem; }
+  #kt-search-status { margin: 0; padding: .55rem .85rem; font-size: .9rem; }
+  #kt-search-results { overflow-y: auto; min-height: 0; max-height: min(65vh, 35rem); padding: 0 .5rem .5rem; }
+  .kt-search-result { display: block; padding: .7rem .4rem; border-bottom: 1px solid #e6e6e6; color: #202124; text-decoration: none; overflow-wrap: anywhere; }
+  .kt-search-result:hover, .kt-search-result:focus-visible { background: color-mix(in srgb, var(--kt-accent) 5%, transparent); color: var(--kt-heading); box-shadow: inset 2px 0 var(--kt-accent); }
+  .kt-search-result:focus-visible { outline: 2px solid var(--kt-focus); outline-offset: -2px; }
+  .kt-search-result-title { display: block; font-weight: 650; }
+  .kt-search-result-section { display: block; font-size: .9rem; color: #465469; }
+  .kt-search-result-text { display: block; margin-top: .2rem; font-size: .9rem; color: #3d4148; }
+  mark.kt-search-mark { background: #ffe58a; color: inherit; }
+  @media (max-width: 991px) { #kt-search-launcher { margin-left: auto; } .quarto-navbar-tools { display: flex; align-items: center; } }
+</style>
+<button id="kt-search-launcher" type="button" aria-haspopup="dialog" aria-controls="kt-search-dialog" aria-label="Search" title="Search"><svg class="kt-search-icon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="10.75" cy="10.75" r="6.5"/><path d="m16 16 4.25 4.25"/></svg></button>
+<dialog id="kt-search-dialog" aria-label="Search">
+  <div class="kt-search-panel">
+    <div class="kt-search-head">
+      <div class="kt-search-field">
+        <label id="kt-search-title" class="visually-hidden" for="kt-search-input">Search</label>
+        <input id="kt-search-input" type="search" autocomplete="off" aria-controls="kt-search-results" aria-describedby="kt-search-status">
+        <button id="kt-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>×</button>
+      </div>
+      <button id="kt-search-close" type="button">Cancel</button>
+    </div>
+    <p id="kt-search-status" role="status" aria-live="polite"></p>
+    <div id="kt-search-results"></div>
+  </div>
+</dialog>
+<script>
+(() => {
+  "use strict";
+  const launcher = document.getElementById("kt-search-launcher");
+  const dialog = document.getElementById("kt-search-dialog");
+  const input = document.getElementById("kt-search-input");
+  const results = document.getElementById("kt-search-results");
+  const status = document.getElementById("kt-search-status");
+  const closeButton = document.getElementById("kt-search-close");
+  const clearButton = document.getElementById("kt-search-clear");
+  const languageLink = document.querySelector("nav.navbar ul.navbar-nav.ms-auto a.nav-link");
+  const homeLink = document.querySelector("nav.navbar ul.navbar-nav.me-auto a.nav-link");
+  const tools = document.querySelector(".quarto-navbar-tools");
+  if (!launcher || !dialog || !input || !closeButton || !clearButton || !languageLink || !homeLink || !tools) return;
+
+  const locale = languageLink.textContent.trim() === "中文" ? "en" : "zh";
+  const root = new URL("./", homeLink.href);
+  const siteRoot = locale === "en" ? new URL("../", root) : root;
+  const words = locale === "zh" ? {
+    search: "搜索", cancel: "取消", clear: "清空搜索", loading: "正在加载搜索…",
+    unavailable: "搜索暂时不可用，请稍后重试。", none: "没有找到结果。", count: n => `找到 ${n} 条结果`
+  } : {
+    search: "Search", cancel: "Cancel", clear: "Clear search", loading: "Loading search…",
+    unavailable: "Search is temporarily unavailable. Please try again.", none: "No results.", count: n => `${n} results`
+  };
+  launcher.setAttribute("aria-label", words.search);
+  launcher.setAttribute("title", words.search);
+  dialog.setAttribute("aria-label", words.search);
+  document.getElementById("kt-search-title").textContent = words.search;
+  closeButton.textContent = words.cancel;
+  clearButton.setAttribute("aria-label", words.clear);
+  clearButton.setAttribute("title", words.clear);
+  input.placeholder = words.search;
+  status.textContent = "";
+  tools.append(launcher);
+
+  let corePromise;
+  let dataPromise;
+  let prepared;
+  let generation = 0;
+  const syncClearButton = () => { clearButton.hidden = !input.value.length; };
+  const asset = name => new URL(`assets/${name}`, siteRoot);
+
+  function loadCore() {
+    if (window.KTSearchCore) return Promise.resolve(window.KTSearchCore);
+    if (!corePromise) corePromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = asset("kt-search-core.js").href;
+      script.onload = () => window.KTSearchCore ? resolve(window.KTSearchCore) : reject(new Error("Search core unavailable"));
+      script.onerror = () => { script.remove(); reject(new Error("Search core unavailable")); };
+      document.head.append(script);
+    }).catch(error => { corePromise = null; throw error; });
+    return corePromise;
+  }
+
+  async function loadJson(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Search asset status ${response.status}`);
+    return response.json();
+  }
+
+  function loadData() {
+    if (!dataPromise) dataPromise = Promise.all([
+      loadCore(), loadJson(asset("kt-search-aliases.json")), loadJson(new URL("kt-search.json", root))
+    ]).then(([core, aliases, records]) => {
+      if (!Array.isArray(aliases.groups) || !Array.isArray(records)) throw new Error("Invalid controlled search data");
+      prepared = core.prepare(records, aliases, locale);
+      return prepared;
+    }).catch(error => { dataPromise = null; throw error; });
+    return dataPromise;
+  }
+
+  function resultUrl(href, query) {
+    if (typeof href !== "string" || href.includes("?")) return null;
+    const url = new URL(href, root);
+    if (url.origin !== root.origin || !url.pathname.startsWith(root.pathname) ||
+        !(url.pathname === root.pathname || url.pathname.endsWith(".html"))) return null;
+    url.searchParams.set("q", query);
+    return url.href;
+  }
+
+  function showResults(query) {
+    results.replaceChildren();
+    if (!query.trim()) { status.textContent = ""; return; }
+    const found = window.KTSearchCore.search(prepared, query, { limit: 24 });
+    for (const record of found) {
+      const href = resultUrl(record.href, query);
+      if (!href) continue;
+      const link = document.createElement("a");
+      link.className = "kt-search-result";
+      link.href = href;
+      for (const [className, value] of [
+        ["kt-search-result-title", record.title],
+        ["kt-search-result-section", record.section],
+        ["kt-search-result-text", record.text]
+      ]) {
+        if (!value) continue;
+        const line = document.createElement("span");
+        line.className = className;
+        line.textContent = String(value);
+        link.append(line);
+      }
+      results.append(link);
+    }
+    status.textContent = results.childElementCount ? words.count(results.childElementCount) : words.none;
+  }
+
+  async function updateResults() {
+    const current = ++generation;
+    const query = input.value;
+    syncClearButton();
+    results.replaceChildren();
+    if (!query.trim()) { status.textContent = ""; return; }
+    status.textContent = words.loading;
+    try {
+      await loadData();
+      if (dialog.open && current === generation) showResults(query);
+    } catch (_) {
+      if (dialog.open && current === generation) { results.replaceChildren(); status.textContent = words.unavailable; }
+    }
+  }
+
+  launcher.addEventListener("click", () => {
+    document.dispatchEvent(new CustomEvent("kt:search-opening"));
+    if (!dialog.open) dialog.showModal();
+    syncClearButton();
+    input.focus();
+    if (input.value.trim()) updateResults();
+  });
+  clearButton.addEventListener("click", () => {
+    input.value = "";
+    updateResults();
+    input.focus();
+  });
+  closeButton.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    event.preventDefault();
+    event.stopPropagation();
+    dialog.close();
+  }, true);
+  dialog.addEventListener("cancel", event => { event.preventDefault(); dialog.close(); });
+  dialog.addEventListener("close", () => { generation++; launcher.focus({ preventScroll: true }); });
+  input.addEventListener("input", updateResults);
+  input.addEventListener("keydown", event => {
+    const links = [...results.querySelectorAll("a")];
+    if (event.key === "ArrowDown" && links.length) { event.preventDefault(); links[0].focus(); }
+    if (event.key === "Enter" && links.length) { event.preventDefault(); links[0].click(); }
+  });
+  results.addEventListener("keydown", event => {
+    if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+    const links = [...results.querySelectorAll("a")];
+    const next = links.indexOf(document.activeElement) + (event.key === "ArrowDown" ? 1 : -1);
+    event.preventDefault();
+    if (next < 0) input.focus();
+    else links[Math.min(next, links.length - 1)]?.focus();
+  });
+
+  const pageQuery = new URL(location.href).searchParams.get("q");
+  const article = document.getElementById("quarto-document-content");
+  let activeMarks = false;
+  function dismissMarks() {
+    if (activeMarks) {
+      for (const mark of article.querySelectorAll("mark.kt-search-mark")) {
+        mark.replaceWith(document.createTextNode(mark.textContent));
+      }
+      article.normalize();
+      activeMarks = false;
+    }
+    const url = new URL(location.href);
+    if (!url.searchParams.has("q")) return;
+    url.searchParams.delete("q");
+    history.replaceState(history.state, "", url.href);
+  }
+
+  function visible(node) {
+    for (let element = node.parentElement; element && element !== article; element = element.parentElement) {
+      if (element.matches("script,style,template,input,textarea,select,button,nav,mark.kt-search-mark,[hidden],[aria-hidden='true']")) return false;
+      if (element.matches("details:not([open])") && !node.parentElement.closest("summary")) return false;
+      const style = getComputedStyle(element);
+      if (style.display === "none" || style.visibility === "hidden") return false;
+    }
+    return true;
+  }
+
+  function markArticle(core, aliases, scope = article) {
+    if (!article || !pageQuery) return;
+    const parsed = core.parseQuery(pageQuery, aliases, locale);
+    const forms = [...parsed.tokens];
+    for (const group of aliases.groups) {
+      if (parsed.concepts.includes(group.id)) forms.push(...group.forms);
+    }
+    const distinct = [...new Set(forms.filter(Boolean))].sort((a, b) => b.length - a.length);
+    if (!distinct.length) return;
+    const pattern = new RegExp(distinct.map(value => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "giu");
+    const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) if (walker.currentNode.textContent && visible(walker.currentNode)) nodes.push(walker.currentNode);
+    let total = 0;
+    for (const node of nodes) {
+      if (total >= 200) break;
+      const content = node.textContent;
+      pattern.lastIndex = 0;
+      const matches = [...content.matchAll(pattern)];
+      if (!matches.length) continue;
+      const fragment = document.createDocumentFragment();
+      let offset = 0;
+      for (const match of matches) {
+        if (total >= 200) break;
+        fragment.append(document.createTextNode(content.slice(offset, match.index)));
+        const mark = document.createElement("mark");
+        mark.className = "kt-search-mark";
+        mark.textContent = match[0];
+        fragment.append(mark);
+        offset = match.index + match[0].length;
+        total++;
+      }
+      fragment.append(document.createTextNode(content.slice(offset)));
+      node.replaceWith(fragment);
+    }
+    activeMarks = total > 0;
+  }
+
+  if (pageQuery && article) {
+    Promise.all([loadCore(), loadJson(asset("kt-search-aliases.json"))])
+      .then(([core, aliases]) => markArticle(core, aliases)).catch(() => {});
+    // The progressive Outfit locator makes an exact reference visible after loading.
+    window.addEventListener("kt:dressing-selection", () => {
+      if (!new URL(location.href).searchParams.has("q")) return;
+      Promise.all([loadCore(), loadJson(asset("kt-search-aliases.json"))])
+        .then(([core, aliases]) => {
+          const reference = article.querySelector(".kt-dressing-detail .kt-dressing-entry");
+          if (reference) markArticle(core, aliases, reference);
+        }).catch(() => {});
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && !dialog.open) dismissMarks();
+    });
+    document.addEventListener("click", event => {
+      if (!dialog.open && article.contains(event.target) &&
+          !event.target.closest("mark.kt-search-mark, a, button, input, summary")) dismissMarks();
+    });
+  }
+})();
+</script>
