@@ -7,7 +7,7 @@
   width: min(100%, 840px);
   min-width: 0;
   margin-inline: auto;
-  padding: 1rem 1rem 3.5rem;
+  padding: 1rem 0 3.5rem;
   color: var(--kt-text);
 }
 #kt-public-discussion .kt-discussion { min-width: 0; }
@@ -173,6 +173,7 @@
   #quarto-content.page-columns > #kt-public-discussion {
     grid-column: 2;
     grid-row: 2;
+    justify-self: start;
     width: 100%;
     max-width: 840px;
     margin: 0;
@@ -180,6 +181,5 @@
   }
 }
 @media (max-width: 767.98px) {
-  #kt-public-discussion { padding-inline: .85rem; }
   #kt-public-discussion .kt-discussion-replies { margin-left: 0; padding-left: .7rem; }
 }
