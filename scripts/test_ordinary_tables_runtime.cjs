@@ -142,8 +142,25 @@ async function run(engine, launcher, options = {}) {
         const semantic353 = await semantics(page);
         const tableRoles353 = await page.getByRole("table").count();
         const threeCount = await page.locator(three).count();
-        assert.equal(threeCount, route === "collectibles/equipment" ? 3 : route === "guide/spiceport" ? 2 : ["collectibles/dressing-room","reference/combat"].includes(route) ? 1 : 0,
+        // Automatic Equipment is now four columns (Stats added); the Prime
+        // planning and Supplies helper tables remain exactly three columns.
+        assert.equal(threeCount, ["collectibles/equipment","guide/spiceport"].includes(route) ? 2 : ["collectibles/dressing-room","reference/combat"].includes(route) ? 1 : 0,
           `${engine} ${locale} ${route}: exactly-three-column inventory`);
+        if (route === 'collectibles/equipment') {
+          assert.equal(await page.locator('.kt-equipment-completion table').count(),5);
+          assert.equal(await page.locator('.kt-equipment-completion table thead tr th').count(),30);
+          assert.equal(await page.locator('.kt-equipment-automatic table thead tr th').count(),4);
+          assert.equal(await page.locator('.kt-equipment-automatic table tbody tr').count(),11);
+        }
+        if (route === 'help') {
+          const baseline=page.locator('.kt-trailmarker-baselines table');
+          assert.equal(await baseline.getByRole('columnheader').count(),5);
+          assert.equal(await baseline.locator('tbody tr').count(),9);
+          assert.deepEqual(await baseline.locator('tbody tr td:first-child').evaluateAll(cells=>cells.map(cell=>{
+            const copy=cell.cloneNode(true);copy.querySelector('.kt-record-label')?.remove();return copy.textContent.trim();
+          })),
+            ['PROLOGUE','THE SPARK','THE LESSONS','THE BEASTSLAYER','THE PURSUIT','THE DREADSTONE','???','THE CATALYST','THE THRUST']);
+        }
         if (route === 'collectibles/dressing-room') {
           assert.equal(semantic353.length,2);
           assert.deepEqual(semantic353.map(t=>t.headers),[3,2]);
@@ -299,8 +316,12 @@ async function run(engine, launcher, options = {}) {
         assert(state.heights.every(height => height > 0), `${engine} ${locale} ${route} ${width}: table geometry`);
       }
     }
-    assert.deepEqual(totals, { states: 504, tables: 42, three: 14, rows: 280, headers: 128, cells: 776,
-      links: 64, code: 74, focus: 12 }, `${engine}: ordinary table inventory`);
+    // Per locale: +1 Help table (10 rows/5 headers/45 cells), Equipment
+    // +6 headers/+46 cells, and one fewer three-column table.
+    // Also account exactly for the pre-existing Personality table in the inventory
+    // (+1 table/9 rows/2 headers/16 cells/4 choices per locale), without editing it.
+    assert.deepEqual(totals, { states: 504, tables: 46, three: 12, rows: 318, headers: 154, cells: 990,
+      links: 64, code: 82, focus: 12 }, `${engine}: ordinary table inventory`);
     // Check actual text containment at 320px; row heights depend on content.
     for (const locale of ["zh","en"]) for (const route of ["collectibles/equipment","guide/spiceport","reference/combat"]) {
       await page.setViewportSize({width:320,height:800}); await page.goto(url(locale,route));

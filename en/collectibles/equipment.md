@@ -8,6 +8,8 @@ This covers normal acquisition opportunities. Branch gifts can be mutually exclu
 
 For appearance values and Expressions, use [Dressing Room](dressing-room.md). If an obtained item seems missing, check [Help](../help.md#help-item-status) and [equipment care](#equipment-state-care).
 
+**Stats column:** This summarizes the Brawn, Charm, and Wits values shown in the native Equipment UI. `+` is guide shorthand for an equipment bonus; three visible zeros are summarized as “No stat bonus.” Map did not show a numeric tooltip, so `—` means no visible numeric value was observed, not a proven zero. [Only currently worn equipment changes the displayed Stats value](../help.md#help-stats).
+
 <span id="equipment-quick-find"></span>
 <span id="equipment-simple-acquisitions"></span>
 <span id="equipment-conditional"></span>
@@ -19,11 +21,11 @@ For appearance values and Expressions, use [Dressing Room](dressing-room.md). If
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| Item | Category | When / how | Missable / recovery | Detail |
-|---|---|---|---|---|
-| <span id="equipment-item-silvatto-vest">**Silvatto Vest**</span> | Armor | Order reward; `Yep.` for each. | Pre-reward save; removed on escape. | [Steps](#silvatto-garments) |
-| <span id="equipment-item-silvatto-anklets">**Silvatto Anklets**</span> | Boots | Order reward; `Yep.` for each. | Pre-reward save; removed on escape. | [Steps](#silvatto-garments) |
-| <span id="equipment-item-silvatto-loinwrap">**Silvatto Loinwrap**</span> | Bottoms | Order reward; `Yep.` for each. | Pre-reward save; removed on escape. | [Steps](#silvatto-garments) |
+| Item | Category | Stats | When / how | Missed / recovery | Detail |
+|---|---|---|---|---|---|
+| <span id="equipment-item-silvatto-vest">**Silvatto Vest**</span> | Armor | No stat bonus | Order reward; `Yep.` for each. | Pre-reward save; removed on escape. | [Steps](#silvatto-garments) |
+| <span id="equipment-item-silvatto-anklets">**Silvatto Anklets**</span> | Boots | No stat bonus | Order reward; `Yep.` for each. | Pre-reward save; removed on escape. | [Steps](#silvatto-garments) |
+| <span id="equipment-item-silvatto-loinwrap">**Silvatto Loinwrap**</span> | Bottoms | No stat bonus | Order reward; `Yep.` for each. | Pre-reward save; removed on escape. | [Steps](#silvatto-garments) |
 
 :::
 
@@ -43,9 +45,9 @@ The physical garments are removed during the later escape. Their **Dressing Room
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| Item | Category | When / how | Missable / recovery | Detail |
-|---|---|---|---|---|
-| <span id="equipment-item-marchanide-langou">**Marchanide Langou**</span> | Undies | Day 8: lose, or win without Belt worn. | Early branch save; later story fallback before Grove. | [Steps](#marchanide-langou) |
+| Item | Category | Stats | When / how | Missed / recovery | Detail |
+|---|---|---|---|---|---|
+| <span id="equipment-item-marchanide-langou">**Marchanide Langou**</span> | Undies | Brawn +3 · Charm +3 · Wits +3 | Day 8: lose, or win without Belt worn. | Early branch save; later story fallback before Grove. | [Steps](#marchanide-langou) |
 
 :::
 
@@ -69,22 +71,22 @@ All Aris optional equipment is listed below. The ordinary shop opens during the 
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| Item | Category | When / how | Missable / recovery | Detail |
-|---|---|---|---|---|
-| <span id="equipment-item-spare-langou">**Spare Langou**</span> | Undies | Day 2, without Marchanide: `A langou.` | Gift branch; pre-question save. No later shop stock. | [Steps](#aris-day2-garments) |
-| <span id="equipment-item-viscount-robe">**Viscount Robe**</span> | Armor | Day 2 onward, General Store: 200 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-fiendish-harness">**Fiendish Harness**</span> | Armor | Day 2 onward, General Store: 150 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-hand-me-down-loincloth">**Hand-me-down Loincloth**</span> | Bottoms | Day 2 gift: `Something looser.`; or shop: 40 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | [Steps](#aris-day2-garments) |
-| <span id="equipment-item-viscount-kilt">**Viscount Kilt**</span> | Bottoms | Day 2 onward, General Store: 80 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-fiendish-garb">**Fiendish Garb**</span> | Bottoms | Day 2 onward, General Store: 70 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-aris-langou">**Aris Langou**</span> | Undies | Day 2 onward, General Store: 25 Ouros. | Hidden while Spare is owned; sell it unworn, then return on another shop day. | [Steps](#aris-day2-garments) |
-| <span id="equipment-item-woven-britches">**Woven Britches**</span> | Undies | Day 2 onward, General Store: 10 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-viscount-loinwrap">**Viscount Loinwrap**</span> | Undies | Day 2 onward, General Store: 50 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-viscount-belt">**Viscount Belt**</span> | Belt | Day 2 onward, General Store: 100 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-fiendish-belt">**Fiendish Belt**</span> | Belt | Day 2 onward, General Store: 80 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-viscount-anklets">**Viscount Anklets**</span> | Boots | Day 2 onward, General Store: 100 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-fiendish-greaves">**Fiendish Greaves**</span> | Boots | Day 2 onward, General Store: 60 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
-| <span id="equipment-item-prime-attire">**Prime Attire**</span> | Undies | First Day 7 / 8 Coliseum entry, after preparation. | Day 8 can recover claim, not expired prerequisites. | [Steps](#prime-attire) |
+| Item | Category | Stats | When / how | Missed / recovery | Detail |
+|---|---|---|---|---|---|
+| <span id="equipment-item-spare-langou">**Spare Langou**</span> | Undies | Charm +1 · Wits +5 | Day 2, without Marchanide: `A langou.` | Gift branch; pre-question save. No later shop stock. | [Steps](#aris-day2-garments) |
+| <span id="equipment-item-viscount-robe">**Viscount Robe**</span> | Armor | Brawn +3 · Charm +7 · Wits +5 | Day 2 onward, General Store: 200 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-fiendish-harness">**Fiendish Harness**</span> | Armor | Brawn +7 · Charm +5 · Wits +3 | Day 2 onward, General Store: 150 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-hand-me-down-loincloth">**Hand-me-down Loincloth**</span> | Bottoms | Brawn +2 · Charm +2 · Wits +2 | Day 2 gift: `Something looser.`; or shop: 40 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | [Steps](#aris-day2-garments) |
+| <span id="equipment-item-viscount-kilt">**Viscount Kilt**</span> | Bottoms | Brawn +2 · Charm +5 · Wits +3 | Day 2 onward, General Store: 80 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-fiendish-garb">**Fiendish Garb**</span> | Bottoms | Brawn +5 · Charm +3 · Wits +1 | Day 2 onward, General Store: 70 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-aris-langou">**Aris Langou**</span> | Undies | Charm +1 · Wits +5 | Day 2 onward, General Store: 25 Ouros. | Hidden while Spare is owned; sell it unworn, then return on another shop day. | [Steps](#aris-day2-garments) |
+| <span id="equipment-item-woven-britches">**Woven Britches**</span> | Undies | No stat bonus | Day 2 onward, General Store: 10 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-viscount-loinwrap">**Viscount Loinwrap**</span> | Undies | Charm +3 · Wits +1 | Day 2 onward, General Store: 50 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-viscount-belt">**Viscount Belt**</span> | Belt | Brawn +2 · Charm +5 · Wits +3 | Day 2 onward, General Store: 100 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-fiendish-belt">**Fiendish Belt**</span> | Belt | Brawn +5 · Charm +3 · Wits +2 | Day 2 onward, General Store: 80 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-viscount-anklets">**Viscount Anklets**</span> | Boots | Brawn +1 · Charm +4 · Wits +3 | Day 2 onward, General Store: 100 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-fiendish-greaves">**Fiendish Greaves**</span> | Boots | Brawn +3 · Charm +2 · Wits +1 | Day 2 onward, General Store: 60 Ouros. | Return Days 5 / 7 / 8 / 11; earlier save after departure. | — |
+| <span id="equipment-item-prime-attire">**Prime Attire**</span> | Undies | Brawn +10 | First Day 7 / 8 Coliseum entry, after preparation. | Day 8 can recover claim, not expired prerequisites. | [Steps](#prime-attire) |
 
 :::
 
@@ -183,22 +185,22 @@ Spiceport equipment includes nine ordinary shop items and five back-room items. 
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| Item | Category | When / how | Missable / recovery | Detail |
-|---|---|---|---|---|
-| <span id="equipment-item-peddler-s-vest">**Peddler's Vest**</span> | Armor | Day 5 afternoon / Day 6 free time, General Store: 200 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-scallywag-covering">**Scallywag Covering**</span> | Armor | Day 5 afternoon / Day 6 free time, General Store: 150 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-old-fashioned-vest">**Old-Fashioned Vest**</span> | Armor | Day 5 afternoon / Day 6 free time, back room: 80 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-belt">**Peddler's Belt**</span> | Belt | Day 5 afternoon / Day 6 free time, General Store: 80 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-old-fashioned-suspenders">**Old-Fashioned Suspenders**</span> | Belt | Day 5 afternoon / Day 6 free time, back room: 30 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-shoes">**Peddler's Shoes**</span> | Boots | Day 5 afternoon / Day 6 free time, General Store: 70 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-scallywag-scraps">**Scallywag Scraps**</span> | Boots | Day 5 afternoon / Day 6 free time, General Store: 30 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-custom-made-sandals">**Custom-Made Sandals**</span> | Boots | Day 5 afternoon / Day 6 free time, back room: 30 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-leggings">**Peddler's Leggings**</span> | Bottoms | Day 5 afternoon / Day 6 free time, General Store: 100 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-scallywag-pantsleeve">**Scallywag Pantsleeve**</span> | Bottoms | Day 5 afternoon / Day 6 free time, General Store: 50 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-old-fashioned-loinwear">**Old-Fashioned Loinwear**</span> | Bottoms | Day 5 afternoon / Day 6 free time, back room: 50 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-confidence">**Peddler's Confidence**</span> | Undies | Day 5 afternoon / Day 6 free time, General Store: 50 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-scallywag-bandana">**Scallywag Bandana**</span> | Undies | Day 5 afternoon / Day 6 free time, General Store: 35 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
-| <span id="equipment-item-old-fashioned-langou">**Old-Fashioned Langou**</span> | Undies | Day 5 afternoon / Day 6 free time, back room: 30 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
+| Item | Category | Stats | When / how | Missed / recovery | Detail |
+|---|---|---|---|---|---|
+| <span id="equipment-item-peddler-s-vest">**Peddler's Vest**</span> | Armor | Brawn +3 · Charm +8 · Wits +2 | Day 5 afternoon / Day 6 free time, General Store: 200 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-scallywag-covering">**Scallywag Covering**</span> | Armor | Brawn +8 · Charm +3 · Wits +3 | Day 5 afternoon / Day 6 free time, General Store: 150 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-old-fashioned-vest">**Old-Fashioned Vest**</span> | Armor | Brawn +2 · Charm +5 · Wits +8 | Day 5 afternoon / Day 6 free time, back room: 80 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-belt">**Peddler's Belt**</span> | Belt | Brawn +3 · Charm +5 · Wits +1 | Day 5 afternoon / Day 6 free time, General Store: 80 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-old-fashioned-suspenders">**Old-Fashioned Suspenders**</span> | Belt | Brawn +1 · Charm +3 · Wits +5 | Day 5 afternoon / Day 6 free time, back room: 30 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-shoes">**Peddler's Shoes**</span> | Boots | Brawn +1 · Charm +4 · Wits +1 | Day 5 afternoon / Day 6 free time, General Store: 70 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-scallywag-scraps">**Scallywag Scraps**</span> | Boots | Brawn +3 · Charm +2 · Wits +1 | Day 5 afternoon / Day 6 free time, General Store: 30 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-custom-made-sandals">**Custom-Made Sandals**</span> | Boots | Brawn +1 · Charm +3 · Wits +5 | Day 5 afternoon / Day 6 free time, back room: 30 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-leggings">**Peddler's Leggings**</span> | Bottoms | Brawn +2 · Charm +6 · Wits +3 | Day 5 afternoon / Day 6 free time, General Store: 100 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-scallywag-pantsleeve">**Scallywag Pantsleeve**</span> | Bottoms | Brawn +6 · Charm +3 · Wits +1 | Day 5 afternoon / Day 6 free time, General Store: 50 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-old-fashioned-loinwear">**Old-Fashioned Loinwear**</span> | Bottoms | Brawn +1 · Charm +2 · Wits +7 | Day 5 afternoon / Day 6 free time, back room: 50 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-confidence">**Peddler's Confidence**</span> | Undies | Charm +5 · Wits +2 | Day 5 afternoon / Day 6 free time, General Store: 50 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-scallywag-bandana">**Scallywag Bandana**</span> | Undies | Brawn +2 · Charm +3 · Wits +1 | Day 5 afternoon / Day 6 free time, General Store: 35 Ouros. | Day 8 story shop also sells it; earlier save after departure. | — |
+| <span id="equipment-item-old-fashioned-langou">**Old-Fashioned Langou**</span> | Undies | Brawn +2 · Charm +3 · Wits +6 | Day 5 afternoon / Day 6 free time, back room: 30 Ouros. | Unlock and buy by the end of Day 6; earlier save if missed. | [Steps](#spiceport-old-fashioned) |
 
 :::
 
@@ -233,11 +235,11 @@ Spiceport's east and west city maps are added to the **map list** with the story
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| Item | Category | When / how | Missable / recovery | Detail |
-|---|---|---|---|---|
-| <span id="equipment-item-focusing-wriststrap">**Focusing Wriststrap**</span> | Special | Days 10–12: full evening Talk with Macsen; Day 12 gift. | One of three gifts; pre-Day-10-evening save. | [Steps](#blueleaf-gifts) |
-| <span id="equipment-item-brawler-band">**Brawler Band**</span> | Special | Days 10–12: full evening Talk with Zhokhar; Day 12 gift. | One of three gifts; pre-Day-10-evening save. | [Steps](#blueleaf-gifts) |
-| <span id="equipment-item-marchanide-timekeeper">**Marchanide Timekeeper**</span> | Special | Days 10–12: full evening Talk with Cabotte; Day 12 gift. | One of three gifts; pre-Day-10-evening save. | [Steps](#blueleaf-gifts) |
+| Item | Category | Stats | When / how | Missed / recovery | Detail |
+|---|---|---|---|---|---|
+| <span id="equipment-item-focusing-wriststrap">**Focusing Wriststrap**</span> | Special | Brawn +2 · Charm +3 · Wits +4 | Days 10–12: full evening Talk with Macsen; Day 12 gift. | One of three gifts; pre-Day-10-evening save. | [Steps](#blueleaf-gifts) |
+| <span id="equipment-item-brawler-band">**Brawler Band**</span> | Special | Brawn +4 · Charm +2 · Wits +3 | Days 10–12: full evening Talk with Zhokhar; Day 12 gift. | One of three gifts; pre-Day-10-evening save. | [Steps](#blueleaf-gifts) |
+| <span id="equipment-item-marchanide-timekeeper">**Marchanide Timekeeper**</span> | Special | Brawn +3 · Charm +4 · Wits +2 | Days 10–12: full evening Talk with Cabotte; Day 12 gift. | One of three gifts; pre-Day-10-evening save. | [Steps](#blueleaf-gifts) |
 
 :::
 
@@ -273,19 +275,19 @@ These 11 items arrive through the normal story without an optional acquisition t
 
 ::: {.kt-adaptive-records .kt-equipment-automatic}
 
-| Item | Category | When received |
-|---|---|---|
-| <span id="equipment-item-silvatto-langou">**Silvatto Langou**</span> | Undies | Redroot: morning wake-up; removed on escape. |
-| <span id="equipment-item-worker-s-apron">**Worker's Apron**</span> | Armor | Redroot: work-clothes tutorial; removed on escape. |
-| <span id="equipment-item-worker-s-greaves">**Worker's Greaves**</span> | Boots | Redroot: work-clothes tutorial; removed on escape. |
-| <span id="equipment-item-toiler-s-straps">**Toiler's Straps**</span> | Bottoms | Redroot: work-clothes tutorial; removed on escape. |
-| <span id="equipment-item-adventurer-s-armor">**Adventurer's Armor**</span> | Armor | Redroot escape: crafted before departure. |
-| <span id="equipment-item-adventurer-s-belt">**Adventurer's Belt**</span> | Belt | Redroot escape: crafted before departure. |
-| <span id="equipment-item-adventurer-s-boots">**Adventurer's Boots**</span> | Boots | Redroot escape: crafted before departure. |
-| <span id="equipment-item-map">**Map**</span> | Map | Redroot escape; needs a worn Belt. Taken in Aris Day 2, returned Day 10. |
-| <span id="equipment-item-summit-attire">**Summit Attire**</span> | Undies | Aris Day 4: Taavi / Zhokhar story delivery; competition attire later removed. |
-| <span id="equipment-item-imperfect-lustre-amulet">**Imperfect Lustre Amulet**</span> | Special | Aris Day 11: banquet entrance. |
-| <span id="equipment-item-echelle-warhammer">**Echelle Warhammer**</span> | Weapon | Aris Day 12: departure; automatically equipped. |
+| Item | Category | Stats | When received |
+|---|---|---|---|
+| <span id="equipment-item-silvatto-langou">**Silvatto Langou**</span> | Undies | No stat bonus | Redroot: morning wake-up; removed on escape. |
+| <span id="equipment-item-worker-s-apron">**Worker's Apron**</span> | Armor | Brawn +5 | Redroot: work-clothes tutorial; removed on escape. |
+| <span id="equipment-item-worker-s-greaves">**Worker's Greaves**</span> | Boots | No stat bonus | Redroot: work-clothes tutorial; removed on escape. |
+| <span id="equipment-item-toiler-s-straps">**Toiler's Straps**</span> | Bottoms | No stat bonus | Redroot: work-clothes tutorial; removed on escape. |
+| <span id="equipment-item-adventurer-s-armor">**Adventurer's Armor**</span> | Armor | Brawn +1 · Charm +1 · Wits +1 | Redroot escape: crafted before departure. |
+| <span id="equipment-item-adventurer-s-belt">**Adventurer's Belt**</span> | Belt | Brawn +1 · Charm +1 · Wits +1 | Redroot escape: crafted before departure. |
+| <span id="equipment-item-adventurer-s-boots">**Adventurer's Boots**</span> | Boots | Brawn +1 · Charm +1 · Wits +1 | Redroot escape: crafted before departure. |
+| <span id="equipment-item-map">**Map**</span> | Map | — | Redroot escape; needs a worn Belt. Taken in Aris Day 2, returned Day 10. |
+| <span id="equipment-item-summit-attire">**Summit Attire**</span> | Undies | Brawn +5 | Aris Day 4: Taavi / Zhokhar story delivery; competition attire later removed. |
+| <span id="equipment-item-imperfect-lustre-amulet">**Imperfect Lustre Amulet**</span> | Special | Brawn +1 · Charm +1 · Wits +1 | Aris Day 11: banquet entrance. |
+| <span id="equipment-item-echelle-warhammer">**Echelle Warhammer**</span> | Weapon | Brawn +10 · Charm +5 · Wits +5 | Aris Day 12: departure; automatically equipped. |
 
 :::
 

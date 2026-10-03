@@ -110,18 +110,34 @@ def equipment_rows(main, pairs):
             region = parents[id(region)]
         heading = next(n for n in region.children() if n.tag == "h2")
         region_name = clean(label(heading))
-        for row in (n for n in block.walk() if n.tag == "tr" and n.children("td")):
+        table = next(n for n in block.walk() if n.tag == "table")
+        headers = table_header(table)
+
+        def column(*names):
+            matches = [index for index, header in enumerate(headers) if header in names]
+            if len(matches) != 1:
+                raise ValueError(f"Equipment header missing or ambiguous: {names}: {headers}")
+            return matches[0]
+
+        item_col = column("装备", "Item")
+        category_col = column("类别", "Category")
+        stats_col = column("Stats")
+        acquisition_col = column("时机／取得方式", "When / how", "自动取得时机", "When received")
+        detail_col = column("详情", "Detail") if "kt-equipment-completion" in classes(block) else None
+        for row in (n for n in table.walk() if n.tag == "tr" and n.children("td")):
             cells = row.children("td")
-            marker = next(n for n in cells[0].walk() if n.tag == "span" and
+            if len(cells) != len(headers):
+                raise ValueError(f"Equipment row/header shape differs: {region_name}")
+            marker = next(n for n in cells[item_col].walk() if n.tag == "span" and
                           n.attrs.get("id", "").startswith("equipment-item-"))
             item_anchor = marker.attrs["id"]
             name = clean(label(marker))
-            detail = next((n.attrs["href"][1:] for n in cells[-1].walk()
-                           if n.tag == "a" and n.attrs.get("href", "").startswith("#")), None)
+            detail = next((n.attrs["href"][1:] for n in cells[detail_col].walk()
+                           if n.tag == "a" and n.attrs.get("href", "").startswith("#")), None) if detail_col is not None else None
             anchor = ("aris-story-equipment" if "kt-equipment-automatic" in classes(block)
                       else detail or region.attrs["id"])
-            locator = f"{name} · {clean(label(cells[1]))} · {region_name}"
-            yield f"equipment:{item_anchor}", anchor, locator, clean(label(cells[2]))
+            locator = f"{name} · {clean(label(cells[category_col]))} · {clean(label(cells[stats_col]))} · {region_name}"
+            yield f"equipment:{item_anchor}", anchor, locator, clean(label(cells[acquisition_col]))
     section = pairs["practical-items"][1]
     for row in (n for n in section.walk() if n.tag == "tr" and n.children("td")):
         cells = row.children("td")
@@ -129,6 +145,31 @@ def equipment_rows(main, pairs):
         name = clean(label(native_name))
         index = ("Repair Hammer", "Rations", "Foragemeal", "Bedroll", "Arcanics Scroll").index(name.split("（")[0]) + 1
         yield f"equipment:practical-items:{index}", "practical-items", name, clean(label(row))
+
+
+def trailmarker_rows(main):
+    """Bounded projection of the nine visible Help rows; no new targets or types."""
+    expected = ["PROLOGUE", "THE SPARK", "THE LESSONS", "THE BEASTSLAYER",
+                "THE PURSUIT", "THE DREADSTONE", "???", "THE CATALYST", "THE THRUST"]
+    blocks = [n for n in main.walk() if "kt-trailmarker-baselines" in classes(n)]
+    if len(blocks) != 1:
+        raise ValueError("Help requires exactly one Trailmarker baseline table")
+    rows = [n for n in blocks[0].walk() if n.tag == "tr" and n.children("td")]
+    titles = [clean(label(row.children("td")[0])) for row in rows]
+    if titles != expected:
+        raise ValueError(f"Trailmarker public rows changed: {titles}")
+    for row, title in zip(rows, titles):
+        cells = row.children("td")
+        if len(cells) != 5:
+            raise ValueError(f"Trailmarker baseline row shape changed: {title}")
+        slug = "vision" if title == "???" else title.lower().replace(" ", "-")
+        # Preserve the numeric baseline even when the start has two sentences
+        # (CATALYST distinguishes the menu destination from the first HUD).
+        start = clean(label(cells[1]))
+        stats = clean(label(cells[2]))
+        state = re.split(r"[。.;]", clean(label(cells[4])))[0]
+        baseline = f"{start.rstrip('.。')} · {stats} · Ouros {clean(label(cells[3]))}"
+        yield f"trailmarker:{slug}", title, baseline, state
 
 
 def content_pages(root, locale):
@@ -185,6 +226,17 @@ def build_locale(locale):
             records.append(dict(objectID=f"{route}#{anchor}", href=f"{route}#{anchor}", title=title,
                                 section=heading_text,
                                 text=brief(direct_paragraph(section), locale, heading_text), type="section"))
+
+        if route == "help.html":
+            for object_id, native_title, baseline, state in trailmarker_rows(main):
+                preview = f"{baseline} · {state}"
+                if len(preview) > TEXT_LIMIT[locale]:
+                    preview = baseline
+                if len(preview) > TEXT_LIMIT[locale]:
+                    raise ValueError(f"Trailmarker preview needs a shorter public start: {native_title}")
+                records.append(dict(objectID=object_id, href="help.html#help-trailmarkers", title=title,
+                                    section=f"Trailmarker · {native_title}",
+                                    text=preview, type="section"))
 
         if route == "collectibles/equipment.html":
             for section in (n for n in main.walk() if n.tag == "section" and

@@ -30,6 +30,8 @@
 
 **当前数值与装备：**在 **Stats** 看 Brawn、Charm、Wits 当前显示的数值。穿在身上的装备可能改变当前值；仅持有物品或解锁 Dressing Room 外观不算穿着。换装后回 Stats 核对；有些场景会暂时收起装备，例如[蓝叶森林 Day 11 切磋](guide/blueleaf-grove.md#blueleaf-day11)。
 
+想找能提高 Charm 等属性的装备，可直接查[装备清单的 Stats 列](collectibles/equipment.md#equipment-quick-find)。
+
 **夜营补给：**在进行日终补给结算的夜营，没吃晚餐可能使 Brawn −1，水壶没水可能使 Charm −1，缺少可用 Bedroll 可能使 Wits −1。睡前核对食物、饮水和 Bedroll；不同剧情用餐不能一概套用这条结算。
 
 <a id="help-choice-icons"></a>
@@ -58,6 +60,26 @@
 ## 没有旧存档，还能从哪里继续？
 
 先看 Eddio 的[官方回归／换设备指南](https://itch.io/t/2741741/returning-player-new-device-click-here)，再查看游戏提供的 **Trailmarkers** 章节起点。它们带有预设状态，可从相应章节继续，但**不会重建你原来的物品、关系和探索选择**。Memories 观看历史与 Dressing Room 外观解锁另行保存，不能从章节起点判断这些记录。比较旧分支时，优先用自己留在选择前的普通存档；若没有旧档，按目标页核对起点预设能否满足前置。
+
+下面列的是 **使用 Trailmarker 时游戏提供的预设状态**，不表示正常游玩到这里应该拥有的状态。已有游戏记录中的 Memories 观看历史与 Dressing Room 解锁可能不同；章节起点也不一定补齐此前的 Codex 历史。
+
+表中的 Adventurer’s 三件指 **Adventurer's Armor、Adventurer's Belt、Adventurer's Boots**。在可直接查看 Stats／Personality 面板的起点，性格指示位于中央，对应 **Neutral 倾向**。PROLOGUE 与 `???` 的起始阶段不能直接查看 Stats／Personality 面板，因此表中不列性格或属性数值。`—` 表示起始阶段没有可直接查看的数值。
+
+::: {.kt-adaptive-records .kt-trailmarker-baselines}
+
+| Trailmarker | 起始位置 | Brawn / Charm / Wits | Ouros | 初始状态与关系 |
+|---|---|---|---|---|
+| PROLOGUE | 童年家庭开场；Day 未显示。 | — | — | 开场阶段尚不能直接查看 Stats 面板。 |
+| THE SPARK | 红根镇荒野（Redroot Wilds），Day 1（周日）。 | 3 / 3 / 3 | 0 | 已穿 Adventurer’s 三件；Map 槽空。 |
+| THE LESSONS | 阿瑞斯（Aris），Day 1（周四）。 | 18 / 18 / 18 | 102 | 已穿 Adventurer’s 三件；Map 槽空；Supplies 页面为空。 |
+| THE BEASTSLAYER | 阿瑞斯（Aris），Day 9（周五）。 | 72 / 27 / 27 | 700 | 已穿 Adventurer’s 三件与 Summit Attire；持有 Tavern Room Key、Arcanics Scroll ×5。 |
+| THE PURSUIT | 水晶平原（Crystal Plains），Day 1（周一）。 | 98 / 43 / 43 | 3000 | 已穿 Echelle Warhammer 与 Adventurer’s 三件；Map 在位；Rations ×10。 |
+| THE DREADSTONE | 水晶平原（Crystal Plains），Day 8（周一）。 | 103 / 53 / 53 | 3050 | 已穿 Echelle Warhammer 与 Adventurer’s 三件；Map 在位；Rations ×2。入口询问与 Macsen 的关系。 |
+| ??? | dreadstone 幻象；无可确认的 Day。 | — | — | 这段幻象的起始阶段不能直接查看 Stats 面板；入口会询问与 Macsen 的关系。 |
+| THE CATALYST | 菜单标示 Spiceport City／Day 1；首次可用界面仍在盾落谷（Shieldfall Vale），Day 7（周二）。 | 111 / 53 / 53 | 3050 | 已穿 Echelle Warhammer 与 Adventurer’s 三件；Map 在位；Rations ×2。入口询问与 Macsen 的关系。 |
+| THE THRUST | 斯派斯港（Spiceport），Day 7（周一）。 | 104 / 51 / 51 | 3050 | **首次面板未穿任何 Equipment**；Rations ×2。入口可选 Macsen／Zhokhar／Single；这三个关系分支的初始属性与穿戴状态相同。 |
+
+:::
 
 <a id="help-codex"></a>
 

@@ -22,7 +22,8 @@
     display: grid;
     width: 100%;
     max-width: none;
-    grid-template-columns: 192px minmax(0, 840px) minmax(0, 1fr);
+    /* Reserve the rail and both gaps before expanding the article. */
+    grid-template-columns: 192px minmax(0, min(960px, calc(100% - 232px))) minmax(0, 1fr);
     gap: 20px;
     padding-inline: max(16px, calc((100vw - 1440px) / 2 + 16px));
   }
@@ -52,10 +53,16 @@
     grid-column: 2;
     grid-row: 1;
     width: 100%;
-    max-width: 840px;
+    max-width: 960px;
     min-width: 0;
     margin: 0;
     padding: 1.5rem 0 0 2rem;
+  }
+
+  /* Keep prose readable while tables, images and maps use the wider article. */
+  #quarto-content > #quarto-document-content .kt-ordinary-page
+  :is(p:not(:has(img, picture, svg)), ul, ol, dl):not(table *) {
+    max-width: 47.5rem;
   }
 
   #kt-page-toc-panel #TOC {

@@ -209,6 +209,22 @@ def main():
             fail(f"{locale}: Outfit target count changed")
         if counts["memory"] != 87 or counts["codex"] != 56 or counts["page"] != 14:
             fail(f"{locale}: required record counts changed: {dict(counts)}")
+        trailmarkers = [r for r in records if r['objectID'].startswith('trailmarker:')]
+        expected_trailmarkers = {'trailmarker:' + name for name in
+                                ('prologue', 'the-spark', 'the-lessons', 'the-beastslayer',
+                                 'the-pursuit', 'the-dreadstone', 'vision', 'the-catalyst', 'the-thrust')}
+        if {r['objectID'] for r in trailmarkers} != expected_trailmarkers or len(trailmarkers) != 9:
+            fail(f"{locale}: expected nine bounded Trailmarker identities")
+        if any(r['type'] != 'section' or r['href'] != 'help.html#help-trailmarkers' for r in trailmarkers):
+            fail(f"{locale}: Trailmarkers must retain the existing Help destination and section type")
+        thrust = next(r for r in trailmarkers if r['objectID'] == 'trailmarker:the-thrust')
+        if '104 / 51 / 51' not in thrust['text'] or '117 / 59 / 59' in thrust['text']:
+            fail(f"{locale}: THRUST Search must retain the first visible Stats baseline")
+        prime = next(r for r in records if r['objectID'] == 'equipment:equipment-item-prime-attire')
+        if 'Brawn +10' not in prime['section'] or 'Day 7' not in prime['text']:
+            fail(f"{locale}: Equipment Stats must be searchable without replacing acquisition prose")
+        if counts['equipment'] != 51:
+            fail(f"{locale}: expected 46 Equipment identities plus five Supplies records")
         if destinations["memory-row"] != 87:
             fail(f"{locale}: exact Memory row destinations changed: {destinations['memory-row']}")
         if destinations["codex-entry"] != 56:

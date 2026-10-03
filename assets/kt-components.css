@@ -432,63 +432,40 @@ body #quarto-document-content #kt-memory-locator a:focus-visible {
 
 /* Shared conventional desktop chrome; compact table systems keep their own narrow rules. */
 @media (min-width: 992px) {
-  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) {
+  #quarto-document-content table.table:not(.kt-codex-responsive-table) {
     width: auto !important;
     min-width: 0;
     max-width: 100%;
     table-layout: auto !important;
   }
 
-  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) :is(col, th, td) {
+  #quarto-document-content table.table:not(.kt-codex-responsive-table) :is(col, th, td) {
     width: auto !important;
     min-width: 0;
   }
 
-  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) th {
-    white-space: nowrap;
-  }
-
-  #quarto-document-content table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table) td {
+  #quarto-document-content table.table:not(.kt-codex-responsive-table) th {
     white-space: normal;
   }
 
-  #quarto-document-content :is(.quarto-table-container, .quarto-bootstrap-table, .table-responsive):has(> table.table:not(.kt-memory-responsive-table):not(.kt-codex-responsive-table)) {
+  #quarto-document-content table.table:not(.kt-codex-responsive-table) td {
+    white-space: normal;
+  }
+
+  #quarto-document-content :is(.quarto-table-container, .quarto-bootstrap-table, .table-responsive):has(> table.table:not(.kt-codex-responsive-table)) {
     width: fit-content;
     min-width: 0;
     max-width: 100%;
     overflow-x: auto;
   }
 
-  /* Memory lookup: narrow order, readable native title, remaining space for the scene. */
-  #quarto-document-content table.kt-memory-responsive-table {
-    width: 100%;
-    table-layout: fixed;
-  }
-
-  #quarto-document-content :is(table.kt-memory-responsive-table, table.kt-codex-responsive-table) col {
-    width: auto !important;
-  }
-
+  /* Memory categories share natural column sizing; only the order stays intact. */
   #quarto-document-content table.kt-memory-responsive-table :is(th, td):nth-child(1) {
-    width: 3.25rem;
     white-space: nowrap;
   }
 
-  #quarto-document-content table.kt-memory-responsive-table :is(th, td):nth-child(2) {
-    width: 38%;
-  }
-
-  /* These early categories have short titles; give their scene descriptions more room. */
-  #quarto-document-content table.kt-memory-responsive-table:has(#memory-redroot-memories-1) :is(th, td):nth-child(2) {
-    width: 9rem;
-  }
-
-  #quarto-document-content table.kt-memory-responsive-table:has(#memory-redroot-wilds-memories-1) :is(th, td):nth-child(2) {
-    width: 13rem;
-  }
-
-  #quarto-document-content table.kt-memory-responsive-table:has(#memory-aris-memories-1) :is(th, td):nth-child(2) {
-    width: 11rem;
+  #quarto-document-content table.kt-codex-responsive-table col {
+    width: auto !important;
   }
 
   /* Codex categories differ in how much text belongs in the final note column. */
@@ -679,6 +656,10 @@ body #quarto-document-content #kt-memory-locator a:focus-visible {
 
 /* One source table, DW's measured-container record reading pattern. */
 #quarto-document-content .kt-adaptive-records { width: 100%; min-width: 0; }
+/* The five-field Trailmarker header must fit the 992/1024 desktop article. */
+#quarto-document-content .kt-adaptive-records.kt-trailmarker-baselines > table.table > thead > tr > th {
+  white-space: normal;
+}
 #quarto-document-content .kt-adaptive-records .kt-record-label { display: none; }
 #quarto-document-content .kt-adaptive-records.kt-record-mode { overflow: visible; }
 #quarto-document-content .kt-adaptive-records.kt-record-mode > table.table,

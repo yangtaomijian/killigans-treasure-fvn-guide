@@ -1477,6 +1477,70 @@
       "pair": "closure-personality-purescale-day7",
       "query": "Aris Day 7 Purescale personality",
       "top": "reference/personality.html#aris-purescale-personality"
+    },
+    {
+      "id": "baseline-thrust-zh",
+      "locale": "zh",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-thrust",
+      "query": "THE THRUST",
+      "top": "trailmarker:the-thrust"
+    },
+    {
+      "id": "baseline-thrust-en",
+      "locale": "en",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-thrust",
+      "query": "THE THRUST",
+      "top": "trailmarker:the-thrust"
+    },
+    {
+      "id": "baseline-beastslayer-zh",
+      "locale": "zh",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-beastslayer",
+      "query": "THE BEASTSLAYER",
+      "top": "trailmarker:the-beastslayer"
+    },
+    {
+      "id": "baseline-beastslayer-en",
+      "locale": "en",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-beastslayer",
+      "query": "THE BEASTSLAYER",
+      "top": "trailmarker:the-beastslayer"
+    },
+    {
+      "id": "baseline-prime-stats-zh",
+      "locale": "zh",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-prime-stats",
+      "query": "Prime Attire Brawn +10",
+      "top": "equipment:equipment-item-prime-attire"
+    },
+    {
+      "id": "baseline-prime-stats-en",
+      "locale": "en",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-prime-stats",
+      "query": "Prime Attire Brawn +10",
+      "top": "equipment:equipment-item-prime-attire"
+    },
+    {
+      "id": "baseline-viscount-stats-zh",
+      "locale": "zh",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-viscount-stats",
+      "query": "Viscount Robe Charm +7",
+      "top": "equipment:equipment-item-viscount-robe"
+    },
+    {
+      "id": "baseline-viscount-stats-en",
+      "locale": "en",
+      "category": "equipment-trailmarker-stats",
+      "pair": "baseline-viscount-stats",
+      "query": "Viscount Robe Charm +7",
+      "top": "equipment:equipment-item-viscount-robe"
     }
   ]
 }

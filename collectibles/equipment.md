@@ -8,6 +8,8 @@
 
 外观编号与表情查 [Dressing Room](dressing-room.md)；取得后找不到，先查[帮助](../help.md#help-item-status)与[装备状态](#equipment-state-care)。
 
+**Stats 列：**汇总原生 Equipment 界面显示的 Brawn／Charm／Wits 数值，`+` 是本攻略对装备加成的简写；三项都显示为 0 时写作“无属性加成”。Map 没有显示数值提示，`—` 表示未观察到可见数值，不代表已证明为零。[只有当前穿在身上的装备会改变 Stats 显示值](../help.md#help-stats)。
+
 <span id="equipment-quick-find"></span>
 <span id="equipment-simple-acquisitions"></span>
 <span id="equipment-conditional"></span>
@@ -19,11 +21,11 @@
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| 装备 | 类别 | 时机／取得方式 | 错过／补收 | 详情 |
-|---|---|---|---|---|
-| <span id="equipment-item-silvatto-vest">**Silvatto Vest**</span> | Armor | 订单奖励；逐件选 `Yep.`。 | 奖励前普通档；实体衣物逃离时移走。 | [步骤](#silvatto-garments) |
-| <span id="equipment-item-silvatto-anklets">**Silvatto Anklets**</span> | Boots | 订单奖励；逐件选 `Yep.`。 | 奖励前普通档；实体衣物逃离时移走。 | [步骤](#silvatto-garments) |
-| <span id="equipment-item-silvatto-loinwrap">**Silvatto Loinwrap**</span> | Bottoms | 订单奖励；逐件选 `Yep.`。 | 奖励前普通档；实体衣物逃离时移走。 | [步骤](#silvatto-garments) |
+| 装备 | 类别 | Stats | 时机／取得方式 | 错过／补收 | 详情 |
+|---|---|---|---|---|---|
+| <span id="equipment-item-silvatto-vest">**Silvatto Vest**</span> | Armor | 无属性加成 | 订单奖励；逐件选 `Yep.`。 | 奖励前普通档；实体衣物逃离时移走。 | [步骤](#silvatto-garments) |
+| <span id="equipment-item-silvatto-anklets">**Silvatto Anklets**</span> | Boots | 无属性加成 | 订单奖励；逐件选 `Yep.`。 | 奖励前普通档；实体衣物逃离时移走。 | [步骤](#silvatto-garments) |
+| <span id="equipment-item-silvatto-loinwrap">**Silvatto Loinwrap**</span> | Bottoms | 无属性加成 | 订单奖励；逐件选 `Yep.`。 | 奖励前普通档；实体衣物逃离时移走。 | [步骤](#silvatto-garments) |
 
 :::
 
@@ -43,9 +45,9 @@
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| 装备 | 类别 | 时机／取得方式 | 错过／补收 | 详情 |
-|---|---|---|---|---|
-| <span id="equipment-item-marchanide-langou">**Marchanide Langou**</span> | Undies | Day 8：战败，或获胜后未穿 Belt。 | 早期分支读战前档；进入蓝叶森林前剧情补发。 | [步骤](#marchanide-langou) |
+| 装备 | 类别 | Stats | 时机／取得方式 | 错过／补收 | 详情 |
+|---|---|---|---|---|---|
+| <span id="equipment-item-marchanide-langou">**Marchanide Langou**</span> | Undies | Brawn +3 · Charm +3 · Wits +3 | Day 8：战败，或获胜后未穿 Belt。 | 早期分支读战前档；进入蓝叶森林前剧情补发。 | [步骤](#marchanide-langou) |
 
 :::
 
@@ -69,22 +71,22 @@ Aris 的可选装备见下表。普通商店从 Day 2 剧情造访开放，Day 5
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| 装备 | 类别 | 时机／取得方式 | 错过／补收 | 详情 |
-|---|---|---|---|---|
-| <span id="equipment-item-spare-langou">**Spare Langou**</span> | Undies | Day 2，无 Marchanide 时选 `A langou.`。 | 赠衣分支；提问前普通档，商店不卖这件。 | [步骤](#aris-day2-garments) |
-| <span id="equipment-item-viscount-robe">**Viscount Robe**</span> | Armor | Day 2 起，General Store：200 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-fiendish-harness">**Fiendish Harness**</span> | Armor | Day 2 起，General Store：150 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-hand-me-down-loincloth">**Hand-me-down Loincloth**</span> | Bottoms | Day 2 赠衣选 `Something looser.`；也可商店买，40 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | [步骤](#aris-day2-garments) |
-| <span id="equipment-item-viscount-kilt">**Viscount Kilt**</span> | Bottoms | Day 2 起，General Store：80 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-fiendish-garb">**Fiendish Garb**</span> | Bottoms | Day 2 起，General Store：70 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-aris-langou">**Aris Langou**</span> | Undies | Day 2 起，General Store：25 Ouros。 | 持有 Spare 时隐藏；卸下售出后，下次造访可买。 | [步骤](#aris-day2-garments) |
-| <span id="equipment-item-woven-britches">**Woven Britches**</span> | Undies | Day 2 起，General Store：10 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-viscount-loinwrap">**Viscount Loinwrap**</span> | Undies | Day 2 起，General Store：50 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-viscount-belt">**Viscount Belt**</span> | Belt | Day 2 起，General Store：100 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-fiendish-belt">**Fiendish Belt**</span> | Belt | Day 2 起，General Store：80 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-viscount-anklets">**Viscount Anklets**</span> | Boots | Day 2 起，General Store：100 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-fiendish-greaves">**Fiendish Greaves**</span> | Boots | Day 2 起，General Store：60 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
-| <span id="equipment-item-prime-attire">**Prime Attire**</span> | Undies | 准备齐全后，Day 7／8 当天首次进 Coliseum。 | Day 8 可补领，不能补已关闭的准备条件。 | [步骤](#prime-attire) |
+| 装备 | 类别 | Stats | 时机／取得方式 | 错过／补收 | 详情 |
+|---|---|---|---|---|---|
+| <span id="equipment-item-spare-langou">**Spare Langou**</span> | Undies | Charm +1 · Wits +5 | Day 2，无 Marchanide 时选 `A langou.`。 | 赠衣分支；提问前普通档，商店不卖这件。 | [步骤](#aris-day2-garments) |
+| <span id="equipment-item-viscount-robe">**Viscount Robe**</span> | Armor | Brawn +3 · Charm +7 · Wits +5 | Day 2 起，General Store：200 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-fiendish-harness">**Fiendish Harness**</span> | Armor | Brawn +7 · Charm +5 · Wits +3 | Day 2 起，General Store：150 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-hand-me-down-loincloth">**Hand-me-down Loincloth**</span> | Bottoms | Brawn +2 · Charm +2 · Wits +2 | Day 2 赠衣选 `Something looser.`；也可商店买，40 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | [步骤](#aris-day2-garments) |
+| <span id="equipment-item-viscount-kilt">**Viscount Kilt**</span> | Bottoms | Brawn +2 · Charm +5 · Wits +3 | Day 2 起，General Store：80 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-fiendish-garb">**Fiendish Garb**</span> | Bottoms | Brawn +5 · Charm +3 · Wits +1 | Day 2 起，General Store：70 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-aris-langou">**Aris Langou**</span> | Undies | Charm +1 · Wits +5 | Day 2 起，General Store：25 Ouros。 | 持有 Spare 时隐藏；卸下售出后，下次造访可买。 | [步骤](#aris-day2-garments) |
+| <span id="equipment-item-woven-britches">**Woven Britches**</span> | Undies | 无属性加成 | Day 2 起，General Store：10 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-viscount-loinwrap">**Viscount Loinwrap**</span> | Undies | Charm +3 · Wits +1 | Day 2 起，General Store：50 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-viscount-belt">**Viscount Belt**</span> | Belt | Brawn +2 · Charm +5 · Wits +3 | Day 2 起，General Store：100 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-fiendish-belt">**Fiendish Belt**</span> | Belt | Brawn +5 · Charm +3 · Wits +2 | Day 2 起，General Store：80 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-viscount-anklets">**Viscount Anklets**</span> | Boots | Brawn +1 · Charm +4 · Wits +3 | Day 2 起，General Store：100 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-fiendish-greaves">**Fiendish Greaves**</span> | Boots | Brawn +3 · Charm +2 · Wits +1 | Day 2 起，General Store：60 Ouros。 | Day 5／7／8／11 可补买；离城后读早期档。 | — |
+| <span id="equipment-item-prime-attire">**Prime Attire**</span> | Undies | Brawn +10 | 准备齐全后，Day 7／8 当天首次进 Coliseum。 | Day 8 可补领，不能补已关闭的准备条件。 | [步骤](#prime-attire) |
 
 :::
 
@@ -183,22 +185,22 @@ Day 5：Bestial Alleys 选 `Help someone move crates`（一格），再进 Colis
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| 装备 | 类别 | 时机／取得方式 | 错过／补收 | 详情 |
-|---|---|---|---|---|
-| <span id="equipment-item-peddler-s-vest">**Peddler's Vest**</span> | Armor | Day 5 下午／Day 6 自由探索，General Store：200 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-scallywag-covering">**Scallywag Covering**</span> | Armor | Day 5 下午／Day 6 自由探索，General Store：150 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-old-fashioned-vest">**Old-Fashioned Vest**</span> | Armor | Day 5 下午／Day 6 自由探索，后仓：80 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-belt">**Peddler's Belt**</span> | Belt | Day 5 下午／Day 6 自由探索，General Store：80 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-old-fashioned-suspenders">**Old-Fashioned Suspenders**</span> | Belt | Day 5 下午／Day 6 自由探索，后仓：30 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-shoes">**Peddler's Shoes**</span> | Boots | Day 5 下午／Day 6 自由探索，General Store：70 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-scallywag-scraps">**Scallywag Scraps**</span> | Boots | Day 5 下午／Day 6 自由探索，General Store：30 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-custom-made-sandals">**Custom-Made Sandals**</span> | Boots | Day 5 下午／Day 6 自由探索，后仓：30 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-leggings">**Peddler's Leggings**</span> | Bottoms | Day 5 下午／Day 6 自由探索，General Store：100 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-scallywag-pantsleeve">**Scallywag Pantsleeve**</span> | Bottoms | Day 5 下午／Day 6 自由探索，General Store：50 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-old-fashioned-loinwear">**Old-Fashioned Loinwear**</span> | Bottoms | Day 5 下午／Day 6 自由探索，后仓：50 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
-| <span id="equipment-item-peddler-s-confidence">**Peddler's Confidence**</span> | Undies | Day 5 下午／Day 6 自由探索，General Store：50 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-scallywag-bandana">**Scallywag Bandana**</span> | Undies | Day 5 下午／Day 6 自由探索，General Store：35 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
-| <span id="equipment-item-old-fashioned-langou">**Old-Fashioned Langou**</span> | Undies | Day 5 下午／Day 6 自由探索，后仓：30 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
+| 装备 | 类别 | Stats | 时机／取得方式 | 错过／补收 | 详情 |
+|---|---|---|---|---|---|
+| <span id="equipment-item-peddler-s-vest">**Peddler's Vest**</span> | Armor | Brawn +3 · Charm +8 · Wits +2 | Day 5 下午／Day 6 自由探索，General Store：200 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-scallywag-covering">**Scallywag Covering**</span> | Armor | Brawn +8 · Charm +3 · Wits +3 | Day 5 下午／Day 6 自由探索，General Store：150 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-old-fashioned-vest">**Old-Fashioned Vest**</span> | Armor | Brawn +2 · Charm +5 · Wits +8 | Day 5 下午／Day 6 自由探索，后仓：80 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-belt">**Peddler's Belt**</span> | Belt | Brawn +3 · Charm +5 · Wits +1 | Day 5 下午／Day 6 自由探索，General Store：80 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-old-fashioned-suspenders">**Old-Fashioned Suspenders**</span> | Belt | Brawn +1 · Charm +3 · Wits +5 | Day 5 下午／Day 6 自由探索，后仓：30 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-shoes">**Peddler's Shoes**</span> | Boots | Brawn +1 · Charm +4 · Wits +1 | Day 5 下午／Day 6 自由探索，General Store：70 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-scallywag-scraps">**Scallywag Scraps**</span> | Boots | Brawn +3 · Charm +2 · Wits +1 | Day 5 下午／Day 6 自由探索，General Store：30 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-custom-made-sandals">**Custom-Made Sandals**</span> | Boots | Brawn +1 · Charm +3 · Wits +5 | Day 5 下午／Day 6 自由探索，后仓：30 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-leggings">**Peddler's Leggings**</span> | Bottoms | Brawn +2 · Charm +6 · Wits +3 | Day 5 下午／Day 6 自由探索，General Store：100 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-scallywag-pantsleeve">**Scallywag Pantsleeve**</span> | Bottoms | Brawn +6 · Charm +3 · Wits +1 | Day 5 下午／Day 6 自由探索，General Store：50 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-old-fashioned-loinwear">**Old-Fashioned Loinwear**</span> | Bottoms | Brawn +1 · Charm +2 · Wits +7 | Day 5 下午／Day 6 自由探索，后仓：50 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
+| <span id="equipment-item-peddler-s-confidence">**Peddler's Confidence**</span> | Undies | Charm +5 · Wits +2 | Day 5 下午／Day 6 自由探索，General Store：50 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-scallywag-bandana">**Scallywag Bandana**</span> | Undies | Brawn +2 · Charm +3 · Wits +1 | Day 5 下午／Day 6 自由探索，General Store：35 Ouros。 | Day 8 剧情商店仍可买；离城后读早期档。 | — |
+| <span id="equipment-item-old-fashioned-langou">**Old-Fashioned Langou**</span> | Undies | Brawn +2 · Charm +3 · Wits +6 | Day 5 下午／Day 6 自由探索，后仓：30 Ouros。 | 最迟 Day 6 解锁并购买；错过读早期档。 | [步骤](#spiceport-old-fashioned) |
 
 :::
 
@@ -233,11 +235,11 @@ Day 5 下午或 Day 6 **进入自由探索**后，去 General Store 花一格时
 
 ::: {.kt-adaptive-records .kt-equipment-completion}
 
-| 装备 | 类别 | 时机／取得方式 | 错过／补收 | 详情 |
-|---|---|---|---|---|
-| <span id="equipment-item-focusing-wriststrap">**Focusing Wriststrap**</span> | Special | Day 10–12 晚间完整 Talk 选 Macsen；Day 12 赠礼。 | 三件赠礼当次互斥；Day 10 晚间前普通档。 | [步骤](#blueleaf-gifts) |
-| <span id="equipment-item-brawler-band">**Brawler Band**</span> | Special | Day 10–12 晚间完整 Talk 选 Zhokhar；Day 12 赠礼。 | 三件赠礼当次互斥；Day 10 晚间前普通档。 | [步骤](#blueleaf-gifts) |
-| <span id="equipment-item-marchanide-timekeeper">**Marchanide Timekeeper**</span> | Special | Day 10–12 晚间完整 Talk 选 Cabotte；Day 12 赠礼。 | 三件赠礼当次互斥；Day 10 晚间前普通档。 | [步骤](#blueleaf-gifts) |
+| 装备 | 类别 | Stats | 时机／取得方式 | 错过／补收 | 详情 |
+|---|---|---|---|---|---|
+| <span id="equipment-item-focusing-wriststrap">**Focusing Wriststrap**</span> | Special | Brawn +2 · Charm +3 · Wits +4 | Day 10–12 晚间完整 Talk 选 Macsen；Day 12 赠礼。 | 三件赠礼当次互斥；Day 10 晚间前普通档。 | [步骤](#blueleaf-gifts) |
+| <span id="equipment-item-brawler-band">**Brawler Band**</span> | Special | Brawn +4 · Charm +2 · Wits +3 | Day 10–12 晚间完整 Talk 选 Zhokhar；Day 12 赠礼。 | 三件赠礼当次互斥；Day 10 晚间前普通档。 | [步骤](#blueleaf-gifts) |
+| <span id="equipment-item-marchanide-timekeeper">**Marchanide Timekeeper**</span> | Special | Brawn +3 · Charm +4 · Wits +2 | Day 10–12 晚间完整 Talk 选 Cabotte；Day 12 赠礼。 | 三件赠礼当次互斥；Day 10 晚间前普通档。 | [步骤](#blueleaf-gifts) |
 
 :::
 
@@ -273,19 +275,19 @@ Day 5 下午或 Day 6 **进入自由探索**后，去 General Store 花一格时
 
 ::: {.kt-adaptive-records .kt-equipment-automatic}
 
-| 装备 | 类别 | 自动取得时机 |
-|---|---|---|
-| <span id="equipment-item-silvatto-langou">**Silvatto Langou**</span> | Undies | 红根镇早晨起床；逃离时移走。 |
-| <span id="equipment-item-worker-s-apron">**Worker's Apron**</span> | Armor | 红根镇工作服教程；逃离时移走。 |
-| <span id="equipment-item-worker-s-greaves">**Worker's Greaves**</span> | Boots | 红根镇工作服教程；逃离时移走。 |
-| <span id="equipment-item-toiler-s-straps">**Toiler's Straps**</span> | Bottoms | 红根镇工作服教程；逃离时移走。 |
-| <span id="equipment-item-adventurer-s-armor">**Adventurer's Armor**</span> | Armor | 红根镇逃离后，出发前制作。 |
-| <span id="equipment-item-adventurer-s-belt">**Adventurer's Belt**</span> | Belt | 红根镇逃离后，出发前制作。 |
-| <span id="equipment-item-adventurer-s-boots">**Adventurer's Boots**</span> | Boots | 红根镇逃离后，出发前制作。 |
-| <span id="equipment-item-map">**Map**</span> | Map | 红根镇逃离后；穿戴须先穿 Belt。Aris Day 2 移走，Day 10 归还。 |
-| <span id="equipment-item-summit-attire">**Summit Attire**</span> | Undies | Aris Day 4，Taavi／Zhokhar 剧情交付；参赛服之后移走。 |
-| <span id="equipment-item-imperfect-lustre-amulet">**Imperfect Lustre Amulet**</span> | Special | Aris Day 11，宴会入口。 |
-| <span id="equipment-item-echelle-warhammer">**Echelle Warhammer**</span> | Weapon | Aris Day 12，离城交付并自动穿上。 |
+| 装备 | 类别 | Stats | 自动取得时机 |
+|---|---|---|---|
+| <span id="equipment-item-silvatto-langou">**Silvatto Langou**</span> | Undies | 无属性加成 | 红根镇早晨起床；逃离时移走。 |
+| <span id="equipment-item-worker-s-apron">**Worker's Apron**</span> | Armor | Brawn +5 | 红根镇工作服教程；逃离时移走。 |
+| <span id="equipment-item-worker-s-greaves">**Worker's Greaves**</span> | Boots | 无属性加成 | 红根镇工作服教程；逃离时移走。 |
+| <span id="equipment-item-toiler-s-straps">**Toiler's Straps**</span> | Bottoms | 无属性加成 | 红根镇工作服教程；逃离时移走。 |
+| <span id="equipment-item-adventurer-s-armor">**Adventurer's Armor**</span> | Armor | Brawn +1 · Charm +1 · Wits +1 | 红根镇逃离后，出发前制作。 |
+| <span id="equipment-item-adventurer-s-belt">**Adventurer's Belt**</span> | Belt | Brawn +1 · Charm +1 · Wits +1 | 红根镇逃离后，出发前制作。 |
+| <span id="equipment-item-adventurer-s-boots">**Adventurer's Boots**</span> | Boots | Brawn +1 · Charm +1 · Wits +1 | 红根镇逃离后，出发前制作。 |
+| <span id="equipment-item-map">**Map**</span> | Map | — | 红根镇逃离后；穿戴须先穿 Belt。Aris Day 2 移走，Day 10 归还。 |
+| <span id="equipment-item-summit-attire">**Summit Attire**</span> | Undies | Brawn +5 | Aris Day 4，Taavi／Zhokhar 剧情交付；参赛服之后移走。 |
+| <span id="equipment-item-imperfect-lustre-amulet">**Imperfect Lustre Amulet**</span> | Special | Brawn +1 · Charm +1 · Wits +1 | Aris Day 11，宴会入口。 |
+| <span id="equipment-item-echelle-warhammer">**Echelle Warhammer**</span> | Weapon | Brawn +10 · Charm +5 · Wits +5 | Aris Day 12，离城交付并自动穿上。 |
 
 :::
 

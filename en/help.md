@@ -30,6 +30,8 @@ Check by item type. In **Equipment**, look for ownership, equipped status, and d
 
 **Current stats and equipment:** **Stats** shows the current displayed Brawn, Charm, and Wits values. Worn equipment can affect them; owning an item or unlocking its Dressing Room appearance is not the same as wearing it. Check Stats after changing gear. Some scenes temporarily put equipment away, including the [Blueleaf Grove Day 11 spar](guide/blueleaf-grove.md#blueleaf-day11).
 
+For gear that raises Charm or another stat, go straight to the [Equipment Stats column](collectibles/equipment.md#equipment-quick-find).
+
 **Camp supplies:** On nights when the game checks camp supplies, skipping dinner may give Brawn −1, an empty waterskin may give Charm −1, and lacking a usable Bedroll may give Wits −1. Check food, water, and your Bedroll before sleeping. Not every story meal has this check.
 
 <a id="help-choice-icons"></a>
@@ -58,6 +60,26 @@ If an input succeeds but the action fails, or you are deciding whether to retry,
 ## No old save? Where can I continue?
 
 Start with Eddio's [official guide for returning players and new devices](https://itch.io/t/2741741/returning-player-new-device-click-here), then look at the game's **Trailmarkers** chapter starts. Their preset state lets you continue from a chapter, but **does not rebuild your original items, relationships, or exploration choices**. Memories viewing history and Dressing Room appearances are stored separately, so a Trailmarker does not tell you what those records contain. To compare old branches, use a regular save you made before the choice. Without one, check whether the preset for your chosen start can meet the target page's prerequisites.
+
+These are **the preset states the game provides when you use a Trailmarker**, rather than a target state for a normal playthrough. Memories viewing history and Dressing Room unlocks can differ on an existing profile, and chapter starts may leave gaps in earlier Codex history.
+
+“Adventurer’s three pieces” below means **Adventurer's Armor, Adventurer's Belt, and Adventurer's Boots**. At starts where the Stats / Personality panel is directly available, its visible Personality indicator is centered, corresponding to a **Neutral tendency**. The Stats / Personality panel is not directly available at the start of PROLOGUE or `???`, so the table does not list Personality or stat values for them. `—` means no numeric value is directly available at the start.
+
+::: {.kt-adaptive-records .kt-trailmarker-baselines}
+
+| Trailmarker | Starts at | Brawn / Charm / Wits | Ouros | Initial state and relationship setup |
+|---|---|---|---|---|
+| PROLOGUE | Childhood family opening; Day not shown. | — | — | The Stats panel is not yet available during the opening section. |
+| THE SPARK | Redroot Wilds, Day 1 (Sunday). | 3 / 3 / 3 | 0 | Adventurer’s three pieces worn; Map slot empty. |
+| THE LESSONS | Aris, Day 1 (Thursday). | 18 / 18 / 18 | 102 | Adventurer’s three pieces worn; Map slot empty; Supplies pages are empty. |
+| THE BEASTSLAYER | Aris, Day 9 (Friday). | 72 / 27 / 27 | 700 | Adventurer’s three pieces and Summit Attire worn; Tavern Room Key and Arcanics Scroll ×5 held. |
+| THE PURSUIT | Crystal Plains, Day 1 (Monday). | 98 / 43 / 43 | 3000 | Echelle Warhammer and Adventurer’s three pieces worn; Map present; Rations ×10. |
+| THE DREADSTONE | Crystal Plains, Day 8 (Monday). | 103 / 53 / 53 | 3050 | Echelle Warhammer and Adventurer’s three pieces worn; Map present; Rations ×2. Entry asks about your relationship with Macsen. |
+| ??? | Dreadstone vision; no confirmed Day. | — | — | The Stats panel is not directly available at the start of this vision; the entry asks about your relationship with Macsen. |
+| THE CATALYST | Menu destination: Spiceport City / Day 1. First usable HUD: Shieldfall Vale, Day 7 (Tuesday). | 111 / 53 / 53 | 3050 | Echelle Warhammer and Adventurer’s three pieces worn; Map present; Rations ×2. Entry asks about your relationship with Macsen. |
+| THE THRUST | Spiceport, Day 7 (Monday). | 104 / 51 / 51 | 3050 | **No Equipment worn at the first panel**; Rations ×2. Entry offers Macsen / Zhokhar / Single; all three relationship branches share these initial stats and equipped state. |
+
+:::
 
 <a id="help-codex"></a>
 
