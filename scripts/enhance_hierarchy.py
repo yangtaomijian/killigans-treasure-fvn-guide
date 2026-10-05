@@ -11,6 +11,7 @@ from verify_render import OUTPUT, PAGES
 
 # Route keys, rather than rendered headings, determine the breadcrumb.
 PAGE_LABELS = {
+    "discussions": ("全站讨论", "All guide discussions"),
     "help": ("帮助", "Help"),
     "guide/redroot": ("红根镇 / 红根镇荒野", "Redroot / Redroot Wilds"),
     "guide/aris": ("阿瑞斯", "Aris"),

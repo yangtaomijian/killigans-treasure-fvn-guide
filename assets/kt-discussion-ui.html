@@ -15,7 +15,7 @@
     deleted: 'This comment was deleted.', fragment: 'Referenced section', earlier: 'Earlier guide versions',
     loadMore: 'Load more', loading: 'Loading discussion…', error: 'Couldn’t load the discussion.',
     retry: 'Try again', count: number => `${number} ${number === 1 ? 'comment' : 'comments'}`,
-    replies: 'Replies',
+    replies: 'Replies', persistent: 'Persistent discussions', persistentNote: 'Kept across guide versions by the maintainer.', all: 'View all discussions', original: 'Original guide version', missing: 'This comment is unavailable.',
     add: 'Add a comment', reply: 'Reply', report: 'Report', name: 'Name (optional)', body: 'Comment',
     identity: 'No account required. Names are not verified.', rootSubmit: 'Post comment',
     replySubmit: 'Post reply', cancel: 'Cancel', posting: 'Posting…',
@@ -38,7 +38,7 @@
     maintainer: '维护者', pinned: '置顶', hidden: '此评论已由维护者隐藏。',
     deleted: '此评论已删除。', fragment: '对应段落', earlier: '较早的攻略版本',
     loadMore: '加载更多', loading: '正在加载讨论…', error: '无法加载讨论。',
-    retry: '重试', count: number => `${number} 条评论`, replies: '回复',
+    retry: '重试', count: number => `${number} 条评论`, replies: '回复', persistent: '长期讨论', persistentNote: '由维护者保留，跨攻略版本显示。', all: '查看全站讨论', original: '最初攻略版本', missing: '此评论当前不可用。',
     add: '发表评论', reply: '回复', report: '举报', name: '昵称（可选）', body: '评论',
     identity: '无需账号；昵称不会验证身份。', rootSubmit: '发表评论',
     replySubmit: '发布回复', cancel: '取消', posting: '正在发布…',
@@ -69,6 +69,10 @@
   section.setAttribute('aria-labelledby', 'kt-discussion-title');
   const heading = make('h2', '', words.title);
   heading.id = 'kt-discussion-title';
+  const headingRow = make('div', 'kt-discussion-heading');
+  const hubLink = make('a', 'kt-discussion-hub-link', words.all);
+  hubLink.href = (context.locale === 'en' ? '/en/' : '/') + 'discussions.html';
+  headingRow.append(heading, hubLink);
   const explainer = make('p', 'kt-discussion-explainer', words.explainer);
   const versionContext = make('p', 'kt-discussion-version', `${words.current} · ${context.guideVersion}`);
   const status = make('div', 'kt-discussion-status');
@@ -92,21 +96,28 @@
   const versionsTitle = make('h3', '', words.earlier);
   const versionButtons = make('div', 'kt-discussion-version-buttons');
   versions.append(versionsTitle, versionButtons);
-  section.append(heading, explainer, versionContext, status, postNotice, lockedNotice,
+  const persistent = make('section', 'kt-discussion-persistent'); persistent.hidden = true;
+  const persistentHeading = make('h3', '', words.persistent);
+  const persistentNote = make('p', 'kt-discussion-explainer', words.persistentNote);
+  const persistentComments = make('div', 'kt-discussion-persistent-comments');
+  const persistentMore = make('button', 'kt-discussion-action', words.loadMore);
+  persistentMore.type = 'button'; persistentMore.hidden = true;
+  persistent.append(persistentHeading, persistentNote, persistentComments, persistentMore);
+  section.append(headingRow, explainer, persistent, versionContext, status, postNotice, lockedNotice,
     rootAction, composerHost, comments, more, versions);
   mount.append(section);
   mount.hidden = false;
 
   const remoteMode = runtime.mode === 'staging' || runtime.mode === 'production';
-  const writeEnabled = remoteMode && typeof runtime.transport.postComment === 'function';
-  const reportEnabled = remoteMode && typeof runtime.transport.sendFeedback === 'function';
-  const state = { activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
+  const writeEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.postComment === 'function';
+  const reportEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.sendFeedback === 'function';
+  const state = { persistent: null, activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
     drafts: new Map(), activeTarget: null, opener: null, posting: false, threadLocked: false };
-  const requestFor = (guideVersion, cursor = null) => ({
-    site: context.site, locale: context.locale, pageKey: context.pageKey, guideVersion, cursor,
+  const requestFor = (guideVersion, cursor = null, section = 'current') => ({
+    site: context.site, locale: context.locale, pageKey: context.pageKey, guideVersion, cursor, section,
   });
-  const read = async (guideVersion, cursor) => {
-    const response = await runtime.transport.readDiscussion(requestFor(guideVersion, cursor));
+  const read = async (guideVersion, cursor, section = 'current') => {
+    const response = await runtime.transport.readDiscussion(requestFor(guideVersion, cursor, section));
     if (response?.ok !== true || !response.thread || !Array.isArray(response.currentVersion?.comments) ||
         response.currentVersion.guideVersion !== guideVersion || !Array.isArray(response.earlierVersions)) {
       throw Error('INVALID_DISCUSSION_RESPONSE');
@@ -127,9 +138,9 @@
   function busy(value) {
     state.pending = value;
     comments.setAttribute('aria-busy', String(value));
-    more.disabled = value;
+    more.disabled = persistentMore.disabled = value;
     rootAction.disabled = value;
-    comments.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = value; });
+    section.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = value; });
     versionButtons.querySelectorAll('button').forEach(button => { button.disabled = value; });
   }
   function dateTime(value) {
@@ -163,6 +174,7 @@
       if (isRoot && comment.authorKind === 'maintainer' && comment.pinnedAt)
         meta.append(make('span', 'kt-discussion-tag', words.pinned));
       meta.append(dateTime(comment.createdAt));
+      if (isRoot && comment.discussionScope === 'persistent') meta.append(make('span', 'kt-discussion-tag', words.original + ' · ' + comment.guideVersion));
       article.append(meta, make('p', 'kt-discussion-body', comment.body ?? ''));
       const actions = make('div', 'kt-discussion-actions');
       if (isRoot && typeof comment.pageHash === 'string' && /^#[^?#]{1,255}$/.test(comment.pageHash)) {
@@ -222,6 +234,12 @@
     lockedNotice.hidden = page.status !== 'locked';
     rootAction.hidden = !writeEnabled || state.threadLocked || state.activeVersion !== context.guideVersion;
     rootAction.disabled = state.pending || state.posting;
+    persistentComments.replaceChildren();
+    const persistentPage = state.persistent;
+    persistent.hidden = !persistentPage || (!projectRoots(persistentPage.comments).length && !persistentPage.nextCursor);
+    if (persistentPage) projectRoots(persistentPage.comments).forEach(comment => persistentComments.append(renderComment(comment, true)));
+    persistentMore.hidden = !persistentPage?.nextCursor;
+    persistentMore.disabled = state.pending || state.posting;
     comments.replaceChildren();
     const visibleRoots = projectRoots(page.comments);
     if (visibleRoots.length) visibleRoots.forEach(comment => comments.append(renderComment(comment, true)));
@@ -369,7 +387,7 @@
       rootAction.after(composerHost);
     } else {
       const rootId = state.activeTarget.slice(6);
-      const root = [...comments.querySelectorAll('.kt-discussion-comment')]
+      const root = [...section.querySelectorAll('.kt-discussion-comment')]
         .find(article => article.dataset.commentId === rootId);
       const action = root?.querySelector('.kt-discussion-reply-action');
       if (!action) { closeComposer(false); return; }
@@ -407,12 +425,26 @@
     return valid;
   }
   async function refreshDiscussion() {
+    saveDraft();
+    const loadedVersionRoots = state.pages.get(state.activeVersion)?.comments.length ?? 0;
+    const loadedPersistentRoots = state.persistent?.comments.length ?? 0;
     const response = await read(state.activeVersion, null);
+    rememberPersistent(response, true);
     const roots = response.currentVersion.comments;
-    state.pages.set(state.activeVersion, {
-      status: response.thread.status, comments: roots, seen: new Set(roots.map(root => root.id)),
-      nextCursor: response.currentVersion.nextCursor,
-    });
+    const page = { status: response.thread.status, comments: roots, seen: new Set(roots.map(root => root.id)), nextCursor: response.currentVersion.nextCursor };
+    state.pages.set(state.activeVersion, page);
+    for (const [selected, expected] of [['current', loadedVersionRoots], ['persistent', loadedPersistentRoots]]) {
+      const selectedPage = selected === 'persistent' ? state.persistent : page;
+      const cursors = new Set();
+      while (selectedPage.nextCursor && selectedPage.comments.length < expected) {
+        if (cursors.has(selectedPage.nextCursor)) throw Error('REPEATED_DISCUSSION_CURSOR');
+        cursors.add(selectedPage.nextCursor);
+        const next = await read(selected === 'persistent' ? context.guideVersion : state.activeVersion, selectedPage.nextCursor, selected);
+        const data = selected === 'persistent' ? next.persistent : next.currentVersion;
+        for (const root of data.comments) if (!selectedPage.seen.has(root.id)) { selectedPage.comments.push(root); selectedPage.seen.add(root.id); }
+        selectedPage.nextCursor = data.nextCursor;
+      }
+    }
     if (state.activeVersion === context.guideVersion) state.index = response.earlierVersions;
     renderPage();
   }
@@ -433,8 +465,8 @@
     token = null;
     state.posting = true; updateSubmit(); cancel.disabled = true;
     rootAction.disabled = true;
-    more.disabled = true;
-    comments.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = true; });
+    more.disabled = persistentMore.disabled = true;
+    section.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = true; });
     formStatus.textContent = words.posting;
     const payload = {
       pageKey: context.pageKey, locale: context.locale, guideVersion: context.guideVersion,
@@ -475,8 +507,8 @@
       state.posting = false; cancel.disabled = false;
       updateSubmit();
       rootAction.disabled = state.pending;
-      more.disabled = state.pending;
-      comments.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = state.pending; });
+      more.disabled = persistentMore.disabled = state.pending;
+      section.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = state.pending; });
     }
   }
   if (writeEnabled) {
@@ -492,12 +524,13 @@
     const cached = state.pages.get(guideVersion);
     if (cached) {
       state.activeVersion = guideVersion;
-      message(); renderPage();
+      saveDraft(); message(); renderPage();
       return;
     }
     busy(true); message('loading');
     try {
       const response = await read(guideVersion, null);
+      saveDraft(); rememberPersistent(response);
       const roots = response.currentVersion.comments;
       state.pages.set(guideVersion, {
         status: response.thread.status, comments: roots, seen: new Set(roots.map(root => root.id)),
@@ -516,6 +549,7 @@
   async function loadMore() {
     const page = state.pages.get(state.activeVersion);
     if (state.pending || state.posting || !page?.nextCursor) return;
+    saveDraft();
     const guideVersion = state.activeVersion;
     const cursor = page.nextCursor;
     busy(true); message('loading');
@@ -532,7 +566,55 @@
       busy(false); renderPage();
     }
   }
+  function rememberPersistent(response, reset = false) {
+    if (state.persistent && !reset) return;
+    const page = response.persistent ?? { comments: [], nextCursor: null };
+    if (!Array.isArray(page.comments)) throw Error('INVALID_DISCUSSION_RESPONSE');
+    state.persistent = { comments: page.comments, seen: new Set(page.comments.map(root => root.id)), nextCursor: page.nextCursor };
+  }
+  async function loadPersistent() {
+    const page = state.persistent;
+    if (state.pending || state.posting || !page?.nextCursor) return;
+    saveDraft(); busy(true); message('loading');
+    try {
+      const response = await read(context.guideVersion, page.nextCursor, 'persistent');
+      if (!Array.isArray(response.persistent?.comments)) throw Error('INVALID_DISCUSSION_RESPONSE');
+      for (const root of response.persistent.comments) if (!page.seen.has(root.id)) { page.comments.push(root); page.seen.add(root.id); }
+      page.nextCursor = response.persistent.nextCursor; message();
+    } catch { message('error', loadPersistent); }
+    finally { busy(false); renderPage(); }
+  }
+  persistentMore.addEventListener('click', loadPersistent);
+  const anchorParams = new URLSearchParams(location.search);
+  const historicalVersion = anchorParams.get('discussionVersion')?.trim();
+  const initialVersion = anchorParams.get('discussionScope') !== 'persistent' && historicalVersion && Array.from(historicalVersion).length <= 80 ? historicalVersion : context.guideVersion;
+  let locationGeneration = 0;
+  async function locateComment() {
+    const run = ++locationGeneration;
+    const id = location.hash.slice(1);
+    if (!new RegExp('^kt-comment-[0-9a-f]{8}-[0-9a-f-]{27}$', 'i').test(id)) return;
+    const visited = new Set();
+    while (run === locationGeneration) {
+      const target = document.getElementById(id);
+      if (target) { target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'center', behavior: 'instant' }); return; }
+      const persistentTarget = new URLSearchParams(location.search).get('discussionScope') === 'persistent';
+      const page = persistentTarget ? state.persistent : state.pages.get(state.activeVersion);
+      if (!page?.nextCursor || visited.has(page.nextCursor)) break;
+      visited.add(page.nextCursor);
+      if (persistentTarget) await loadPersistent(); else await loadMore();
+      if (state.pending || state.posting) return;
+    }
+    if (run === locationGeneration) postNotice.textContent = words.missing;
+  }
+  async function followLocation() {
+    const params = new URLSearchParams(location.search); const version = params.get('discussionVersion')?.trim();
+    await loadVersion(params.get('discussionScope') !== 'persistent' && version && Array.from(version).length <= 80 ? version : context.guideVersion);
+    if (!state.pending && !state.posting) await locateComment();
+  }
+  window.addEventListener('hashchange', followLocation); window.addEventListener('popstate', followLocation);
   more.addEventListener('click', loadMore);
-  loadVersion(context.guideVersion);
+  loadVersion(context.guideVersion)
+    .then(() => initialVersion === context.guideVersion ? undefined : loadVersion(initialVersion))
+    .then(locateComment);
 })();
 </script>

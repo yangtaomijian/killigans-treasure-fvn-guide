@@ -72,7 +72,7 @@ def main():
             ids = parser.ids
             if ids["quarto-margin-sidebar"]:
                 errors.append(f"{page}: KT TOC still owned by Quarto margin collision manager")
-            has_toc = route != "index"
+            has_toc = route not in {"index", "discussions"}
             required = ("quarto-content", "kt-page-toc-panel", "quarto-document-content", "TOC", "toc-title",
                         "kt-page-toc-trigger", "kt-page-toc-close", "kt-page-toc-backdrop",
                         "kt-search-launcher", "navbarCollapse", "kt-global-nav-toolbar",
@@ -127,8 +127,8 @@ def main():
             language_links = re.findall(r'<a class="nav-link kt-language-utility"[^>]*>.*?</a>', html, re.S)
             if len(language_links) != 1 or f'aria-label="{language_label}"' not in language_links[0] or 'class="kt-language-icon"' not in language_links[0]:
                 errors.append(f"{page}: single language utility with globe and accessible label")
-            if len(parser.global_links) != len(PAGES) + 1 or len(set(parser.global_links)) != len(PAGES) + 1:
-                errors.append(f"{page}: expected one global navigation tree with {len(PAGES) + 1} unique destinations, got {len(parser.global_links)}")
+            if len(parser.global_links) != len(PAGES) or len(set(parser.global_links)) != len(PAGES):
+                errors.append(f"{page}: expected one global navigation tree with {len(PAGES)} unique destinations, got {len(parser.global_links)}")
             if not any(asset.endswith("assets/kt-foundation.css") for asset in parser.assets):
                 errors.append(f"{page}: foundation asset missing")
             if not any("kt-language" in asset for asset in parser.assets) and "navbar-nav-scroll ms-auto" not in html:

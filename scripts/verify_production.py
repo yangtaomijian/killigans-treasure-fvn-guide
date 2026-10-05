@@ -78,7 +78,7 @@ def main():
     ns = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'x': 'http://www.w3.org/1999/xhtml'}
     root = ET.parse(OUTPUT / 'sitemap.xml').getroot()
     entries = root.findall('s:url', ns)
-    assert len(entries) == 28
+    assert len(entries) == 2 * len(PAGES)
     assert {node.find('s:loc', ns).text for node in entries} == expected
     for node in entries:
         links = node.findall('x:link',ns)
@@ -107,7 +107,7 @@ def main():
     not_found.feed((OUTPUT / '404.html').read_text())
     verify_icons(not_found, OUTPUT / '404.html', OUTPUT / 'assets')
     assert all(link['href'].startswith('/assets/') for link in not_found.links), '404 favicon links must resolve from missing nested routes'
-    print(f'PASS: {len(fingerprints)}/48 public content checksums; 28 bilingual pages; 28 sitemap routes; 404 noindex; favicon in both locales; version-agnostic 1200x630 social cards and OG/Twitter metadata')
+    print(f'PASS: {len(fingerprints)} public content checksums; {2 * len(PAGES)} bilingual pages; {2 * len(PAGES)} sitemap routes; 404 noindex; favicon in both locales; version-agnostic 1200x630 social cards and OG/Twitter metadata')
 
 
 if __name__ == '__main__':

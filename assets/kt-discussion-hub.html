@@ -1,0 +1,58 @@
+<!-- Read-only public summary; no comment mount or composer. -->
+<script>
+/* Build configuration and runtime belong to this site.
+   No composer, Turnstile, feedback, or discussion mount is created on this page. */
+(() => {
+  'use strict';
+  const runtime = window.__ktDiscussionRuntime;
+  const context = runtime?.getContext();
+  const mount = document.getElementById('kt-discussion-hub');
+  if (!mount || !context || typeof runtime.transport?.readSummary !== 'function') return;
+  const config = { site: context.site, locale: context.locale, guideVersion: context.guideVersion, publicHost: 'killigans-treasure.carambi.com' };
+  mount.innerHTML = "<h1 id=\"title\"></h1><p id=\"description\" class=\"muted\"></p><div class=\"filters\"><label><span class=\"filter-label\" id=\"language-label\"></span><span class=\"filter-control\"><select id=\"language\"><option value=\"\" id=\"all-languages\"></option><option value=\"en\">English</option><option value=\"zh-CN\">简体中文</option></select></span></label><label><span class=\"filter-label\" id=\"scope-label\"></span><span class=\"filter-control\"><select id=\"scope\"><option value=\"all\" id=\"all-scopes\"></option><option value=\"current\" id=\"current\"></option><option value=\"historical\" id=\"historical\"></option><option value=\"persistent\" id=\"persistent\"></option></select></span></label><button id=\"refresh\" type=\"button\"><svg class=\"refresh-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 7v5h-5M4 17v-5h5M6.1 6.1a8 8 0 0 1 13.2 3.4M17.9 17.9A8 8 0 0 1 4.7 14.5\"></path></svg><span id=\"refresh-label\"></span></button></div><p id=\"state\" role=\"status\" aria-live=\"polite\"></p><div id=\"discussions\" aria-busy=\"false\"></div><button id=\"more\" type=\"button\" hidden></button>";
+  document.documentElement.lang = context.locale;
+  if (!config || !['password','demons-within','killigans-treasure'].includes(config.site)) return;
+  const en = config.locale === 'en';
+  const words = en ? {title:'All guide discussions',description:'Public discussions from all pages, in English and Chinese. Open a discussion to read or reply on its original page.',language:'Language',allLanguages:'All languages',scope:'Guide version',all:'All discussions',current:'Current version',historical:'Earlier versions',persistent:'Persistent discussions',refresh:'Refresh',more:'Load more',loading:'Loading discussions…',empty:'No public discussions match these filters.',error:'Couldn’t load discussions. Try refreshing.',reply:n=>`${n} ${n===1?'reply':'replies'}`} : {title:'全站讨论',description:'汇集中英文各页面的公开讨论。打开讨论后，可在原页面阅读和回复。',language:'语言',allLanguages:'全部语言',scope:'攻略版本',all:'全部讨论',current:'当前版本',historical:'历史版本',persistent:'长期讨论',refresh:'刷新',more:'加载更多',loading:'正在加载讨论…',empty:'暂无符合筛选条件的公开讨论。',error:'无法加载讨论，请刷新重试。',reply:n=>`${n} 条回复`};
+  const el = id => document.getElementById(id);
+  for (const [id,text] of Object.entries({title:words.title,description:words.description,'language-label':words.language,'all-languages':words.allLanguages,'scope-label':words.scope,'all-scopes':words.all,current:en?'Current':words.current,historical:en?'Earlier':words.historical,persistent:en?'Persistent':words.persistent,'refresh-label':words.refresh,more:words.more})) el(id).textContent=text;
+  function syncFilterAppearance() {
+    for (const [id, defaultValue] of [['language', ''], ['scope', 'all']])
+      el(id).parentElement.dataset.active = String(el(id).value !== defaultValue);
+  }
+  let cursor=null, generation=0, pending=false;
+  const ids=new Set();
+  const node=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n;};
+  function card(d) {
+    const article=node('article','','card');
+    const title=node('h2',''); const link=node('a',d.pageTitle);
+    const url=new URL(d.publicUrl); if (url.protocol!=='https:' || url.hostname!==config.publicHost) throw Error('INVALID_PUBLIC_LINK');
+    if (['localhost','127.0.0.1','[::1]'].includes(location.hostname) && runtime.transport.localPublicOrigin === location.origin) url.protocol=location.protocol, url.host=location.host;
+    link.href=url.href;title.append(link);
+    const meta=node('div','','meta');meta.append(node('span',d.locale==='en'?'English':'简体中文'),node('span',d.guideVersion),node('span',d.discussionScope==='persistent'?words.persistent:words.reply(d.replyCount)));
+    if(d.discussionScope==='persistent')meta.append(node('span',words.reply(d.replyCount)));
+    const time=node('time',new Intl.DateTimeFormat(en?'en':'zh-CN',{dateStyle:'medium',timeStyle:'short'}).format(new Date(d.lastActivityAt)));time.dateTime=d.lastActivityAt;
+    article.append(meta,title,node('p',d.summary,'summary'),time);return article;
+  }
+  async function load(reset) {
+    if(pending)return;pending=true;const run=++generation;
+    if(reset){cursor=null;ids.clear();el('discussions').replaceChildren();}
+    for(const id of ['language','scope','refresh','more'])el(id).disabled=true;
+    el('discussions').setAttribute('aria-busy','true');el('state').textContent=words.loading;
+    try {
+      const url=new URL('https://discussion.carambi.com/v1/discussion/summary');url.searchParams.set('guideVersion',config.guideVersion);url.searchParams.set('scope',el('scope').value);url.searchParams.set('limit','20');
+      if(el('language').value)url.searchParams.set('locale',el('language').value);if(cursor)url.searchParams.set('cursor',cursor);
+      const data=await runtime.transport.readSummary(Object.fromEntries(url.searchParams));
+      if(!data.ok||!Array.isArray(data.discussions))throw Error('DISCUSSION_READ_FAILED');if(run!==generation)return;
+      const cards=[];for(const d of data.discussions)if(!ids.has(d.rootCommentId)){cards.push([d.rootCommentId,card(d)]);}
+      for(const [id,article] of cards){ids.add(id);el('discussions').append(article);}
+      cursor=data.nextCursor;el('more').hidden=!cursor;el('state').textContent=ids.size?'':words.empty;
+    }catch{el('state').textContent=words.error;}
+    finally{pending=false;for(const id of ['language','scope','refresh','more'])el(id).disabled=false;el('discussions').setAttribute('aria-busy','false');}
+  }
+  el('refresh').addEventListener('click',()=>load(true));el('more').addEventListener('click',()=>load(false));
+  for(const id of ['language','scope'])el(id).addEventListener('change',()=>{syncFilterAppearance();load(true);});
+  syncFilterAppearance();load(true);
+})();
+
+</script>

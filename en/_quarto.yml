@@ -5,6 +5,7 @@ project:
   output-dir: _site
   render:
     - index.md
+    - discussions.md
     - help.md
     - guide/redroot.md
     - guide/aris.md
@@ -90,6 +91,7 @@ format:
       - ../assets/kt-discussion-remote.html
       - ../assets/kt-discussion-runtime.html
       - ../assets/kt-discussion-ui.html
+      - ../assets/kt-discussion-hub.html
       - ../assets/kt-feedback-ui.html
       - ../assets/kt-production-shell.html
     filters:

@@ -78,3 +78,10 @@ description: "Eddio 的 Killigan’s Treasure Public v0.57a 非官方中文攻�
 
 - 牛獸人杜恩的 [Summit Attire / Prime 步骤分享](https://itch.io/post/4549066)：早期的单项社区步骤；[Prime Attire 条目](collectibles/equipment.md#prime-attire)保留就近署名和本版操作条件。
 - 本站攻略独立编写，部分中文用名采用 [Heyeah](https://t.me/heyeah12) 的 v0.57a **非官方汉化资源**；该汉化的校对／润色为 **顺水行洲zhou**。
+
+
+::: {.kt-discussions-entry}
+[查看全站讨论](discussions.md)
+
+查看中英文各攻略页面的公开讨论，点击后返回原页面阅读与回复。
+:::

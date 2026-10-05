@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlsplit
 SITE = Path(__file__).resolve().parents[1]
 OUTPUT = SITE / "_site"
 PAGES = (
-    "index", "help",
+    "index", "discussions", "help",
     "guide/redroot", "guide/aris", "guide/crystal-plains-shieldfall",
     "guide/spiceport", "guide/blueleaf-grove",
     "reference/relationships", "reference/personality", "reference/combat",

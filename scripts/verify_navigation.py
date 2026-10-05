@@ -122,6 +122,7 @@ def leaf_pages(items):
 def main():
     errors = []
     expected_pages = {Path(prefix + page) for prefix, locale in (("", "zh"), ("en/", "en")) for page in leaf_pages(EXPECTED[locale])}
+    expected_pages.update({Path("discussions.html"), Path("en/discussions.html")})
     actual_pages = {path.relative_to(OUTPUT) for path in OUTPUT.rglob("*.html") if "site_libs" not in path.parts and path.name != "404.html"} if OUTPUT.is_dir() else set()
     missing_pages = sorted(expected_pages - actual_pages)
     unexpected_pages = sorted(actual_pages - expected_pages)
@@ -179,7 +180,7 @@ def main():
             continue
         global_sidebars += sum(node.attrs.get("id") == "quarto-sidebar" or "sidebar-navigation" in classes(node) for node in nodes)
         toc = [node for node in nodes if node.tag == "nav" and node.attrs.get("id") == "TOC"]
-        expected_toc = 0 if current.stem == "index" else 1
+        expected_toc = 0 if current.stem in {"index", "discussions"} else 1
         if len(toc) != expected_toc:
             errors.append(f"expected page TOC on {current}, found {len(toc)}")
         elif toc:

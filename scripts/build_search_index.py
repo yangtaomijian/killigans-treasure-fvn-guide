@@ -175,7 +175,7 @@ def trailmarker_rows(main):
 def content_pages(root, locale):
     for path in sorted(root.rglob("*.html")):
         rel = path.relative_to(root)
-        if rel.as_posix() in {"404.html"} or "site_libs" in rel.parts or (locale == "zh" and rel.parts[0] == "en"):
+        if rel.as_posix() in {"404.html", "discussions.html"} or "site_libs" in rel.parts or (locale == "zh" and rel.parts[0] == "en"):
             continue
         yield path, rel.as_posix()
 

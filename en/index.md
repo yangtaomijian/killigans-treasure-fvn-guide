@@ -73,3 +73,10 @@ Make a separate regular save before relationship decisions, limited free-time ch
 ### Reference material {#kt-credits}
 
 - [Summit Attire / Prime steps](https://itch.io/post/4549066) by 牛獸人杜恩: an early community walkthrough for one item. The [Prime Attire entry](collectibles/equipment.md#prime-attire) credits that contribution near the current-version steps.
+
+
+::: {.kt-discussions-entry}
+[View all discussions](discussions.md)
+
+Read public discussions from every guide page in English and Chinese.
+:::

@@ -23,7 +23,7 @@ def enhance(text, page, locale):
     label = "本页目录" if zh else "On this page"
     text, title_count = TOC_TITLE_RE.subn(lambda match: f"{match[1]}{label}{match[2]}", text)
     has_toc = title_count == 1
-    if title_count not in (0, 1) or (not has_toc and page.stem != "index"):
+    if title_count not in (0, 1) or (not has_toc and page.stem not in {"index", "discussions"}):
         raise ValueError(f"{page}: expected one TOC title, found {title_count}")
 
     # KT owns this left rail and mobile drawer. Quarto's native right-margin

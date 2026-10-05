@@ -183,3 +183,52 @@
 @media (max-width: 767.98px) {
   #kt-public-discussion .kt-discussion-replies { margin-left: 0; padding-left: .7rem; }
 }
+
+/* Local scope extension: independent persistent tree section and hub entry. */
+#kt-public-discussion .kt-discussion-heading { display:flex; align-items:baseline; justify-content:space-between; gap:.6rem 1rem; flex-wrap:wrap; }
+#kt-public-discussion .kt-discussion-heading h2 { flex:1; }
+#kt-public-discussion .kt-discussion-hub-link { font-size:.86rem; }
+#kt-public-discussion .kt-discussion-persistent { margin:1.3rem 0 1.7rem; }
+#kt-public-discussion .kt-discussion-persistent[hidden] { display:none!important; }
+#kt-public-discussion .kt-discussion-persistent h3 { font-size:1.12rem; margin-bottom:.3rem; }
+#kt-public-discussion [id^='kt-comment-'] { scroll-margin-top:6rem; }
+
+/* Read-only hub uses this guide's publication shell and typography. */
+#kt-discussion-hub select, #kt-discussion-hub button { font:inherit;min-height:44px;padding:.5rem .75rem;border:1px solid var(--kt-border);border-radius:6px;background:var(--kt-surface);color:var(--kt-text); }
+#kt-discussion-hub .filters {
+  display:grid;grid-template-columns:minmax(0,14rem) minmax(0,14rem) auto;
+  align-items:end;justify-content:start;gap:.9rem 1rem;
+  margin:1.4rem 0 1rem;padding:1rem;
+  border:1px solid var(--kt-border);border-radius:10px;
+  background:var(--kt-surface-muted,var(--kt-surface));
+}
+#kt-discussion-hub .filters label { display:grid;gap:.4rem;min-width:0; }
+#kt-discussion-hub .filter-label { color:var(--kt-text-muted);font-size:.8rem;font-weight:600;line-height:1.3;letter-spacing:.015em; }
+#kt-discussion-hub .filter-control { display:block;position:relative;min-width:0;color:var(--kt-text-muted); }
+#kt-discussion-hub .filter-control::after { content:"";position:absolute;right:1rem;top:17px;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);pointer-events:none; }
+#kt-discussion-hub .filters select {
+  -webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;
+  box-sizing:border-box;height:44px;min-height:44px;padding:0 2.4rem 0 .8rem;
+  border:1px solid var(--kt-border-strong,var(--kt-border));border-radius:8px;
+  background:var(--kt-surface);color:var(--kt-text);font:inherit;font-size:.94rem;line-height:1.3;cursor:pointer;
+}
+#kt-discussion-hub .filter-control[data-active='true'] { color:var(--kt-accent); }
+#kt-discussion-hub .filter-control[data-active='true'] select { border-color:var(--kt-accent);background:var(--kt-accent-soft);color:var(--kt-heading);font-weight:600; }
+#kt-discussion-hub .filters #refresh { display:inline-flex;align-items:center;justify-content:center;gap:.45rem;height:44px;box-sizing:border-box;padding:0 .9rem;border-radius:8px;background:transparent;font-size:.9rem;line-height:1.3;cursor:pointer; }
+#kt-discussion-hub .refresh-icon { width:16px;height:16px;flex:none; }
+#kt-discussion-hub .filters select:focus-visible, #kt-discussion-hub .filters button:focus-visible { outline:2px solid var(--kt-accent);outline-offset:3px; }
+#kt-discussion-hub .filters select:disabled, #kt-discussion-hub .filters button:disabled { opacity:.6;cursor:wait; }
+@media(hover:hover) { #kt-discussion-hub .filters select:not(:disabled):hover, #kt-discussion-hub .filters button:not(:disabled):hover { border-color:var(--kt-accent); } }
+#kt-discussion-hub .card { padding:1.1rem 0;border:0;border-top:1px solid var(--kt-border);background:transparent;border-radius:0;overflow-wrap:anywhere; }
+#kt-discussion-hub .meta { display:flex;flex-wrap:wrap;gap:.5rem;font-size:.85rem; }
+#kt-discussion-hub .summary { white-space:pre-wrap; }
+#kt-discussion-hub h1 { display:none; }
+#kt-discussion-hub h2 { font-size:1.15rem;margin:.5rem 0; }
+#kt-discussion-hub [hidden] { display:none!important; }
+#kt-discussion-hub #state { min-height:1.5rem; }
+.kt-discussions-entry { margin-top:2rem;padding-top:1rem;border-top:1px solid var(--kt-border); }
+@media(max-width:640px) {
+  #kt-discussion-hub .filters { grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.85rem;padding:.85rem; }
+  #kt-discussion-hub .filters #refresh { grid-column:1/-1;justify-self:end; }
+}
+@media(max-width:480px) { #kt-discussion-hub .filters { grid-template-columns:minmax(0,1fr); } }
