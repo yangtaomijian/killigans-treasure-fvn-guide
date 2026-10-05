@@ -10,6 +10,14 @@
   if (!trigger || !panel || !toc || !closeButton || !backdrop || !header || !article) return;
 
   const narrow = window.matchMedia("(max-width: 991px)");
+  // Keep the viewport rail below the actual masthead, including font changes.
+  function desktopOffset() {
+    if (!narrow.matches) document.documentElement.style.setProperty(
+      "--kt-desktop-header-height", `${header.getBoundingClientRect().bottom}px`);
+  }
+  new ResizeObserver(desktopOffset).observe(header);
+  narrow.addEventListener("change", desktopOffset);
+  desktopOffset();
   const background = [header, article];
   const focusable = () => [closeButton, ...toc.querySelectorAll("a.nav-link")]
     .filter(node => node.getClientRects().length && getComputedStyle(node).visibility !== "hidden");

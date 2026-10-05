@@ -55,7 +55,11 @@ async function run(engine, type, options = {}) {
           // Compare those heights across a live resize round trip below.
           const changedArticleHeight = p === "h"
             && ["#quarto-document-content","#kt-page-toc-panel"].includes(a.s);
-          if (!changedArticleHeight) close(a[p],e[p],`${engine} desktop ${expected.width} ${a.s} ${p}`);
+          // The approved desktop article expanded from 840 to 960; the
+          // historical header fixture remains valid for every other dimension.
+          const approved = a.s === "#quarto-document-content" && p === "w"
+            ? Math.min(960, expected.width - 264) : e[p];
+          if (!changedArticleHeight) close(a[p],approved,`${engine} desktop ${expected.width} ${a.s} ${p}`);
         }
         for(const p of ["color","bg","font","display"])assert.equal(a[p],e[p]); });
       if (expected.route === "collectibles/memories") {

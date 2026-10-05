@@ -195,7 +195,7 @@ async function run(engine, launcher, options = {}) {
         }
         for (const width of widths) {
           await page.setViewportSize({ width, height: 800 });
-          await page.evaluate(async()=>{await document.fonts.ready;for(let i=0;i<3;i++)await new Promise(requestAnimationFrame)});
+          await page.evaluate(async()=>{await window.ktAdaptiveTables.whenSettled()});
           const state = await measure(page);
           assert(state.documentWidth <= width, `${engine} ${locale} ${route} ${width}: document overflow`);
           for (const table of state.tables) {

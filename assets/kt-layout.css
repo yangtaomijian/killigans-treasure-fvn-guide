@@ -32,15 +32,16 @@
     display: block;
     grid-column: 1;
     grid-row: 1;
-    width: 100%;
+    width: 192px;
     min-width: 0;
     height: calc(100dvh - var(--kt-desktop-header-height));
     /* Quarto writes top/max-height inline; this rail fills the visible desktop viewport. */
     max-height: calc(100dvh - var(--kt-desktop-header-height)) !important;
-    /* Pull the grid's initial top spacing under the sticky header offset. */
-    margin: -4px 0 0;
+    margin: 0;
     padding: calc(.65rem + var(--kt-desktop-toc-gutter)) .7rem .65rem .35rem;
-    position: sticky;
+    /* A viewport rail must not be pushed up by the article/grid bottom. */
+    position: fixed;
+    left: max(16px, calc((100vw - 1440px) / 2 + 16px));
     top: var(--kt-desktop-header-height) !important;
     overflow-y: auto;
     overscroll-behavior: contain;

@@ -464,6 +464,11 @@ body #quarto-document-content #kt-memory-locator a:focus-visible {
     white-space: nowrap;
   }
 
+  /* Keep native place/day titles intact while scene prose wraps naturally. */
+  #quarto-document-content table.kt-memory-responsive-table td:nth-child(2) code {
+    white-space: nowrap;
+  }
+
   #quarto-document-content table.kt-codex-responsive-table col {
     width: auto !important;
   }

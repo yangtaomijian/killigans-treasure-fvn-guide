@@ -1,6 +1,20 @@
 /* DW adaptive-table behavior extracted for opt-in KT source tables only. */
 (() => {
  'use strict';
+ const components=[];
+ // Resolve only after fonts and the measured-container mode agree at a frame.
+ // ResizeObserver may have delivered later than the caller's viewport resize.
+ const whenSettled=async()=>{
+  await document.fonts.ready;
+  await new Promise(resolve=>{
+   const check=()=>{
+    if(components.every(c=>c.settled()))resolve();
+    else requestAnimationFrame(check);
+   };
+   requestAnimationFrame(check);
+  });
+ };
+ window.ktAdaptiveTables=Object.freeze({whenSettled});
  document.querySelectorAll('main.content .kt-adaptive-records table.table').forEach(table=>{
   if(table.dataset.ktAdaptive)return;
   const heads=[...table.querySelectorAll('thead th')].map(th=>th.textContent.replace(/\s+/g,' ').trim()),wrap=table.closest('.kt-adaptive-records');
@@ -15,13 +29,23 @@
    if(document.getElementById('dressing-room-unlocks')&&['具体条件','Details'].includes(heads[index]))cell.classList.add('kt-record-detail');
    if(wrap.classList.contains('kt-travel-schedule')&&['时间','Cost'].includes(heads[index]))cell.classList.add('kt-record-cost');
   }));
+  let frame=0,appliedWidth=-1;
+  const width=()=>wrap.getBoundingClientRect().width;
+  const settled=()=>!frame && width()===appliedWidth &&
+   wrap.classList.contains('kt-record-mode')===(appliedWidth<576);
+  components.push({settled});
   const update=()=>{
-   const narrow=wrap.getBoundingClientRect().width<576;
-   if(wrap.classList.contains('kt-record-mode')!==narrow)wrap.classList.toggle('kt-record-mode',narrow);
+   appliedWidth=width();
+   wrap.classList.toggle('kt-record-mode',appliedWidth<576);
+   wrap.dataset.ktAdaptiveReady='true';
   };
   // A mode switch changes height; defer observer writes to avoid resize loops.
-  let frame=0;
-  new ResizeObserver(()=>{if(!frame)frame=requestAnimationFrame(()=>{frame=0;update();});}).observe(wrap);
+  // Ignore height-only notifications once this measured width is applied.
+  new ResizeObserver(()=>{
+   if(width()===appliedWidth||frame)return;
+   wrap.dataset.ktAdaptiveReady='false';
+   frame=requestAnimationFrame(()=>{frame=0;update();});
+  }).observe(wrap);
   update();
  });
  // The record switch changes content above Equipment's existing destinations.
@@ -31,8 +55,7 @@
   const inputs=['wheel','touchstart','pointerdown','keydown'];
   const mark=()=>{interacted=true;};inputs.forEach(t=>addEventListener(t,mark,{passive:true}));
   const land=async()=>{
-   await document.fonts.ready;
-   for(let i=0;i<3;i++)await new Promise(requestAnimationFrame);
+   await whenSettled();
    inputs.forEach(t=>removeEventListener(t,mark));
    if(interacted||location.hash!==initialHash)return;
    let id;try{id=decodeURIComponent(initialHash.slice(1));}catch{return;}

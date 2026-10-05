@@ -69,6 +69,9 @@ async function runEngine(name, type, options = {}) {
       await page.goto(url(locale, route));
       for (const width of widths) {
         await page.setViewportSize({ width, height: 900 });
+        // Adaptive tables update through ResizeObserver + requestAnimationFrame.
+        // Measure the settled layout, retaining the exact overflow guarantees.
+        await page.evaluate(async()=>{await window.ktAdaptiveTables.whenSettled()});
         const state = { locale, route, ...await measure(page) };
         result.geometry.push(state);
         if (route === "index") {
@@ -80,7 +83,7 @@ async function runEngine(name, type, options = {}) {
         if (state.tocCount !== 1) fail(`${locale}/${route} ${width}: TOC count ${state.tocCount}`);
         if (state.documentWidth > width + 1) fail(`${locale}/${route} ${width}: document width ${state.documentWidth}`);
         if (width >= 992) {
-          if (state.railDisplay === "none" || state.railPosition !== "sticky" || state.rail.right > state.article.x - 15) fail(`${locale}/${route} ${width}: left rail geometry`);
+          if (state.railDisplay === "none" || state.railPosition !== "fixed" || state.rail.right > state.article.x - 15) fail(`${locale}/${route} ${width}: left rail geometry`);
           if (state.article.width < (width === 992 ? 700 : width === 1024 ? 730 : 810)) fail(`${locale}/${route} ${width}: article width ${state.article.width}`);
           if (state.triggerDisplay !== "none") fail(`${locale}/${route} ${width}: narrow trigger visible`);
         } else {

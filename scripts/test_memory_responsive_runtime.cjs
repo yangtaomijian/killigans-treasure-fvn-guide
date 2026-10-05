@@ -94,6 +94,11 @@ async function measure(page) {
       headerWidth: head.getBoundingClientRect().width,
       otherTableDisplays: otherTables.map(table => getComputedStyle(table).display),
       columns: tables.map(table => [...table.tHead.rows[0].cells].map(cell => cell.getBoundingClientRect().width)),
+      titleTextFits: tables.every(table => [...table.querySelectorAll('th:nth-child(2), td:nth-child(2)')].every(cell => {
+        const range=document.createRange(); range.selectNodeContents(cell);
+        const box=cell.getBoundingClientRect();
+        return [...range.getClientRects()].every(r=>r.left>=box.left-.5 && r.right<=box.right+.5);
+      })),
       shortTitleLines: [...article.querySelectorAll("table.kt-memory-responsive-table td:nth-child(2) code")]
         .filter(code => /^(Redroot Wilds|Aris|Crystal Plains|Shieldfall Vale|Spiceport City|Blueleaf Grove) Day \d+$/.test(code.textContent))
         .map(code => {
@@ -136,8 +141,11 @@ async function geometry(browser, engine) {
         if (narrow) assert(item.headerWidth <= 1.1, `${engine} ${width} ${locale}: header not visually hidden`);
         assert(item.otherTableDisplays.every(display => display === "table"), `${engine} ${width} ${locale}: unrelated table changed`);
         if (width >= 992) {
-          assert(item.columns.every(([order, title, scene]) => order >= 45 && order <= 65 && title > order * 2 && scene > title),
-            `${engine} ${width} ${locale}: narrow order and useful title/scene columns`);
+          assert(item.columns.every(([order, title, scene]) => order >= 45 && order <= 65 && scene > title),
+            `${engine} ${width} ${locale}: natural order/title/scene columns`);
+          // Natural desktop columns need to fit the actual text, not an
+          // arbitrary title/order ratio inherited from the narrower article.
+          assert(item.titleTextFits, `${engine} ${width} ${locale}: title text escapes its column`);
           assert(item.shortTitleLines.length > 20 && item.shortTitleLines.every(lines => lines === 1),
             `${engine} ${width} ${locale}: native place/day titles should fit on one line`);
         } else {
