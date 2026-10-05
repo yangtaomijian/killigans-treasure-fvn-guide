@@ -139,6 +139,17 @@
     time.textContent = Number.isNaN(date.getTime()) ? value : dateFormat.format(date);
     return time;
   }
+  // Keep raw pages/seen IDs/cursors intact; project only the public display tree.
+  function projectRoots(roots) {
+    return roots.flatMap(root => {
+      const replies = (root.replies ?? []).filter(reply => reply.status !== 'deleted');
+      if (root.status === 'deleted' && !replies.length) return [];
+      return [{ ...root, replies }];
+    });
+  }
+  function visibleCount(page) {
+    return projectRoots(page.comments).reduce((count, root) => count + 1 + root.replies.length, 0);
+  }
   function renderComment(comment, isRoot) {
     const article = make('article', isRoot ? 'kt-discussion-comment' : 'kt-discussion-reply');
     article.dataset.commentId = comment.id;
@@ -191,8 +202,11 @@
     if (versions.hidden) return;
     for (const item of [{ guideVersion: context.guideVersion, current: true },
       ...state.index.map(summary => ({ ...summary, current: false }))]) {
+      const page = state.pages.get(item.guideVersion);
+      // Backend historical counts include deleted rows. Show a visible count only
+      // after this version's raw pagination is complete; never estimate from a subset.
       const label = item.current ? `${words.current} · ${item.guideVersion}` :
-        `${item.guideVersion} · ${words.count(item.commentCount)}`;
+        page && !page.nextCursor ? `${item.guideVersion} · ${words.count(visibleCount(page))}` : item.guideVersion;
       const button = make('button', 'kt-discussion-action', label);
       button.type = 'button';
       button.setAttribute('aria-pressed', String(item.guideVersion === state.activeVersion));
@@ -209,8 +223,9 @@
     rootAction.hidden = !writeEnabled || state.threadLocked || state.activeVersion !== context.guideVersion;
     rootAction.disabled = state.pending || state.posting;
     comments.replaceChildren();
-    if (page.comments.length) page.comments.forEach(comment => comments.append(renderComment(comment, true)));
-    else comments.append(make('p', 'kt-discussion-empty', words.empty));
+    const visibleRoots = projectRoots(page.comments);
+    if (visibleRoots.length) visibleRoots.forEach(comment => comments.append(renderComment(comment, true)));
+    else if (!page.nextCursor) comments.append(make('p', 'kt-discussion-empty', words.empty));
     more.hidden = !page.nextCursor;
     more.disabled = state.pending;
     renderVersions();
