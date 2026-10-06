@@ -366,7 +366,8 @@
   #kt-desktop-toc-collapse:hover, #kt-desktop-toc-expand:hover { border-color:var(--kt-accent); }
   #kt-desktop-toc-collapse:focus-visible, #kt-desktop-toc-expand:focus-visible { outline:2px solid var(--kt-accent); outline-offset:2px; }
   body.kt-desktop-toc-collapsed #quarto-content.page-columns { grid-template-columns: minmax(0, min(960px, calc(100% - 20px))) minmax(0, 1fr); padding-left:max(116px, calc((100vw - 1440px) / 2 + 116px)); }
-  body.kt-desktop-toc-collapsed #quarto-content.page-columns > main.content { grid-column:1; }
+  /* The discussion is a main-content sibling and must follow the same reading column. */
+  body.kt-desktop-toc-collapsed #quarto-content.page-columns > :is(main.content, #kt-public-discussion) { grid-column:1; }
   body.kt-desktop-toc-collapsed #quarto-content.page-columns > #kt-page-toc-panel { display:none; }
   #kt-desktop-toc-expand { position:fixed; top:calc(var(--kt-desktop-header-height) + 1.3rem); left:max(16px, calc((100vw - 1440px) / 2 + 16px)); z-index:1015; max-width:96px; }
 }
