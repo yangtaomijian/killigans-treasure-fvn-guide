@@ -371,3 +371,96 @@
   body.kt-desktop-toc-collapsed #quarto-content.page-columns > #kt-page-toc-panel { display:none; }
   #kt-desktop-toc-expand { position:fixed; top:calc(var(--kt-desktop-header-height) + 1.3rem); left:max(16px, calc((100vw - 1440px) / 2 + 16px)); z-index:1015; max-width:96px; }
 }
+
+/* PW desktop table-of-contents baseline. Narrow drawers keep their existing rules. */
+#TOC .kt-toc-branch-toggle { display: none; }
+#TOC .kt-toc-branch-toggle[hidden] { display: none !important; }
+@media (min-width: 992px) {
+  #kt-page-toc-panel {
+    --kt-toc-soft: #666158; --kt-toc-faint: #746e64; --kt-toc-hover: #604522;
+    --kt-toc-accent: #947044; --kt-toc-heading: #292824;
+    --kt-toc-border: #ddd6cb;
+  }
+  body.quarto-dark #kt-page-toc-panel {
+    --kt-toc-soft: #b9b3a9; --kt-toc-faint: #aaa397; --kt-toc-hover: #ead0a5;
+    --kt-toc-accent: #c5a16a; --kt-toc-heading: #eee9df;
+    --kt-toc-border: #3b3833;
+  }
+  body:not(.kt-desktop-toc-collapsed) #quarto-content.page-columns:has(> #kt-page-toc-panel) {
+    grid-template-columns: 220px minmax(0, min(960px, calc(100% - 260px))) minmax(0, 1fr);
+  }
+  #quarto-content.page-columns > #kt-page-toc-panel {
+    /* PW's rail starts at the viewport edge; retain its 20px inner inset. */
+    left: 0;
+    width: 220px; padding: 0 .8rem 1.5rem 20px;
+    border-right-color: var(--kt-toc-border);
+    scroll-padding-top: calc(14px + 2rem + .5rem + 5px);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+    font-size: .93rem; font-weight: 400; line-height: 1.72; letter-spacing: .006em;
+    text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+  }
+  #kt-page-toc-panel .kt-desktop-toc-toolbar {
+    position: sticky; top: 0; z-index: 20; min-height: 0;
+    padding: 14px 0 .5rem; margin: 0; gap: .5rem;
+    background: var(--kt-bg); border-bottom: 1px solid color-mix(in srgb, var(--kt-toc-border) 65%, transparent);
+    box-shadow: none; backdrop-filter: none;
+  }
+  #kt-page-toc-panel .kt-desktop-toc-toolbar > span {
+    color: var(--kt-toc-faint); font-size: .71rem; font-weight: 600; letter-spacing: .1em;
+  }
+  html[lang^="zh"] #kt-page-toc-panel .kt-desktop-toc-toolbar > span { letter-spacing: .045em; }
+  #kt-desktop-toc-collapse {
+    font-family: inherit; font-size: .75rem; font-weight: 400; line-height: 1.72;
+    height: 2rem; min-height: 2rem; padding: .3rem .5rem; border-radius: 6px;
+    border-color: var(--kt-toc-border);
+    color: var(--kt-toc-soft); background: var(--kt-bg); box-shadow: none;
+  }
+  #kt-page-toc-panel #TOC { border: 0; padding: .55rem 0 1rem; }
+  #kt-page-toc-panel #TOC ul { border: 0; list-style: none; padding: 0; }
+  #kt-page-toc-panel #TOC > ul { margin: 0 0 0 .45em; font-size: .875rem; }
+  #kt-page-toc-panel #TOC li + li { margin-top: .2rem; }
+  #kt-page-toc-panel #TOC ul ul { padding-left: .65rem; margin: .2rem 0 0; }
+  /* KT includes a sole page H1 around its level2 entries; it adds no extra tier. */
+  #kt-page-toc-panel #TOC .kt-toc-page-root > ul { padding-left: 0; display: block !important; }
+  #kt-page-toc-panel #TOC a.nav-link {
+    display: block; position: relative; margin: 0;
+    padding: .3rem .4rem .3rem .7rem;
+    font-size: .8rem; font-weight: 400; line-height: 1.4;
+    white-space: normal; word-break: normal; overflow-wrap: anywhere;
+    text-indent: 0; text-wrap: wrap; hyphens: manual; line-break: auto; text-overflow: clip;
+    color: var(--kt-toc-soft) !important;
+    border-left: 2px solid transparent !important; border-radius: 0;
+    background: transparent !important; box-shadow: none;
+  }
+  #kt-page-toc-panel #TOC a[data-kt-toc-level="3"],
+  #kt-page-toc-panel #TOC a[data-kt-toc-level="4"] {
+    font-size: .76rem; color: var(--kt-toc-faint) !important;
+  }
+  #kt-page-toc-panel #TOC a.nav-link::before { content: none; display: none; }
+  #kt-page-toc-panel #TOC a.nav-link:hover { color: var(--kt-toc-hover) !important; }
+  #kt-page-toc-panel #TOC li.kt-toc-branch { position: relative; }
+  #kt-page-toc-panel #TOC li.kt-toc-branch > a { padding-right: 1.7rem; }
+  #kt-page-toc-panel #TOC .kt-toc-managed-branch[data-desktop-expanded="true"] { display: block !important; }
+  #kt-page-toc-panel #TOC .kt-toc-managed-branch[data-desktop-expanded="false"] { display: none !important; }
+  #kt-page-toc-panel #TOC .kt-toc-branch-toggle {
+    position: absolute; top: .1rem; right: 0; z-index: 2;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.5rem; height: 1.7rem; padding: 0; margin: 0;
+    border: 0; border-radius: 3px; background: transparent;
+    color: var(--kt-toc-faint); font: inherit; line-height: 1; cursor: pointer;
+  }
+  #kt-page-toc-panel #TOC .kt-toc-branch-toggle:hover {
+    color: var(--kt-toc-heading); background: color-mix(in srgb, var(--kt-toc-accent) 8%, transparent);
+  }
+  #kt-page-toc-panel #TOC .kt-toc-branch-toggle:focus-visible {
+    outline: 2px solid var(--kt-toc-accent); outline-offset: 1px;
+  }
+  #kt-page-toc-panel #TOC a.kt-toc-parent {
+    color: var(--kt-toc-heading) !important; font-weight: 650;
+    border-left-color: var(--kt-toc-accent) !important;
+  }
+  #kt-page-toc-panel #TOC a.nav-link.active {
+    color: var(--kt-toc-heading) !important; font-weight: 700;
+    border-left-color: var(--kt-toc-accent) !important;
+  }
+}

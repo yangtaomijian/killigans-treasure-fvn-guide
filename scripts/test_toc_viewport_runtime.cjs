@@ -24,7 +24,7 @@ await page.waitForFunction(hash=>{const target=document.getElementById(decodeURI
 // Product contract: 960 article, independent 840 discussion, same text start.
 // Reveal the local hidden mount only for CSS geometry; no discussion requests/actions.
 const contract=await page.evaluate(()=>{const a=document.querySelector('main.content'),d=document.querySelector('#kt-public-discussion');d.hidden=false;return {a:a.getBoundingClientRect().width,d:d.getBoundingClientRect().width,ax:a.getBoundingClientRect().x+parseFloat(getComputedStyle(a).paddingLeft),dx:d.getBoundingClientRect().x+parseFloat(getComputedStyle(d).paddingLeft)}});
-assert(Math.abs(contract.a-Math.min(960,width-2*Math.max(16,(width-1440)/2+16)-232))<=1,'approved article width');assert(Math.abs(contract.d-Math.min(840,contract.a))<=1,'discussion width');assert(Math.abs(contract.ax-contract.dx)<=1,'discussion text alignment');
+assert(Math.abs(contract.a-Math.min(960,width-2*Math.max(16,(width-1440)/2+16)-260))<=1,'approved article width');assert(Math.abs(contract.d-Math.min(840,contract.a))<=1,'discussion width');assert(Math.abs(contract.ax-contract.dx)<=1,'discussion text alignment');
 results.push({engine,colorScheme,locale,width,route,height,initial,footer,contract});
 if(width===1440&&locale==='zh'&&colorScheme==='light') {await page.evaluate(()=>scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));await page.screenshot({path:path.join(dir,engine+'-'+route.replace('/','-')+'-footer.png')});}
 }
