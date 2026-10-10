@@ -86,7 +86,7 @@ Tavern 早晨出门前，更偏 **Noble** 会自动穿衣，更偏 **Barbaric** 
 
 ### 水晶平原：Macsen 夜营观星
 
-已正式确认 Macsen 关系时，水晶平原夜营中第三次与他进行浪漫谈话会进入观星场景。更偏 **Noble** 会保留下身衣物，中间倾向会脱下下身外衣，更偏 **Barbaric** 还会脱下内衣，具体取决于当时穿着。三种呈现都会继续观星，并增加同样的亲近度。这是水晶平原的夜营谈话；盾落谷后来第三次谈话的成人画面见 [Macsen 的后续事件](relationships.md#macsen-shieldfall)。
+已正式确认 Macsen 关系时，水晶平原夜营中第三次与他进行浪漫谈话会进入观星场景。更偏 **Noble** 会保留下身衣物，中间倾向会脱下下身外衣，更偏 **Barbaric** 还会脱下内衣，具体取决于当时穿着。三种呈现都会继续观星。这是水晶平原的夜营谈话；盾落谷后来第三次谈话的成人画面见 [Macsen 的后续事件](relationships.md#macsen-shieldfall)。
 
 <a id="crystal-day5-personality"></a>
 

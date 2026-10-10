@@ -86,7 +86,7 @@ Both refusals leave you without the money; the difference is in the response. A 
 
 ### Crystal Plains: stargazing with Macsen
 
-With Macsen formally confirmed as your partner, the third romantic camp talk with him in Crystal Plains leads to stargazing. More **Noble-leaning** keeps lower-body clothing on; the middle tendency removes outer lower-body clothing; more **Barbaric-leaning** also removes underwear, depending on what is worn. All three continue to stargazing and give the same closeness increase. This is the Crystal Plains camp talk; see [Macsen's later events](relationships.md#macsen-shieldfall) for the adult image from Shieldfall Vale's third talk.
+With Macsen formally confirmed as your partner, the third romantic camp talk with him in Crystal Plains leads to stargazing. More **Noble-leaning** keeps lower-body clothing on; the middle tendency removes outer lower-body clothing; more **Barbaric-leaning** also removes underwear, depending on what is worn. All three versions continue to the stargazing scene. This is the Crystal Plains camp talk; see [Macsen's later events](relationships.md#macsen-shieldfall) for the adult image from Shieldfall Vale's third talk.
 
 <a id="crystal-day5-personality"></a>
 
