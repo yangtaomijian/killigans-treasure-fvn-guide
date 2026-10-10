@@ -244,7 +244,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     if (source) {
       previewTitle.textContent = source.title;
       previewBody.replaceChildren(node('div', source.text, { class: 'kt-ai-source-text' }));
-      previewMode.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文（未提供核实中文对应）'));
+      previewMode.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文'));
       read.disabled = false;
     } else {
       previewBody.replaceChildren(node('p', t('暂时无法显示这条来源的节选，可打开完整攻略核对。')));
@@ -274,7 +274,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     if (readerState !== state) return;
     if (source) {
       readerTitle.textContent = source.title;
-      readerLocale.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文（未提供核实中文对应）')) + t(' · 本题引用的攻略资料');
+      readerLocale.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文')) + t(' · 本题引用的攻略资料');
       readerText.textContent = source.text;
     } else readerText.textContent = t('暂时无法显示这条来源的节选，可打开完整攻略核对。');
   }

@@ -8,7 +8,7 @@ For Killigan’s Treasure Public v0.57a. Start with the problem you can see; the
 
 ## No Gallery or Memories menu?
 
-The Gallery menu opens when you first reach **Redroot Wilds** through normal play. Memories is available from there. If you are already there and still have no menu entry, check your game version and progress; menu behavior on migrated saves has not been verified. If you can see the categories but one entry is locked, use the [next section](#help-memories-lock).
+The Gallery menu opens when you first reach **Redroot Wilds** through normal play. Memories is available from there. If you are already there and still have no menu entry, check your game version and progress; when using an old save, go by its current menu. If needed, keep the old save and start a new game to compare the menu entry through normal play. If you can see the categories but one entry is locked, use the [next section](#help-memories-lock).
 
 <a id="help-memories-lock"></a>
 
@@ -63,19 +63,19 @@ Start with Eddio's [official guide for returning players and new devices](https:
 
 These are **the preset states the game provides when you use a Trailmarker**, rather than a target state for a normal playthrough. Memories viewing history and Dressing Room unlocks can differ on an existing profile, and chapter starts may leave gaps in earlier Codex history.
 
-“Adventurer’s three pieces” below means **Adventurer's Armor, Adventurer's Belt, and Adventurer's Boots**. At starts where the Stats / Personality panel is directly available, its visible Personality indicator is centered, corresponding to a **Neutral tendency**. The Stats / Personality panel is not directly available at the start of PROLOGUE or `???`, so the table does not list Personality or stat values for them. `—` means no numeric value is directly available at the start.
+“Adventurer’s three pieces” below means **Adventurer's Armor, Adventurer's Belt, and Adventurer's Boots**. At starts where you can open the Stats / Personality panel, the Personality indicator is centered, corresponding to a **Neutral tendency**. These panels are unavailable at the opening of PROLOGUE and `???`; the table omits Personality and uses `—` for values that are not displayed.
 
 ::: {.kt-adaptive-records .kt-trailmarker-baselines}
 
 | Trailmarker | Starts at | Brawn / Charm / Wits | Ouros | Initial state and relationship setup |
 |---|---|---|---|---|
-| PROLOGUE | Childhood family opening; Day not shown. | — | — | The Stats panel is not yet available during the opening section. |
+| PROLOGUE | Childhood family opening; Day not shown. | — | — | You cannot open the Stats panel during the opening section. |
 | THE SPARK | Redroot Wilds, Day 1 (Sunday). | 3 / 3 / 3 | 0 | Adventurer’s three pieces worn; Map slot empty. |
 | THE LESSONS | Aris, Day 1 (Thursday). | 18 / 18 / 18 | 102 | Adventurer’s three pieces worn; Map slot empty; Supplies pages are empty. |
 | THE BEASTSLAYER | Aris, Day 9 (Friday). | 72 / 27 / 27 | 700 | Adventurer’s three pieces and Summit Attire worn; Tavern Room Key and Arcanics Scroll ×5 held. |
 | THE PURSUIT | Crystal Plains, Day 1 (Monday). | 98 / 43 / 43 | 3000 | Echelle Warhammer and Adventurer’s three pieces worn; Map present; Rations ×10. |
 | THE DREADSTONE | Crystal Plains, Day 8 (Monday). | 103 / 53 / 53 | 3050 | Echelle Warhammer and Adventurer’s three pieces worn; Map present; Rations ×2. Entry asks about your relationship with Macsen. |
-| ??? | Dreadstone vision; no confirmed Day. | — | — | The Stats panel is not directly available at the start of this vision; the entry asks about your relationship with Macsen. |
+| ??? | Dreadstone vision; no confirmed Day. | — | — | You cannot open the Stats panel at the start of this vision; the entry asks about your relationship with Macsen. |
 | THE CATALYST | Menu destination: Spiceport City / Day 1. First usable HUD: Shieldfall Vale, Day 7 (Tuesday). | 111 / 53 / 53 | 3050 | Echelle Warhammer and Adventurer’s three pieces worn; Map present; Rations ×2. Entry asks about your relationship with Macsen. |
 | THE THRUST | Spiceport, Day 7 (Monday). | 104 / 51 / 51 | 3050 | **No Equipment worn at the first panel**; Rations ×2. Entry offers Macsen / Zhokhar / Single; all three relationship branches share these initial stats and equipped state. |
 

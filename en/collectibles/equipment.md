@@ -8,7 +8,7 @@ This covers normal acquisition opportunities. Branch gifts can be mutually exclu
 
 For appearance values and Expressions, use [Dressing Room](dressing-room.md). If an obtained item seems missing, check [Help](../help.md#help-item-status) and [equipment care](#equipment-state-care).
 
-**Stats column:** This summarizes the Brawn, Charm, and Wits values shown in the native Equipment UI. `+` is guide shorthand for an equipment bonus; three visible zeros are summarized as “No stat bonus.” Map did not show a numeric tooltip, so `—` means no visible numeric value was observed, not a proven zero. [Only currently worn equipment changes the displayed Stats value](../help.md#help-stats).
+**Stats column:** This summarizes the Brawn, Charm, and Wits values shown in the native Equipment UI. `+` is guide shorthand for an equipment bonus; three visible zeros are summarized as “No stat bonus.” Map does not display stat values; `—` distinguishes it from equipment that displays zeros. [Only currently worn equipment changes the displayed Stats value](../help.md#help-stats).
 
 <span id="equipment-quick-find"></span>
 <span id="equipment-simple-acquisitions"></span>
@@ -154,7 +154,7 @@ The reward shows **Obtained Prime Attire**. Before the Summit, check **Equipment
 |---|---|
 | **Prime Attire equipment** | In Equipment → Undies before the Summit, check ownership and worn state. The physical attire worn to compete is removed afterward. |
 | **Prime Attire memento** | In Supplies after the Summit. If you did not get Prime, the record is a Summit Attire memento instead. A memento cannot be worn. |
-| **Prime Attire Dressing Room unlock** | Acquiring Prime can leave a cross-save appearance unlock. This does not show whether the current story save still owns or wears the physical attire. |
+| **Prime Attire Dressing Room unlock** | Acquiring Prime can leave a cross-save appearance unlock. This unlock alone does not tell you whether the current story save still owns or wears the physical attire. |
 
 :::
 

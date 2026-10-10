@@ -8,7 +8,7 @@
 
 外观编号与表情查 [Dressing Room](dressing-room.md)；取得后找不到，先查[帮助](../help.md#help-item-status)与[装备状态](#equipment-state-care)。
 
-**Stats 列：**汇总原生 Equipment 界面显示的 Brawn／Charm／Wits 数值，`+` 是本攻略对装备加成的简写；三项都显示为 0 时写作“无属性加成”。Map 没有显示数值提示，`—` 表示未观察到可见数值，不代表已证明为零。[只有当前穿在身上的装备会改变 Stats 显示值](../help.md#help-stats)。
+**Stats 列：**汇总原生 Equipment 界面显示的 Brawn／Charm／Wits 数值，`+` 是本攻略对装备加成的简写；三项都显示为 0 时写作“无属性加成”。Map 不显示属性数值，表中用 `—` 标示，与显示零值的装备区分。[只有当前穿在身上的装备会改变 Stats 显示值](../help.md#help-stats)。
 
 <span id="equipment-quick-find"></span>
 <span id="equipment-simple-acquisitions"></span>
@@ -154,7 +154,7 @@ Day 5：Bestial Alleys 选 `Help someone move crates`（一格），再进 Colis
 |---|---|
 | **Prime Attire 装备** | 参赛前在 Equipment 的 Undies 类核对持有与穿着。参赛穿着的实体装备赛后会被移走。 |
 | **Prime Attire 纪念物** | 赛后在 Supplies 的纪念物中查看；若这次没有取得特制服，记录的是 Summit Attire 纪念物。纪念物不能穿。 |
-| **特制参赛服的换装解锁** | 成功取得特制服后可留下跨存档换装解锁；它不能证明当前剧情存档仍持有或穿着实体装备。 |
+| **特制参赛服的换装解锁** | 成功取得特制服后可留下跨存档换装解锁；不能据此判断当前剧情存档是否仍持有或穿着实体装备。 |
 
 :::
 
