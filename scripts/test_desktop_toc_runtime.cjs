@@ -75,7 +75,10 @@ function opaqueHeader() {
         });
         await page.goto(`${base}/${locale === 'en' ? 'en/' : ''}collectibles/equipment.html`);
         await page.evaluate(() => document.fonts.ready); await settle(page);
-        assert.equal(await page.locator('#kt-ai-launcher,#kt-ai-panel').count(), 0, 'public page contains no AI entry or panel');
+        await page.locator('#kt-ai-launcher').waitFor();
+        assert.equal(await page.locator('#kt-ai-launcher').count(), 1, 'one integrated AI entry');
+        assert.equal(await page.locator('#kt-ai-panel').count(), 1, 'one integrated AI panel');
+        assert(await page.locator('#kt-ai-panel').evaluate(node => node.hidden), 'AI panel starts closed');
         assert.equal(await page.evaluate(() => document.body.classList.contains('quarto-dark')), theme === 'dark');
         const types = await page.evaluate(typeStyles);
         assert.equal(types.level2.size, '13.6px'); assert.equal(types.level2.weight, '400');

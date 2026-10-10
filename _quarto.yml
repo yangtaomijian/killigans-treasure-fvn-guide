@@ -4,6 +4,7 @@ project:
   type: website
   output-dir: _site
   resources:
+    - assets/ai-beta/**
     - assets/favicon.svg
     - assets/favicon-32x32.png
     - assets/apple-touch-icon.png
@@ -101,5 +102,6 @@ format:
       - assets/kt-discussion-hub.html
       - assets/kt-feedback-ui.html
       - assets/kt-production-shell.html
+      - assets/kt-ask-guide.html
     filters:
       - scripts/preserve-explicit-anchors.lua

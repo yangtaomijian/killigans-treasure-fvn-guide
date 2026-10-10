@@ -94,5 +94,6 @@ format:
       - ../assets/kt-discussion-hub.html
       - ../assets/kt-feedback-ui.html
       - ../assets/kt-production-shell.html
+      - ../assets/kt-ask-guide.html
     filters:
       - ../scripts/preserve-explicit-anchors.lua

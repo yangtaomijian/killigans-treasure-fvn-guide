@@ -291,9 +291,9 @@ async function run(engine,launcher,options={}) {
         }
         if(route==="index")await interactions(page,locale,width,mode,count);
         if(route==="guide/aris"){
-          assert.equal(await page.locator("details").count(),2);
-          await page.locator("details").first().evaluate(e=>e.open=true);
-          assert.equal(await page.locator("summary").first().evaluate(e=>getComputedStyle(e).borderBottomWidth),"1px");
+          assert.equal(await page.locator("main.content details").count(),2);
+          await page.locator("main.content details").first().evaluate(e=>e.open=true);
+          assert.equal(await page.locator("main.content summary").first().evaluate(e=>getComputedStyle(e).borderBottomWidth),"1px");
           if(mode==="dark")await contrast(page,count);count.details++;
         }
         count.matrix++;

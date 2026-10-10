@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="/assets/ai-beta/panel.css">
+<style>
+/* Keep the existing desktop masthead on one row after adding its AI entry. */
+@media (min-width: 992px) {
+  #quarto-header .quarto-navbar-tools:has(#kt-ai-launcher) { display: flex; align-items: center; flex-wrap: nowrap; }
+  #quarto-header:has(#kt-ai-launcher) .kt-language-utility { white-space: nowrap; }
+}
+</style>
+<script type="module" src="/assets/ai-beta/google-gis.mjs"></script>
+<script type="module" src="/assets/ai-beta/beta-application.mjs"></script>

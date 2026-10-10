@@ -16,7 +16,7 @@ await page.evaluate(()=>scrollTo({top:document.documentElement.scrollHeight,beha
 const footer=await state(page);check(footer,route+'/footer');assert(Math.abs(footer.article.x-initial.article.x)<=.5 && Math.abs(footer.article.width-initial.article.width)<=.5,'scroll changed article geometry');assert(footer.scroll>100,route+': did not reach footer');
 await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
 if(route==='guide/aris'){
-await page.locator('details summary').last().scrollIntoViewIfNeeded();const before=await state(page);await page.locator('details summary').last().click();const after=await state(page);check(before,route+'/details-before');check(after,route+'/details-after');assert(Math.abs(before.rail.y-after.rail.y)<=.5,'details rail jump');
+await page.locator('main.content details summary').last().scrollIntoViewIfNeeded();const before=await state(page);await page.locator('main.content details summary').last().click();const after=await state(page);check(before,route+'/details-before');check(after,route+'/details-after');assert(Math.abs(before.rail.y-after.rail.y)<=.5,'details rail jump');
 }
 const last=page.locator('#TOC a.nav-link:visible').last();await last.focus();assert(await last.evaluate(a=>{const r=a.getBoundingClientRect(),p=a.closest('#kt-page-toc-panel').getBoundingClientRect();return r.top>=p.top-1&&r.bottom<=p.bottom+1}),'long TOC focus outside rail');
 const top=page.locator('#TOC > ul > li > a').first();const hash=await top.getAttribute('data-scroll-target');await top.click();await page.waitForFunction(hash=>document.querySelector('#TOC a.active')?.getAttribute('data-scroll-target')===hash,hash);assert.equal(decodeURI(new URL(page.url()).hash),decodeURI(hash));

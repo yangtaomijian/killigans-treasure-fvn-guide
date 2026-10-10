@@ -52,6 +52,7 @@ python3 -B "$site_dir/scripts/enhance_discovery.py"
 cp "$site_dir/assets/kt-mobile-header.css" "$site_dir/_site/assets/kt-mobile-header.css"
 cp "$site_dir/assets/kt-mobile-header.js" "$site_dir/_site/assets/kt-mobile-header.js"
 python3 -B "$site_dir/scripts/enhance_mobile_header.py"
+python3 -B "$site_dir/scripts/enhance_ask_guide.py"
 find "$site_dir/_site" -type f -name .DS_Store -exec rm -f {} +
 python3 -B "$site_dir/scripts/enhance_production.py"
 python3 -B "$site_dir/scripts/verify_production.py"
@@ -69,5 +70,6 @@ python3 -B "$site_dir/scripts/verify_layout.py"
 python3 -B "$site_dir/scripts/verify_hierarchy.py"
 python3 -B "$site_dir/scripts/verify_discovery.py"
 python3 -B "$site_dir/scripts/verify_mobile_header.py"
+python3 -B "$site_dir/scripts/verify_ask_guide.py"
 # Browser regressions remain separate: test_fragment_history_runtime.cjs,
 # test_search_runtime.cjs, and test_memories_runtime.cjs.
