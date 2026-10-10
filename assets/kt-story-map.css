@@ -9,6 +9,9 @@
 .kt-map-button:focus-visible, .kt-story-map-scroll:focus-visible, .kt-map-viewer-stage:focus-visible { outline:2px solid var(--kt-focus); outline-offset:-2px; }
 .kt-story-map-scroll { height:var(--kt-map-inline-height,440px); width:100%; overflow:hidden; touch-action:none; cursor:grab; }
 .kt-story-map-scroll pre.mermaid { height:100%; width:100%; padding:0; margin:0; overflow:hidden; background:transparent; }
+.kt-story-map-scroll pre.mermaid:not(:has(svg:not([aria-roledescription="error"]))) { visibility:hidden; }
+.kt-story-map:not(.kt-map-enhanced) .kt-story-map-scroll:not(:has(svg:not([aria-roledescription="error"])))::before { content:"流程图暂未显示。请刷新重试，或展开下方文字链接阅读。"; display:flex; align-items:center; justify-content:center; height:100%; padding:1rem; box-sizing:border-box; color:var(--kt-text-muted); text-align:center; }
+html:lang(en) .kt-story-map:not(.kt-map-enhanced) .kt-story-map-scroll:not(:has(svg:not([aria-roledescription="error"])))::before { content:"The map is not yet available. Try refreshing, or expand Text links below to continue reading."; }
 .kt-map-compact-overview { display:none; }
 .kt-story-map-scroll .cell, .kt-story-map-scroll .cell-output-display, .kt-story-map-scroll .quarto-figure, .kt-story-map-scroll figure, .kt-story-map-scroll p { height:100%; margin:0 !important; }
 .kt-story-map-scroll svg, .kt-map-viewer-stage svg { display:block; width:100% !important; height:100% !important; max-width:none !important; }
