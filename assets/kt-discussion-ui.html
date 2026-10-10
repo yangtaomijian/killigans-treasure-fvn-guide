@@ -35,6 +35,12 @@
     postLocked: 'This discussion is locked. Your draft is still here.',
     refreshFailed: 'Your comment was posted, but the discussion couldn’t refresh. Reload the page to see it.',
     verifyRetry: 'Try verification again',
+    reactions: 'Emoji reactions', reactionNames: { like: 'Helpful', heart: 'Thanks', smile: 'Happy', celebrate: 'Celebrate', thinking: 'Thinking' },
+    reactionAdd: 'Add a reaction', reactionChoose: 'Choose an emoji', reactionSaving: 'Saving reaction…',
+    reactionRate: 'Too many reaction changes. Please wait and try again.',
+    reactionUnknown: 'Reaction state is uncertain. Reload reactions before making another change.',
+    reactionReadFailed: 'Couldn’t load reactions. Comments remain available.', reactionReadRetry: 'Reload reactions',
+    reactionStorage: 'Reactions require browser storage. Counts remain available.', reactionUnavailable: 'Reactions are unavailable for this comment.',
   } : {
     title: '讨论', explainer: '关于本页内容的公开评论与回复。',
     current: '当前攻略版本', empty: '这个攻略版本还没有评论。',
@@ -61,6 +67,12 @@
     postLocked: '此讨论已锁定；你的草稿仍然保留。',
     refreshFailed: '评论已发布，但讨论区未能刷新。重新加载页面即可查看。',
     verifyRetry: '重试验证',
+    reactions: 'Emoji 反应', reactionNames: { like: '有帮助', heart: '感谢', smile: '开心', celebrate: '庆祝', thinking: '疑惑' },
+    reactionAdd: '添加反应', reactionChoose: '选择表情', reactionSaving: '正在保存反应…',
+    reactionRate: '反应操作过于频繁，请稍后重试。',
+    reactionUnknown: '反应状态暂不确定。请先重新读取反应，再进行修改。',
+    reactionReadFailed: '无法读取反应；现有评论仍可查看。', reactionReadRetry: '重新读取反应',
+    reactionStorage: '反应需要浏览器本地存储；仍可查看数量。', reactionUnavailable: '此评论当前不能修改反应。',
   };
   const dateFormat = new Intl.DateTimeFormat(context.locale, {
     year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
@@ -122,6 +134,257 @@
   const reportEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.sendFeedback === 'function';
   const state = { persistent: null, activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
     uncertainTargets: new Set(), drafts: new Map(), activeTarget: null, activeReply: null, opener: null, posting: false, threadLocked: false };
+  // Reactions are an independent, optional transport capability. No comment state is reused.
+  const reactionTypes = ['like', 'heart', 'smile', 'celebrate', 'thinking'];
+  const reactionEmoji = { like: '👍', heart: '❤️', smile: '😄', celebrate: '🎉', thinking: '🤔' };
+  const reactionEnabled = typeof runtime.transport.readReactions === 'function';
+  const reactionWriteEnabled = reactionEnabled && typeof runtime.transport.setReaction === 'function';
+  const reactionVisitorKey = 'carambi:kt:emoji-visitor:v1';
+  const reactionStates = new Map();
+  let reactionViewGeneration = 0, reactionIdentityGeneration = 0, reactionReadScheduled = false;
+  let reactionMenuId = null;
+  function getReactionVisitor() {
+    try {
+      const stored = localStorage.getItem(reactionVisitorKey);
+      if (typeof stored === 'string' && /^[0-9a-f]{64}$/.test(stored)) return stored;
+      const bytes = crypto.getRandomValues(new Uint8Array(32));
+      const value = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+      localStorage.setItem(reactionVisitorKey, value);
+      return localStorage.getItem(reactionVisitorKey) === value ? value : null;
+    } catch { return null; }
+  }
+  let reactionVisitor = reactionEnabled ? getReactionVisitor() : null;
+  function syncReactionIdentity() {
+    if (!reactionEnabled) return;
+    const visitor = getReactionVisitor();
+    if (visitor === reactionVisitor) return;
+    reactionVisitor = visitor; reactionIdentityGeneration++;
+    for (const [id, item] of reactionStates) {
+      if (item.data) item.data = { ...item.data, selected: [] };
+      item.dataView = -1; item.uncertain = true; paintReaction(id);
+    }
+    closeReactionMenu(); scheduleReactionRead();
+  }
+  const exactReactionKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) &&
+    Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
+  function validReaction(row, id) {
+    return exactReactionKeys(row, ['commentId', 'counts', 'selected', 'canReact']) && row.commentId === id &&
+      exactReactionKeys(row.counts, reactionTypes) && reactionTypes.every(type => Number.isSafeInteger(row.counts[type]) && row.counts[type] >= 0) &&
+      Array.isArray(row.selected) && new Set(row.selected).size === row.selected.length &&
+      row.selected.every(type => reactionTypes.includes(type) && row.counts[type] > 0) && typeof row.canReact === 'boolean';
+  }
+  function reactionState(id) {
+    if (!reactionStates.has(id)) reactionStates.set(id, {
+      data: null, dataView: -1, revision: 0, readSerial: 0, pending: false, uncertain: false, error: '',
+    });
+    return reactionStates.get(id);
+  }
+  function reactionPanel(id) {
+    return [...section.querySelectorAll('.kt-discussion-reactions')].find(panel => panel.dataset.commentId === id);
+  }
+  function positionReactionMenu() {
+    const panel = reactionPanel(reactionMenuId);
+    const menu = panel?.querySelector('.kt-discussion-reaction-menu');
+    const add = panel?.querySelector('.kt-discussion-reaction-add');
+    if (!menu || !add) return;
+    const viewport = window.visualViewport;
+    const gap = 6, edge = 8, leftEdge = (viewport?.offsetLeft ?? 0) + edge, topEdge = (viewport?.offsetTop ?? 0) + edge;
+    const width = viewport?.width ?? innerWidth, height = viewport?.height ?? innerHeight;
+    const rightEdge = leftEdge + width - edge * 2, bottomEdge = topEdge + height - edge * 2;
+    menu.style.maxWidth = `${Math.max(0, width - edge * 2)}px`;
+    menu.style.maxHeight = `${Math.max(0, height - edge * 2)}px`;
+    const anchor = add.getBoundingClientRect(), size = menu.getBoundingClientRect();
+    const left = Math.max(leftEdge, Math.min(anchor.left, rightEdge - size.width));
+    const toolbar = panel.closest('.kt-discussion-actions')?.getBoundingClientRect() ?? anchor;
+    const below = Math.max(anchor.bottom, toolbar.bottom) + gap;
+    const above = Math.min(anchor.top, toolbar.top) - gap - size.height;
+    const preferredTop = below + size.height > bottomEdge && above >= topEdge ? above : below;
+    const top = Math.max(topEdge, Math.min(preferredTop, bottomEdge - size.height));
+    menu.style.left = `${left}px`; menu.style.top = `${top}px`;
+  }
+  function closeReactionMenu(restoreFocus = false) {
+    const id = reactionMenuId;
+    reactionMenuId = null;
+    if (id) {
+      paintReaction(id);
+      if (restoreFocus) reactionPanel(id)?.querySelector('.kt-discussion-reaction-add')?.focus({ preventScroll: true });
+    }
+  }
+  function paintReaction(id) {
+    const panel = reactionPanel(id);
+    if (!panel) return;
+    const item = reactionState(id), data = item.data;
+    const enabled = reactionWriteEnabled && !!reactionVisitor && data?.canReact === true &&
+      item.dataView === reactionViewGeneration && !item.pending && !item.uncertain;
+    const focused = panel.contains(document.activeElement) ? document.activeElement : null;
+    const focusType = focused?.dataset.reactionType ?? (focused ? item.focusType : null);
+    const focusMenu = !!focused?.closest('.kt-discussion-reaction-menu');
+    const focusedRetry = focused?.classList.contains('kt-discussion-reaction-retry');
+    const x = scrollX, y = scrollY;
+    // A local notice can change the height above an editor the user is typing in.
+    const editor = document.activeElement?.closest('.kt-discussion-composer') ? document.activeElement : null;
+    const editorTop = editor?.getBoundingClientRect().top;
+    panel.replaceChildren();
+    panel.setAttribute('aria-busy', String(item.pending));
+    const chips = make('div', 'kt-discussion-reaction-chips');
+    for (const type of reactionTypes) {
+      if (!data?.counts[type]) continue;
+      const selected = data.selected.includes(type);
+      const button = make('button', 'kt-discussion-reaction-chip', `${reactionEmoji[type]} ${data.counts[type]}${selected ? ' ✓' : ''}`);
+      button.type = 'button'; button.dataset.reactionType = type;
+      button.setAttribute('aria-label', `${words.reactionNames[type]} · ${data.counts[type]}`);
+      button.setAttribute('aria-pressed', String(selected)); button.disabled = !enabled;
+      button.addEventListener('click', () => writeReaction(id, type));
+      chips.append(button);
+    }
+    const add = make('button', 'kt-discussion-reaction-add', '＋');
+    add.type = 'button'; add.setAttribute('aria-label', words.reactionAdd);
+    add.setAttribute('aria-haspopup', 'menu'); add.setAttribute('aria-expanded', String(reactionMenuId === id));
+    add.disabled = !enabled;
+    add.addEventListener('click', () => {
+      if (reactionMenuId === id) { closeReactionMenu(true); return; }
+      closeReactionMenu(); reactionMenuId = id; paintReaction(id);
+      reactionPanel(id)?.querySelector('[role="menuitemcheckbox"]')?.focus({ preventScroll: true });
+    });
+    chips.append(add); panel.append(chips);
+    if (reactionMenuId === id && enabled) {
+      const menu = make('div', 'kt-discussion-reaction-menu'); menu.setAttribute('role', 'menu');
+      menu.setAttribute('aria-label', words.reactionChoose);
+      for (const type of reactionTypes) {
+        const selected = data.selected.includes(type);
+        const button = make('button', 'kt-discussion-reaction-option', `${reactionEmoji[type]}${selected ? ' ✓' : ''}`);
+        button.type = 'button'; button.dataset.reactionType = type;
+        button.setAttribute('role', 'menuitemcheckbox'); button.setAttribute('aria-checked', String(selected));
+        button.setAttribute('aria-label', words.reactionNames[type]);
+        button.addEventListener('click', () => writeReaction(id, type));
+        menu.append(button);
+      }
+      menu.addEventListener('keydown', event => {
+        const options = [...menu.querySelectorAll('button')], index = options.indexOf(document.activeElement);
+        let next;
+        if (['ArrowRight', 'ArrowDown'].includes(event.key)) next = (index + 1) % options.length;
+        if (['ArrowLeft', 'ArrowUp'].includes(event.key)) next = (index - 1 + options.length) % options.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = options.length - 1;
+        if (next !== undefined) { event.preventDefault(); options[next].focus({ preventScroll: true }); }
+      });
+      panel.append(menu);
+    } else if (reactionMenuId === id) reactionMenuId = null;
+    const notice = make('p', 'kt-discussion-reaction-status'); notice.setAttribute('role', 'status');
+    notice.setAttribute('aria-live', 'polite');
+    if (item.pending) notice.textContent = words.reactionSaving;
+    else if (item.error) notice.textContent = item.error;
+    else if (!reactionVisitor) notice.textContent = words.reactionStorage;
+    else if (data?.canReact === false) notice.textContent = words.reactionUnavailable;
+    if (notice.textContent) panel.append(notice);
+    if (item.error && !item.pending) {
+      const retry = make('button', 'kt-discussion-reaction-retry', words.reactionReadRetry); retry.type = 'button';
+      retry.addEventListener('click', () => readReactionIds([id])); panel.append(retry);
+    }
+    if (focused) {
+      const replacement = focusType ? panel.querySelector(`${focusMenu ? '.kt-discussion-reaction-menu ' : '.kt-discussion-reaction-chips '}[data-reaction-type="${focusType}"]`) :
+        focusedRetry ? panel.querySelector('.kt-discussion-reaction-retry') : panel.querySelector('.kt-discussion-reaction-add');
+      const fallback = panel.querySelector('.kt-discussion-reaction-add');
+      const focusable = replacement && !replacement.disabled ? replacement : fallback && !fallback.disabled ? fallback : null;
+      if (focusable) focusable.focus({ preventScroll: true });
+      else panel.focus({ preventScroll: true });
+    }
+    const nextY = editor?.isConnected ? scrollY + editor.getBoundingClientRect().top - editorTop : y;
+    scrollTo(x, nextY);
+    positionReactionMenu();
+  }
+  function makeReactionPanel(id) {
+    const panel = make('div', 'kt-discussion-reactions'); panel.dataset.commentId = id; panel.tabIndex = -1;
+    panel.setAttribute('role', 'group'); panel.setAttribute('aria-label', words.reactions);
+    return panel;
+  }
+  async function readReactionIds(ids) {
+    if (!reactionEnabled || !ids.length) return;
+    const view = reactionViewGeneration, identity = reactionIdentityGeneration;
+    const captures = new Map(ids.map(id => {
+      const entry = reactionState(id);
+      return [id, { revision: entry.revision, serial: ++entry.readSerial }];
+    }));
+    const current = id => {
+      const item = reactionState(id), capture = captures.get(id);
+      return view === reactionViewGeneration && identity === reactionIdentityGeneration &&
+        item.revision === capture.revision && item.readSerial === capture.serial && !item.pending;
+    };
+    const input = { pageKey: context.pageKey, locale: context.locale, commentIds: ids };
+    if (reactionVisitor) input.visitorId = reactionVisitor;
+    try {
+      const response = await runtime.transport.readReactions(input);
+      if (response?.ok !== true || !Array.isArray(response.reactions) || response.reactions.length !== ids.length ||
+          new Set(response.reactions.map(row => row?.commentId)).size !== ids.length ||
+          !response.reactions.every(row => ids.includes(row?.commentId) && validReaction(row, row.commentId))) throw Error('INVALID_REACTION_RESPONSE');
+      for (const data of response.reactions) {
+        if (!current(data.commentId)) continue;
+        const item = reactionState(data.commentId);
+        item.data = { ...data, counts: { ...data.counts }, selected: [...data.selected] }; item.dataView = view; item.error = ''; item.uncertain = false; paintReaction(data.commentId);
+      }
+    } catch {
+      for (const id of ids) if (current(id)) {
+        const item = reactionState(id); item.error = item.uncertain ? words.reactionUnknown : words.reactionReadFailed;
+        paintReaction(id);
+      }
+    }
+  }
+  function scheduleReactionRead() {
+    if (!reactionEnabled || reactionReadScheduled) return;
+    reactionReadScheduled = true;
+    queueMicrotask(async () => {
+      reactionReadScheduled = false;
+      const ids = [...new Set([...section.querySelectorAll('.kt-discussion-reactions')].map(panel => panel.dataset.commentId))];
+      for (let index = 0; index < ids.length; index += 50) await readReactionIds(ids.slice(index, index + 50));
+    });
+  }
+  async function writeReaction(id, type) {
+    syncReactionIdentity();
+    const item = reactionState(id), data = item.data;
+    if (!reactionWriteEnabled || !reactionVisitor || item.pending || item.uncertain || item.dataView !== reactionViewGeneration ||
+        data?.canReact !== true || !reactionTypes.includes(type)) return;
+    const view = reactionViewGeneration, identity = reactionIdentityGeneration;
+    const intent = data.selected.includes(type) ? 'remove' : 'add';
+    // The stable panel temporarily owns focus while its disabled children are rebuilt.
+    // Completion restores the intended chip/add only if the user still focuses this panel.
+    if (reactionPanel(id)?.contains(document.activeElement)) item.focusType = type;
+    item.pending = true; item.revision++; item.error = ''; closeReactionMenu(); paintReaction(id);
+    let needsRead = false;
+    try {
+      const response = await runtime.transport.setReaction({ pageKey: context.pageKey, locale: context.locale,
+        commentId: id, type, visitorId: reactionVisitor, intent });
+      if (response?.ok !== true || !validReaction(response.reaction, id)) throw Error('INVALID_REACTION_RESPONSE');
+      if (view === reactionViewGeneration && identity === reactionIdentityGeneration) {
+        item.data = { ...response.reaction, counts: { ...response.reaction.counts }, selected: [...response.reaction.selected] }; item.dataView = view; item.uncertain = false;
+      } else { item.uncertain = true; needsRead = true; }
+    } catch (error) {
+      if (error?.status === 429 && view === reactionViewGeneration && identity === reactionIdentityGeneration) {
+        item.error = words.reactionRate;
+      } else {
+        item.uncertain = true; needsRead = true; item.error = words.reactionUnknown;
+      }
+    } finally {
+      item.pending = false; item.revision++; paintReaction(id);
+      if (needsRead) await readReactionIds([id]);
+    }
+  }
+  if (reactionEnabled) {
+    window.addEventListener('resize', positionReactionMenu);
+    window.addEventListener('scroll', positionReactionMenu, { passive: true });
+    window.visualViewport?.addEventListener('resize', positionReactionMenu);
+    window.visualViewport?.addEventListener('scroll', positionReactionMenu, { passive: true });
+    document.addEventListener('click', event => {
+      if (reactionMenuId && !event.composedPath().includes(reactionPanel(reactionMenuId))) closeReactionMenu();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && reactionMenuId) { event.preventDefault(); closeReactionMenu(true); }
+    });
+    window.addEventListener('storage', event => {
+      if (event.key !== reactionVisitorKey && event.key !== null) return;
+      syncReactionIdentity();
+      closeReactionMenu(); scheduleReactionRead();
+    });
+  }
   const requestFor = (guideVersion, cursor = null, section = 'current') => ({
     site: context.site, locale: context.locale, pageKey: context.pageKey, guideVersion, cursor, section,
   });
@@ -231,6 +494,7 @@
       }
       article.append(make('p', 'kt-discussion-body', comment.body ?? ''));
       const actions = make('div', 'kt-discussion-actions');
+      if (reactionEnabled && root.status === 'published') actions.append(makeReactionPanel(comment.id));
       if (isRoot && typeof comment.pageHash === 'string' && /^#[^?#]{1,255}$/.test(comment.pageHash)) {
         const anchor = make('a', 'kt-discussion-fragment', words.fragment);
         anchor.href = context.pagePath + comment.pageHash;
@@ -284,6 +548,7 @@
   function renderPage() {
     const page = state.pages.get(state.activeVersion);
     if (!page) return;
+    reactionViewGeneration++;
     state.threadLocked = page.status === 'locked';
     lockedNotice.hidden = page.status !== 'locked';
     rootAction.hidden = !writeEnabled || state.threadLocked || state.activeVersion !== context.guideVersion;
@@ -304,6 +569,8 @@
     if (state.activeTarget === 'root' && (state.threadLocked || state.activeVersion !== context.guideVersion))
       closeComposer(false);
     else placeComposer();
+    section.querySelectorAll('.kt-discussion-reactions').forEach(panel => paintReaction(panel.dataset.commentId));
+    scheduleReactionRead();
   }
 
   const form = make('form', 'kt-discussion-composer');
@@ -543,6 +810,7 @@
   }
   async function manualRefresh() {
     if (state.pending || state.posting) return;
+    syncReactionIdentity();
     const focused = document.activeElement;
     const focusedId = focused?.id;
     const selection = focused === nameInput || focused === bodyInput ? [focused.selectionStart, focused.selectionEnd] : null;
@@ -553,7 +821,7 @@
     catch {
       status.replaceChildren(make('span', '', words.manualRefreshFailed));
       const retry = make('button', 'kt-discussion-action', words.retry); retry.type = 'button';
-      retry.addEventListener('click', manualRefresh); status.append(retry);
+      retry.addEventListener('click', manualRefresh); status.append(retry); scheduleReactionRead();
     } finally {
       busy(false);
       const replacement = focused?.isConnected ? focused : focusedId ? document.getElementById(focusedId) :
