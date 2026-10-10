@@ -40,16 +40,20 @@
         pageHash: input.pageHash, parentCommentId: input.parentCommentId,
         turnstileToken: input.turnstileToken, honeypot: input.honeypot,
       };
-      const response = await fetch(endpoint + '/comments', {
+      let response;
+      try { response = await fetch(endpoint + '/comments', {
         method: 'POST', mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer',
         headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload),
-      });
+      }); } catch {
+        const error = Error('DISCUSSION_POST_UNKNOWN'); error.outcomeUnknown = true; throw error;
+      }
       let data = null;
       try { data = await response.json(); } catch { /* HTTP status remains authoritative. */ }
       if (response.status === 201) return {
         ok: true, httpStatus: 201, commentId: typeof data?.commentId === 'string' ? data.commentId : null,
       };
       const error = Error('DISCUSSION_POST_FAILED');
+      error.outcomeUnknown = ![400, 401, 403, 404, 405, 409, 413, 415, 422, 423, 429].includes(response.status);
       error.code = typeof data?.code === 'string' ? data.code : null;
       error.fieldErrors = data?.fieldErrors && typeof data.fieldErrors === 'object' ? data.fieldErrors : null;
       throw error;

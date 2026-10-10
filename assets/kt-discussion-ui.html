@@ -28,6 +28,9 @@
     verifyFailed: 'Verification failed. Please try again.',
     rateLimited: 'You’re posting too quickly. Please wait and try again.',
     postFailed: 'Couldn’t post your comment. Your draft is still here — please try again.',
+    postUnknown: 'Posting may have succeeded. Your draft is kept. Refresh and check the discussion before submitting again.',
+    checkedNotPosted: 'I checked; it was not posted', refresh: 'Refresh', refreshed: 'Discussion refreshed.',
+    manualRefreshFailed: 'Couldn’t refresh. Existing comments are kept; please try again.',
     postLocked: 'This discussion is locked. Your draft is still here.',
     refreshFailed: 'Your comment was posted, but the discussion couldn’t refresh. Reload the page to see it.',
     verifyRetry: 'Try verification again',
@@ -51,6 +54,9 @@
     verifyFailed: '验证失败，请重试。',
     rateLimited: '提交过于频繁，请稍后再试。',
     postFailed: '评论未能发布。草稿仍然保留，请重试。',
+    postUnknown: '发布结果不确定，评论可能已发布。草稿仍保留，请先刷新核对讨论，再决定是否重新提交。',
+    checkedNotPosted: '已核对，确认未发布', refresh: '刷新', refreshed: '讨论已刷新。',
+    manualRefreshFailed: '刷新失败，现有评论仍保留，请重试。',
     postLocked: '此讨论已锁定；你的草稿仍然保留。',
     refreshFailed: '评论已发布，但讨论区未能刷新。重新加载页面即可查看。',
     verifyRetry: '重试验证',
@@ -72,7 +78,9 @@
   const headingRow = make('div', 'kt-discussion-heading');
   const hubLink = make('a', 'kt-discussion-hub-link', words.all);
   hubLink.href = (context.locale === 'en' ? '/en/' : '/') + 'discussions.html';
-  headingRow.append(heading, hubLink);
+  const refreshButton = make('button', 'kt-discussion-action kt-discussion-refresh', words.refresh);
+  refreshButton.type = 'button';
+  headingRow.append(heading, refreshButton, hubLink);
   const explainer = make('p', 'kt-discussion-explainer', words.explainer);
   const versionContext = make('p', 'kt-discussion-version', `${words.current} · ${context.guideVersion}`);
   const status = make('div', 'kt-discussion-status');
@@ -112,7 +120,7 @@
   const writeEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.postComment === 'function';
   const reportEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.sendFeedback === 'function';
   const state = { persistent: null, activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
-    drafts: new Map(), activeTarget: null, opener: null, posting: false, threadLocked: false };
+    uncertainTargets: new Set(), drafts: new Map(), activeTarget: null, opener: null, posting: false, threadLocked: false };
   const requestFor = (guideVersion, cursor = null, section = 'current') => ({
     site: context.site, locale: context.locale, pageKey: context.pageKey, guideVersion, cursor, section,
   });
@@ -137,11 +145,14 @@
   }
   function busy(value) {
     state.pending = value;
+    refreshButton.disabled = value || state.posting;
+    updateSubmit();
     comments.setAttribute('aria-busy', String(value));
     more.disabled = persistentMore.disabled = value;
     rootAction.disabled = value;
     section.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = value; });
     versionButtons.querySelectorAll('button').forEach(button => { button.disabled = value; });
+    if (!value) replayLocation();
   }
   function dateTime(value) {
     const time = make('time', 'kt-discussion-time');
@@ -280,7 +291,9 @@
   submit.type = 'submit'; submit.disabled = true;
   const cancel = make('button', 'kt-discussion-action', words.cancel);
   cancel.type = 'button';
-  actions.append(submit, cancel);
+  const checkedNotPosted = make('button', 'kt-discussion-action kt-discussion-confirm-unposted', words.checkedNotPosted);
+  checkedNotPosted.type = 'button'; checkedNotPosted.hidden = true;
+  actions.append(submit, checkedNotPosted, cancel);
   form.append(identity, nameLabel, nameInput, nameError, bodyLabel, bodyInput, bodyError,
     honeypot, verifySlot, formStatus, verifyRetry, actions);
   if (writeEnabled) composerHost.append(form);
@@ -303,7 +316,12 @@
     fieldError(nameInput, nameError, '');
     fieldError(bodyInput, bodyError, '');
   }
-  function updateSubmit() { submit.disabled = state.posting || !token || !state.activeTarget; }
+  function updateSubmit() {
+    const uncertain = state.uncertainTargets.has(state.activeTarget);
+    submit.disabled = state.posting || state.pending || uncertain || !token || !state.activeTarget;
+    checkedNotPosted.hidden = !uncertain;
+    checkedNotPosted.disabled = state.posting || state.pending;
+  }
   function clearWidget() {
     widgetGeneration++;
     token = null;
@@ -391,12 +409,13 @@
         .find(article => article.dataset.commentId === rootId);
       const action = root?.querySelector('.kt-discussion-reply-action');
       if (!action) { closeComposer(false); return; }
+      state.opener = action;
       action.parentElement.after(composerHost);
     }
     composerHost.hidden = false;
   }
   function openComposer(target, opener) {
-    if (!writeEnabled || state.threadLocked || state.posting) return;
+    if (!writeEnabled || state.threadLocked || state.posting || state.pending) return;
     if (state.activeTarget === target) { nameInput.focus(); return; }
     if (state.activeTarget) closeComposer(false);
     state.activeTarget = target; state.opener = opener;
@@ -407,7 +426,9 @@
     submit.textContent = target === 'root' ? words.rootSubmit : words.replySubmit;
     placeComposer();
     nameInput.focus({ preventScroll: true });
-    renderChallenge();
+    if (state.uncertainTargets.has(target)) {
+      clearWidget(); formStatus.textContent = words.postUnknown; verifyRetry.hidden = true; updateSubmit();
+    } else renderChallenge();
   }
   function validateDraft(target) {
     clearFieldErrors();
@@ -417,7 +438,7 @@
     if (points(name) > 40) { fieldError(nameInput, nameError, words.nameLong); valid = false; }
     if (!body) { fieldError(bodyInput, bodyError, words.emptyBody); valid = false; }
     else if (points(body) > 2000) { fieldError(bodyInput, bodyError, words.bodyLong); valid = false; }
-    const hash = target === 'root' ? location.hash : '';
+    const hash = target === 'root' ? runtime.getContentHash() : '';
     if (target === 'root' && (points(hash) > 256 || (hash && !hash.startsWith('#')))) {
       formStatus.textContent = words.badHash; valid = false;
     }
@@ -426,28 +447,58 @@
   }
   async function refreshDiscussion() {
     saveDraft();
-    const loadedVersionRoots = state.pages.get(state.activeVersion)?.comments.length ?? 0;
+    const selectedVersion = state.activeVersion;
+    const activeReplyId = state.activeTarget?.startsWith('reply:') ? state.activeTarget.slice(6) : null;
+    const replySection = activeReplyId && state.persistent?.seen.has(activeReplyId) ? 'persistent' : 'current';
+    const loadedVersionRoots = state.pages.get(selectedVersion)?.comments.length ?? 0;
     const loadedPersistentRoots = state.persistent?.comments.length ?? 0;
-    const response = await read(state.activeVersion, null);
-    rememberPersistent(response, true);
-    const roots = response.currentVersion.comments;
-    const page = { status: response.thread.status, comments: roots, seen: new Set(roots.map(root => root.id)), nextCursor: response.currentVersion.nextCursor };
-    state.pages.set(state.activeVersion, page);
-    for (const [selected, expected] of [['current', loadedVersionRoots], ['persistent', loadedPersistentRoots]]) {
-      const selectedPage = selected === 'persistent' ? state.persistent : page;
+    const response = await read(selectedVersion, null);
+    const prepare = (data, status) => {
+      if (!Array.isArray(data?.comments)) throw Error('INVALID_DISCUSSION_RESPONSE');
+      return { status, comments: [...data.comments], seen: new Set(data.comments.map(root => root.id)), nextCursor: data.nextCursor };
+    };
+    const page = prepare(response.currentVersion, response.thread.status);
+    const persistentPage = prepare(response.persistent ?? { comments: [], nextCursor: null }, response.thread.status);
+    for (const [selected, expected, selectedPage] of [['current', loadedVersionRoots, page], ['persistent', loadedPersistentRoots, persistentPage]]) {
       const cursors = new Set();
-      while (selectedPage.nextCursor && selectedPage.comments.length < expected) {
+      while (selectedPage.nextCursor && (selectedPage.comments.length < expected ||
+          (activeReplyId && selected === replySection && !selectedPage.seen.has(activeReplyId)))) {
         if (cursors.has(selectedPage.nextCursor)) throw Error('REPEATED_DISCUSSION_CURSOR');
         cursors.add(selectedPage.nextCursor);
-        const next = await read(selected === 'persistent' ? context.guideVersion : state.activeVersion, selectedPage.nextCursor, selected);
+        const next = await read(selected === 'persistent' ? context.guideVersion : selectedVersion, selectedPage.nextCursor, selected);
         const data = selected === 'persistent' ? next.persistent : next.currentVersion;
+        if (!Array.isArray(data?.comments)) throw Error('INVALID_DISCUSSION_RESPONSE');
         for (const root of data.comments) if (!selectedPage.seen.has(root.id)) { selectedPage.comments.push(root); selectedPage.seen.add(root.id); }
         selectedPage.nextCursor = data.nextCursor;
       }
     }
-    if (state.activeVersion === context.guideVersion) state.index = response.earlierVersions;
+    state.pages.set(selectedVersion, page); state.persistent = persistentPage;
+    if (selectedVersion === context.guideVersion) state.index = response.earlierVersions;
     renderPage();
   }
+  async function manualRefresh() {
+    if (state.pending || state.posting) return;
+    const focused = document.activeElement;
+    const focusedId = focused?.id;
+    const selection = focused === nameInput || focused === bodyInput ? [focused.selectionStart, focused.selectionEnd] : null;
+    const focusedRoot = focused?.closest('[data-comment-id]')?.dataset.commentId;
+    const y = window.scrollY, x = window.scrollX;
+    busy(true); message('loading');
+    try { await refreshDiscussion(); status.textContent = words.refreshed; }
+    catch {
+      status.replaceChildren(make('span', '', words.manualRefreshFailed));
+      const retry = make('button', 'kt-discussion-action', words.retry); retry.type = 'button';
+      retry.addEventListener('click', manualRefresh); status.append(retry);
+    } finally {
+      busy(false);
+      const replacement = focused?.isConnected ? focused : focusedId ? document.getElementById(focusedId) :
+        focusedRoot ? document.getElementById('kt-comment-' + focusedRoot)?.querySelector('.kt-discussion-reply-action') : null;
+      (replacement || refreshButton).focus({ preventScroll: true });
+      if (selection && replacement === focused) focused.setSelectionRange(...selection);
+      window.scrollTo(x, y);
+    }
+  }
+  refreshButton.addEventListener('click', manualRefresh);
   function postError(error) {
     if (error?.code === 'RATE_LIMITED') return words.rateLimited;
     if (error?.code === 'VERIFICATION_FAILED') return words.verifyFailed;
@@ -459,11 +510,12 @@
   async function submitDraft(event) {
     event.preventDefault();
     const target = state.activeTarget;
-    if (!target || state.posting || !validateDraft(target)) return;
+    if (!target || state.posting || state.pending || state.uncertainTargets.has(target) || !validateDraft(target)) return;
     if (!token) { formStatus.textContent = words.verifyWait; return; }
     const usedToken = token;
     token = null;
-    state.posting = true; updateSubmit(); cancel.disabled = true;
+    state.posting = true; refreshButton.disabled = true;
+    versionButtons.querySelectorAll('button').forEach(button => { button.disabled = true; }); updateSubmit(); cancel.disabled = true;
     rootAction.disabled = true;
     more.disabled = persistentMore.disabled = true;
     section.querySelectorAll('.kt-discussion-reply-action').forEach(button => { button.disabled = true; });
@@ -471,14 +523,14 @@
     const payload = {
       pageKey: context.pageKey, locale: context.locale, guideVersion: context.guideVersion,
       displayName: nameInput.value, body: bodyInput.value,
-      pageHash: target === 'root' ? location.hash : '',
+      pageHash: target === 'root' ? runtime.getContentHash() : '',
       parentCommentId: target === 'root' ? null : target.slice(6),
       turnstileToken: usedToken, honeypot: honeypot.value,
     };
     try {
       const posted = await runtime.transport.postComment(payload);
       if (posted?.httpStatus !== 201) throw Error('DISCUSSION_POST_FAILED');
-      state.drafts.delete(target);
+      state.drafts.delete(target); state.uncertainTargets.delete(target);
       state.activeTarget = null; state.opener = null;
       clearWidget(); composerHost.hidden = true; comments.before(composerHost);
       postNotice.textContent = target === 'root' ? words.rootSuccess : words.replySuccess;
@@ -493,8 +545,13 @@
       }
     } catch (error) {
       saveDraft();
-      const messageText = postError(error);
-      if (error?.code === 'THREAD_LOCKED') {
+      const knownCodes = ['RATE_LIMITED', 'VERIFICATION_FAILED', 'THREAD_LOCKED', 'VALIDATION_FAILED', 'PAYLOAD_TOO_LARGE', 'ORIGIN_NOT_ALLOWED', 'UNAUTHORIZED', 'NOT_FOUND', 'METHOD_NOT_ALLOWED'];
+      const uncertain = error?.outcomeUnknown === true || (error?.outcomeUnknown !== false && !knownCodes.includes(error?.code) && !error?.fieldErrors);
+      const messageText = uncertain ? words.postUnknown : postError(error);
+      if (uncertain) {
+        state.uncertainTargets.add(target); clearWidget(); formStatus.textContent = messageText;
+        verifyRetry.hidden = true;
+      } else if (error?.code === 'THREAD_LOCKED') {
         for (const page of state.pages.values()) page.status = 'locked';
         closeComposer(false);
         postNotice.textContent = messageText;
@@ -504,7 +561,9 @@
         renderChallenge(messageText);
       }
     } finally {
-      state.posting = false; cancel.disabled = false;
+      state.posting = false; cancel.disabled = false; refreshButton.disabled = state.pending;
+      replayLocation();
+      versionButtons.querySelectorAll('button').forEach(button => { button.disabled = state.pending; });
       updateSubmit();
       rootAction.disabled = state.pending;
       more.disabled = persistentMore.disabled = state.pending;
@@ -514,7 +573,11 @@
   if (writeEnabled) {
     rootAction.addEventListener('click', () => openComposer('root', rootAction));
     cancel.addEventListener('click', () => closeComposer());
-    verifyRetry.addEventListener('click', () => renderChallenge());
+    verifyRetry.addEventListener('click', () => { if (!state.uncertainTargets.has(state.activeTarget)) renderChallenge(); });
+    checkedNotPosted.addEventListener('click', () => {
+      if (state.pending || state.posting || !state.activeTarget) return;
+      state.uncertainTargets.delete(state.activeTarget); updateSubmit(); renderChallenge();
+    });
     nameInput.addEventListener('input', saveDraft);
     bodyInput.addEventListener('input', saveDraft);
     form.addEventListener('submit', submitDraft);
@@ -589,6 +652,20 @@
   const historicalVersion = anchorParams.get('discussionVersion')?.trim();
   const initialVersion = anchorParams.get('discussionScope') !== 'persistent' && historicalVersion && Array.from(historicalVersion).length <= 80 ? historicalVersion : context.guideVersion;
   let locationGeneration = 0;
+  let pendingLocation = false;
+  let followingLocation = false;
+  let locationReplayScheduled = false;
+  let initializingLocation = true;
+  function replayLocation() {
+    if (!pendingLocation || state.pending || state.posting || followingLocation ||
+        initializingLocation || locationReplayScheduled) return;
+    locationReplayScheduled = true;
+    queueMicrotask(() => {
+      locationReplayScheduled = false;
+      if (pendingLocation && !state.pending && !state.posting && !followingLocation && !initializingLocation)
+        followLocation();
+    });
+  }
   async function locateComment() {
     const run = ++locationGeneration;
     const id = location.hash.slice(1);
@@ -607,14 +684,27 @@
     if (run === locationGeneration) postNotice.textContent = words.missing;
   }
   async function followLocation() {
-    const params = new URLSearchParams(location.search); const version = params.get('discussionVersion')?.trim();
-    await loadVersion(params.get('discussionScope') !== 'persistent' && version && Array.from(version).length <= 80 ? version : context.guideVersion);
-    if (!state.pending && !state.posting) await locateComment();
+    // Browser history can move while controls are disabled. Keep the latest URL
+    // pending and replay it after the active read/post finishes, without overlap.
+    pendingLocation = true;
+    locationGeneration++;
+    if (state.pending || state.posting || followingLocation || initializingLocation) return;
+    followingLocation = true;
+    pendingLocation = false;
+    try {
+      const params = new URLSearchParams(location.search); const version = params.get('discussionVersion')?.trim();
+      await loadVersion(params.get('discussionScope') !== 'persistent' && version && Array.from(version).length <= 80 ? version : context.guideVersion);
+      if (!pendingLocation && !state.pending && !state.posting) await locateComment();
+    } finally {
+      followingLocation = false;
+      replayLocation();
+    }
   }
   window.addEventListener('hashchange', followLocation); window.addEventListener('popstate', followLocation);
   more.addEventListener('click', loadMore);
   loadVersion(context.guideVersion)
     .then(() => initialVersion === context.guideVersion ? undefined : loadVersion(initialVersion))
-    .then(locateComment);
+    .then(() => pendingLocation ? undefined : locateComment())
+    .finally(() => { initializingLocation = false; replayLocation(); });
 })();
 </script>

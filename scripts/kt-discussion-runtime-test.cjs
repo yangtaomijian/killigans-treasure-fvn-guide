@@ -16,7 +16,7 @@ const uuid = n => `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
 function html(url, dark) {
   const en = url.pathname.startsWith('/en/');
   const file = path.join(root, '_site', url.pathname.replace(/^\//, '') || 'index.html');
-  let text = assembled ? fs.readFileSync(file, 'utf8') : `<!doctype html><html lang="${en ? 'en' : 'zh-CN'}"><head>
+  let text = assembled ? fs.readFileSync(file, 'utf8') : `<!doctype html><html lang="${en ? 'en' : 'zh-CN'}"><head><meta charset="utf-8">
     ${asset('kt-discussion-config.html')}<style>${asset('kt-foundation.css')}
     body { margin: 0; } #quarto-content { display: grid; grid-template-columns: [body-content-start] 1fr [body-content-end]; }
     main { min-width: 0; padding: 1rem; } ${asset('kt-discussion.css')} ${asset('kt-feedback.css')}</style></head><body>

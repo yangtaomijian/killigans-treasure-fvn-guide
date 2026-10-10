@@ -34,6 +34,19 @@
     '/en/collectibles/codex.html': 'collectibles.codex',
   });
 
+  function getContentHash(hash = location.hash) {
+    if (!hash || Array.from(hash).length > 256 || /[?#]/.test(hash.slice(1))) return '';
+    let id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return ''; }
+    if (/^(?:[a-z]{2}-comment-|.*discussion)|^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(id)) return '';
+    const main = document.querySelector('main#quarto-document-content');
+    const target = document.getElementById(id);
+    if (!target || !main?.contains(target) || target === main ||
+        target.closest('nav,header,footer,aside,form,dialog,.quarto-title-block,.quarto-title,.footnotes,#TOC,[role="doc-endnotes"],[role="navigation"],[role="dialog"]') ||
+        !target.matches('section,h2,h3,h4,h5,h6,p,li,table,blockquote,figure,pre')) return '';
+    return hash;
+  }
+
   function getContext() {
     const locale = document.documentElement.lang;
     if (locale !== 'en' && locale !== 'zh-CN') return null;
@@ -55,7 +68,7 @@
   const transport = localHost ? window.__ktDiscussionFixtureTransport ?? null :
     productionHost ? window.__ktDiscussionRemoteTransport ?? null : null;
   window.__ktDiscussionRuntime = Object.freeze({
-    getContext, transport, mode: transport ?
+    getContext, getContentHash, transport, mode: transport ?
       (localHost ? 'fixture' : 'production') : 'inactive',
   });
   const context = getContext();

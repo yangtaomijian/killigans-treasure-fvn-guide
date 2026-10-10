@@ -186,7 +186,8 @@
 
 /* Local scope extension: independent persistent tree section and hub entry. */
 #kt-public-discussion .kt-discussion-heading { display:flex; align-items:baseline; justify-content:space-between; gap:.6rem 1rem; flex-wrap:wrap; }
-#kt-public-discussion .kt-discussion-heading h2 { flex:1; }
+#kt-public-discussion .kt-discussion-heading h2 { flex:1 1 8rem; min-width:0; }
+#kt-public-discussion .kt-discussion-refresh { flex:none; }
 #kt-public-discussion .kt-discussion-hub-link { font-size:.86rem; }
 #kt-public-discussion .kt-discussion-persistent { margin:1.3rem 0 1.7rem; }
 #kt-public-discussion .kt-discussion-persistent[hidden] { display:none!important; }
