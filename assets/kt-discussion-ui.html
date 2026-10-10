@@ -15,6 +15,7 @@
     deleted: 'This comment was deleted.', fragment: 'Referenced section', earlier: 'Earlier guide versions',
     loadMore: 'Load more', loading: 'Loading discussion…', error: 'Couldn’t load the discussion.',
     retry: 'Try again', count: number => `${number} ${number === 1 ? 'comment' : 'comments'}`,
+    replyTo: name => `Reply to ${name}`, replyHidden: 'Reply to a hidden comment', replyDeleted: 'Reply to a deleted comment', replyUnavailable: 'Reply to an unavailable comment', targetUnavailable: 'This reply target is unavailable. Your draft is kept; choose another published comment to reply to.',
     replies: 'Replies', persistent: 'Persistent discussions', persistentNote: 'Kept across guide versions by the maintainer.', all: 'View all discussions', original: 'Original guide version', missing: 'This comment is unavailable.',
     add: 'Add a comment', reply: 'Reply', report: 'Report', name: 'Name (optional)', body: 'Comment',
     identity: 'No account required. Names are not verified.', rootSubmit: 'Post comment',
@@ -41,7 +42,7 @@
     maintainer: '维护者', pinned: '置顶', hidden: '此评论已由维护者隐藏。',
     deleted: '此评论已删除。', fragment: '对应段落', earlier: '较早的攻略版本',
     loadMore: '加载更多', loading: '正在加载讨论…', error: '无法加载讨论。',
-    retry: '重试', count: number => `${number} 条评论`, replies: '回复', persistent: '长期讨论', persistentNote: '由维护者保留，跨攻略版本显示。', all: '查看全站讨论', original: '最初攻略版本', missing: '此评论当前不可用。',
+    retry: '重试', count: number => `${number} 条评论`, replyTo: name => `回复 ${name}`, replyHidden: '回复已隐藏的评论', replyDeleted: '回复已删除的评论', replyUnavailable: '回复当前不可用的评论', targetUnavailable: '回复对象当前不可用。草稿仍保留；请另选可回复的已发布评论。', replies: '回复', persistent: '长期讨论', persistentNote: '由维护者保留，跨攻略版本显示。', all: '查看全站讨论', original: '最初攻略版本', missing: '此评论当前不可用。',
     add: '发表评论', reply: '回复', report: '举报', name: '昵称（可选）', body: '评论',
     identity: '无需账号；昵称不会验证身份。', rootSubmit: '发表评论',
     replySubmit: '发布回复', cancel: '取消', posting: '正在发布…',
@@ -120,7 +121,7 @@
   const writeEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.postComment === 'function';
   const reportEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.sendFeedback === 'function';
   const state = { persistent: null, activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
-    uncertainTargets: new Set(), drafts: new Map(), activeTarget: null, opener: null, posting: false, threadLocked: false };
+    uncertainTargets: new Set(), drafts: new Map(), activeTarget: null, activeReply: null, opener: null, posting: false, threadLocked: false };
   const requestFor = (guideVersion, cursor = null, section = 'current') => ({
     site: context.site, locale: context.locale, pageKey: context.pageKey, guideVersion, cursor, section,
   });
@@ -164,7 +165,8 @@
   // Keep raw pages/seen IDs/cursors intact; project only the public display tree.
   function projectRoots(roots) {
     return roots.flatMap(root => {
-      const replies = (root.replies ?? []).filter(reply => reply.status !== 'deleted');
+      const referenced = new Set((root.replies ?? []).filter(reply => reply.status === 'published').map(reply => reply.replyToCommentId).filter(Boolean));
+      const replies = (root.replies ?? []).filter(reply => reply.status !== 'deleted' || referenced.has(reply.id));
       if (root.status === 'deleted' && !replies.length) return [];
       return [{ ...root, replies }];
     });
@@ -172,7 +174,33 @@
   function visibleCount(page) {
     return projectRoots(page.comments).reduce((count, root) => count + 1 + root.replies.length, 0);
   }
-  function renderComment(comment, isRoot) {
+  function findReply(id) {
+    const pages = [[state.persistent, 'persistent'], [state.pages.get(state.activeVersion), 'current']];
+    for (const [page, section] of pages) for (const root of page?.comments ?? []) {
+      const comment = root.id === id ? root : (root.replies ?? []).find(reply => reply.id === id);
+      if (comment) return { comment, root, section };
+    }
+    return null;
+  }
+  function replyAllowed(found) {
+    return !!found && !state.threadLocked && found.root.status === 'published' &&
+      found.root.canReply === true && found.comment.status === 'published' && found.comment.canReply === true;
+  }
+  function replyLabel(comment) {
+    if (comment?.status === 'published') return words.replyTo(comment.displayName || words.guest);
+    if (comment?.status === 'hidden') return words.replyHidden;
+    if (comment?.status === 'deleted') return words.replyDeleted;
+    return words.replyUnavailable;
+  }
+  function replyUrl(id, root) {
+    const url = new URL(location.href);
+    url.searchParams.delete('discussionVersion'); url.searchParams.delete('discussionScope');
+    if (root.discussionScope === 'persistent') url.searchParams.set('discussionScope', 'persistent');
+    else url.searchParams.set('discussionVersion', root.guideVersion);
+    url.hash = `kt-comment-${id}`;
+    return url.href;
+  }
+  function renderComment(comment, isRoot, root = comment) {
     const article = make('article', isRoot ? 'kt-discussion-comment' : 'kt-discussion-reply');
     article.dataset.commentId = comment.id;
     article.id = `kt-comment-${comment.id}`;
@@ -186,14 +214,29 @@
         meta.append(make('span', 'kt-discussion-tag', words.pinned));
       meta.append(dateTime(comment.createdAt));
       if (isRoot && comment.discussionScope === 'persistent') meta.append(make('span', 'kt-discussion-tag', words.original + ' · ' + comment.guideVersion));
-      article.append(meta, make('p', 'kt-discussion-body', comment.body ?? ''));
+      article.append(meta);
+      if (!isRoot && comment.replyToCommentId) {
+        const target = comment.replyTo;
+        const knownTarget = ['published', 'hidden', 'deleted'].includes(target?.status);
+        const reference = make(knownTarget ? 'a' : 'span', 'kt-discussion-reply-reference', replyLabel(target));
+        reference.dataset.replyToCommentId = comment.replyToCommentId;
+        if (knownTarget) {
+          reference.href = replyUrl(comment.replyToCommentId, root);
+          reference.addEventListener('click', event => {
+            if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+            event.preventDefault(); history.pushState(null, '', reference.href); followLocation();
+          });
+        }
+        article.append(reference);
+      }
+      article.append(make('p', 'kt-discussion-body', comment.body ?? ''));
       const actions = make('div', 'kt-discussion-actions');
       if (isRoot && typeof comment.pageHash === 'string' && /^#[^?#]{1,255}$/.test(comment.pageHash)) {
         const anchor = make('a', 'kt-discussion-fragment', words.fragment);
         anchor.href = context.pagePath + comment.pageHash;
         actions.append(anchor);
       }
-      if (isRoot && writeEnabled && !state.threadLocked) {
+      if (writeEnabled && replyAllowed({ comment, root })) {
         const replyAction = make('button', 'kt-discussion-action kt-discussion-reply-action', words.reply);
         replyAction.type = 'button'; replyAction.disabled = state.pending;
         replyAction.addEventListener('click', () => openComposer(`reply:${comment.id}`, replyAction));
@@ -214,7 +257,7 @@
     if (isRoot && Array.isArray(comment.replies) && comment.replies.length) {
       const replies = make('div', 'kt-discussion-replies');
       replies.setAttribute('aria-label', words.replies);
-      comment.replies.forEach(reply => replies.append(renderComment(reply, false)));
+      comment.replies.forEach(reply => replies.append(renderComment(reply, false, root)));
       article.append(replies);
     }
     return article;
@@ -258,7 +301,7 @@
     more.hidden = !page.nextCursor;
     more.disabled = state.pending;
     renderVersions();
-    if (state.threadLocked || (state.activeTarget === 'root' && state.activeVersion !== context.guideVersion))
+    if (state.activeTarget === 'root' && (state.threadLocked || state.activeVersion !== context.guideVersion))
       closeComposer(false);
     else placeComposer();
   }
@@ -266,6 +309,7 @@
   const form = make('form', 'kt-discussion-composer');
   form.noValidate = true;
   const identity = make('p', 'kt-discussion-identity', words.identity);
+  const composerTarget = make('p', 'kt-discussion-composer-target'); composerTarget.hidden = true;
   const nameLabel = make('label', '', words.name);
   nameLabel.htmlFor = 'kt-discussion-name';
   const nameInput = make('input', 'kt-discussion-input');
@@ -294,7 +338,7 @@
   const checkedNotPosted = make('button', 'kt-discussion-action kt-discussion-confirm-unposted', words.checkedNotPosted);
   checkedNotPosted.type = 'button'; checkedNotPosted.hidden = true;
   actions.append(submit, checkedNotPosted, cancel);
-  form.append(identity, nameLabel, nameInput, nameError, bodyLabel, bodyInput, bodyError,
+  form.append(composerTarget, identity, nameLabel, nameInput, nameError, bodyLabel, bodyInput, bodyError,
     honeypot, verifySlot, formStatus, verifyRetry, actions);
   if (writeEnabled) composerHost.append(form);
 
@@ -318,9 +362,11 @@
   }
   function updateSubmit() {
     const uncertain = state.uncertainTargets.has(state.activeTarget);
-    submit.disabled = state.posting || state.pending || uncertain || !token || !state.activeTarget;
+    submit.disabled = state.posting || state.pending || uncertain || !token || !state.activeTarget ||
+      (state.activeTarget.startsWith('reply:') && !replyAllowed(findReply(state.activeTarget.slice(6))));
     checkedNotPosted.hidden = !uncertain;
-    checkedNotPosted.disabled = state.posting || state.pending;
+    checkedNotPosted.disabled = state.posting || state.pending ||
+      (state.activeTarget?.startsWith('reply:') && !replyAllowed(findReply(state.activeTarget.slice(6))));
   }
   function clearWidget() {
     widgetGeneration++;
@@ -353,6 +399,9 @@
   async function renderChallenge(messageText = words.verifyWait) {
     clearWidget();
     if (!state.activeTarget || !writeEnabled) return;
+    if (state.activeTarget.startsWith('reply:') && !replyAllowed(findReply(state.activeTarget.slice(6)))) {
+      formStatus.textContent = state.threadLocked ? words.postLocked : words.targetUnavailable; verifyRetry.hidden = true; return;
+    }
     const generation = widgetGeneration;
     formStatus.textContent = messageText;
     verifyRetry.hidden = true;
@@ -392,7 +441,7 @@
     if (!state.activeTarget) return;
     saveDraft();
     const opener = state.opener;
-    state.activeTarget = null; state.opener = null;
+    state.activeTarget = null; state.activeReply = null; state.opener = null;
     clearWidget();
     composerHost.hidden = true;
     comments.before(composerHost);
@@ -402,23 +451,38 @@
     if (!state.activeTarget) return;
     if (state.activeTarget === 'root') {
       if (rootAction.hidden) { closeComposer(false); return; }
-      rootAction.after(composerHost);
+      rootAction.after(composerHost); composerTarget.hidden = true; delete composerTarget.dataset.replyToCommentId;
     } else {
-      const rootId = state.activeTarget.slice(6);
-      const root = [...section.querySelectorAll('.kt-discussion-comment')]
-        .find(article => article.dataset.commentId === rootId);
-      const action = root?.querySelector('.kt-discussion-reply-action');
-      if (!action) { closeComposer(false); return; }
-      state.opener = action;
-      action.parentElement.after(composerHost);
+      const targetId = state.activeTarget.slice(6);
+      const found = findReply(targetId);
+      const article = document.getElementById(`kt-comment-${targetId}`);
+      const action = article?.querySelector(':scope > .kt-discussion-actions > .kt-discussion-reply-action');
+      composerTarget.hidden = false;
+      composerTarget.dataset.replyToCommentId = targetId;
+      const allowed = replyAllowed(found);
+      composerTarget.textContent = found?.comment.status === 'published' && !allowed ? words.replyUnavailable : replyLabel(found?.comment);
+      if (!found && state.activeReply?.section === 'current' && state.activeReply.guideVersion !== state.activeVersion) { closeComposer(false); return; }
+      if (action && allowed) {
+        const wasUnavailable = state.activeReply?.unavailable === true;
+        state.activeReply = { rootId: found.root.id, guideVersion: found.root.guideVersion, section: found.section, unavailable: false };
+        state.opener = action;
+        action.parentElement.after(composerHost);
+        if (wasUnavailable && !state.uncertainTargets.has(state.activeTarget)) renderChallenge();
+      } else {
+        if (state.activeReply) state.activeReply.unavailable = true;
+        comments.before(composerHost);
+        clearWidget(); formStatus.textContent = state.threadLocked ? words.postLocked : words.targetUnavailable; verifyRetry.hidden = true;
+      }
     }
-    composerHost.hidden = false;
+    composerHost.hidden = false; updateSubmit();
   }
   function openComposer(target, opener) {
     if (!writeEnabled || state.threadLocked || state.posting || state.pending) return;
+    const found = target.startsWith('reply:') ? findReply(target.slice(6)) : null;
+    if (target.startsWith('reply:') && !replyAllowed(found)) return;
     if (state.activeTarget === target) { nameInput.focus(); return; }
     if (state.activeTarget) closeComposer(false);
-    state.activeTarget = target; state.opener = opener;
+    state.activeTarget = target; state.activeReply = found ? { rootId: found.root.id, guideVersion: found.root.guideVersion, section: found.section } : null; state.opener = opener;
     const draft = state.drafts.get(target);
     nameInput.value = draft?.name ?? ''; bodyInput.value = draft?.body ?? '';
     honeypot.value = '';
@@ -449,7 +513,8 @@
     saveDraft();
     const selectedVersion = state.activeVersion;
     const activeReplyId = state.activeTarget?.startsWith('reply:') ? state.activeTarget.slice(6) : null;
-    const replySection = activeReplyId && state.persistent?.seen.has(activeReplyId) ? 'persistent' : 'current';
+    const activeRootId = activeReplyId ? state.activeReply?.rootId : null;
+    const replySection = state.activeReply?.section ?? 'current';
     const loadedVersionRoots = state.pages.get(selectedVersion)?.comments.length ?? 0;
     const loadedPersistentRoots = state.persistent?.comments.length ?? 0;
     const response = await read(selectedVersion, null);
@@ -462,7 +527,7 @@
     for (const [selected, expected, selectedPage] of [['current', loadedVersionRoots, page], ['persistent', loadedPersistentRoots, persistentPage]]) {
       const cursors = new Set();
       while (selectedPage.nextCursor && (selectedPage.comments.length < expected ||
-          (activeReplyId && selected === replySection && !selectedPage.seen.has(activeReplyId)))) {
+          (activeRootId && selected === replySection && !selectedPage.seen.has(activeRootId)))) {
         if (cursors.has(selectedPage.nextCursor)) throw Error('REPEATED_DISCUSSION_CURSOR');
         cursors.add(selectedPage.nextCursor);
         const next = await read(selected === 'persistent' ? context.guideVersion : selectedVersion, selectedPage.nextCursor, selected);
@@ -503,6 +568,7 @@
     if (error?.code === 'RATE_LIMITED') return words.rateLimited;
     if (error?.code === 'VERIFICATION_FAILED') return words.verifyFailed;
     if (error?.code === 'THREAD_LOCKED') return words.postLocked;
+    if (error?.fieldErrors?.replyToCommentId || error?.fieldErrors?.parentCommentId) return words.targetUnavailable;
     if (error?.fieldErrors?.displayName) fieldError(nameInput, nameError, words.badName);
     if (error?.fieldErrors?.body) fieldError(bodyInput, bodyError, words.emptyBody);
     return words.postFailed;
@@ -511,6 +577,8 @@
     event.preventDefault();
     const target = state.activeTarget;
     if (!target || state.posting || state.pending || state.uncertainTargets.has(target) || !validateDraft(target)) return;
+    const found = target.startsWith('reply:') ? findReply(target.slice(6)) : null;
+    if (target.startsWith('reply:') && !replyAllowed(found)) { saveDraft(); formStatus.textContent = words.targetUnavailable; updateSubmit(); return; }
     if (!token) { formStatus.textContent = words.verifyWait; return; }
     const usedToken = token;
     token = null;
@@ -524,14 +592,15 @@
       pageKey: context.pageKey, locale: context.locale, guideVersion: context.guideVersion,
       displayName: nameInput.value, body: bodyInput.value,
       pageHash: target === 'root' ? runtime.getContentHash() : '',
-      parentCommentId: target === 'root' ? null : target.slice(6),
+      parentCommentId: target === 'root' ? null : found.root.id,
+      replyToCommentId: target === 'root' ? null : found.comment.id,
       turnstileToken: usedToken, honeypot: honeypot.value,
     };
     try {
       const posted = await runtime.transport.postComment(payload);
       if (posted?.httpStatus !== 201) throw Error('DISCUSSION_POST_FAILED');
       state.drafts.delete(target); state.uncertainTargets.delete(target);
-      state.activeTarget = null; state.opener = null;
+      state.activeTarget = null; state.activeReply = null; state.opener = null;
       clearWidget(); composerHost.hidden = true; comments.before(composerHost);
       postNotice.textContent = target === 'root' ? words.rootSuccess : words.replySuccess;
       postNotice.dataset.state = 'success';
@@ -553,9 +622,17 @@
         verifyRetry.hidden = true;
       } else if (error?.code === 'THREAD_LOCKED') {
         for (const page of state.pages.values()) page.status = 'locked';
-        closeComposer(false);
+        state.threadLocked = true;
         postNotice.textContent = messageText;
         try { await refreshDiscussion(); } catch { renderPage(); }
+      } else if (error?.fieldErrors?.replyToCommentId || error?.fieldErrors?.parentCommentId) {
+        const found = target.startsWith('reply:') ? findReply(target.slice(6)) : null;
+        if (found) {
+          if (error?.fieldErrors?.parentCommentId) found.root.canReply = false;
+          else found.comment.canReply = false;
+        }
+        renderPage();
+        formStatus.textContent = messageText;
       } else {
         state.posting = false;
         renderChallenge(messageText);
@@ -573,9 +650,10 @@
   if (writeEnabled) {
     rootAction.addEventListener('click', () => openComposer('root', rootAction));
     cancel.addEventListener('click', () => closeComposer());
-    verifyRetry.addEventListener('click', () => { if (!state.uncertainTargets.has(state.activeTarget)) renderChallenge(); });
+    verifyRetry.addEventListener('click', () => { if (!state.pending && !state.posting && !state.uncertainTargets.has(state.activeTarget)) renderChallenge(); });
     checkedNotPosted.addEventListener('click', () => {
-      if (state.pending || state.posting || !state.activeTarget) return;
+      if (state.pending || state.posting || !state.activeTarget ||
+          (state.activeTarget.startsWith('reply:') && !replyAllowed(findReply(state.activeTarget.slice(6))))) return;
       state.uncertainTargets.delete(state.activeTarget); updateSubmit(); renderChallenge();
     });
     nameInput.addEventListener('input', saveDraft);

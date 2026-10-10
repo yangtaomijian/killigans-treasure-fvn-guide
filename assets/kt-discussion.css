@@ -233,3 +233,13 @@
   #kt-discussion-hub .filters #refresh { grid-column:1/-1;justify-self:end; }
 }
 @media(max-width:480px) { #kt-discussion-hub .filters { grid-template-columns:minmax(0,1fr); } }
+
+/* Exact targets stay in the existing single-level discussion layout. */
+#kt-public-discussion .kt-discussion-reply-reference,
+#kt-public-discussion .kt-discussion-composer-target {
+  display: block; min-width: 0; max-width: 100%; overflow-wrap: anywhere;
+  margin: 0 0 .5rem; font-size: .84rem; color: var(--kt-text-muted);
+}
+#kt-public-discussion a.kt-discussion-reply-reference { color: var(--kt-link); }
+#kt-public-discussion .kt-discussion-composer-target { font-weight: 650; }
+#kt-public-discussion .kt-discussion-composer-target[hidden] { display: none !important; }

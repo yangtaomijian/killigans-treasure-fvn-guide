@@ -26,6 +26,13 @@ async function remoteChecks() {
       if (status === 201) assert.equal((await transport.postComment({})).httpStatus, 201);
       else await assert.rejects(transport.postComment({}), e => e.outcomeUnknown === ![400, 403, 423, 429].includes(status));
     }
+    context.fetch = async (url, options) => {
+      const payload = JSON.parse(options.body);
+      assert.equal(payload.parentCommentId, id(1)); assert.equal(payload.replyToCommentId, id(2));
+      assert.equal(Object.hasOwn(payload, 'site'), false);
+      return { status: 201, json: async () => ({ commentId: id(3) }) };
+    };
+    assert.equal((await transport.postComment({ parentCommentId: id(1), replyToCommentId: id(2) })).commentId, id(3));
     context.fetch = async () => { throw Error('Connection lost'); };
     await assert.rejects(transport.postComment({}), e => e.outcomeUnknown === true);
   }
@@ -39,7 +46,7 @@ async function open(browser, locale, width, suffix = '') {
     window.discussionReads = []; window.discussionPosts = []; window.postMode = 'unknown';
     window.failCursor = null; window.slowRead = false; window.slowPost = false; window.locked = false;
     window.turnstile = { render(slot, options) { queueMicrotask(() => options.callback('fixture-token')); return 1; }, remove() {} };
-    const comment = (n, version, scope = 'version', replies = []) => ({ id: id(n), authorKind: n === 1 ? 'maintainer' : 'guest', displayName: 'Synthetic', body: `Comment ${n}`, status: 'published', guideVersion: version, discussionScope: scope, parentCommentId: null, pageHash: null, pinnedAt: n === 1 ? '2026-10-01T00:00:00Z' : null, createdAt: '2026-10-01T00:00:00Z', replies });
+    const comment = (n, version, scope = 'version', replies = []) => ({ id: id(n), authorKind: n === 1 ? 'maintainer' : 'guest', displayName: 'Synthetic', body: `Comment ${n}`, status: 'published', canReply: !window.locked, guideVersion: version, discussionScope: scope, parentCommentId: null, pageHash: null, pinnedAt: n === 1 ? '2026-10-01T00:00:00Z' : null, createdAt: '2026-10-01T00:00:00Z', replies });
     const transport = { fixtureCanWrite: true, turnstileSitekey: '0xFixture', async readDiscussion(request) {
       window.discussionReads.push({ ...request });
       if (window.slowRead) await new Promise(resolve => { window.releaseRead = resolve; });
@@ -74,7 +81,7 @@ async function open(browser, locale, width, suffix = '') {
 async function settled(page) { await page.waitForFunction(() => document.querySelector('.kt-discussion-comments')?.getAttribute('aria-busy') === 'false'); }
 async function ready(page) { await page.waitForFunction(() => !document.querySelector('.kt-discussion-submit').disabled); }
 async function composer(page, reply = false) {
-  await page.locator(reply ? `#kt-comment-${id(1)} ${sel('reply-action')}` : sel('add')).click();
+  await page.locator(reply ? `#kt-comment-${id(1)} > ${sel('actions')} > ${sel('reply-action')}` : sel('add')).click();
   await page.locator('#kt-discussion-name').fill('Reader'); await page.locator('#kt-discussion-new-body').fill('Saved synthetic draft'); await ready(page);
 }
 async function run(name, type, options) {
@@ -143,21 +150,23 @@ async function run(name, type, options) {
       assert.equal(await page.locator(sel('version-buttons') + ' button[aria-pressed="true"]').innerText(), historical);
       assert.equal(await page.evaluate(() => window.discussionReads.filter(read => read.section !== 'persistent').at(-1).guideVersion), historical);
       await page.locator(sel('version-buttons') + ' button').first().click(); await settled(page);
-      await page.locator(`#kt-comment-${id(1)} ${sel('reply-action')}`).click();
+      await page.locator(`#kt-comment-${id(1)} > ${sel('actions')} > ${sel('reply-action')}`).click();
       assert.equal(await page.locator('#kt-discussion-new-body').inputValue(), 'Saved synthetic draft');
       await page.evaluate(() => { window.postMode = 'server'; }); await ready(page); await page.locator(sel('submit')).click();
       await page.locator(sel('confirm-unposted')).waitFor(); assert.equal(await page.evaluate(() => window.discussionPosts.at(-1).parentCommentId), id(1)); assert.equal(await page.evaluate(() => window.discussionPosts.at(-1).pageHash), '');
       assert(await page.locator(sel('submit')).isDisabled());
       await page.locator(sel('confirm-unposted')).click(); await ready(page);
       await page.evaluate(() => { window.postMode = 'locked'; }); await page.locator(sel('submit')).click(); await page.locator(sel('locked')).waitFor();
-      assert.equal(await page.locator(sel('composer-host')).isVisible(), false);
+      assert.equal(await page.locator(sel('composer-host')).isVisible(), true);
+      assert.equal(await page.locator('#kt-discussion-new-body').inputValue(), 'Saved synthetic draft');
+      assert(await page.locator(sel('submit')).isDisabled());
       assert(await page.locator(sel('comment')).count() >= 2);
       assert.equal(await page.locator(sel('heading')).evaluate(n => n.scrollWidth <= n.clientWidth), true);
       await page.screenshot({ path: `${process.env.DISCUSSION_EVIDENCE_DIR || '/tmp'}/${name}-${locale}-${width}.png`, fullPage: false });
       await page.close(); cases++;
       page = await open(browser, locale, width);
       await page.locator(sel('comments') + ' + button').click(); await settled(page);
-      await page.locator(`#kt-comment-${id(2)} ${sel('reply-action')}`).click();
+      await page.locator(`#kt-comment-${id(2)} > ${sel('actions')} > ${sel('reply-action')}`).click();
       await page.locator('#kt-discussion-new-body').fill('Tail-page reply draft'); await ready(page);
       await page.evaluate(() => { window.shifted = true; });
       await page.locator(sel('refresh')).click(); await settled(page);
@@ -187,7 +196,7 @@ async function run(name, type, options) {
         await page.evaluate(operation => { if (operation === 'refresh') { window.slowRead = false; window.releaseRead(); } else { window.slowPost = false; window.releasePost(); } }, operation);
         await page.waitForFunction(current => document.querySelector('.kt-discussion-version-buttons button[aria-pressed="true"]')?.textContent.includes(current), current);
         await settled(page);
-        if (!await page.locator(sel('composer-host')).isVisible()) await page.locator(`#kt-comment-${id(1)} ${sel('reply-action')}`).click();
+        if (!await page.locator(sel('composer-host')).isVisible()) await page.locator(`#kt-comment-${id(1)} > ${sel('actions')} > ${sel('reply-action')}`).click();
         assert.equal(await page.locator('#kt-discussion-new-body').inputValue(), 'Saved synthetic draft');
         if (operation === 'post') { assert(await page.locator(sel('confirm-unposted')).isVisible()); assert(await page.locator(sel('submit')).isDisabled()); }
         await page.close(); cases++;

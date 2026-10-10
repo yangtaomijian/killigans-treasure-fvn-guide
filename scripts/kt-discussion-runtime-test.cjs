@@ -55,7 +55,7 @@ async function run(engine, launch) {
         const key = `${url.searchParams.get('locale')}:${url.searchParams.get('pageKey')}`;
         const comments = rows.get(key) || [];
         const current = paginated ? [{ id: uuid(url.searchParams.has('cursor') ? 92 : 91), authorKind:'guest',
-          displayName:'Visitor', body:'<img src=x onerror=alert(1)>', status:'published', createdAt:'2026-10-01T00:00:00Z', replies:[] }] : comments;
+          displayName:'Visitor', body:'<img src=x onerror=alert(1)>', status:'published', canReply: !locked, createdAt:'2026-10-01T00:00:00Z', replies:[] }] : comments;
         return json(200, { ok:true, thread:{ id:uuid(900), status:locked ? 'locked' : 'open' },
           currentVersion:{ guideVersion:url.searchParams.get('guideVersion'), comments:current,
             nextCursor:paginated && !url.searchParams.has('cursor') ? 'local-cursor' : null }, earlierVersions:[] });
@@ -68,7 +68,7 @@ async function run(engine, launch) {
       if (postError) return json(429, { ok:false, code:postError });
       const key = `${payload.locale}:${payload.pageKey}`; const comments = rows.get(key) || [];
       const item = { id:uuid(posted.length), authorKind:'guest', displayName:payload.displayName,
-        body:payload.body, pageHash:payload.pageHash, status:'published', createdAt:'2026-10-01T00:00:00Z', replies:[] };
+        body:payload.body, pageHash:payload.pageHash, status:'published', canReply: !locked, createdAt:'2026-10-01T00:00:00Z', replies:[] };
       if (payload.parentCommentId) comments.find(x => x.id === payload.parentCommentId).replies.push(item);
       else comments.unshift(item);
       rows.set(key, comments); return json(201, { ok:true, commentId:item.id });
@@ -111,7 +111,7 @@ async function run(engine, launch) {
     await page.locator('#kt-discussion-new-body').fill('Local reply');
     await page.locator('.kt-discussion-submit').click();
     await page.locator('.kt-discussion-reply').waitFor();
-    assert.equal(posted.at(-1).parentCommentId, uuid(1)); assert.equal(posted.at(-1).pageHash, '');
+    assert.equal(posted.at(-1).parentCommentId, uuid(1)); assert.equal(posted.at(-1).replyToCommentId, uuid(1)); assert.equal(posted.at(-1).pageHash, '');
     await page.locator('.kt-discussion-report-action').first().click();
     if (!await page.locator('#kt-feedback-message').count()) console.error('Feedback initialization', await page.evaluate(() => ({
       ready:document.readyState, dialog:!!window.__ktFeedbackDialog, runtime:window.__ktDiscussionRuntime?.mode,
