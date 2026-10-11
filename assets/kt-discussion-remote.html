@@ -41,6 +41,38 @@
       return data;
     } finally { clearTimeout(timer); }
   }
+  const subscriptionStates = ['not_requested', 'verification_pending', 'verification_failed', 'verification_unknown', 'active', 'cancelled', 'expired'];
+  const subscriptionCodes = ['SUBSCRIPTION_UNAVAILABLE', 'SUBSCRIPTION_EMAIL_INVALID', 'SUBSCRIPTION_EMAIL_FIXED', 'SUBSCRIPTION_RATE_LIMITED'];
+  async function subscriptionRequest(input, statusOnly) {
+    if (!uuid(input.commentId) || !/^[0-9a-f]{64}$/.test(input.subscriptionProof) ||
+        typeof input.pageKey !== 'string' || !input.pageKey || !['zh-CN', 'en'].includes(input.locale)) throw Error('INVALID_SUBSCRIPTION_REQUEST');
+    const payload = { commentId: input.commentId, pageKey: input.pageKey, locale: input.locale, subscriptionProof: input.subscriptionProof };
+    if (!statusOnly) payload.email = input.email;
+    const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 15_000);
+    try {
+      let response, data;
+      try {
+        response = await fetch(config.origin + '/v1/email-subscriptions' + (statusOnly ? '/status' : ''), {
+          method: 'POST', mode: 'cors', credentials: 'omit', redirect: 'error', signal: controller.signal, referrerPolicy: 'no-referrer',
+          headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload),
+        });
+        data = await response.json();
+      } catch { const error = Error('SUBSCRIPTION_UNKNOWN'); error.outcomeUnknown = true; throw error; }
+      if (response.status !== 200 || data?.ok !== true) {
+        const error = Error('SUBSCRIPTION_FAILED');
+        error.code = response.status !== 200 && data?.ok === false && subscriptionCodes.includes(data.code) ? data.code : null;
+        error.outcomeUnknown = !error.code; throw error;
+      }
+      const row = data.subscription;
+      const keys = row && Object.keys(row);
+      if (!row || !subscriptionStates.includes(row.state) || typeof row.mayRetry !== 'boolean' ||
+          !keys.every(key => ['state', 'mayRetry', 'expiresAt'].includes(key)) ||
+          (row.expiresAt !== undefined && (typeof row.expiresAt !== 'string' || !Number.isFinite(Date.parse(row.expiresAt)) || new Date(row.expiresAt).toISOString() !== row.expiresAt))) {
+        const error = Error('SUBSCRIPTION_UNKNOWN'); error.outcomeUnknown = true; throw error;
+      }
+      return { ok: true, subscription: { state: row.state, mayRetry: row.mayRetry, ...(row.expiresAt === undefined ? {} : { expiresAt: row.expiresAt }) } };
+    } finally { clearTimeout(timer); }
+  }
   window.__ktDiscussionRemoteTransport = Object.freeze({
     turnstileSitekey: config.turnstileSitekey,
     async readDiscussion(request) {
@@ -85,6 +117,8 @@
       }
       return { ok: true, reaction: data.reaction };
     },
+    async enrollSubscription(input) { return subscriptionRequest(input, false); },
+    async readSubscriptionStatus(input) { return subscriptionRequest(input, true); },
     async postComment(input) {
       const payload = {
         schemaVersion: 1, pageKey: input.pageKey, locale: input.locale,
@@ -93,9 +127,11 @@
         replyToCommentId: input.replyToCommentId,
         turnstileToken: input.turnstileToken, honeypot: input.honeypot,
       };
+      if (/^[0-9a-f]{64}$/.test(input.subscriptionProof)) payload.subscriptionProof = input.subscriptionProof;
       let response;
       try { response = await fetch(endpoint + '/comments', {
         method: 'POST', mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer',
+        ...(payload.subscriptionProof ? { redirect: 'error' } : {}),
         headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload),
       }); } catch {
         const error = Error('DISCUSSION_POST_UNKNOWN'); error.outcomeUnknown = true; throw error;

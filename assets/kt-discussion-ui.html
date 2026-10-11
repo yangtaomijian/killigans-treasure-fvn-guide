@@ -35,6 +35,24 @@
     postLocked: 'This discussion is locked. Your draft is still here.',
     refreshFailed: 'Your comment was posted, but the discussion couldn’t refresh. Reload the page to see it.',
     verifyRetry: 'Try verification again',
+    subscriptionOptIn: 'Email me when someone directly replies to this comment (optional)', subscriptionEmail: 'Email for reply notifications',
+    subscriptionPrivacy: 'Your email is private. Verify within 24 hours; subscriptions last 365 days after verification. The email cannot be changed; unsubscribe anytime from an email.',
+    subscriptionSending: 'Comment posted. Requesting email verification…', subscriptionRequest: 'Request email verification',
+    subscriptionRetry: 'Retry subscription only', subscriptionCheck: 'Check subscription status',
+    subscriptionInvalid: 'Comment posted. Enter a valid email below to request verification; do not repost the comment.',
+    subscriptionUnavailable: 'Comment posted. Email subscription is unavailable; you can retry the subscription separately.',
+    subscriptionRate: 'Comment posted. Subscription requests are too frequent; wait before retrying.',
+    subscriptionFixed: 'Comment posted. The first email is fixed; check this subscription’s status.',
+    subscriptionProofMissing: 'Comment posted. Email subscription could not be prepared in this browser.',
+    subscriptionChecking: 'Comment posted. Checking private subscription status…',
+    subscriptionStates: {
+      not_requested: 'Comment posted. Email verification has not been requested.',
+      verification_pending: 'Comment posted. The email provider accepted the verification request; delivery is not confirmed. Notifications start only after you verify.',
+      verification_failed: 'Comment posted. The verification request failed. You can retry only the subscription.',
+      verification_unknown: 'Comment posted. The verification result is uncertain. Check subscription status before deciding whether to retry; do not repost.',
+      active: 'Comment posted. Email verified; notifications for direct replies are active.',
+      cancelled: 'Comment posted. This subscription was cancelled.', expired: 'Comment posted. This subscription expired.',
+    },
     reactions: 'Emoji reactions', reactionNames: { like: 'Helpful', heart: 'Thanks', smile: 'Happy', celebrate: 'Celebrate', thinking: 'Thinking' },
     reactionAdd: 'Add a reaction', reactionChoose: 'Choose an emoji', reactionSaving: 'Saving reaction…',
     reactionRate: 'Too many reaction changes. Please wait and try again.',
@@ -67,6 +85,24 @@
     postLocked: '此讨论已锁定；你的草稿仍然保留。',
     refreshFailed: '评论已发布，但讨论区未能刷新。重新加载页面即可查看。',
     verifyRetry: '重试验证',
+    subscriptionOptIn: '有人直接回复此评论时邮件提醒我（可选）', subscriptionEmail: '回复提醒邮箱',
+    subscriptionPrivacy: '邮箱不公开。24小时内验证，验证后有效365天；邮箱不能更换，可随时从邮件退订。',
+    subscriptionSending: '评论已发布。正在请求邮箱验证…', subscriptionRequest: '请求邮箱验证',
+    subscriptionRetry: '仅重试订阅', subscriptionCheck: '核对订阅状态',
+    subscriptionInvalid: '评论已发布。请在下方填写有效邮箱后请求验证，无需重发评论。',
+    subscriptionUnavailable: '评论已发布。邮件订阅暂不可用，可单独重试订阅。',
+    subscriptionRate: '评论已发布。订阅请求过于频繁，请稍后再试。',
+    subscriptionFixed: '评论已发布。首次邮箱已固定，请核对此订阅状态。',
+    subscriptionProofMissing: '评论已发布。此浏览器未能准备邮件订阅。',
+    subscriptionChecking: '评论已发布。正在核对私有订阅状态…',
+    subscriptionStates: {
+      not_requested: '评论已发布。尚未请求邮箱验证。',
+      verification_pending: '评论已发布。邮件服务已接受验证请求，但不代表已送达；完成邮箱验证后才会开始提醒。',
+      verification_failed: '评论已发布。验证请求失败，可仅重试订阅。',
+      verification_unknown: '评论已发布。验证结果暂不确定，请先核对订阅状态，再决定是否重试；无需重发评论。',
+      active: '评论已发布。邮箱已验证，直接回复提醒已启用。',
+      cancelled: '评论已发布。此订阅已取消。', expired: '评论已发布。此订阅已过期。',
+    },
     reactions: 'Emoji 反应', reactionNames: { like: '有帮助', heart: '感谢', smile: '开心', celebrate: '庆祝', thinking: '疑惑' },
     reactionAdd: '添加反应', reactionChoose: '选择表情', reactionSaving: '正在保存反应…',
     reactionRate: '反应操作过于频繁，请稍后重试。',
@@ -132,6 +168,8 @@
   const remoteMode = runtime.mode === 'staging' || runtime.mode === 'production';
   const writeEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.postComment === 'function';
   const reportEnabled = (remoteMode || (runtime.mode === 'fixture' && runtime.transport.fixtureCanWrite === true)) && typeof runtime.transport.sendFeedback === 'function';
+  const subscriptionEnabled = writeEnabled && typeof runtime.transport.enrollSubscription === 'function' &&
+    typeof runtime.transport.readSubscriptionStatus === 'function';
   const state = { persistent: null, activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
     uncertainTargets: new Set(), drafts: new Map(), activeTarget: null, activeReply: null, opener: null, posting: false, threadLocked: false };
   // Reactions are an independent, optional transport capability. No comment state is reused.
@@ -571,6 +609,7 @@
     else placeComposer();
     section.querySelectorAll('.kt-discussion-reactions').forEach(panel => paintReaction(panel.dataset.commentId));
     scheduleReactionRead();
+    paintSubscription();
   }
 
   const form = make('form', 'kt-discussion-composer');
@@ -589,6 +628,17 @@
   bodyInput.id = 'kt-discussion-new-body'; bodyInput.rows = 5;
   const bodyError = make('p', 'kt-discussion-field-error');
   bodyError.id = 'kt-discussion-body-error'; bodyInput.setAttribute('aria-describedby', bodyError.id);
+  const subscriptionOptions = make('div', 'kt-discussion-subscription-options');
+  subscriptionOptions.hidden = !subscriptionEnabled;
+  const optInLabel = make('label', 'kt-discussion-subscription-optin-label');
+  const optIn = make('input', 'kt-discussion-subscription-optin'); optIn.type = 'checkbox'; optIn.checked = false;
+  optInLabel.append(optIn, make('span', '', words.subscriptionOptIn));
+  const draftEmailWrap = make('div', 'kt-discussion-subscription-email-wrap'); draftEmailWrap.hidden = true;
+  const draftEmailLabel = make('label', '', words.subscriptionEmail); draftEmailLabel.htmlFor = 'kt-discussion-subscription-email';
+  const draftEmail = make('input', 'kt-discussion-input kt-discussion-subscription-email');
+  draftEmail.id = 'kt-discussion-subscription-email'; draftEmail.type = 'email'; draftEmail.autocomplete = 'off'; draftEmail.maxLength = 254;
+  const subscriptionPrivacy = make('p', 'kt-discussion-subscription-note', words.subscriptionPrivacy);
+  draftEmailWrap.append(draftEmailLabel, draftEmail, subscriptionPrivacy); subscriptionOptions.append(optInLabel, draftEmailWrap);
   const honeypot = make('input', 'kt-discussion-honeypot');
   honeypot.type = 'text'; honeypot.name = 'website'; honeypot.autocomplete = 'off';
   honeypot.tabIndex = -1; honeypot.setAttribute('aria-hidden', 'true');
@@ -606,8 +656,84 @@
   checkedNotPosted.type = 'button'; checkedNotPosted.hidden = true;
   actions.append(submit, checkedNotPosted, cancel);
   form.append(composerTarget, identity, nameLabel, nameInput, nameError, bodyLabel, bodyInput, bodyError,
-    honeypot, verifySlot, formStatus, verifyRetry, actions);
+    subscriptionOptions, honeypot, verifySlot, formStatus, verifyRetry, actions);
   if (writeEnabled) composerHost.append(form);
+
+  const privatePanel = make('section', 'kt-discussion-subscription-panel'); privatePanel.hidden = true;
+  const privateStatus = make('p', 'kt-discussion-subscription-status'); privateStatus.setAttribute('role', 'status'); privateStatus.setAttribute('aria-live', 'polite');
+  const privateEmailWrap = make('div', 'kt-discussion-subscription-private-email');
+  const privateEmailLabel = make('label', '', words.subscriptionEmail); privateEmailLabel.htmlFor = 'kt-discussion-subscription-retry-email';
+  const privateEmail = make('input', 'kt-discussion-input'); privateEmail.type = 'email'; privateEmail.autocomplete = 'off'; privateEmail.maxLength = 254;
+  privateEmail.id = 'kt-discussion-subscription-retry-email'; privateEmailWrap.append(privateEmailLabel, privateEmail);
+  const privateActions = make('div', 'kt-discussion-subscription-actions');
+  const privateRetry = make('button', 'kt-discussion-action kt-discussion-subscription-retry', words.subscriptionRequest); privateRetry.type = 'button';
+  const privateCheck = make('button', 'kt-discussion-action kt-discussion-subscription-check', words.subscriptionCheck); privateCheck.type = 'button';
+  privateActions.append(privateRetry, privateCheck); privatePanel.append(privateStatus, privateEmailWrap, privateActions); postNotice.after(privatePanel);
+  let subscriptionGeneration = 0, subscriptionJob = null;
+  const subscriptionStates = ['not_requested', 'verification_pending', 'verification_failed', 'verification_unknown', 'active', 'cancelled', 'expired'];
+  const subscriptionEmailValid = value => typeof value === 'string' && value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  function subscriptionProof() {
+    try { const bytes = new Uint8Array(32); crypto.getRandomValues(bytes); return [...bytes].map(byte => byte.toString(16).padStart(2, '0')).join(''); }
+    catch { return null; }
+  }
+  function currentSubscription(job) {
+    const latest = runtime.getContext();
+    return job === subscriptionJob && job.generation === subscriptionGeneration && mount.isConnected &&
+      latest?.pageKey === job.pageKey && latest?.locale === job.locale && state.activeVersion === job.viewVersion;
+  }
+  function paintSubscription() {
+    const editor = document.activeElement?.closest('.kt-discussion-composer') ? document.activeElement : null;
+    const top = editor?.getBoundingClientRect().top, x = scrollX;
+    const job = subscriptionJob; privatePanel.hidden = !job || !currentSubscription(job);
+    if (!privatePanel.hidden) {
+      privateStatus.textContent = job.pending ? (job.checking ? words.subscriptionChecking : words.subscriptionSending) : job.message || words.subscriptionStates[job.state];
+      privateEmailWrap.hidden = job.emailFixed || !job.proof || ['active', 'cancelled', 'expired'].includes(job.state);
+      privateEmail.disabled = job.pending; privateRetry.disabled = privateCheck.disabled = job.pending;
+      privateRetry.hidden = !job.proof || !job.mayRetry || !['not_requested', 'verification_failed'].includes(job.state);
+      privateRetry.textContent = job.emailFixed ? words.subscriptionRetry : words.subscriptionRequest;
+      privateCheck.hidden = !job.proof || ['active', 'cancelled', 'expired'].includes(job.state);
+    }
+    if (editor?.isConnected) scrollTo(x, scrollY + editor.getBoundingClientRect().top - top);
+  }
+  async function subscriptionAction(job, checking = false) {
+    if (!currentSubscription(job) || job.pending || !job.proof || (!checking && (!job.mayRetry || !['not_requested', 'verification_failed'].includes(job.state)))) return;
+    if (!checking && !job.emailFixed) {
+      job.email = privateEmail.value.trim();
+      if (!subscriptionEmailValid(job.email)) { job.message = words.subscriptionInvalid; privateEmail.setAttribute('aria-invalid', 'true'); paintSubscription(); return; }
+      privateEmail.removeAttribute('aria-invalid');
+    }
+    job.pending = true; job.checking = checking; job.message = ''; if (!checking) job.emailFixed = true; paintSubscription();
+    const input = { commentId: job.commentId, pageKey: job.pageKey, locale: job.locale, subscriptionProof: job.proof };
+    if (!checking) input.email = job.email;
+    try {
+      const response = await runtime.transport[checking ? 'readSubscriptionStatus' : 'enrollSubscription'](input);
+      const row = response?.subscription;
+      if (response?.ok !== true || !row || !subscriptionStates.includes(row.state) || typeof row.mayRetry !== 'boolean' ||
+          !Object.keys(row).every(key => ['state', 'mayRetry', 'expiresAt'].includes(key)) ||
+          (row.expiresAt !== undefined && (typeof row.expiresAt !== 'string' || !Number.isFinite(Date.parse(row.expiresAt)) || new Date(row.expiresAt).toISOString() !== row.expiresAt))) throw Error('SUBSCRIPTION_UNKNOWN');
+      job.state = row.state; job.mayRetry = row.mayRetry;
+    } catch (error) {
+      if (error?.code === 'SUBSCRIPTION_EMAIL_INVALID' && !checking) {
+        job.state = 'not_requested'; job.emailFixed = false; job.mayRetry = true; job.message = words.subscriptionInvalid;
+      } else if (['SUBSCRIPTION_UNAVAILABLE', 'SUBSCRIPTION_RATE_LIMITED'].includes(error?.code)) {
+        job.state = 'verification_failed'; job.mayRetry = !checking; job.message = error.code === 'SUBSCRIPTION_RATE_LIMITED' ? words.subscriptionRate : words.subscriptionUnavailable;
+      } else if (error?.code === 'SUBSCRIPTION_EMAIL_FIXED') {
+        job.state = 'verification_unknown'; job.mayRetry = false; job.message = words.subscriptionFixed;
+      } else {
+        job.state = 'verification_unknown'; job.mayRetry = false;
+      }
+    } finally { job.pending = false; if (currentSubscription(job)) paintSubscription(); }
+  }
+  function beginSubscription(snapshot, commentId) {
+    if (!snapshot.optIn || snapshot.generation !== subscriptionGeneration || !subscriptionEnabled) return;
+    const job = { ...snapshot, commentId, emailFixed: false, pending: false, state: 'not_requested', mayRetry: true, message: '' };
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(commentId ?? '') || !job.proof) { job.proof = null; job.message = words.subscriptionProofMissing; job.mayRetry = false; }
+    subscriptionJob = job; privateEmail.value = job.email; privateEmail.removeAttribute('aria-invalid'); paintSubscription();
+    if (job.proof && subscriptionEmailValid(job.email)) void subscriptionAction(job);
+    else if (job.proof) { job.message = words.subscriptionInvalid; paintSubscription(); }
+  }
+  privateRetry.addEventListener('click', () => { if (subscriptionJob) void subscriptionAction(subscriptionJob); });
+  privateCheck.addEventListener('click', () => { if (subscriptionJob) void subscriptionAction(subscriptionJob, true); });
 
   let turnstileScript = null;
   let widgetId = null;
@@ -616,7 +742,7 @@
   const points = value => Array.from(value).length;
   function saveDraft() {
     if (state.activeTarget) state.drafts.set(state.activeTarget,
-      { name: nameInput.value, body: bodyInput.value });
+      { name: nameInput.value, body: bodyInput.value, optIn: subscriptionEnabled && optIn.checked, email: draftEmail.value });
   }
   function fieldError(input, messageNode, messageText) {
     messageNode.textContent = messageText || '';
@@ -752,6 +878,7 @@
     state.activeTarget = target; state.activeReply = found ? { rootId: found.root.id, guideVersion: found.root.guideVersion, section: found.section } : null; state.opener = opener;
     const draft = state.drafts.get(target);
     nameInput.value = draft?.name ?? ''; bodyInput.value = draft?.body ?? '';
+    optIn.checked = draft?.optIn === true; draftEmail.value = draft?.email ?? ''; draftEmailWrap.hidden = !optIn.checked;
     honeypot.value = '';
     clearFieldErrors(); postNotice.textContent = '';
     submit.textContent = target === 'root' ? words.rootSubmit : words.replySubmit;
@@ -849,6 +976,10 @@
     if (target.startsWith('reply:') && !replyAllowed(found)) { saveDraft(); formStatus.textContent = words.targetUnavailable; updateSubmit(); return; }
     if (!token) { formStatus.textContent = words.verifyWait; return; }
     const usedToken = token;
+    const subscriptionSnapshot = { optIn: subscriptionEnabled && optIn.checked, email: draftEmail.value.trim(),
+      proof: subscriptionEnabled && optIn.checked ? subscriptionProof() : null, generation: ++subscriptionGeneration,
+      pageKey: context.pageKey, locale: context.locale, viewVersion: state.activeVersion };
+    subscriptionJob = null; privateEmail.value = ''; privatePanel.hidden = true;
     token = null;
     state.posting = true; refreshButton.disabled = true;
     versionButtons.querySelectorAll('button').forEach(button => { button.disabled = true; }); updateSubmit(); cancel.disabled = true;
@@ -864,6 +995,7 @@
       replyToCommentId: target === 'root' ? null : found.comment.id,
       turnstileToken: usedToken, honeypot: honeypot.value,
     };
+    if (subscriptionSnapshot.proof) payload.subscriptionProof = subscriptionSnapshot.proof;
     try {
       const posted = await runtime.transport.postComment(payload);
       if (posted?.httpStatus !== 201) throw Error('DISCUSSION_POST_FAILED');
@@ -872,6 +1004,7 @@
       clearWidget(); composerHost.hidden = true; comments.before(composerHost);
       postNotice.textContent = target === 'root' ? words.rootSuccess : words.replySuccess;
       postNotice.dataset.state = 'success';
+      queueMicrotask(() => beginSubscription(subscriptionSnapshot, posted.commentId));
       try {
         await refreshDiscussion();
         const rendered = posted.commentId && document.getElementById(`kt-comment-${posted.commentId}`);
@@ -926,6 +1059,8 @@
     });
     nameInput.addEventListener('input', saveDraft);
     bodyInput.addEventListener('input', saveDraft);
+    optIn.addEventListener('change', () => { draftEmailWrap.hidden = !optIn.checked; saveDraft(); });
+    draftEmail.addEventListener('input', saveDraft);
     form.addEventListener('submit', submitDraft);
   }
   async function loadVersion(guideVersion) {
