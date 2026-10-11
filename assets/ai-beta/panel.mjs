@@ -108,7 +108,6 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   const budget = node('p','',{id:'kt-ai-budget',class:'kt-ai-note'});
   funds.append(node('summary',t('可用额度详情')),budget);
   const betaApply=node('button',t('申请 Beta'),{id:'kt-ai-beta-apply',type:'button',class:'kt-ai-text-button'});betaApply.hidden=true;
-  betaApply.addEventListener('click',()=>window.KTBetaApplication?.open(betaApply));
   document.addEventListener('kt:beta-application-ready',()=>sync());
   notice.append(identity,account,permission,modeCheck,funds,betaApply);
   const query = node('button',t('查看进度'),{id:'kt-ai-query',type:'button'}); query.hidden=true;
@@ -121,7 +120,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     node('p',t('AI 可能误读或遗漏攻略条件，请核对引用原文。')),
     node('p',t('无法读取你的游戏存档；请在问题中说明路线与进度。')),
     node('p',t('启用 AI 问答后，问题与相关攻略材料会由 OpenAI 处理；详见「隐私与数据」。')),
-    node('p',t('Closed Beta 每人本轮最多 1 题；资格与剩余次数以上方状态为准，额度恢复不会增加题数。')),privacyAck,privacyMore);
+    node('p',t('Open Beta：Google 登录后可试用，每账户最多 1 题，全站共 5 题（含站长首测），全站滚动 24 小时最多 1 题；额度不会自动补充。')),privacyAck,privacyMore);
   const empty=node('p',t('想查哪段攻略？在下方写下你的问题。'),{class:'kt-ai-empty'});
   const result=node('section',undefined,{id:'kt-ai-result','aria-label':t('问题与回答')});result.hidden=true;
   scroll.append(privacyFirst,query,empty,result);
@@ -142,7 +141,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   footer.append(quality,privacyLink);form.append(composer,status,footer);
   const privacyDialog=node('dialog',undefined,{id:'kt-ai-privacy-dialog','aria-labelledby':'kt-ai-privacy-title'});
   const privacyClose=node('button',t('返回'),{type:'button','aria-label':t('关闭隐私说明')});
-  privacyDialog.append(node('h3',t('隐私说明'),{id:'kt-ai-privacy-title'}),node('p',privacyCopy),node('p',t('服务保留必要的请求状态、额度结算与防滥用记录。问答正文仅在当前页面显示；刷新后不会恢复。')),privacyClose);
+  privacyDialog.append(node('h3',t('隐私说明'),{id:'kt-ai-privacy-title'}),node('p',privacyCopy),node('p',t('服务保留必要的请求状态、额度结算与防滥用记录。问答正文仅在当前页面显示；刷新后不会恢复。')),node('p',t('为防止额度重复领取，服务长期保留与 Google 账户关联的身份摘要、已用试用题数和退出标记；重新登录、退出或停用账户不会重置题数。已结清账务明细保留 90 天，之后保留累计费用汇总；未结责任保留至人工核对完成。')),privacyClose);
   privacyLink.addEventListener('click',()=>privacyDialog.showModal());privacyMore.addEventListener('click',()=>privacyDialog.showModal());privacyClose.addEventListener('click',()=>privacyDialog.close());
   privacyAck.addEventListener('click',()=>{privacyReviewed=true;privacyFirst.hidden=true;sync();input.focus({preventScroll:true});});
   panel.append(head,notice,scroll,form,privacyDialog);document.body.append(panel);
@@ -244,7 +243,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     if (source) {
       previewTitle.textContent = source.title;
       previewBody.replaceChildren(node('div', source.text, { class: 'kt-ai-source-text' }));
-      previewMode.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文'));
+      previewMode.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文（未提供核实中文对应）'));
       read.disabled = false;
     } else {
       previewBody.replaceChildren(node('p', t('暂时无法显示这条来源的节选，可打开完整攻略核对。')));
@@ -274,7 +273,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     if (readerState !== state) return;
     if (source) {
       readerTitle.textContent = source.title;
-      readerLocale.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文')) + t(' · 本题引用的攻略资料');
+      readerLocale.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文（未提供核实中文对应）')) + t(' · 本题引用的攻略资料');
       readerText.textContent = source.text;
     } else readerText.textContent = t('暂时无法显示这条来源的节选，可打开完整攻略核对。');
   }
@@ -315,7 +314,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     send.dataset.action=stopping?'stop':'send';
     const accessible=cancelling?t('正在请求停止'):stopping?t('停止回答'):t('发送问题');
     send.setAttribute('aria-label',accessible);send.title=accessible;send.setAttribute('aria-busy',String(cancelling));
-    send.disabled=stopping?cancelling||!trialState?.authenticated||!state.activeId:busy||state.busy||state.uncertain||!trialState?.authenticated||trialState?.beta?.approved!==true||!ready||pilot?.configured!==true||pilot.used===true||!privacyReviewed||composing||lengths.over||!input.value.trim();
+    send.disabled=stopping?cancelling||!trialState?.authenticated||!state.activeId:busy||state.busy||state.uncertain||!trialState?.authenticated||trialState?.beta?.approved!==true||!ready||pilot?.configured!==true||pilot.used===true||pilot.poolRemaining===0||pilot.rolling24hAvailable===false||!privacyReviewed||composing||lengths.over||!input.value.trim();
     input.readOnly=sending||cancelling||state.busy;
     searchAI.disabled=sending||cancelling||state.busy;
     query.hidden=!state.activeId||(!manualCheckNeeded&&!state.uncertain&&sending);
@@ -350,7 +349,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     if (narrow.matches && mobileRow) mobileRow.insertBefore(launcher, document.getElementById('kt-page-toc-trigger'));
     else search.after(launcher);
     launcher.firstElementChild.textContent = narrow.matches ? 'AI' : t('AI 问攻略');
-    launcher.setAttribute('aria-label', t('AI 问攻略（Closed Beta）'));
+    launcher.setAttribute('aria-label', t('AI 问攻略（Open Beta）'));
 
   }
   function freezePage() {
@@ -464,13 +463,13 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     notice.dataset.sessionPhase=sessionPhase;notice.dataset.authenticated=String(authenticated);
     notice.dataset.available=String(authenticated&&state.ready===true&&pilot?.used!==true);
     const publicApply=document.getElementById('kt-beta-apply-entry');
-    if(publicApply)publicApply.hidden=authenticated&&state.beta?.approved===true;
+    if(publicApply)publicApply.hidden=true;
     google.hidden=true;gis.hidden=true;logout.hidden=true;sessionRetry.hidden=true;permission.hidden=true;modeCheck.hidden=true;funds.hidden=true;account.hidden=true;betaApply.hidden=true;
     modeCheck.textContent='';budget.textContent='';
     if(sessionPhase==='access'){
-      identity.textContent='Closed Beta';permission.hidden=false;permission.textContent=t('目前仅向获准的测试账号开放');
+      identity.textContent='Open Beta';permission.hidden=false;permission.textContent=t('登录暂不可用，请稍后重试。');
       account.hidden=false;google.hidden=false;google.disabled=!['ready','retry','error'].includes(googlePhase);
-      betaApply.hidden=typeof window.KTBetaApplication?.open!=='function';
+      betaApply.hidden=true;
       if(googleMessage){modeCheck.hidden=false;modeCheck.textContent=googleMessage;}
       dismissSource(false);returnToAnswer(false);result.hidden=true;return;
     }
@@ -481,20 +480,20 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     }
     if(current&&result.childNodes.length)result.hidden=false;
     account.hidden=false;permission.hidden=false;
-    betaApply.hidden=typeof window.KTBetaApplication?.open!=='function'||authenticated&&state.beta?.approved!==false;
+    betaApply.hidden=true;
     if(!authenticated){
-      identity.textContent=t('尚未登录');permission.textContent=t('登录后查看测试资格');
+      identity.textContent=t('尚未登录');permission.textContent=t('Google 登录后即可获得公开试用资格');
       gis.hidden=!gis.childElementCount;google.hidden=!!gis.childElementCount;
       google.disabled=!['ready','retry','error'].includes(googlePhase);google.title=googleMessage||t('Google 登录');
       if(googleMessage){modeCheck.hidden=false;modeCheck.textContent=googleMessage;}
       return;
     }
     logout.hidden=false;
-    identity.textContent=state.beta?.approved===true?t('已获准测试'):t('已登录');
+    identity.textContent=state.beta?.approved===true?t('已登录 · 可公开试用'):t('已登录');
     const ended=availabilityText(state)==='本轮测试已结束';
-    permission.textContent=state.beta?.approved!==true?t('尚未获准参加测试'):ended?t('本轮测试已结束'):!pilot?.configured?t('AI 问答尚未开放'):pilot.used?t('本轮剩余 0 题'):t('本轮剩余 {count} 题',{count:Number.isInteger(pilot.maxQuestions)?pilot.maxQuestions:1});
+    permission.textContent=state.beta?.approved!==true?t(descriptions[state.code]??'暂时无法确认试用资格'):ended?t('本轮测试已结束'):!pilot?.configured?t('AI 问答尚未开放'):pilot.used?t('账户剩余 0 题'):pilot.poolRemaining===0?t('全站试用题数已用完'):t('账户剩余 {count} 题 · 全站剩余 {pool} 题',{count:Number.isInteger(pilot.remainingQuestions)?pilot.remainingQuestions:1,pool:Number.isInteger(pilot.poolRemaining)?pilot.poolRemaining:5});
     const shown=percentage(state.allowance?.percentage);funds.hidden=shown===null;
-    budget.textContent=shown===null?'':t('可用额度约 {percent}%；额度恢复不会增加本轮题数。',{percent:shown});
+    budget.textContent=shown===null?'':t('可用处理额度约 {percent}%；已发送的问题不会恢复试用题数，额度不会自动补充。',{percent:shown});
     if(state.beta?.approved===true&&pilot?.configured&&!pilot.used&&state.code&&state.code!=='AUTH_REQUIRED'){
       modeCheck.hidden=false;modeCheck.textContent=ended?t('可继续阅读攻略或使用站内搜索。'):limitReason();
     }
@@ -566,7 +565,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   sessionRetry.addEventListener('click',()=>recover());
   logout.addEventListener('click',async()=>{loggingOut=true;clearQuestion();try{await transport.logout();const snapshot=await refreshSnapshot();status.textContent=snapshot?.authenticated===false?t('已退出登录，本页正文已清除。'):t('退出状态待确认；本页正文已清除。');}catch{sessionPhase='error';trialState=null;ready=false;status.textContent=t('退出状态待确认；本页正文已清除。');sync();}finally{loggingOut=false;}});
   let googleAttempt=null;
-  window.KTProductGoogle=Object.freeze({requiresAccess:()=>sessionPhase==='access',prepare:async()=>{googleAttempt=await transport.nonce();return {nonce:googleAttempt.nonce};},complete:async credential=>{const attempt=googleAttempt;googleAttempt=null;if(!attempt?.csrf)throw Error('GOOGLE_NONCE_REQUIRED');sessionPhase='checking';ready=false;sync();try{return await transport.loginGoogle(credential,attempt.csrf);}catch(error){sessionPhase='error';trialState=null;sync();throw error;}},onUIStatus:({phase,message=''})=>{googlePhase=phase;googleMessage=message;sync();},refreshUI:()=>sync()});
+  window.KTProductGoogle=Object.freeze({requiresAccess:()=>false,prepare:async()=>{googleAttempt=await transport.nonce();return {nonce:googleAttempt.nonce};},complete:async credential=>{const attempt=googleAttempt;googleAttempt=null;if(!attempt?.csrf)throw Error('GOOGLE_NONCE_REQUIRED');sessionPhase='checking';ready=false;sync();try{return await transport.loginGoogle(credential,attempt.csrf);}catch(error){sessionPhase='error';trialState=null;sync();throw error;}},onUIStatus:({phase,message=''})=>{googlePhase=phase;googleMessage=message;sync();},refreshUI:()=>sync()});
   window.addEventListener('focus',()=>{if(sessionPhase==='access'&&!busy)recover();});
   placeLauncher();sync();recover(true);
 })();

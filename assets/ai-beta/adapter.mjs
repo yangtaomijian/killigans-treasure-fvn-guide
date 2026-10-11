@@ -3,7 +3,7 @@ import {t} from './strings.mjs';
 import {createTransport,safeSourceURL,percentage} from './transport.mjs';
 import {descriptions as productDescriptions,feedbackFor as productFeedback} from './feedback.mjs';
 export {percentage};
-export const descriptions=Object.freeze({...productDescriptions,PROVIDER_DISABLED:'AI 问答尚未开放',PROVIDER_ADMISSION_OFF:'AI 问答暂时不可用',GLOBAL_EMERGENCY_STOP:'AI 问答暂时不可用',BUDGET_CLOSED:'AI 问答暂时不可用',BETA_WINDOW_CLOSED:'AI 问答暂时不可用',BETA_QUESTION_LIMIT:'本轮可用题数已用完，未提交新题。',BETA_DAILY_QUESTION_LIMIT:'今天暂时无法继续提问，请稍后再试。',BETA_EXECUTION_CLOSED:'AI 问答暂时不可用'});
+export const descriptions=Object.freeze({...productDescriptions,PROVIDER_DISABLED:'AI 问答尚未开放',PROVIDER_ADMISSION_OFF:'AI 问答暂时不可用',GLOBAL_EMERGENCY_STOP:'AI 问答暂时不可用',BUDGET_CLOSED:'AI 问答暂时不可用',BETA_WINDOW_CLOSED:'AI 问答暂时不可用',BETA_QUESTION_LIMIT:'账户试用题数已用完，未提交新题。',OPEN_BETA_POOL_EXHAUSTED:'全站试用题数已用完，未提交新题。',OPEN_BETA_WITHDRAWN:'你已退出公开试用；本次未提交问题。',ACCOUNT_SNAPSHOT_EXPIRED:'AI 问答暂时不可用',BETA_DAILY_QUESTION_LIMIT:'全站滚动 24 小时内已发送 1 题，请在该题发送满 24 小时后重试。',BETA_EXECUTION_CLOSED:'AI 问答暂时不可用'});
 // Display only: a closed gate does not by itself prove that a Beta round ended.
 export function availabilityText(state={}) {
   if(!state||!['PROVIDER_DISABLED','PROVIDER_ADMISSION_OFF','BETA_WINDOW_CLOSED','BETA_EXECUTION_CLOSED','GLOBAL_EMERGENCY_STOP','BUDGET_CLOSED'].includes(state.code))return null;

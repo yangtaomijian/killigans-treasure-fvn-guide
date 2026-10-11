@@ -17,7 +17,7 @@ async function prepare(clientId){
  google.accounts.id.renderButton(target,{type:'standard',theme:'outline',size:'large',text:'signin_with',width:Math.min(348,target.parentElement.clientWidth||260)});
  report('ready');
 }
-let clientId=null,scriptPromise=null,accessOpened=false,starting=false;
+let clientId=null,scriptPromise=null,starting=false;
 async function start(){
  if(starting)return;
  starting=true;report('preparing',t('正在准备 Google 登录…'));
@@ -32,20 +32,11 @@ async function start(){
    scriptPromise=new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('GIS_UNAVAILABLE')),10000);script.onload=()=>{clearTimeout(timer);resolve();};script.onerror=()=>{clearTimeout(timer);script.remove();reject(Error('GIS_UNAVAILABLE'));};document.head.append(script);}).catch(error=>{scriptPromise=null;throw error;});
   }
   await scriptPromise;
-  accessOpened=false;
   await prepare(clientId);
  }catch(error){
-  if(error.message==='ACCESS_REQUIRED'){accessOpened=false;report('retry',t('未能确认测试访问权限。可申请 Beta，或完成验证后重试。'));}
+  if(error.message==='ACCESS_REQUIRED'){report('retry',t('登录暂不可用，请稍后重试。'));}
   else report('retry',t('登录准备失败；请稍后主动重试。'));
  }finally{starting=false;}
 }
-old.addEventListener('click',()=>{
- if(window.KTProductGoogle.requiresAccess()&&!accessOpened){
-  // Only this explicit click opens the existing protected route. No background navigation.
-  window.open('/auth/config','_blank','noopener,noreferrer');accessOpened=true;
-  report('retry',t('完成测试访问验证后，请返回此页继续 Google 登录。'));
-  return;
- }
- start();
-});
+old.addEventListener('click',start);
 report('ready');

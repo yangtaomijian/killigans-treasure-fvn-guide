@@ -10,13 +10,18 @@ const records = [], writes = [], errors = [];
 const anon = {authenticated:false, ready:false, code:'AUTH_REQUIRED', user:null, allowance:null, activeRequestId:null};
 const unapproved = {authenticated:true, ready:false, code:'BETA_NOT_APPROVED', csrf:'REPLAY_ONLY', user:{id:'REPLAY_ACCOUNT_A'}, beta:{approved:false,pilot:{configured:false,used:false}}, activeRequestId:null};
 const off = {...unapproved,code:'PROVIDER_ADMISSION_OFF',beta:{approved:true,pilot:{configured:false,used:false}}};
+const ready = {...off,ready:true,code:null,allowance:{balance:1000,percentage:100,refillAt:null},beta:{approved:true,pilot:{policy:'OPEN_BETA_V1',configured:true,used:false,maxQuestions:1,remainingQuestions:1,poolRemaining:5,rolling24hAvailable:true,endsAt:null,automaticRefill:false}}};
+const exhausted = {...ready,ready:false,code:'OPEN_BETA_POOL_EXHAUSTED',beta:{...ready.beta,pilot:{...ready.beta.pilot,poolRemaining:0}}};
+const daily = {...ready,ready:false,code:'BETA_DAILY_QUESTION_LIMIT',beta:{...ready.beta,pilot:{...ready.beta.pilot,rolling24hAvailable:false}}};
+const staleReady = {...exhausted,ready:true};
+const withdrawn = {...unapproved,code:'OPEN_BETA_WITHDRAWN'};
 const used = {...off,beta:{approved:true,pilot:{configured:true,used:true,maxQuestions:1}}};
 const ended = {...off,beta:{approved:true,pilot:{configured:true,used:false,maxQuestions:1,endsAt:1}}};
-const cases = {access:null,anon,error:null,unapproved,off,used,ended};
+const cases = {access:null,anon,error:null,unapproved,off,used,ended,ready,exhausted,daily,staleReady,withdrawn};
 async function run(name, engine, options) {
   const browser = await engine.launch({headless:true,...options});
   try {
-    for (const locale of ['zh','en']) for (const width of [1440,390]) for (const [state,session] of Object.entries(cases)) {
+    for (const locale of ['zh','en']) for (const width of [1440,390,320]) for (const [state,session] of Object.entries(cases)) {
       const context = await browser.newContext({viewport:{width,height:900},colorScheme:'light'});
       const page = await context.newPage(); let current = structuredClone(session), authRequests = 0;
       page.on('pageerror', e => errors.push({name,locale,width,state,message:e.message}));
@@ -45,9 +50,9 @@ async function run(name, engine, options) {
       assert.equal(await page.locator('#kt-ai-query').isVisible(),false);
       const phase = await page.locator('.kt-ai-notice').getAttribute('data-session-phase');
       assert.equal(phase,state==='access'?'access':state==='error'?'error':'known');
-      const apply = ['access','anon','unapproved'].includes(state);
-      assert.equal(await page.locator('#kt-ai-beta-apply').isVisible(),apply);
-      assert.equal(await page.locator('#kt-beta-apply-entry').getAttribute('hidden') !== null,['off','used','ended'].includes(state));
+      assert.equal(await page.locator('#kt-ai-beta-apply').isVisible(),false);
+      assert.equal(await page.locator('#kt-beta-apply-entry').count(),0);
+      assert.equal(await page.locator('#kt-beta-application').count(),0);
       if(state==='error') {
         assert(await page.locator('#kt-ai-session-retry').isVisible());
         assert.equal(await page.locator('#google').isVisible(),false);
@@ -59,23 +64,26 @@ async function run(name, engine, options) {
       assert(!/Provider|local UI candidate|mock|Request too large/.test(visible));
       assert.equal(new URL(page.url()).pathname,`/${locale==='en'?'en/':''}guide/aris.html`);
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-      if(['access','unapproved'].includes(state)) {
+      if(['ready','exhausted'].includes(state)&&width!==320) {
         const label = `${name}-${locale}-${width}-${state}`;
         await page.screenshot({path:path.join(out,label+'.png')});
       }
-      if(apply) {
-        await page.locator('#kt-ai-beta-apply').click();
-        assert(await page.locator('#kt-beta-application').evaluate(e=>e.open));
-        await page.locator('#kt-beta-contact').fill('local-preview@example.invalid');
-        assert(await page.locator('#kt-beta-submit').isDisabled());
-        assert.match(await page.locator('.kt-feedback-intro').last().innerText(),/Google/);
-        await page.locator('#kt-beta-application .kt-feedback-close').click();
-        assert.equal(await page.evaluate(()=>document.activeElement.id),'kt-ai-beta-apply');
+      if(['ready','exhausted','daily','staleReady','used','off','anon'].includes(state)) {
+        await page.locator('#kt-ai-question').fill('PUBLIC SYNTHETIC UI ONLY');
+        await page.locator('#kt-ai-privacy-ack').click();
+        assert.equal(await page.locator('#kt-ai-send').isEnabled(),state==='ready');
       }
+      if(state==='ready') {
+        assert.match(await page.locator('#kt-ai-quota').innerText(),/全站剩余 5|Site questions left: 5/);
+        await page.locator('.kt-ai-funds summary').click();
+        assert.match(await page.locator('#kt-ai-budget').innerText(),/不会自动补充|does not refill/);
+      }
+      if(state==='exhausted')assert.match(await page.locator('#kt-ai-quota').innerText(),/已用完|exhausted/);
+      if(state==='daily')assert.match(await page.locator('#kt-ai-panel').innerText(),/滚动 24 小时|last 24 hours/);
       if(state==='unapproved') {
         await page.getByRole('button',{name:locale==='en'?'Sign out':'退出',exact:true}).click();
         await page.waitForFunction(()=>{const state=document.querySelector('.kt-ai-notice').dataset;return state.sessionPhase==='known'&&state.authenticated==='false';});
-        assert(await page.locator('#kt-ai-beta-apply').isVisible());
+        assert.equal(await page.locator('#kt-ai-beta-apply').isVisible(),false);
         assert.equal(current.beta,undefined,'Logout replay clears account projection');
       }
       await page.locator('#kt-ai-close').click();
