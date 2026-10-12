@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 from verify_render import OUTPUT, PAGES
 
-ASSETS = {'panel.mjs', 'panel.css', 'strings.mjs', 'question-limits.mjs', 'google-gis.mjs',
+ASSETS = {'panel.mjs', 'panel.css', 'strings.mjs', 'question-limits.mjs', 'question-language.mjs', 'google-gis.mjs',
           'google-g.png', 'beta-application.mjs', 'adapter.mjs', 'transport.mjs', 'feedback.mjs'}
 
 def main():
