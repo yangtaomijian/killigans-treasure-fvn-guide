@@ -1,5 +1,6 @@
 import {t} from './strings.mjs';
 import {questionLengths} from './question-limits.mjs';
+import {questionLanguage,languageClarification} from './question-language.mjs';
 import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityText} from './adapter.mjs';
 (() => {
   'use strict';
@@ -114,16 +115,18 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   const privacyCopy=t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。本站不保存问答正文；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。');
   let privacyReviewed=false,composing=false,compositionEndedAt=0,sending=false,cancelling=false,manualCheckNeeded=false;
   const privacyFirst=node('section',undefined,{id:'kt-ai-privacy-first',class:'kt-ai-privacy-first','aria-labelledby':'kt-ai-privacy-heading'});
-  const privacyAck=node('button',t('知道了'),{id:'kt-ai-privacy-ack',type:'button'});
+  const privacyAck=node('button',t('我已了解，继续输入'),{id:'kt-ai-privacy-ack',type:'button'});
   const privacyMore=node('button',t('查看隐私说明'),{type:'button',class:'kt-ai-text-button'});
   privacyFirst.append(node('h3',t('提问前，请先了解'),{id:'kt-ai-privacy-heading'}),
+    node('p',t('可以先输入问题。首次发送前，请确认已阅读以下说明。')),
     node('p',t('AI 可能误读或遗漏攻略条件，请核对引用原文。')),
     node('p',t('无法读取你的游戏存档；请在问题中说明路线与进度。')),
     node('p',t('启用 AI 问答后，问题与相关攻略材料会由 OpenAI 处理；详见「隐私与数据」。')),
     node('p',t('Open Beta：Google 登录后可试用，每账户最多 1 题，全站共 5 题（含站长首测），全站滚动 24 小时最多 1 题；额度不会自动补充。')),privacyAck,privacyMore);
   const empty=node('p',t('想查哪段攻略？在下方写下你的问题。'),{class:'kt-ai-empty'});
   const result=node('section',undefined,{id:'kt-ai-result','aria-label':t('问题与回答')});result.hidden=true;
-  scroll.append(privacyFirst,query,empty,result);
+  const scope=node('p',t('可选的 AI 问答工具，只检索本站公开的攻略资料，并根据检索结果生成回答。它不会搜索其他网站，也不会读取游戏代码或非公开内容。主线攻略和参考页面独立维护。'),{id:'kt-ai-scope',class:'kt-ai-note'});
+  scroll.append(scope,privacyFirst,query,empty,result);
   const form=node('form',undefined,{id:'kt-ai-form'});
   const label=node('label',t('你的问题'),{for:'kt-ai-question',class:'kt-ai-sr-only'});
   const input=node('textarea',undefined,{id:'kt-ai-question',rows:'2',placeholder:t('想了解什么？'),'aria-describedby':'kt-ai-status kt-ai-length-help'});
@@ -141,8 +144,13 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   footer.append(quality,privacyLink);form.append(composer,status,footer);
   const privacyDialog=node('dialog',undefined,{id:'kt-ai-privacy-dialog','aria-labelledby':'kt-ai-privacy-title'});
   const privacyClose=node('button',t('返回'),{type:'button','aria-label':t('关闭隐私说明')});
-  privacyDialog.append(node('h3',t('隐私说明'),{id:'kt-ai-privacy-title'}),node('p',privacyCopy),node('p',t('服务保留必要的请求状态、额度结算与防滥用记录。问答正文仅在当前页面显示；刷新后不会恢复。')),node('p',t('为防止额度重复领取，服务长期保留与 Google 账户关联的身份摘要、已用试用题数和退出标记；重新登录、退出或停用账户不会重置题数。已结清账务明细保留 90 天，之后保留累计费用汇总；未结责任保留至人工核对完成。')),privacyClose);
-  privacyLink.addEventListener('click',()=>privacyDialog.showModal());privacyMore.addEventListener('click',()=>privacyDialog.showModal());privacyClose.addEventListener('click',()=>privacyDialog.close());
+  const privacyConfirm=node('button',t('我已了解，发送此问题'),{id:'kt-ai-privacy-confirm',type:'button'});privacyConfirm.hidden=true;
+  let pendingConsentQuestion=null;
+  privacyDialog.append(node('h3',t('隐私说明'),{id:'kt-ai-privacy-title'}),node('p',privacyCopy),node('p',t('AI 可能出错；攻略材料可能包含后续剧情，本工具不提供严格剧透过滤。请核对引用原文。')),node('p',t('服务保留必要的请求状态、额度结算与防滥用记录。问答正文仅在当前页面显示；刷新后不会恢复。')),node('p',t('为防止额度重复领取，服务长期保留与 Google 账户关联的身份摘要、已用试用题数和退出标记；重新登录、退出或停用账户不会重置题数。已结清账务明细保留 90 天，之后保留累计费用汇总；未结责任保留至人工核对完成。')),privacyConfirm,privacyClose);
+  function openPrivacy(forSend=false){pendingConsentQuestion=forSend?input.value:null;privacyConfirm.hidden=!forSend;privacyDialog.showModal();}
+  privacyLink.addEventListener('click',()=>openPrivacy());privacyMore.addEventListener('click',()=>openPrivacy());privacyClose.addEventListener('click',()=>privacyDialog.close());
+  privacyDialog.addEventListener('close',()=>{pendingConsentQuestion=null;privacyConfirm.hidden=true;});
+  privacyConfirm.addEventListener('click',()=>{const question=pendingConsentQuestion;privacyReviewed=true;privacyFirst.hidden=true;privacyDialog.close();sync();if(question!==null&&question===input.value)submit();});
   privacyAck.addEventListener('click',()=>{privacyReviewed=true;privacyFirst.hidden=true;sync();input.focus({preventScroll:true});});
   panel.append(head,notice,scroll,form,privacyDialog);document.body.append(panel);
   const popover = node('div', undefined, { id: 'kt-ai-source-preview', class: 'kt-ai-source-popover', role: 'dialog', 'aria-modal': 'false', 'aria-labelledby': 'kt-ai-source-title' });
@@ -165,7 +173,8 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   const sheetHead = node('div', undefined, { class: 'kt-ai-sheet-head' });
   const sheetClose = node('button', t('关闭来源'), { type: 'button', id: 'kt-ai-source-sheet-close' });
   const sheetExpand = node('button', t('展开阅读'), { type: 'button', id: 'kt-ai-source-expand', 'aria-expanded': 'false' });
-  sheetHead.append(sheetClose, node('span', t('来源节选')), sheetExpand);
+  const sheetLabel=node('span',t('来源节选'));
+  sheetHead.append(sheetClose,sheetLabel,sheetExpand);
   const readerTitle = node('h3');
   const readerLocale = node('p', '', { class: 'kt-ai-note' });
   const readerText = node('div', undefined, { class: 'kt-ai-source-text' });
@@ -215,8 +224,12 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   }
   function canonicalURL(value) { return transport.safeSourceURL(value); }
   function loadSources() {
-    // The backend driver binds only this question's approved source excerpts.
-    return Promise.resolve(new Map([...transport.sources()].filter(([url, source]) => canonicalURL(url) && ['en','zh'].includes(source.locale) && typeof source.title === 'string' && typeof source.text === 'string')));
+    // The backend binds this question's verified excerpts or section links.
+    return Promise.resolve(new Map([...transport.sources()].filter(([url, source]) => canonicalURL(url) && ['en','zh'].includes(source.locale) && typeof source.title === 'string' && (typeof source.text === 'string' || source.mappingType === 'section' || source.variants?.section))));
+  }
+  async function sourceFor(reference) {
+    const group=(await loadSources()).get(canonicalURL(reference.url));
+    return group?.variants?.[reference.mappingType??'excerpt']??group;
   }
   function placeSource() {
     if (!activeSource || popover.hidden) return;
@@ -233,17 +246,21 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     const state = { trigger, reference, kind, source: null };
     activeSource = state; trigger.setAttribute('aria-expanded', 'true');
     previewTitle.textContent = reference.label;
-    previewMode.textContent = t('来源节选 · 点击引用可阅读原文');
-    previewBody.replaceChildren(node('p', t('正在读取本题来源节选…')));
+    const chapter=reference.mappingType==='section';
+    previewMode.textContent = chapter?'中文对应章节':t('来源节选 · 点击引用可阅读原文');
+    previewBody.hidden=chapter;read.textContent=t(chapter?'查看章节':'阅读原文');
+    previewBody.replaceChildren(...(chapter?[]:[node('p', t('正在读取本题来源节选…'))]));
     previewBody.scrollTop = 0; read.disabled = true;
     full.href = canonicalURL(reference.url); popover.hidden = false; placeSource();
-    const source = (await loadSources()).get(canonicalURL(reference.url));
+    const source = await sourceFor(reference);
     if (activeSource !== state) return;
     state.source = source || null;
     if (source) {
       previewTitle.textContent = source.title;
-      previewBody.replaceChildren(node('div', source.text, { class: 'kt-ai-source-text' }));
-      previewMode.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文'));
+      const section=source.mappingType==='section';
+      previewBody.hidden=section;previewBody.replaceChildren(...(section?[]:[node('div', source.text, { class: 'kt-ai-source-text' })]));
+      previewMode.textContent = section?'中文对应章节':source.locale === 'zh' ? '来源节选 · 中文原文' : 'Source excerpt · English original';
+      read.textContent=t(section?'查看章节':'阅读原文');
       read.disabled = false;
     } else {
       previewBody.replaceChildren(node('p', t('暂时无法显示这条来源的节选，可打开完整攻略核对。')));
@@ -258,8 +275,10 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     if (state.mobile) reader.setAttribute('aria-modal', 'true');
     trigger.setAttribute('aria-expanded', 'true');
     readerTitle.textContent = reference.label;
-    readerLocale.textContent = t('来源节选 · 本题引用的攻略资料');
-    readerText.textContent = t('正在读取本题来源节选…'); readerFull.href = canonicalURL(reference.url);
+    const chapter=reference.mappingType==='section';
+    sheetLabel.textContent=chapter?'中文对应章节':reference.locale==='zh'?'中文原文摘录':'Source excerpt';
+    readerLocale.textContent = chapter?'中文对应章节':t('来源节选 · 本题引用的攻略资料');
+    readerText.hidden=chapter;readerText.textContent = chapter?'':t('正在读取本题来源节选…'); readerFull.href = canonicalURL(reference.url);
     if (state.mobile) {
       state.inert = [head, notice, scroll, form].map(el => ({ el, was: el.hasAttribute('inert') }));
       state.inert.forEach(({ el }) => el.setAttribute('inert', ''));
@@ -269,12 +288,13 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     reader.hidden = false; reader.scrollTop = 0;
 
     (state.mobile ? sheetClose : back).focus({ preventScroll: true });
-    const source = (await loadSources()).get(canonicalURL(reference.url));
+    const source = await sourceFor(reference);
     if (readerState !== state) return;
     if (source) {
       readerTitle.textContent = source.title;
-      readerLocale.textContent = t('来源节选 · ') + (source.locale === 'zh' ? t('中文原文') : t('英文原文')) + t(' · 本题引用的攻略资料');
-      readerText.textContent = source.text;
+      const section=source.mappingType==='section';
+      readerLocale.textContent = section?'中文对应章节':source.locale === 'zh' ? '来源节选 · 中文原文 · 本题引用的攻略资料' : 'Source excerpt · English original · Guide material cited for this question';
+      readerText.hidden=section;readerText.textContent = section?'':source.text;
     } else readerText.textContent = t('暂时无法显示这条来源的节选，可打开完整攻略核对。');
   }
   function returnToAnswer(restoreFocus = true) {
@@ -314,7 +334,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     send.dataset.action=stopping?'stop':'send';
     const accessible=cancelling?t('正在请求停止'):stopping?t('停止回答'):t('发送问题');
     send.setAttribute('aria-label',accessible);send.title=accessible;send.setAttribute('aria-busy',String(cancelling));
-    send.disabled=stopping?cancelling||!trialState?.authenticated||!state.activeId:busy||state.busy||state.uncertain||!trialState?.authenticated||trialState?.beta?.approved!==true||!ready||pilot?.configured!==true||pilot.used===true||pilot.poolRemaining===0||pilot.rolling24hAvailable===false||!privacyReviewed||composing||lengths.over||!input.value.trim();
+    send.disabled=stopping?cancelling||!trialState?.authenticated||!state.activeId:busy||state.busy||state.uncertain||!trialState?.authenticated||trialState?.beta?.approved!==true||!ready||pilot?.configured!==true||pilot.used===true||pilot.poolRemaining===0||pilot.rolling24hAvailable===false||composing||lengths.over||!input.value.trim();
     input.readOnly=sending||cancelling||state.busy;
     searchAI.disabled=sending||cancelling||state.busy;
     query.hidden=!state.activeId||(!manualCheckNeeded&&!state.uncertain&&sending);
@@ -436,7 +456,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   });
   function safeLink(reference) {
     if (!canonicalURL(reference.url) || !transport.sources().has(reference.url)) return null;
-    const button = node('button', t('来源：') + reference.label, { type: 'button', class: 'kt-ai-citation', id: 'kt-ai-citation-' + (++citationNumber), 'aria-haspopup': 'dialog', 'aria-expanded': 'false', 'aria-controls': 'kt-ai-source-preview kt-ai-source-reader', title: t('悬停预览；点击阅读原文；按 ↓ 进入预览') });
+    const button = node('button', (reference.locale==='zh'?(reference.mappingType==='section'?'章节：':'来源：'):'Source: ') + reference.label, { type: 'button', class: 'kt-ai-citation', id: 'kt-ai-citation-' + (++citationNumber), 'aria-haspopup': 'dialog', 'aria-expanded': 'false', 'aria-controls': 'kt-ai-source-preview kt-ai-source-reader', title: t('悬停预览；点击阅读原文；按 ↓ 进入预览') });
     button.addEventListener('pointerenter', () => showSource(button, reference, 'pointer'));
     button.addEventListener('pointerleave', scheduleHide);
     button.addEventListener('pointerdown', () => { pointerFocusTrigger = button; });
@@ -527,7 +547,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     if (answer.status === 'limited' && kinds[answer.kind]) result.append(node('p', kinds[answer.kind], { class: 'kt-ai-note' }));
     uncertain = answer.kind === 'local_connection';
     if (uncertain) result.append(node('p', t('请查看进度确认结果。确认前不会再次发送问题。'), { class: 'kt-ai-note' }));
-    status.textContent = answer.status === 'answer' ? t('本题回答已返回') : (typeof answer.title === 'string' ? t(answer.title) : t('本题处理未完成'));
+    status.textContent = answer.serviceStatus || (answer.status === 'answer' ? t('本题回答已返回') : (typeof answer.title === 'string' ? t(answer.title) : t('本题处理未完成')));
     scroll.scrollTop = Math.max(0, result.offsetTop - scroll.offsetTop - 12);
   }
   function connectionFailure(text) {
@@ -545,7 +565,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
         if(kind==='cancel'&&['cancelled','completed','failed','rejected'].includes(answer.raw?.status))sending=false;
         render(answer);
         manualCheckNeeded=!!transport.state().activeId;
-        status.textContent=answer.raw?.status==='cancelled'?t('已停止 · 结算结果见上方'):answer.raw?.status==='completed'?t('回答已完成'):kind==='cancel'&&manualCheckNeeded?t('停止结果待确认，请查看进度'):feedbackFor(answer.raw||answer,trialState);
+        status.textContent=answer.serviceStatus||(answer.raw?.status==='cancelled'?t('已停止 · 结算结果见上方'):answer.raw?.status==='completed'?t('回答已完成'):kind==='cancel'&&manualCheckNeeded?t('停止结果待确认，请查看进度'):feedbackFor(answer.raw||answer,trialState));
         if(!transport.state().activeId)await refreshSnapshot();
       }
     }catch(error){
@@ -557,7 +577,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     busy=true;sync();const snapshot=await refreshSnapshot();busy=false;
     if(snapshot&&transport.state().activeId){manualCheckNeeded=true;status.textContent=t('有结果待确认，请查看进度。');}sync();
   }
-  async function submit(){if(send.dataset.action!=='send'||send.disabled)return;const question=input.value;if(questionLengths(question).over){sync();return;}waiting(question);await run(()=>transport.send(question),'send');}
+  async function submit(){if(send.dataset.action!=='send'||send.disabled)return;const question=input.value;if(questionLengths(question).over){sync();return;}if(!questionLanguage(question)){status.textContent=languageClarification;return;}if(!privacyReviewed){openPrivacy(true);return;}waiting(question);await run(()=>transport.send(question),'send');}
   form.addEventListener('submit',event=>{event.preventDefault();submit();});
   send.addEventListener('click',()=>send.dataset.action==='stop'?stop():submit());
   async function stop(){if(send.disabled||cancelling)return;await run(()=>transport.cancel(),'cancel');}

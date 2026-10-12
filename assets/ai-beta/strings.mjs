@@ -1,6 +1,16 @@
 // Interface copy only; never translates questions, answers or source bodies.
 export const locale = /^en(?:-|$)/i.test(document.documentElement.lang) ? "en" : "zh";
 export const english = Object.freeze({
+  "查看章节": "View section",
+  "中文攻略来源暂未准备完整，本题未发送，也未扣试用题数。": "Chinese guide sources are temporarily incomplete. Your question was not sent and your trial question was not used.",
+  "攻略来源版本暂不一致，本题未发送，也未扣试用题数。": "Guide source versions do not currently match. Your question was not sent and your trial question was not used.",
+  "部分所需来源的中文对应尚未核验，未生成回答。请改用英文提问或直接阅读攻略；本次已处理的检索仍按现有规则结算。": "Some required sources have no verified Chinese counterpart, so no answer was generated. Ask in English or read the guide directly. Retrieval already processed is settled under the existing rules.",
+  "问题语言不明确，请用中文或英文完整提问，或明确指定回答语言。": "The question language is unclear. Ask a full question in Chinese or English, or explicitly specify the answer language.",
+  "回答语言未符合要求，本题已停止，不会自动重试。": "The answer did not meet the requested language. This question has stopped and will not retry automatically.",
+  "我已了解，继续输入": "I understand · Continue writing",
+  "我已了解，发送此问题": "I understand · Send this question",
+  "可以先输入问题。首次发送前，请确认已阅读以下说明。": "You can write your question first. Before your first send, confirm that you have read the information below.",
+  "AI 可能出错；攻略材料可能包含后续剧情，本工具不提供严格剧透过滤。请核对引用原文。": "AI can make mistakes. Guide material may reveal later story events; this tool does not provide strict spoiler filtering. Verify the cited original text.",
   "为防止额度重复领取，服务长期保留与 Google 账户关联的身份摘要、已用试用题数和退出标记；重新登录、退出或停用账户不会重置题数。已结清账务明细保留 90 天，之后保留累计费用汇总；未结责任保留至人工核对完成。": "To prevent repeated allowance claims, the service retains an identity digest linked to your Google account, used trial quota and withdrawal markers long term. Signing in again, withdrawing or disabling your account does not reset your question quota. Settled financial details are kept for 90 days, followed by cumulative cost totals. Unsettled liabilities are kept until manually reconciled.",
   "试用处理额度不足；额度不会自动补充。": "Trial processing allowance is insufficient. It does not refill automatically.",
   "Open Beta：Google 登录后可试用，每账户最多 1 题，全站共 5 题（含站长首测），全站滚动 24 小时最多 1 题；额度不会自动补充。": "Open Beta: sign in with Google to try it. Each account gets at most 1 question; the site has 5 in total, including the owner’s first test, and at most 1 question per rolling 24 hours. Allowance does not refill automatically.",
@@ -49,6 +59,7 @@ export const english = Object.freeze({
   "知道了": "Got it",
   "查看隐私说明": "Privacy & data details",
   "提问前，请先了解": "Before you ask",
+  "可选的 AI 问答工具，只检索本站公开的攻略资料，并根据检索结果生成回答。它不会搜索其他网站，也不会读取游戏代码或非公开内容。主线攻略和参考页面独立维护。": "An optional AI-powered Q&A tool that searches only this site's publicly available guide content and generates answers from the retrieved information. It does not search the wider web or access game code or non-public content. The main walkthrough and reference pages are maintained separately.",
   "AI 可能误读或遗漏攻略条件，请核对引用原文。": "AI may misread or miss guide conditions. Verify the cited source text.",
   "无法读取你的游戏存档；请在问题中说明路线与进度。": "It cannot read your game saves. Include your route and progress in your question.",
   "启用 AI 问答后，问题与相关攻略材料会由 OpenAI 处理；详见「隐私与数据」。": "When AI questions are enabled, OpenAI processes your question and relevant guide material. See Privacy & data for details.",

@@ -3,7 +3,7 @@ export const REQUEST_SLOT='kt-qb1-request-id';
 const activeStatuses=new Set(['accepted','processing','waiting','pending','unknown','UNKNOWN']);
 const responseStatuses=new Set([...activeStatuses,'completed','cancelled','rejected','failed']);
 const validatedState=value=>{if(!responseStatuses.has(value.status))throw Error('STATE_CONTRACT');return value;};
-export function safeSourceURL(value){try{const u=new URL(value);return u.origin==='https://killigans-treasure.carambi.com'&&!u.username&&!u.password&&!u.search&&u.pathname.endsWith('.html')&&u.hash?u.href:null;}catch{return null;}}
+export function safeSourceURL(value){try{const u=new URL(value);return u.origin==='https://killigans-treasure.carambi.com'&&!u.username&&!u.password&&!u.search&&u.pathname.endsWith('.html')?u.href:null;}catch{return null;}}
 export function percentage(value){return Number.isFinite(value)?Math.max(0,Math.min(100,Math.round(value/5)*5)):null;}
 export function createTransport({fetchImpl=globalThis.fetch,storage=globalThis.sessionStorage,origin=globalThis.location?.origin,onSession=()=>{}}={}){
   let session=null,busy=false,uncertain=false,activeId=null,generation=0;

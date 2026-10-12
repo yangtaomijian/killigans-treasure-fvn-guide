@@ -2,6 +2,7 @@
 #kt-ai-launcher, #kt-ai-panel { display: none; }
 .kt-ai-sheet-head, #kt-ai-source-backdrop { display: none; }
 .kt-ai-codex-scroll { display: contents; }
+#kt-ai-panel .kt-ai-reference { display: flex; flex-wrap: wrap; gap: .4rem .65rem; align-items: baseline; }
 .kt-ai-search-bridge { flex: 0 0 auto; padding: .55rem .75rem .4rem; border-bottom: 1px solid var(--kt-border, #ddd); color: var(--kt-text); background: var(--kt-surface-panel); }
 .kt-ai-search-bridge-row { display: flex; align-items: center; justify-content: space-between; gap: .6rem; font-size: .85rem; font-weight: 650; }
 #kt-search-ai-entry { min-height: 44px; padding: .4rem .65rem; border: 1px solid var(--kt-accent); border-radius: var(--kt-control-radius); background: var(--kt-accent-soft); color: var(--kt-heading); font: inherit; cursor: pointer; white-space: nowrap; }
@@ -79,7 +80,7 @@
   #kt-ai-result { margin-top: 1.25rem; border-top: 1px solid var(--kt-border); padding-top: 1rem; }
   #kt-ai-panel .kt-ai-question { font-size: .8rem; color: var(--kt-text-muted); padding-left: .7rem; border-left: 2px solid var(--kt-border-strong); white-space: pre-wrap; }
   #kt-ai-panel .kt-ai-result-label { font-size: .7rem; color: var(--kt-text-muted); margin-bottom: .3rem; }
-  #kt-ai-panel .kt-ai-reference { font-size: .75rem; margin: -.2rem 0 1rem; }
+  #kt-ai-panel .kt-ai-reference { display: flex; flex-wrap: wrap; gap: .4rem .65rem; align-items: baseline; font-size: .75rem; margin: -.2rem 0 1rem; }
   #kt-ai-panel a { color: var(--kt-link); text-underline-offset: .2em; overflow-wrap: anywhere; }
   #kt-ai-panel .kt-ai-note { font-size: .76rem; color: var(--kt-text-muted); }
   #kt-ai-repeat { padding: .4rem .65rem; font-size: .78rem; }
