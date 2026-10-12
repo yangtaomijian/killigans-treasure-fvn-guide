@@ -466,9 +466,11 @@
   // Keep raw pages/seen IDs/cursors intact; project only the public display tree.
   function projectRoots(roots) {
     return roots.flatMap(root => {
+      // Root pagination returns the complete flat reply list for each tree.
+      // Keep anonymous context only when this tree still has published content.
+      if (root.status !== 'published' && !(root.replies ?? []).some(reply => reply.status === 'published')) return [];
       const referenced = new Set((root.replies ?? []).filter(reply => reply.status === 'published').map(reply => reply.replyToCommentId).filter(Boolean));
       const replies = (root.replies ?? []).filter(reply => reply.status !== 'deleted' || referenced.has(reply.id));
-      if (root.status === 'deleted' && !replies.length) return [];
       return [{ ...root, replies }];
     });
   }
