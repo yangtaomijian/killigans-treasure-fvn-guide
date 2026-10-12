@@ -7,7 +7,7 @@ const vm = require('node:vm');
 const { chromium, webkit } = require('playwright');
 const base = process.env.GUIDE_BASE_URL;
 assert(base && ['localhost', '127.0.0.1'].includes(new URL(base).hostname));
-const types = ['like', 'heart', 'smile', 'celebrate', 'thinking'];
+const types = ['like', 'heart', 'smile', 'celebrate', 'thinking','sad'];
 const id = n => `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
 const panel = n => `.kt-discussion-reactions[data-comment-id="${id(n)}"]`;
 const add = n => panel(n) + ' .kt-discussion-reaction-add';
@@ -19,15 +19,15 @@ async function transportChecks() {
   const source = fs.readFileSync(path.join(__dirname, '../assets/kt-discussion-remote.html'), 'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
   const context = { window: {}, location: { hostname: 'killigans-treasure.carambi.com' }, document: { querySelector: q => ({ content: q.includes('environment') ? 'production' : q.includes('sitekey') ? '0xFixture' : 'https://discussion.carambi.com' }) }, URL, AbortController, setTimeout, clearTimeout, fetch: null };
   vm.createContext(context); vm.runInContext(source, context); const transport = context.window.__ktDiscussionRemoteTransport;
-  const row = { commentId: id(1), counts: { like: 1, heart: 0, smile: 0, celebrate: 0, thinking: 0 }, selected: ['like'], canReact: true };
+  const row = { commentId: id(1), counts: { like: 1, heart: 0, smile: 0, celebrate: 0, thinking:0,sad:0 }, selected: ['like'], canReact: true };
   context.fetch = async (url, opts) => {
     const body = JSON.parse(opts.body); assert(!url.includes('visitor')); assert.equal(opts.method, 'POST'); assert.equal(opts.credentials, 'omit'); assert(opts.signal);
     assert(body.visitorId === 'a'.repeat(64)); assert(!Object.hasOwn(body, 'site')); assert(!Object.hasOwn(body, 'guideVersion'));
     return { status: 200, json: async () => ({ ok: true, requestId: 'synthetic-request', receivedAt: '2026-10-10T00:00:00Z', unexpected: 'must not echo', ...(url.endsWith('/read') ? { reactions: [row] } : { reaction: row }) }) };
   };
-  const read = await transport.readReactions({ pageKey: 'guide.redroot', locale: 'en', commentIds: [id(1)], visitorId: 'a'.repeat(64) });
+  const read = await transport.readReactions({ reactionVersion:2, pageKey: 'guide.redroot', locale: 'en', commentIds: [id(1)], visitorId: 'a'.repeat(64) });
   assert.deepEqual(Object.keys(read).sort(), ['ok', 'reactions']);
-  const write = await transport.setReaction({ pageKey: 'guide.redroot', locale: 'en', commentId: id(1), type: 'like', visitorId: 'a'.repeat(64), intent: 'add' });
+  const write = await transport.setReaction({ reactionVersion:2, pageKey: 'guide.redroot', locale: 'en', commentId: id(1), type: 'like', visitorId: 'a'.repeat(64), intent: 'add' });
   assert.deepEqual(Object.keys(write).sort(), ['ok', 'reaction']);
   for (const bad of [{ ...row, counts: { ...row.counts, like: -1 } }, { ...row, counts: { ...row.counts, extra: 1 } }, { ...row, selected: ['like', 'like'] }, { ...row, visitorId: 'must not echo' }, { ...row, canReact: 1 }]) {
     context.fetch = async () => ({ status: 200, json: async () => ({ ok: true, reaction: bad }) });
@@ -54,7 +54,7 @@ async function open(browser, locale, width, config = {}) {
   await page.route('**/*', route => new URL(route.request().url()).hostname === '127.0.0.1' ? route.continue() : route.abort());
   await page.addInitScript(({ current, historical, config }) => {
     if (config.storageBlocked) Object.defineProperty(Storage.prototype, 'getItem', { value() { throw Error('Synthetic blocked storage'); } });
-    const types = ['like', 'heart', 'smile', 'celebrate', 'thinking'];
+    const types = ['like', 'heart', 'smile', 'celebrate', 'thinking','sad'];
     const id = n => `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
     window.reactionReads = []; window.reactionWrites = []; window.commentPosts = []; window.selectionMap = {};
     window.reactionMode = 'success'; window.readMode = config.readFail ? 'fail' : 'success'; window.delayWrite = false; window.delayRead = false; window.locked = false; window.noReply = false; window.rootStatus = 'published';
@@ -65,7 +65,7 @@ async function open(browser, locale, width, config = {}) {
       for (const [entry, selections] of Object.entries(window.selectionMap)) if (entry.endsWith(':' + commentId)) for (const type of selections) counts[type]++;
       return { commentId, counts, selected: visitor ? [...(window.selectionMap[visitor + ':' + commentId] || [])] : [], canReact: !window.locked && ![id(6), id(7)].includes(commentId) };
     }
-    const transport = { fixtureCanWrite: true, turnstileSitekey: '0xFixture', async readDiscussion(request) {
+    const transport = { reactionVersion:2,fixtureCanWrite: true, turnstileSitekey: '0xFixture', async readDiscussion(request) {
       const root = comment(request.guideVersion === historical ? 11 : 1, request.guideVersion, 'version', null, window.rootStatus); root.replies = [comment(request.guideVersion === historical ? 12 : 2, request.guideVersion, 'version', request.guideVersion === historical ? 11 : 1)];
       const hidden = comment(6, current, 'version', null, 'hidden'); hidden.replies = [comment(7, current, 'version', 6)];
       const persistent = comment(101, historical, 'persistent'); persistent.replies = [comment(102, historical, 'persistent', 101)];
@@ -100,14 +100,14 @@ async function draft(page) {
 async function run(name, engine, executablePath) {
   const browser = await engine.launch({ headless: true, executablePath }); let groups = 0;
   try {
-    for (const locale of ['zh-CN', 'en']) for (const width of [390, 1440]) {
+    for (const locale of ['zh-CN', 'en']) for (const width of [320,390,1440]) {
       let page;
       if (process.env.KT_REACTION_LAYOUT_ONLY !== 'true') {
       page = await open(browser, locale, width); await reactReady(page);
       assert.equal(await page.locator(panel(6)).count(), 0); assert.equal(await page.locator(panel(7)).count(), 0);
       assert.equal(await page.locator('#kt-public-discussion img').count(), 0, 'Nickname remains text');
       for (const type of types) { await choose(page, 1, type); await chosen(page, 1, type, true); assert((await page.locator(chip(1, type)).innerText()).includes('✓')); }
-      assert.equal(await page.locator(panel(1) + ' .kt-discussion-reaction-chip').count(), 5);
+      assert.equal(await page.locator(panel(1) + ' .kt-discussion-reaction-chip').count(), 6);
       for (const type of types) { await page.locator(chip(1, type)).click(); await reactReady(page); }
       assert.equal(await page.locator(panel(1) + ' .kt-discussion-reaction-chip').count(), 1);
       await page.locator(add(1)).focus(); await page.keyboard.press('Enter'); await page.locator(option(1, 'like')).waitFor();
@@ -191,7 +191,7 @@ async function run(name, engine, executablePath) {
       assert.equal(await page.locator('#kt-comment-' + id(1)).count(), 1); await page.context().close(); groups++;
 
       page = await open(browser, locale, width); await reactReady(page);
-      await page.evaluate(({ id }) => { window.selectionMap['a'.repeat(64) + ':' + id] = ['thinking']; }, { id: id(1) });
+      await page.evaluate(({ id }) => { window.selectionMap['a'.repeat(64) + ':' + id] = ['thinking','sad']; }, { id: id(1) });
       const other = await page.context().newPage(); await other.route('**/*', route => new URL(route.request().url()).hostname === '127.0.0.1' ? route.continue() : route.abort()); await other.goto(base + '/index.html');
       await other.evaluate(({ key }) => localStorage.setItem(key, 'a'.repeat(64)), { key }); await chosen(page, 1, 'thinking', true);
       await other.close(); await page.context().close(); groups++;
@@ -215,7 +215,7 @@ async function run(name, engine, executablePath) {
             actions: n.getBoundingClientRect().height, reply: reply.getBoundingClientRect().height, report: report.getBoundingClientRect().height };
         });
         if (state === 'empty') assert(Math.max(...geometry.tops) - Math.min(...geometry.tops) < 3, 'Zero reaction add/reply/report share one toolbar line');
-        if (width === 390) assert([geometry.plus, geometry.reply, geometry.report].every(h => h >= 44), 'Mobile toolbar touch height');
+        if (width < 768) assert([geometry.plus, geometry.reply, geometry.report].every(h => h >= 44), 'Mobile toolbar touch height');
         else assert(geometry.plus <= 34 && geometry.reply <= 34 && geometry.report <= 34, 'Compact desktop toolbar height');
         const before = await page.locator(`#kt-comment-${id(1)}`).evaluate(n => n.getBoundingClientRect().height);
         await page.locator(add(1)).click(); const menu = page.locator(panel(1) + ' .kt-discussion-reaction-menu'); await menu.waitFor();

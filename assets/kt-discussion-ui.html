@@ -53,7 +53,7 @@
       active: 'Comment posted. Email verified; notifications for direct replies are active.',
       cancelled: 'Comment posted. This subscription was cancelled.', expired: 'Comment posted. This subscription expired.',
     },
-    reactions: 'Emoji reactions', reactionNames: { like: 'Helpful', heart: 'Thanks', smile: 'Happy', celebrate: 'Celebrate', thinking: 'Thinking' },
+    reactions: 'Emoji reactions', reactionNames: { like: 'Helpful', heart: 'Thanks', smile: 'Happy', celebrate: 'Celebrate', thinking: 'Thinking', sad: 'Sad / Sympathy' },
     reactionAdd: 'Add a reaction', reactionChoose: 'Choose an emoji', reactionSaving: 'Saving reaction…',
     reactionRate: 'Too many reaction changes. Please wait and try again.',
     reactionUnknown: 'Reaction state is uncertain. Reload reactions before making another change.',
@@ -103,7 +103,7 @@
       active: '评论已发布。邮箱已验证，直接回复提醒已启用。',
       cancelled: '评论已发布。此订阅已取消。', expired: '评论已发布。此订阅已过期。',
     },
-    reactions: 'Emoji 反应', reactionNames: { like: '有帮助', heart: '感谢', smile: '开心', celebrate: '庆祝', thinking: '疑惑' },
+    reactions: 'Emoji 反应', reactionNames: { like: '有帮助', heart: '感谢', smile: '开心', celebrate: '庆祝', thinking: '疑惑', sad: '难过、共情' },
     reactionAdd: '添加反应', reactionChoose: '选择表情', reactionSaving: '正在保存反应…',
     reactionRate: '反应操作过于频繁，请稍后重试。',
     reactionUnknown: '反应状态暂不确定。请先重新读取反应，再进行修改。',
@@ -173,8 +173,9 @@
   const state = { persistent: null, activeVersion: context.guideVersion, pages: new Map(), index: [], pending: false,
     uncertainTargets: new Set(), drafts: new Map(), activeTarget: null, activeReply: null, opener: null, posting: false, threadLocked: false };
   // Reactions are an independent, optional transport capability. No comment state is reused.
-  const reactionTypes = ['like', 'heart', 'smile', 'celebrate', 'thinking'];
-  const reactionEmoji = { like: '👍', heart: '❤️', smile: '😄', celebrate: '🎉', thinking: '🤔' };
+  const reactionProtocol = runtime.transport.reactionVersion === 2 ? { reactionVersion: 2 } : {};
+  const reactionTypes = ['like', 'heart', 'smile', 'celebrate', 'thinking', ...(reactionProtocol.reactionVersion === 2 ? ['sad'] : [])];
+  const reactionEmoji = { like: '👍', heart: '❤️', smile: '😄', celebrate: '🎉', thinking: '🤔', sad: '😢' };
   const reactionEnabled = typeof runtime.transport.readReactions === 'function';
   const reactionWriteEnabled = reactionEnabled && typeof runtime.transport.setReaction === 'function';
   const reactionVisitorKey = 'carambi:kt:emoji-visitor:v1';
@@ -348,7 +349,7 @@
       return view === reactionViewGeneration && identity === reactionIdentityGeneration &&
         item.revision === capture.revision && item.readSerial === capture.serial && !item.pending;
     };
-    const input = { pageKey: context.pageKey, locale: context.locale, commentIds: ids };
+    const input = { ...reactionProtocol, pageKey: context.pageKey, locale: context.locale, commentIds: ids };
     if (reactionVisitor) input.visitorId = reactionVisitor;
     try {
       const response = await runtime.transport.readReactions(input);
@@ -389,7 +390,7 @@
     item.pending = true; item.revision++; item.error = ''; closeReactionMenu(); paintReaction(id);
     let needsRead = false;
     try {
-      const response = await runtime.transport.setReaction({ pageKey: context.pageKey, locale: context.locale,
+      const response = await runtime.transport.setReaction({ ...reactionProtocol, pageKey: context.pageKey, locale: context.locale,
         commentId: id, type, visitorId: reactionVisitor, intent });
       if (response?.ok !== true || !validReaction(response.reaction, id)) throw Error('INVALID_REACTION_RESPONSE');
       if (view === reactionViewGeneration && identity === reactionIdentityGeneration) {
