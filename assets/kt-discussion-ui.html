@@ -537,7 +537,10 @@
       if (reactionEnabled && root.status === 'published') actions.append(makeReactionPanel(comment.id));
       if (isRoot && typeof comment.pageHash === 'string' && /^#[^?#]{1,255}$/.test(comment.pageHash)) {
         const anchor = make('a', 'kt-discussion-fragment', words.fragment);
-        anchor.href = context.pagePath + comment.pageHash;
+        // Content anchors belong to the original publication page; their translated IDs can differ.
+        const publicationLocale = ['en', 'zh-CN'].includes(comment.publicationLocale) ? comment.publicationLocale : context.locale;
+        const pagePath = context.pagePath.replace(/^\/en\//, '/');
+        anchor.href = (publicationLocale === 'en' ? '/en' : '') + pagePath + comment.pageHash;
         actions.append(anchor);
       }
       if (writeEnabled && replyAllowed({ comment, root })) {

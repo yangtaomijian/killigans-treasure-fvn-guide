@@ -55,6 +55,7 @@ jobs:
           done
           test -f _site/assets/social/killigans-treasure-guide-zh.png
           test -f _site/assets/social/killigans-treasure-guide-en.png
+          python3 -B scripts/kt-discussion-verify.py
           python3 -B scripts/verify_deployment.py
           git diff --exit-code
 
