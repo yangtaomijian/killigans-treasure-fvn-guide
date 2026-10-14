@@ -243,3 +243,4 @@
 /* Wrap long citation titles in both source views without widening the panel. */
 #kt-ai-panel .kt-ai-source-head h3{min-width:0;overflow-wrap:anywhere;}
 #kt-ai-panel .kt-ai-source-reader h3{overflow-wrap:anywhere;}
+#kt-ai-panel .kt-ai-citation{min-width:0;max-width:100%;overflow-wrap:anywhere;}
