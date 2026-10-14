@@ -30,6 +30,7 @@ PUBLIC_ASSETS.update(Path('en/assets') / name for name in ('favicon.svg', 'favic
 PUBLIC_ASSETS.update(Path('assets/ai-beta') / name for name in (
     'panel.mjs', 'panel.css', 'strings.mjs', 'question-limits.mjs', 'question-language.mjs', 'google-gis.mjs',
     'google-g.png', 'beta-application.mjs', 'adapter.mjs', 'transport.mjs', 'feedback.mjs',
+    'followup-config.mjs', 'followup-transport.mjs', 'mode-transport.mjs',
 ))
 
 

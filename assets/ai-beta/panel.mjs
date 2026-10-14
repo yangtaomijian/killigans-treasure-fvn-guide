@@ -1,7 +1,9 @@
+import {createModeTransport} from './mode-transport.mjs';
+import {FOLLOWUP_MODE_AVAILABLE} from './followup-config.mjs';
 import {t} from './strings.mjs';
 import {questionLengths} from './question-limits.mjs';
 import {questionLanguage,languageClarification} from './question-language.mjs';
-import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityText} from './adapter.mjs';
+import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mjs';
 (() => {
   'use strict';
   // Same-origin product panel; keep the guide's own navigation and TOC.
@@ -110,19 +112,25 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   funds.append(node('summary',t('可用额度详情')),budget);
   const betaApply=node('button',t('申请 Beta'),{id:'kt-ai-beta-apply',type:'button',class:'kt-ai-text-button'});betaApply.hidden=true;
   document.addEventListener('kt:beta-application-ready',()=>sync());
-  notice.append(identity,account,permission,modeCheck,funds,betaApply);
+  const modeChoice=node('select',undefined,{id:'kt-ai-mode','aria-label':t('问答模式')});
+  modeChoice.append(node('option',t('单轮问答（默认）'),{value:'single'}),node('option',t('Limited Follow-up · 主问＋2次追问'),{value:'followup'}));
+  const modeLabel=node('label',t('问答模式'),{for:'kt-ai-mode'}),modeRow=node('div',undefined,{class:'kt-ai-mode-row'});modeRow.append(modeLabel,modeChoice);modeRow.hidden=!FOLLOWUP_MODE_AVAILABLE;
+  const endGroup=node('button',t('结束本组'),{id:'kt-ai-end-group',type:'button',class:'kt-ai-text-button'});endGroup.hidden=true;
+  notice.append(modeRow,identity,account,permission,endGroup,modeCheck,funds,betaApply);
   const query = node('button',t('查看进度'),{id:'kt-ai-query',type:'button'}); query.hidden=true;
   const privacyCopy=t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。本站不保存问答正文；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。');
   let privacyReviewed=false,composing=false,compositionEndedAt=0,sending=false,cancelling=false,manualCheckNeeded=false;
   const privacyFirst=node('section',undefined,{id:'kt-ai-privacy-first',class:'kt-ai-privacy-first','aria-labelledby':'kt-ai-privacy-heading'});
   const privacyAck=node('button',t('我已了解，继续输入'),{id:'kt-ai-privacy-ack',type:'button'});
   const privacyMore=node('button',t('查看隐私说明'),{type:'button',class:'kt-ai-text-button'});
+  const singlePolicyNote=node('p',t('Open Beta：Google 登录后可试用，每账户最多 1 题，全站共 5 题（含站长首测），全站滚动 24 小时最多 1 题。本轮自首次正式开放起固定 14 天，期限结束或全站题数用完后结束；停用或重启不会延长期限，额度不会自动补充。'));
+  const followupPolicyNote=node('p',t('Limited Follow-up：每账户最多1组，全局5组，每24小时最多新增1组；每组最多3次完成交互及3次请求尝试，3000处理额度不自动补充。本轮测试为14天。'));followupPolicyNote.hidden=true;
   privacyFirst.append(node('h3',t('提问前，请先了解'),{id:'kt-ai-privacy-heading'}),
     node('p',t('可以先输入问题。首次发送前，请确认已阅读以下说明。')),
     node('p',t('AI 可能误读或遗漏攻略条件，请核对引用原文。')),
     node('p',t('无法读取你的游戏存档；请在问题中说明路线与进度。')),
     node('p',t('启用 AI 问答后，问题与相关攻略材料会由 OpenAI 处理；详见「隐私与数据」。')),
-    node('p',t('Open Beta：Google 登录后可试用，每账户最多 1 题，全站共 5 题（含站长首测），全站滚动 24 小时最多 1 题。本轮自首次正式开放起固定 14 天，期限结束或全站题数用完后结束；停用或重启不会延长期限，额度不会自动补充。')),privacyAck,privacyMore);
+    singlePolicyNote,followupPolicyNote,privacyAck,privacyMore);
   const empty=node('p',t('想查哪段攻略？在下方写下你的问题。'),{class:'kt-ai-empty'});
   const result=node('section',undefined,{id:'kt-ai-result','aria-label':t('问题与回答')});result.hidden=true;
   const scope=node('p',t('可选的 AI 问答工具，只检索本站公开的攻略资料，并根据检索结果生成回答。它不会搜索其他网站，也不会读取游戏代码或非公开内容。主线攻略和参考页面独立维护。'),{id:'kt-ai-scope',class:'kt-ai-note'});
@@ -147,6 +155,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   const privacyConfirm=node('button',t('我已了解，发送此问题'),{id:'kt-ai-privacy-confirm',type:'button'});privacyConfirm.hidden=true;
   let pendingConsentQuestion=null;
   privacyDialog.append(node('h3',t('隐私说明'),{id:'kt-ai-privacy-title'}),node('p',privacyCopy),node('p',t('AI 可能出错；攻略材料可能包含后续剧情，本工具不提供严格剧透过滤。请核对引用原文。')),node('p',t('服务保留必要的请求状态、额度结算与防滥用记录。问答正文仅在当前页面显示；刷新后不会恢复。')),node('p',t('为防止额度重复领取，服务长期保留与 Google 账户关联的身份摘要、已用试用题数和退出标记；重新登录、退出或停用账户不会重置题数。已结清账务明细保留 90 天，之后保留累计费用汇总；未结责任保留至人工核对完成。')),privacyConfirm,privacyClose);
+  const contextPrivacy=node('p',t('本组玩家原文、状态及问答从创建起最多暂存30分钟，可刷新恢复；结束本组、退出登录、撤回或停用账户时清除。实际状态与临时假设分开，不提供长期历史或跨组记忆。'));contextPrivacy.hidden=true;privacyDialog.append(contextPrivacy);
   function openPrivacy(forSend=false){pendingConsentQuestion=forSend?input.value:null;privacyConfirm.hidden=!forSend;privacyDialog.showModal();}
   privacyLink.addEventListener('click',()=>openPrivacy());privacyMore.addEventListener('click',()=>openPrivacy());privacyClose.addEventListener('click',()=>privacyDialog.close());
   privacyDialog.addEventListener('close',()=>{pendingConsentQuestion=null;privacyConfirm.hidden=true;});
@@ -188,7 +197,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     const bridge = node('div', undefined, { class: 'kt-ai-search-bridge' });
     const bridgeRow = node('div', undefined, { class: 'kt-ai-search-bridge-row' });
     bridgeRow.append(node('span', t('站内搜索')), searchAI);
-    bridge.append(bridgeRow, node('p', t('把搜索文字带入提问框，由你决定是否发送。')));
+    bridge.append(bridgeRow);
     searchDialog.querySelector('.kt-search-panel')?.prepend(bridge);
     searchAI.addEventListener('click', () => {
       const draft = searchInput?.value || '';
@@ -200,7 +209,8 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
   let busy = true, serverBusy = false, ready = false, uncertain = false, trialState = null, current = null;
   let returnTarget = launcher, frozenPage = null;
   let activeSource = null, readerState = null, hideTimer = null, suppressedFocusTrigger = null, pointerFocusTrigger = null, citationNumber = 0;
-  const transport = createPanelTransport({onSession:onSnapshot,onStateChange:sync});
+  const transport = createModeTransport({followupAvailable:FOLLOWUP_MODE_AVAILABLE,onSession:onSnapshot,onStateChange:sync});
+  modeChoice.value=transport.mode();singlePolicyNote.hidden=transport.mode()==='followup';followupPolicyNote.hidden=transport.mode()!=='followup';contextPrivacy.hidden=transport.mode()!=='followup';if(transport.mode()==='followup')privacyDialog.querySelector('p').textContent=t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。追问正文仅临时保存30分钟；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。');
   const cancelHide = () => { clearTimeout(hideTimer); hideTimer = null; };
   function restoreCitationFocus(trigger) {
     suppressedFocusTrigger = trigger;
@@ -228,7 +238,9 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     return Promise.resolve(new Map([...transport.sources()].filter(([url, source]) => canonicalURL(url) && ['en','zh'].includes(source.locale) && typeof source.title === 'string' && (typeof source.text === 'string' || source.mappingType === 'section' || source.variants?.section))));
   }
   async function sourceFor(reference) {
-    const group=(await loadSources()).get(canonicalURL(reference.url));
+    // A previous turn's citation keeps its own verified excerpt, even when
+    // another turn cites a different excerpt from the same canonical page.
+    const group=reference.source??(await loadSources()).get(canonicalURL(reference.url));
     return group?.variants?.[reference.mappingType??'excerpt']??group;
   }
   function placeSource() {
@@ -332,10 +344,11 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     const lengths=updateLength();
     const stopping=cancelling||sending||!!state.activeId;
     send.dataset.action=stopping?'stop':'send';
-    const accessible=cancelling?t('正在请求停止'):stopping?t('停止回答'):t('发送问题');
+    const accessible=cancelling?t('正在请求停止'):stopping?t('停止回答'):t(transport.mode()==='followup'&&trialState?.followup?.completedTurns?'发送追问':'发送问题');
     send.setAttribute('aria-label',accessible);send.title=accessible;send.setAttribute('aria-busy',String(cancelling));
-    send.disabled=stopping?cancelling||!trialState?.authenticated||!state.activeId:busy||state.busy||state.uncertain||!trialState?.authenticated||trialState?.beta?.approved!==true||!ready||pilot?.configured!==true||pilot.used===true||pilot.poolRemaining===0||pilot.rolling24hAvailable===false||composing||lengths.over||!input.value.trim();
+    send.disabled=stopping?cancelling||!trialState?.authenticated||!state.activeId:busy||state.busy||state.uncertain||state.pendingOther||!trialState?.authenticated||trialState?.beta?.approved!==true||!ready||pilot?.configured!==true||pilot.used===true||pilot.poolRemaining===0||pilot.rolling24hAvailable===false||composing||lengths.over||!input.value.trim();
     input.readOnly=sending||cancelling||state.busy;
+    input.disabled=transport.mode()==='followup'&&trialState?.followup?.closed===true;modeChoice.disabled=busy||state.busy||sending||cancelling;endGroup.disabled=busy||state.busy||state.uncertain||!!state.activeId;
     searchAI.disabled=sending||cancelling||state.busy;
     query.hidden=!state.activeId||(!manualCheckNeeded&&!state.uncertain&&sending);
     query.disabled=cancelling||!trialState?.authenticated;
@@ -408,6 +421,7 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
       if (narrow.matches) panel.setAttribute('aria-modal', 'true'); else panel.removeAttribute('aria-modal');
       position(); (narrow.matches ? close : input).focus({ preventScroll: true });
     });
+    if(transport.mode()==='followup'&&latestScrollPending)scrollToLatestQuestion();
     if (!busy) recover();
   }
   function closePanel() {
@@ -468,15 +482,30 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     button.addEventListener('keydown', event => { if (event.key === 'ArrowDown') { event.preventDefault(); showSource(button, reference, 'keyboard'); previewClose.focus({ preventScroll: true }); } });
     return button;
   }
+  let contextExpiryTimer=null,displayedCid=null,contextExpired=false,latestScrollPending=false;
+  function scrollToLatestQuestion() {
+    if(panel.hidden||scroll.hidden){latestScrollPending=true;return;}
+    const question=[...result.querySelectorAll('.kt-ai-question')].at(-1);
+    if(question){scroll.scrollTop+=question.getBoundingClientRect().top-scroll.getBoundingClientRect().top-12;latestScrollPending=false;}
+  }
+  modeChoice.addEventListener('change',async()=>{try{transport.setMode(modeChoice.value);input.placeholder=t('想了解什么？');input.disabled=false;endGroup.hidden=true;contextExpired=false;clearTimeout(contextExpiryTimer);clearQuestion();displayedCid=null;privacyReviewed=false;privacyFirst.hidden=false;singlePolicyNote.hidden=transport.mode()==='followup';followupPolicyNote.hidden=transport.mode()!=='followup';contextPrivacy.hidden=transport.mode()!=='followup';const p=privacyDialog.querySelector('p');p.textContent=transport.mode()==='followup'?t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。追问正文仅临时保存30分钟；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。'):privacyCopy;await recover();}catch{modeChoice.value=transport.mode();}});
+  endGroup.addEventListener('click',async()=>{try{contextExpired=false;await transport.endConversation();clearQuestion();await refreshSnapshot();}catch{status.textContent=t('本组状态待确认，请查看进度；不会自动重发。');}});
   let userId=null,renderGeneration=0,resultGeneration=0,pendingActions=0;
-  function clearQuestion(){resultGeneration++;dismissSource(false);returnToAnswer(false);current=null;input.value='';sizeInput();result.replaceChildren();result.hidden=true;status.textContent='';manualCheckNeeded=false;transport.clearSources();}
+  function clearQuestion(){resultGeneration++;latestScrollPending=false;dismissSource(false);returnToAnswer(false);current=null;input.value='';sizeInput();result.replaceChildren();result.hidden=true;status.textContent='';manualCheckNeeded=false;transport.clearSources();}
   function onSnapshot(state){
     if(state!==null&&(typeof state?.authenticated!=='boolean'||state.httpStatus!==undefined&&state.httpStatus!==200))throw Error('SESSION_UNAVAILABLE');
-    const next=state?.user?.id??null;
-    if(next!==userId){renderGeneration++;clearQuestion();privacyReviewed=false;privacyFirst.hidden=false;}userId=next;
+    const priorGroup=trialState?.followup;const next=state?.user?.id??null;
+    if(next!==userId){contextExpired=false;renderGeneration++;clearQuestion();privacyReviewed=false;privacyFirst.hidden=false;}userId=next;
     sessionPhase=state===null?'checking':'known';
     trialState=state;ready=state?.ready===true;serverBusy=!!state?.activeRequestId;
-    sync();
+    clearTimeout(contextExpiryTimer);
+    if(transport.mode()==='followup'){
+      if(priorGroup&&!state?.followup&&Date.now()>=priorGroup.expiresAt)contextExpired=true;
+      if(displayedCid&&displayedCid!==state?.followup?.id)clearQuestion();displayedCid=state?.followup?.id??null;
+      if(state?.followup)contextExpiryTimer=setTimeout(()=>{contextExpired=true;clearQuestion();status.textContent=t('本组已到期，临时上下文已清除');refreshSnapshot();},Math.max(1,state.followup.expiresAt-Date.now()));
+      if(!current&&state?.followup?.history?.length&&!state.activeRequestId){const h=state.followup.history.at(-1);current={question:h.question};render(transport.projectHistory(h.response));}
+    }
+    sync();if(contextExpired&&transport.mode()==='followup'&&state?.authenticated)status.textContent=t('本组已到期，临时上下文已清除');
   }
   function renderAccount(){
     const state=trialState,authenticated=sessionPhase==='known'&&state?.authenticated===true,pilot=state?.beta?.pilot;
@@ -491,12 +520,12 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
       account.hidden=false;google.hidden=false;google.disabled=!['ready','retry','error'].includes(googlePhase);
       betaApply.hidden=true;
       if(googleMessage){modeCheck.hidden=false;modeCheck.textContent=googleMessage;}
-      dismissSource(false);returnToAnswer(false);result.hidden=true;return;
+      dismissSource(false);returnToAnswer(false);result.hidden=!(transport.mode()==='followup'&&sessionPhase==='checking'&&current);return;
     }
     if(sessionPhase!=='known'){
       identity.textContent=sessionPhase==='checking'?(loggingOut?t('正在确认退出状态…'):t('正在确认登录…')):t('无法读取账户状态');
       if(sessionPhase==='error'){account.hidden=false;sessionRetry.hidden=false;modeCheck.hidden=false;modeCheck.textContent=t('尚不能确认当前账户，请重试。');}
-      dismissSource(false);returnToAnswer(false);result.hidden=true;return;
+      dismissSource(false);returnToAnswer(false);result.hidden=!(transport.mode()==='followup'&&sessionPhase==='checking'&&current);return;
     }
     if(current&&result.childNodes.length)result.hidden=false;
     account.hidden=false;permission.hidden=false;
@@ -510,6 +539,14 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
     }
     logout.hidden=false;
     identity.textContent=state.beta?.approved===true?t('已登录 · 可公开试用'):t('已登录');
+    if(transport.mode()==='followup'){
+      identity.textContent=t('已登录');const group=state.followup;endGroup.hidden=!group;
+      permission.textContent=state.beta?.approved!==true?t(descriptions[state.code]??'暂时无法确认试用资格'):group?group.closed?t(group.completedTurns>=3?'本组三次交互已结束':'本组请求尝试已用完'):t('已完成 {count}/3 次 · 可继续 {remaining} 次',{count:group.completedTurns,remaining:group.remaining}):state.ready?t('可发送主问；之后最多追问两次。'):t(descriptions[state.code]??'Limited Follow-up 尚未开放');
+      funds.hidden=false;budget.textContent=t('本组剩余 {units}/3000 处理额度，不自动补充。',{units:state.allowance?.balance??0});
+      if(group&&!group.closed&&!state.ready&&state.code){modeCheck.hidden=false;modeCheck.textContent=limitReason();}
+      input.placeholder=t(group?.closed?'本组三次交互已结束':group?.completedTurns?'继续追问，可省略已说明的条件':'想了解什么？');return;
+    }
+    endGroup.hidden=true;
     const ended=availabilityText(state)==='本轮测试已结束';
     permission.textContent=state.beta?.approved!==true?t(descriptions[state.code]??'暂时无法确认试用资格'):ended?t('本轮测试已结束'):!pilot?.configured?t('AI 问答尚未开放'):pilot.used?t('账户剩余 0 题'):pilot.poolRemaining===0?t('全站试用题数已用完'):t('账户剩余 {count} 题 · 全站剩余 {pool} 题',{count:Number.isInteger(pilot.remainingQuestions)?pilot.remainingQuestions:1,pool:Number.isInteger(pilot.poolRemaining)?pilot.poolRemaining:5});
     const shown=percentage(state.allowance?.percentage);funds.hidden=shown===null;
@@ -518,37 +555,54 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
       modeCheck.hidden=false;modeCheck.textContent=ended?t('可继续阅读攻略或使用站内搜索。'):limitReason();
     }
   }
+  function appendAnswerContent(parent,answer) {
+    if (typeof answer.text === 'string' && answer.text) parent.append(node('p', answer.text));
+    for (const segment of answer.segments || []) {
+      if (typeof segment.text !== 'string') continue;
+      parent.append(node('p', segment.text));
+      const links = node('div', undefined, { class: 'kt-ai-reference' });
+      for (const ref of segment.references || []) { const link = safeLink(ref); if (link) links.append(link); }
+      if (links.childNodes.length) parent.append(links);
+    }
+    if (typeof answer.note === 'string' && answer.note) parent.append(node('p', answer.note, { class: 'kt-ai-note' }));
+    if (typeof answer.scope === 'string' && answer.scope) parent.append(node('p', answer.scope, { class: 'kt-ai-note' }));
+  }
+  function appendCompletedHistory(excludeRequestId) {
+    if(transport.mode()!=='followup')return;
+    for(const h of trialState?.followup?.history??[]) {
+      if(excludeRequestId!==undefined&&h.requestId===excludeRequestId)continue;
+      const block=node('div',undefined,{class:'kt-ai-history-turn'});
+      block.append(node('p',h.question,{class:'kt-ai-question'}));
+      appendAnswerContent(block,transport.projectHistory(h.response));
+      result.append(block);
+    }
+  }
   function waiting(question) {
     dismissSource(false); returnToAnswer(false);
     current = Object.freeze({ question });
     result.hidden = false; result.dataset.state = 'waiting';
-    result.replaceChildren(node('p', question, { class: 'kt-ai-question' }), node('h3', t('正在整理回答…'), { id: 'kt-ai-stage' }), node('p', '', { id: 'kt-ai-wait' }), node('p', t('可以点击输入框右下角停止。关闭面板后仍会继续处理。'), { class: 'kt-ai-note' }));
-    scroll.scrollTop = Math.max(0, result.offsetTop - scroll.offsetTop - 12);
+    result.replaceChildren();appendCompletedHistory();
+    const currentQuestion=node('p', question, { class: 'kt-ai-question' });
+    result.append(currentQuestion, node('h3', t('正在整理回答…'), { id: 'kt-ai-stage' }), node('p', '', { id: 'kt-ai-wait' }), node('p', t('可以点击输入框右下角停止。关闭面板后仍会继续处理。'), { class: 'kt-ai-note' }));
+    if(transport.mode()==='followup')scrollToLatestQuestion();else scroll.scrollTop = Math.max(0, result.offsetTop - scroll.offsetTop - 12);
   }
   function render(answer) {
     const allowed = ['answer','missing','failure','limited','cancelled','timeout','refused','offtopic','clarification'];
     if (!answer || !allowed.includes(answer.status)) answer = connectionFailure(t('回答暂未就绪，请查看进度。问题不会自动重发。'));
     dismissSource(false); returnToAnswer(false);
     result.hidden = false; result.dataset.state = answer.status;
-    result.replaceChildren(node('p', current?.question || t('当前问题'), { class: 'kt-ai-question' }));
+    result.replaceChildren();
+    appendCompletedHistory(answer.raw?.requestId);
+    const currentQuestion=node('p', current?.question || t('当前问题'), { class: 'kt-ai-question' });result.append(currentQuestion);
     const labels = { 'qb1-product':t('基于攻略来源'), 'host-no-evidence': t('暂未找到可核对的攻略材料'), 'host-service-failure': answer.status === 'limited' ? t('提问暂不可用') : t('连接或处理未完成') };
     result.append(node('p', labels[answer.provenance] || t('本题处理状态'), { class: 'kt-ai-result-label' }), node('h3', ({'本题回答':t('回答'),'本题未完成':t('这次未能完成'),'本题状态待确认':t('结果待确认'),'本题已取消':t('已停止'),'暂未接收本题':t('暂时无法提问')})[answer.title]||t(answer.title)||t('处理状态')));
-    if (typeof answer.text === 'string' && answer.text) result.append(node('p', answer.text));
-    for (const segment of answer.segments || []) {
-      if (typeof segment.text !== 'string') continue;
-      result.append(node('p', segment.text));
-      const links = node('div', undefined, { class: 'kt-ai-reference' });
-      for (const ref of segment.references || []) { const link = safeLink(ref); if (link) links.append(link); }
-      if (links.childNodes.length) result.append(links);
-    }
-    if (typeof answer.note === 'string' && answer.note) result.append(node('p', answer.note, { class: 'kt-ai-note' }));
-    if (typeof answer.scope === 'string' && answer.scope) result.append(node('p', answer.scope, { class: 'kt-ai-note' }));
+    appendAnswerContent(result,answer);
     const kinds = { question_cap: t('本轮问题数量上限'), call_cap: t('AI 问答暂时不可用'), time_cap: t('本轮测试已结束'), inflight: t('正在处理上一题'), input: t('输入需要调整'), sensitive_input: t('请移除密钥或认证信息'), local_cap: t('本轮暂时无法继续提问') };
     if (answer.status === 'limited' && kinds[answer.kind]) result.append(node('p', kinds[answer.kind], { class: 'kt-ai-note' }));
     uncertain = answer.kind === 'local_connection';
     if (uncertain) result.append(node('p', t('请查看进度确认结果。确认前不会再次发送问题。'), { class: 'kt-ai-note' }));
     status.textContent = answer.serviceStatus || (answer.status === 'answer' ? t('本题回答已返回') : (typeof answer.title === 'string' ? t(answer.title) : t('本题处理未完成')));
-    scroll.scrollTop = Math.max(0, result.offsetTop - scroll.offsetTop - 12);
+    if(transport.mode()==='followup')scrollToLatestQuestion();else scroll.scrollTop = Math.max(0, result.offsetTop - scroll.offsetTop - 12);
   }
   function connectionFailure(text) {
     return { status: 'failure', provenance: 'host-service-failure', title: t('连接未完成'), text, segments: [], kind: 'local_connection' };
@@ -563,13 +617,13 @@ import {createPanelTransport, percentage,descriptions,feedbackFor,availabilityTe
       const answer=await action();
       if(generation===renderGeneration&&ownResult===resultGeneration){
         if(kind==='cancel'&&['cancelled','completed','failed','rejected'].includes(answer.raw?.status))sending=false;
-        render(answer);
+        render(answer);if(kind==='send'&&transport.mode()==='followup'&&answer.raw?.status==='completed'){input.value='';sizeInput();}
         manualCheckNeeded=!!transport.state().activeId;
         status.textContent=answer.serviceStatus||(answer.raw?.status==='cancelled'?t('已停止 · 结算结果见上方'):answer.raw?.status==='completed'?t('回答已完成'):kind==='cancel'&&manualCheckNeeded?t('停止结果待确认，请查看进度'):feedbackFor(answer.raw||answer,trialState));
         if(!transport.state().activeId)await refreshSnapshot();
       }
     }catch(error){
-      if(generation===renderGeneration&&ownResult===resultGeneration){manualCheckNeeded=!!transport.state().activeId;status.textContent=kind==='cancel'?t('停止结果待确认，请查看进度'):t(descriptions[error.message])||t('连接未完成，请查看进度；不会自动重发。');if(kind==='cancel'){const title=result.querySelector('h3');if(title)title.textContent=t('停止结果待确认');}}
+      if(generation===renderGeneration&&ownResult===resultGeneration){if(kind==='send'&&transport.mode()==='followup')render(connectionFailure(t('连接未完成，请查看进度；不会自动重发。')));manualCheckNeeded=!!transport.state().activeId;status.textContent=kind==='cancel'?t('停止结果待确认，请查看进度'):t(descriptions[error.message])||t('连接未完成，请查看进度；不会自动重发。');if(kind==='cancel'){const title=result.querySelector('h3');if(title)title.textContent=t('停止结果待确认');}}
     }finally{if(kind==='send')sending=false;if(kind==='cancel')cancelling=false;pendingActions--;busy=pendingActions>0;sync();}
   }
   async function recover(initial=false){

@@ -4,7 +4,8 @@ import re
 from verify_render import OUTPUT, PAGES
 
 ASSETS = {'panel.mjs', 'panel.css', 'strings.mjs', 'question-limits.mjs', 'question-language.mjs', 'google-gis.mjs',
-          'google-g.png', 'beta-application.mjs', 'adapter.mjs', 'transport.mjs', 'feedback.mjs'}
+          'google-g.png', 'beta-application.mjs', 'adapter.mjs', 'transport.mjs', 'feedback.mjs',
+          'followup-config.mjs', 'followup-transport.mjs', 'mode-transport.mjs'}
 
 def main():
     directory = OUTPUT / 'assets/ai-beta'

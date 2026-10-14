@@ -233,3 +233,13 @@
 
 #kt-ai-panel #kt-ai-beta-apply { grid-column:1 / -1; justify-self:start; padding-inline:0; font-size:12px; }
 #kt-beta-apply-entry[hidden] { display:none !important; }
+
+/* Local Limited Follow-up candidate; single mode remains the default. */
+.kt-ai-mode-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.6rem}
+.kt-ai-mode-row[hidden]{display:none}
+.kt-ai-mode-row select{max-width:100%;min-width:0;font:inherit;padding:.35rem;border:1px solid currentColor;border-radius:.3rem;background:transparent;color:inherit}
+.kt-ai-history-turn{border-bottom:1px solid #b5ab99;padding-bottom:.6rem;margin-bottom:.8rem}
+
+/* Wrap long citation titles in both source views without widening the panel. */
+#kt-ai-panel .kt-ai-source-head h3{min-width:0;overflow-wrap:anywhere;}
+#kt-ai-panel .kt-ai-source-reader h3{overflow-wrap:anywhere;}

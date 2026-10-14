@@ -1,9 +1,10 @@
 import {t} from './strings.mjs';
 // Thin display projection. The QB1 product transport and its session/ticket/CSRF rules are unchanged.
 import {createTransport,safeSourceURL,percentage} from './transport.mjs';
+import {createTransport as createFollowupTransport} from './followup-transport.mjs';
 import {descriptions as productDescriptions,feedbackFor as productFeedback} from './feedback.mjs';
 export {percentage};
-export const descriptions=Object.freeze({...productDescriptions,SOURCE_MAPPING_INCOMPLETE:'中文攻略来源暂未准备完整，本题未发送，也未扣试用题数。',SOURCE_MAPPING_VERSION_MISMATCH:'攻略来源版本暂不一致，本题未发送，也未扣试用题数。',PROVIDER_DISABLED:'AI 问答尚未开放',PROVIDER_ADMISSION_OFF:'AI 问答暂时不可用',GLOBAL_EMERGENCY_STOP:'AI 问答暂时不可用',BUDGET_CLOSED:'AI 问答暂时不可用',BETA_WINDOW_CLOSED:'AI 问答暂时不可用',BETA_QUESTION_LIMIT:'账户试用题数已用完，未提交新题。',OPEN_BETA_POOL_EXHAUSTED:'全站试用题数已用完，未提交新题。',OPEN_BETA_WITHDRAWN:'你已退出公开试用；本次未提交问题。',ACCOUNT_SNAPSHOT_EXPIRED:'AI 问答暂时不可用',BETA_DAILY_QUESTION_LIMIT:'全站滚动 24 小时内已发送 1 题，请在该题发送满 24 小时后重试。',BETA_EXECUTION_CLOSED:'AI 问答暂时不可用',SOURCE_LANGUAGE_MAPPING_MISSING:'部分所需来源的中文对应尚未核验，未生成回答。请改用英文提问或直接阅读攻略；本次已处理的检索仍按现有规则结算。',QUESTION_LANGUAGE_UNCLEAR:'问题语言不明确，请用中文或英文完整提问，或明确指定回答语言。',ANSWER_LANGUAGE_MISMATCH:'回答语言未符合要求，本题已停止，不会自动重试。'});
+export const descriptions=Object.freeze({...productDescriptions,FOLLOWUP_ACCOUNT_GROUP_LIMIT:'本账户追问测试组已用完，不会自动补充',FOLLOWUP_DAILY_GROUP_LIMIT:'全站24小时内已获准新增1组，请稍后再试',SHORT_SESSION_TURN_LIMIT:'本组三次交互已结束',REQUEST_ATTEMPT_LIMIT:'本组请求尝试已用完',CONVERSATION_EXPIRED:'本组已到期，临时上下文已清除',FOLLOWUP_NOT_ENABLED:'Limited Follow-up 尚未开放',FOLLOWUP_GROUP_LIMIT:'追问测试的全局组数已用完',FOLLOWUP_COST_STOP:'追问测试费用停止线已到，暂不接受请求',FOLLOWUP_FUNDS_INSUFFICIENT:'追问测试的可用资金不足',STALE_REVISION:'会话状态已变化，请查看进度，不会自动重发',SOURCE_MAPPING_INCOMPLETE:'中文攻略来源暂未准备完整，本题未发送，也未扣试用题数。',SOURCE_MAPPING_VERSION_MISMATCH:'攻略来源版本暂不一致，本题未发送，也未扣试用题数。',PROVIDER_DISABLED:'AI 问答尚未开放',PROVIDER_ADMISSION_OFF:'AI 问答暂时不可用',GLOBAL_EMERGENCY_STOP:'AI 问答暂时不可用',BUDGET_CLOSED:'AI 问答暂时不可用',BETA_WINDOW_CLOSED:'AI 问答暂时不可用',BETA_QUESTION_LIMIT:'账户试用题数已用完，未提交新题。',OPEN_BETA_POOL_EXHAUSTED:'全站试用题数已用完，未提交新题。',OPEN_BETA_WITHDRAWN:'你已退出公开试用；本次未提交问题。',ACCOUNT_SNAPSHOT_EXPIRED:'AI 问答暂时不可用',BETA_DAILY_QUESTION_LIMIT:'全站滚动 24 小时内已发送 1 题，请在该题发送满 24 小时后重试。',BETA_EXECUTION_CLOSED:'AI 问答暂时不可用',SOURCE_LANGUAGE_MAPPING_MISSING:'部分所需来源的中文对应尚未核验，未生成回答。请改用英文提问或直接阅读攻略；本次已处理的检索仍按现有规则结算。',QUESTION_LANGUAGE_UNCLEAR:'问题语言不明确，请用中文或英文完整提问，或明确指定回答语言。',ANSWER_LANGUAGE_MISMATCH:'回答语言未符合要求，本题已停止，不会自动重试。'});
 // Display only: a closed gate does not by itself prove that a Beta round ended.
 export function availabilityText(state={}) {
   if(!state||!['PROVIDER_DISABLED','PROVIDER_ADMISSION_OFF','BETA_WINDOW_CLOSED','BETA_EXECUTION_CLOSED','GLOBAL_EMERGENCY_STOP','BUDGET_CLOSED'].includes(state.code))return null;
@@ -14,9 +15,9 @@ export function availabilityText(state={}) {
 }
 export const feedbackFor=(value,state)=>t(availabilityText({...state,code:value?.code,ready:false})??descriptions[value?.code]??productFeedback(value));
 export function createPanelTransport(options={}) {
-  const product=createTransport({...options,fetchImpl:(...args)=>{queueMicrotask(()=>options.onStateChange?.());return (options.fetchImpl??globalThis.fetch)(...args);}}),sources=new Map();
+  const product=(options.mode==='followup'?createFollowupTransport:createTransport)({...options,fetchImpl:(...args)=>{queueMicrotask(()=>options.onStateChange?.());return (options.fetchImpl??globalThis.fetch)(...args);}}),sources=new Map();
   function project(raw) {
-    sources.clear();
+    if(options.mode!=='followup')sources.clear();
     const ids=new Map(),badIds=new Set();
     for(const s of raw.sources??[]) {
       const url=safeSourceURL(s.url??s.canonicalURL);
@@ -26,13 +27,13 @@ export function createPanelTransport(options={}) {
       const source={...s,canonicalURL:url,mappingType};if(mappingType==='section')delete source.text;ids.set(s.id,source);
     }
     for(const id of badIds)ids.delete(id);
-    const groups=new Map();
+    const groups=new Map(),roundSources=new Map();
     for(const source of ids.values()){const group=groups.get(source.canonicalURL)??[];group.push(source);groups.set(source.canonicalURL,group);}
     for(const [url,group]of groups){if(group.every(s=>s.locale===group[0].locale)){
       const variants={};for(const mappingType of ['excerpt','section']){const parts=group.filter(s=>s.mappingType===mappingType);if(parts.length)variants[mappingType]={...parts[0],...(mappingType==='excerpt'?{text:[...new Set(parts.map(s=>s.text))].join('\n\n')}: {})};}
-      sources.set(url,{...group[0],variants});
+      const source={...group[0],variants};sources.set(url,source);roundSources.set(url,source);
     }}
-    const segments=(raw.segments??[]).filter(s=>typeof s.text==='string').map(s=>({text:s.text,references:[...new Map((s.evidenceIds??[]).map(id=>ids.get(id)).filter(s=>s&&sources.has(s.canonicalURL)).map(s=>[s.canonicalURL+'|'+s.mappingType,{label:s.title,url:s.canonicalURL,locale:s.locale,mappingType:s.mappingType}])).values()]}));
+    const segments=(raw.segments??[]).filter(s=>typeof s.text==='string').map(s=>({text:s.text,references:[...new Map((s.evidenceIds??[]).map(id=>ids.get(id)).filter(s=>s&&roundSources.has(s.canonicalURL)).map(s=>[s.canonicalURL+'|'+s.mappingType,{label:s.title,url:s.canonicalURL,locale:s.locale,mappingType:s.mappingType,...(options.mode==='followup'?{source:roundSources.get(s.canonicalURL)}:{})}])).values()]}));
     const status=({completed:'answer',rejected:'limited',failed:'failure',pending:'failure',accepted:'failure',processing:'failure',waiting:'failure',unknown:'failure',UNKNOWN:'failure',cancelled:'cancelled'})[raw.status]??(raw.code?'limited':'failure');
     const uncertain=product.state().uncertain;
     const titles={answer:'本题回答',limited:'暂未接收本题',failure:uncertain?'本题状态待确认':'本题未完成',cancelled:'本题已取消'};
@@ -42,5 +43,5 @@ export function createPanelTransport(options={}) {
     const partial=raw.partial===true?t('部分条件缺少证据；请查看回答限制。'):null;
     return {status,title:titles[status],text:completed?'':descriptions[raw.code]?t(availabilityText({...product.state().session,code:raw.code,ready:false})??descriptions[raw.code]):raw.text??'',segments,provenance:raw.status==='completed'?'qb1-product':'host-service-failure',note:raw.note??'',serviceStatus:[completed?t('回答已完成'):null,partial,settlement].filter(Boolean).join(' · '),kind:uncertain?'local_connection':undefined,raw};
   }
-  return Object.freeze({...product,send:async question=>project(await product.send(question)),queryStatus:async()=>project(await product.queryStatus()),cancel:async()=>project(await product.cancel()),sources:()=>new Map(sources),clearSources:()=>sources.clear(),safeSourceURL});
+  return Object.freeze({...product,send:async question=>project(await product.send(question)),queryStatus:async()=>project(await product.queryStatus()),cancel:async()=>project(await product.cancel()),projectHistory:project,sources:()=>new Map(sources),clearSources:()=>sources.clear(),safeSourceURL});
 }
