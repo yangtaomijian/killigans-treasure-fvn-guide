@@ -112,11 +112,12 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
   funds.append(node('summary',t('可用额度详情')),budget);
   const betaApply=node('button',t('申请 Beta'),{id:'kt-ai-beta-apply',type:'button',class:'kt-ai-text-button'});betaApply.hidden=true;
   document.addEventListener('kt:beta-application-ready',()=>sync());
-  const modeChoice=node('select',undefined,{id:'kt-ai-mode','aria-label':t('问答模式')});
-  modeChoice.append(node('option',t('单轮问答（默认）'),{value:'single'}),node('option',t('Limited Follow-up · 主问＋2次追问'),{value:'followup'}));
-  const modeLabel=node('label',t('问答模式'),{for:'kt-ai-mode'}),modeRow=node('div',undefined,{class:'kt-ai-mode-row'});modeRow.append(modeLabel,modeChoice);modeRow.hidden=!FOLLOWUP_MODE_AVAILABLE;
+  const entryLabel=node('p',t('Limited Follow-up · 主问＋2次追问'),{id:'kt-ai-entry-label',class:'kt-ai-note'});
+  const fallbackChoice=node('button',t('使用一次性单轮备用'),{id:'kt-ai-single-fallback',type:'button',class:'kt-ai-text-button'});fallbackChoice.hidden=true;
+  const primaryChoice=node('button',t('返回追问聊天'),{id:'kt-ai-primary-chat',type:'button',class:'kt-ai-text-button'});primaryChoice.hidden=true;
+  const pendingChoice=node('button',t('查看另一个待确认请求'),{id:'kt-ai-pending-other',type:'button',class:'kt-ai-text-button'});pendingChoice.hidden=true;
   const endGroup=node('button',t('结束本组'),{id:'kt-ai-end-group',type:'button',class:'kt-ai-text-button'});endGroup.hidden=true;
-  notice.append(modeRow,identity,account,permission,endGroup,modeCheck,funds,betaApply);
+  notice.append(entryLabel,identity,account,permission,fallbackChoice,primaryChoice,pendingChoice,endGroup,modeCheck,funds,betaApply);
   const query = node('button',t('查看进度'),{id:'kt-ai-query',type:'button'}); query.hidden=true;
   const privacyCopy=t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。本站不保存问答正文；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。');
   let privacyReviewed=false,composing=false,compositionEndedAt=0,sending=false,cancelling=false,manualCheckNeeded=false;
@@ -210,7 +211,7 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
   let returnTarget = launcher, frozenPage = null;
   let activeSource = null, readerState = null, hideTimer = null, suppressedFocusTrigger = null, pointerFocusTrigger = null, citationNumber = 0;
   const transport = createModeTransport({followupAvailable:FOLLOWUP_MODE_AVAILABLE,onSession:onSnapshot,onStateChange:sync});
-  modeChoice.value=transport.mode();singlePolicyNote.hidden=transport.mode()==='followup';followupPolicyNote.hidden=transport.mode()!=='followup';contextPrivacy.hidden=transport.mode()!=='followup';if(transport.mode()==='followup')privacyDialog.querySelector('p').textContent=t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。追问正文仅临时保存30分钟；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。');
+  singlePolicyNote.hidden=true;followupPolicyNote.hidden=false;contextPrivacy.hidden=false;privacyDialog.querySelector('p').textContent=t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。追问正文仅临时保存30分钟；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。');
   const cancelHide = () => { clearTimeout(hideTimer); hideTimer = null; };
   function restoreCitationFocus(trigger) {
     suppressedFocusTrigger = trigger;
@@ -341,6 +342,12 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
   function limitReason(){return trialState?.ready?'':t(availabilityText(trialState)??descriptions[trialState?.code])||t('暂未接收请求；可继续阅读攻略。');}
   function sync(){
     const state=transport.state(),pilot=trialState?.beta?.pilot;
+    const followup=transport.mode()==='followup';notice.dataset.entry=followup?'followup':state.singleConsent?'single-fallback':'single-recovery';
+    entryLabel.textContent=t(followup?'Limited Follow-up · 主问＋2次追问':state.singleConsent?'一次性单轮备用：不继承追问上下文。':'旧单轮请求：仅查询或取消，不会自动发送新题。');
+    fallbackChoice.hidden=!followup||!state.fallbackAvailable;fallbackChoice.disabled=busy||state.busy||state.probing;
+    primaryChoice.hidden=followup;primaryChoice.disabled=busy||state.busy||!!state.activeId||state.uncertain||state.pendingOther;
+    pendingChoice.hidden=!state.pendingOther;pendingChoice.disabled=busy||state.busy;
+    singlePolicyNote.hidden=followup;followupPolicyNote.hidden=!followup;contextPrivacy.hidden=!followup;
     const lengths=updateLength();
     const stopping=cancelling||sending||!!state.activeId;
     send.dataset.action=stopping?'stop':'send';
@@ -348,7 +355,7 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
     send.setAttribute('aria-label',accessible);send.title=accessible;send.setAttribute('aria-busy',String(cancelling));
     send.disabled=stopping?cancelling||!trialState?.authenticated||!state.activeId:busy||state.busy||state.uncertain||state.pendingOther||!trialState?.authenticated||trialState?.beta?.approved!==true||!ready||pilot?.configured!==true||pilot.used===true||pilot.poolRemaining===0||pilot.rolling24hAvailable===false||composing||lengths.over||!input.value.trim();
     input.readOnly=sending||cancelling||state.busy;
-    input.disabled=transport.mode()==='followup'&&trialState?.followup?.closed===true;modeChoice.disabled=busy||state.busy||sending||cancelling;endGroup.disabled=busy||state.busy||state.uncertain||!!state.activeId;
+    input.disabled=transport.mode()==='followup'&&trialState?.followup?.closed===true;endGroup.disabled=busy||state.busy||state.uncertain||!!state.activeId;
     searchAI.disabled=sending||cancelling||state.busy;
     query.hidden=!state.activeId||(!manualCheckNeeded&&!state.uncertain&&sending);
     query.disabled=cancelling||!trialState?.authenticated;
@@ -488,14 +495,24 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
     const question=[...result.querySelectorAll('.kt-ai-question')].at(-1);
     if(question){scroll.scrollTop+=question.getBoundingClientRect().top-scroll.getBoundingClientRect().top-12;latestScrollPending=false;}
   }
-  modeChoice.addEventListener('change',async()=>{try{transport.setMode(modeChoice.value);input.placeholder=t('想了解什么？');input.disabled=false;endGroup.hidden=true;contextExpired=false;clearTimeout(contextExpiryTimer);clearQuestion();displayedCid=null;privacyReviewed=false;privacyFirst.hidden=false;singlePolicyNote.hidden=transport.mode()==='followup';followupPolicyNote.hidden=transport.mode()!=='followup';contextPrivacy.hidden=transport.mode()!=='followup';const p=privacyDialog.querySelector('p');p.textContent=transport.mode()==='followup'?t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。追问正文仅临时保存30分钟；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。'):privacyCopy;await recover();}catch{modeChoice.value=transport.mode();}});
+  const drafts=new Map(),draftKey=()=>transport.mode();
+  async function changeEntry(action){
+    if(busy||transport.state().busy)return;
+    const oldKey=draftKey(),draft=input.value;drafts.set(oldKey,draft);clearQuestion();busy=true;sync();
+    try{await action();contextExpired=false;clearTimeout(contextExpiryTimer);displayedCid=null;privacyDialog.querySelector('p').textContent=transport.mode()==='followup'?t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。追问正文仅临时保存30分钟；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。'):privacyCopy;input.value=drafts.get(draftKey())??'';privacyReviewed=false;privacyFirst.hidden=false;manualCheckNeeded=!!transport.state().activeId;}
+    catch(error){input.value=draft;status.textContent=error.message==='FALLBACK_UNAVAILABLE'?t('单轮备用当前不可用，请重新读取资格。'):t(descriptions[error.message]??'本组状态待确认，请查看进度；不会自动重发。');}
+    finally{busy=false;sizeInput();sync();}
+  }
+  fallbackChoice.addEventListener('click',()=>changeEntry(()=>transport.chooseFallback()));
+  primaryChoice.addEventListener('click',()=>changeEntry(()=>transport.returnToFollowup()));
+  pendingChoice.addEventListener('click',()=>changeEntry(()=>transport.recoverOther()));
   endGroup.addEventListener('click',async()=>{try{contextExpired=false;await transport.endConversation();clearQuestion();await refreshSnapshot();}catch{status.textContent=t('本组状态待确认，请查看进度；不会自动重发。');}});
   let userId=null,renderGeneration=0,resultGeneration=0,pendingActions=0;
   function clearQuestion(){resultGeneration++;latestScrollPending=false;dismissSource(false);returnToAnswer(false);current=null;input.value='';sizeInput();result.replaceChildren();result.hidden=true;status.textContent='';manualCheckNeeded=false;transport.clearSources();}
   function onSnapshot(state){
     if(state!==null&&(typeof state?.authenticated!=='boolean'||state.httpStatus!==undefined&&state.httpStatus!==200))throw Error('SESSION_UNAVAILABLE');
     const priorGroup=trialState?.followup;const next=state?.user?.id??null;
-    if(next!==userId){contextExpired=false;renderGeneration++;clearQuestion();privacyReviewed=false;privacyFirst.hidden=false;}userId=next;
+    if(next!==userId){drafts.clear();contextExpired=false;renderGeneration++;clearQuestion();privacyReviewed=false;privacyFirst.hidden=false;}userId=next;
     sessionPhase=state===null?'checking':'known';
     trialState=state;ready=state?.ready===true;serverBusy=!!state?.activeRequestId;
     clearTimeout(contextExpiryTimer);

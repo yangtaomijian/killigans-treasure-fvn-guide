@@ -3,23 +3,23 @@ from pathlib import Path
 import re
 from verify_render import OUTPUT, PAGES
 
-ASSETS = {'panel.mjs', 'panel.css', 'strings.mjs', 'question-limits.mjs', 'question-language.mjs', 'google-gis.mjs',
-          'google-g.png', 'beta-application.mjs', 'adapter.mjs', 'transport.mjs', 'feedback.mjs',
-          'followup-config.mjs', 'followup-transport.mjs', 'mode-transport.mjs'}
+from ai_release import ASSETS, LEGACY, verify
 
 def main():
     directory = OUTPUT / 'assets/ai-beta'
-    assert {p.name for p in directory.iterdir()} == ASSETS, 'Unexpected Ask the Guide asset'
+    release=verify(OUTPUT)
+    directory=directory/'releases'/release
     for locale in ('', 'en/'):
         for page in PAGES:
             path = OUTPUT / (locale + page + '.html')
             html = path.read_text()
             for asset in ('panel.css', 'google-gis.mjs', 'beta-application.mjs'):
-                urls = re.findall(r'(?:href|src)="([^"<>]*assets/ai-beta/' + re.escape(asset) + r')"', html)
+                urls = re.findall(r'(?:href|src)="([^"<>]*assets/ai-beta/releases/' + release + '/' + re.escape(asset) + r')"', html)
                 assert len(urls) == 1, (locale, page, asset)
                 assert (path.parent / urls[0]).resolve() == (directory / asset).resolve(), (locale, page, asset)
     forbidden = ('local ui candidate', 'candidate only', 'provider off', 'provider disabled', 'provider 已关闭')
-    for path in directory.iterdir():
+    for path in (OUTPUT/'assets/ai-beta').rglob('*'):
+        if not path.is_file(): continue
         if path.suffix in {'.mjs', '.css'}:
             text = path.read_text().lower()
             assert not any(word in text for word in forbidden), path

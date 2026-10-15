@@ -7,6 +7,7 @@ from pathlib import Path
 import json
 import re
 import sys
+from ai_release import public_paths
 from urllib.parse import unquote, urlsplit
 
 
@@ -33,6 +34,10 @@ PUBLIC_ASSETS.update(Path('assets/ai-beta') / name for name in (
     'followup-config.mjs', 'followup-transport.mjs', 'mode-transport.mjs',
 ))
 
+
+release_assets,release_json=public_paths(OUTPUT)
+PUBLIC_ASSETS.update(release_assets)
+PUBLIC_JSON.update(release_json)
 
 def is_native_theme_stylesheet(tag, values):
     # Quarto intentionally shares these IDs across its primary, alternate and fallback sheets.

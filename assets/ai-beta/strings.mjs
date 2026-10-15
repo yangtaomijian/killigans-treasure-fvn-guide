@@ -1,10 +1,16 @@
 // Interface copy only; never translates questions, answers or source bodies.
 export const locale = /^en(?:-|$)/i.test(document.documentElement.lang) ? "en" : "zh";
 export const english = Object.freeze({
+"额度状态异常，无法继续提问；已有请求仍可查询或取消。":"Allowance state is unavailable. New questions are blocked; existing requests can still be checked or cancelled.",
+"使用一次性单轮备用":"Use one single-question fallback",
+"返回追问聊天":"Back to follow-up chat",
+"查看另一个待确认请求":"Review the other pending request",
+"一次性单轮备用：不继承追问上下文。":"One single-question fallback: no follow-up context.",
+"旧单轮请求：仅查询或取消，不会自动发送新题。":"Previous single-question request: check or cancel it; no new question will be sent automatically.",
+"单轮备用当前不可用，请重新读取资格。":"Single-question fallback is unavailable. Reload eligibility.",
+
   '本账户追问测试组已用完，不会自动补充': 'Your follow-up trial group has been used. It does not refill.',
   '全站24小时内已获准新增1组，请稍后再试': 'One new group has already been admitted in the last 24 hours. Try later.',
-  "问答模式": "Question mode",
-  "单轮问答（默认）": "Single question (default)",
   "Limited Follow-up · 主问＋2次追问": "Limited Follow-up · Main question + 2 follow-ups",
   "结束本组": "End this group",
   "发送追问": "Send follow-up",
