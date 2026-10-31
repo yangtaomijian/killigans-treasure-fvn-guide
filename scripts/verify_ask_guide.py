@@ -1,11 +1,12 @@
 """Check the publishable bilingual Ask the Guide integration, not QA snapshots."""
 from pathlib import Path
 import re
-from verify_render import OUTPUT, PAGES
+from verify_render import SITE, OUTPUT, PAGES
 
-from ai_release import ASSETS, LEGACY, verify
+from ai_release import ASSETS, LEGACY, verify, include_enabled
 
 def main():
+    enabled=include_enabled(SITE)
     directory = OUTPUT / 'assets/ai-beta'
     release=verify(OUTPUT)
     directory=directory/'releases'/release
@@ -13,6 +14,9 @@ def main():
         for page in PAGES:
             path = OUTPUT / (locale + page + '.html')
             html = path.read_text()
+            if not enabled:
+                assert 'assets/ai-beta/' not in html and 'kt-ai-release' not in html, (path, 'Unexpected closed-publication AI bootstrap')
+                continue
             for asset in ('panel.css', 'google-gis.mjs', 'beta-application.mjs'):
                 urls = re.findall(r'(?:href|src)="([^"<>]*assets/ai-beta/releases/' + release + '/' + re.escape(asset) + r')"', html)
                 assert len(urls) == 1, (locale, page, asset)

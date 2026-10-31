@@ -78,3 +78,11 @@ def verify(output):
     for p in target.rglob('*.mjs'):
         assert 'Question mode' not in p.read_text() and 'kt-ai-mode-row' not in p.read_text(), ('Retired entry returned',p)
     return release
+
+def include_enabled(site):
+    # Honor the two existing Quarto include lists; no runtime or expiry gate.
+    enabled=[]
+    for file,include in (('_quarto.yml','assets/kt-ask-guide.html'),('en/_quarto.yml','../assets/kt-ask-guide.html')):
+        enabled.append(any(line.strip() == '- '+include for line in (site/file).read_text().splitlines()))
+    assert enabled[0] == enabled[1], 'Bilingual Ask the Guide include mismatch'
+    return enabled[0]

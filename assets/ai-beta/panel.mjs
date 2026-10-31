@@ -78,16 +78,13 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
     frame = requestAnimationFrame(settle);
   }
   const search = document.getElementById('kt-search-launcher');
-  if (!search || document.getElementById('kt-ai-launcher')) return;
+  if (!search || document.getElementById('kt-ai-panel')) return;
   const node = (tag, text, attrs = {}) => {
     const el = document.createElement(tag);
     if (text !== undefined) el.textContent = text;
     for (const [key, val] of Object.entries(attrs)) el.setAttribute(key, val);
     return el;
   };
-  const launcher = node('button', undefined, { id: 'kt-ai-launcher', type: 'button', 'aria-expanded': 'false', 'aria-controls': 'kt-ai-panel' });
-  launcher.append(node('span', t('AI 问攻略')), node('span', 'Beta', { class: 'kt-ai-mode' }));
-  search.after(launcher);
   const panel = node('aside', undefined, { id: 'kt-ai-panel', 'aria-labelledby': 'kt-ai-title' });
   panel.hidden = true;
   const head = node('div', undefined, { class: 'kt-ai-head' });
@@ -199,7 +196,7 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
     const bridgeRow = node('div', undefined, { class: 'kt-ai-search-bridge-row' });
     bridgeRow.append(node('span', t('站内搜索')), searchAI);
     bridge.append(bridgeRow);
-    searchDialog.querySelector('.kt-search-panel')?.prepend(bridge);
+    searchDialog.querySelector('.kt-search-head')?.after(bridge);
     searchAI.addEventListener('click', () => {
       const draft = searchInput?.value || '';
       const launch = () => openPanel({ origin: search, draft });
@@ -208,7 +205,7 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
     });
   }
   let busy = true, serverBusy = false, ready = false, uncertain = false, trialState = null, current = null;
-  let returnTarget = launcher, frozenPage = null;
+  let returnTarget = search, frozenPage = null;
   let activeSource = null, readerState = null, hideTimer = null, suppressedFocusTrigger = null, pointerFocusTrigger = null, citationNumber = 0;
   const transport = createModeTransport({followupAvailable:FOLLOWUP_MODE_AVAILABLE,onSession:onSnapshot,onStateChange:sync});
   singlePolicyNote.hidden=true;followupPolicyNote.hidden=false;contextPrivacy.hidden=false;privacyDialog.querySelector('p').textContent=t('启用 AI 问答后，问题和相关攻略材料会由 OpenAI 处理。追问正文仅临时保存30分钟；OpenAI 按其政策处理数据，不能保证零保留。请勿填写账号信息、密钥或其他敏感内容。');
@@ -383,15 +380,6 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
       panel.style.setProperty('--kt-ai-mobile-height', (viewport?.height || innerHeight) + 'px');
     }
   }
-  function placeLauncher() {
-    const mobileRow = document.getElementById('kt-mobile-header-row');
-    mobileRow?.classList.toggle('kt-ai-mobile-entry', narrow.matches);
-    if (narrow.matches && mobileRow) mobileRow.insertBefore(launcher, document.getElementById('kt-page-toc-trigger'));
-    else search.after(launcher);
-    launcher.firstElementChild.textContent = narrow.matches ? 'AI' : t('AI 问攻略');
-    launcher.setAttribute('aria-label', t('AI 问攻略（Open Beta）'));
-
-  }
   function freezePage() {
     if (frozenPage) return;
     frozenPage = { x: scrollX, y: scrollY, styles: {}, inert: [] };
@@ -410,7 +398,7 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
     document.documentElement.classList.remove('kt-ai-mobile-modal-open'); document.body.classList.remove('kt-ai-mobile-modal-open');
     window.scrollTo(saved.x, saved.y);
   }
-  function openPanel({ origin = launcher, draft } = {}) {
+  function openPanel({ origin = search, draft } = {}) {
     if (panel.hidden) {
       returnTarget = origin;
       if (narrow.matches) {
@@ -423,7 +411,7 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
       status.textContent = draft.trim() ? t('已带入搜索文字') : '';
     }
     preserveReading(() => {
-      panel.hidden = false; document.body.classList.add('kt-ai-open'); launcher.setAttribute('aria-expanded', 'true');
+      panel.hidden = false; document.body.classList.add('kt-ai-open'); searchAI.setAttribute('aria-expanded', 'true');
       panel.setAttribute('role', narrow.matches ? 'dialog' : 'complementary');
       if (narrow.matches) panel.setAttribute('aria-modal', 'true'); else panel.removeAttribute('aria-modal');
       position(); (narrow.matches ? close : input).focus({ preventScroll: true });
@@ -434,12 +422,11 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
   function closePanel() {
     dismissSource(false); returnToAnswer(false);
     preserveReading(() => {
-      panel.hidden = true; document.body.classList.remove('kt-ai-open'); launcher.setAttribute('aria-expanded', 'false');
+      panel.hidden = true; document.body.classList.remove('kt-ai-open'); searchAI.setAttribute('aria-expanded', 'false');
       panel.removeAttribute('aria-modal'); releasePage();
-      (returnTarget?.isConnected ? returnTarget : launcher).focus({ preventScroll: true });
+      (returnTarget?.isConnected ? returnTarget : search).focus({ preventScroll: true });
     });
   }
-  launcher.addEventListener('click', () => panel.hidden ? openPanel() : closePanel());
   close.addEventListener('click', closePanel);
   document.addEventListener('keydown', event => {
     if(document.getElementById('kt-beta-application')?.open)return;
@@ -461,7 +448,7 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
       else closePanel();
     }
   });
-  narrow.addEventListener('change', () => { if (!panel.hidden) closePanel(); placeLauncher(); position(); });
+  narrow.addEventListener('change', () => { if (!panel.hidden) closePanel();  position(); });
   window.addEventListener('resize', () => { position(); if (!narrow.matches) placeSource(); });
   window.visualViewport?.addEventListener('resize', position);
   window.visualViewport?.addEventListener('scroll', position);
@@ -658,5 +645,5 @@ import {percentage,descriptions,feedbackFor,availabilityText} from './adapter.mj
   let googleAttempt=null;
   window.KTProductGoogle=Object.freeze({requiresAccess:()=>false,prepare:async()=>{googleAttempt=await transport.nonce();return {nonce:googleAttempt.nonce};},complete:async credential=>{const attempt=googleAttempt;googleAttempt=null;if(!attempt?.csrf)throw Error('GOOGLE_NONCE_REQUIRED');sessionPhase='checking';ready=false;sync();try{return await transport.loginGoogle(credential,attempt.csrf);}catch(error){sessionPhase='error';trialState=null;sync();throw error;}},onUIStatus:({phase,message=''})=>{googlePhase=phase;googleMessage=message;sync();},refreshUI:()=>sync()});
   window.addEventListener('focus',()=>{if(sessionPhase==='access'&&!busy)recover();});
-  placeLauncher();sync();recover(true);
+  sync();recover(true);
 })();
