@@ -155,7 +155,7 @@ async function runEngine(engine, launcher, options = {}) {
     await page.locator("#kt-search-launcher").click();
     await page.locator("#kt-search-input").fill("Macsen");
     await page.locator(".kt-search-result").first().click();
-    await page.waitForFunction(() => document.querySelectorAll("mark.kt-search-mark").length > 0);
+    await page.waitForFunction(() => document.querySelectorAll("mark.kt-search-mark").length > 0 && document.querySelector(":target"));
     result.marks = await page.evaluate(() => {
       const mark = document.querySelector("mark.kt-search-mark");
       const target = document.querySelector(":target");

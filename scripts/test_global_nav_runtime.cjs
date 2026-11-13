@@ -7,7 +7,7 @@ const path = require("node:path");
 const { webkit, chromium } = require("playwright");
 
 const base = process.env.KT_BASE_URL || "http://127.0.0.1:18775";
-const shots = path.resolve(__dirname, "../test-results/global-nav");
+const shots = process.env.KT_QA_DIR ? path.resolve(process.env.KT_QA_DIR) : path.resolve(__dirname, "../test-results/global-nav");
 const edgeExecutable = "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge";
 const url = (locale, route = "index", suffix = "") =>
   `${base}/${locale === "en" ? "en/" : ""}${route}.html${suffix}`;

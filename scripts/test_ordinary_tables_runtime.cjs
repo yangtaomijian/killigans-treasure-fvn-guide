@@ -161,6 +161,13 @@ async function run(engine, launcher, options = {}) {
           })),
             ['PROLOGUE','THE SPARK','THE LESSONS','THE BEASTSLAYER','THE PURSUIT','THE DREADSTONE','???','THE CATALYST','THE THRUST']);
         }
+        if (route === 'reference/personality') {
+          // The approved Personality dialogue table predates this integration;
+          // the old aggregate inventory had not yet included its eight rows.
+          assert.equal(semantic353.length,1);
+          assert.deepEqual(semantic353.map(t=>[t.headers,t.rows,t.cells]),[[2,9,16]]);
+          assert.equal(await page.locator(`${ordinary} code`).count(),4);
+        }
         if (route === 'collectibles/dressing-room') {
           assert.equal(semantic353.length,2);
           assert.deepEqual(semantic353.map(t=>t.headers),[3,2]);
@@ -318,7 +325,7 @@ async function run(engine, launcher, options = {}) {
     }
     // Per locale: +1 Help table (10 rows/5 headers/45 cells), Equipment
     // +6 headers/+46 cells, and one fewer three-column table.
-    // Also account exactly for the pre-existing Personality table in the inventory
+    // Also account exactly for the pre-existing Personality table checked above
     // (+1 table/9 rows/2 headers/16 cells/4 choices per locale), without editing it.
     assert.deepEqual(totals, { states: 504, tables: 46, three: 12, rows: 318, headers: 154, cells: 990,
       links: 64, code: 82, focus: 12 }, `${engine}: ordinary table inventory`);
