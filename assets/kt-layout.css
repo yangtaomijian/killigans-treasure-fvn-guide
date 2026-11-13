@@ -60,10 +60,10 @@
     padding: 1.5rem 0 0 2rem;
   }
 
-  /* Keep prose readable while tables, images and maps use the wider article. */
+  /* Desktop prose and lists share the article edge; table sizing stays independent. */
   #quarto-content > #quarto-document-content .kt-ordinary-page
   :is(p:not(:has(img, picture, svg)), ul, ol, dl):not(table *) {
-    max-width: 47.5rem;
+    max-width: none;
   }
 
   #kt-page-toc-panel #TOC {
