@@ -1,6 +1,6 @@
 /* V10: original CSS paper tabs and facing leaves. */
 #kt-reading.v5-book{display:block;padding:17px 20px 23px!important;margin-top:72px!important;overflow:visible;}
-.v10-tabs{position:absolute;display:flex;align-items:end;gap:7px;top:-39px;left:28px;right:28px;height:56px;z-index:4;}
+.v10-tabs{position:absolute;display:flex;align-items:end;gap:7px;top:-39px;left:28px;right:28px;height:56px;z-index:5;}
 .v10-tabs a{flex:1;position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;padding:11px 8px 17px;background:linear-gradient(105deg,#b99b68,#d8c191 55%,#b89a66);border:1px solid #886844;border-radius:7px 7px 0 0;box-shadow:inset 1px 1px #f4dfb377,2px -2px 4px #0003;color:#49331e!important;text-decoration:none!important;font:14px/1.35 Georgia,"Songti SC",serif;transform:translateY(7px) rotate(-.6deg);transition:transform .16s ease;}
 .v10-tabs a:nth-child(2){transform:translateY(7px) rotate(.5deg)}.v10-tabs a:nth-child(3){transform:translateY(7px) rotate(-.3deg)}
 .v10-tabs a[aria-selected=true]{background:linear-gradient(100deg,#ddc595,#f1e1b9 50%,#d2b783);transform:translateY(0);font-weight:600;box-shadow:inset 1px 1px #fff6,0 -3px 9px #0002;}
