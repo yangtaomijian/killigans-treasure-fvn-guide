@@ -17,6 +17,7 @@ for locale,prefix in [('zh',''),('en','en/')]:
  t=t.replace('</head>',f'<link rel="preload" as="image" href="{depth}assets/home/redroot-ai.webp" fetchpriority="high">\n</head>',1)
  t=t.replace('</head>','\n'.join(f'<link rel="stylesheet" href="{depth}assets/home/{x}.css">'for x in CSS)+'\n</head>',1)
  t=t.replace('</body>',''.join(f'<script src="{depth}assets/home/{x}.js"></script>'for x in ['experience','approach','tabs','map-loader'])+'\n</body>',1)
+ t=t.replace('</body>',f'<script defer src="{depth}assets/portrait-blink/blink.js"></script>\n</body>',1)
  assert '私人原型'not in t and 'Private prototype'not in t
  p.write_text(t)
 shutil.copytree(SITE/'assets/home',OUT/'assets/home',dirs_exist_ok=True)

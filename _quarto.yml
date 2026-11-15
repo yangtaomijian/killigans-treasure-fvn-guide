@@ -4,6 +4,7 @@ project:
   type: website
   output-dir: _site
   resources:
+    - assets/portrait-blink/
     - assets/ai-beta/**
     - assets/favicon.svg
     - assets/favicon-32x32.png
