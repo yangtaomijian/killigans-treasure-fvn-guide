@@ -1,14 +1,14 @@
 <!-- Generated from story_map_contracts.json; edit its locale labels, not topology here. -->
-<div class="kt-story-map" data-map-id="journey" style="--kt-map-inline-height:260px;--kt-map-mobile-height:300px">
+<div class="kt-story-map" data-map-id="journey" style="--kt-map-inline-height:150px;--kt-map-mobile-height:300px">
 <p class="kt-map-title"><strong>Journey Overview: this release</strong></p>
-<p class="kt-map-hint" id="journey-hint">Select a node for the guide. Drag to pan; Ctrl / pinch to zoom. The full map supports wheel and trackpad, arrow keys, + / −, 0 / F to reset the view, and Esc to close.</p>
+<p class="kt-map-hint" id="journey-hint">Select a node to open its guide. Drag to pan; Ctrl-scroll or pinch to zoom. The full map supports wheel and trackpad, arrow keys, + / −, 0 / F to reset the view, and Esc to close.</p>
 <div class="kt-story-map-scroll" role="region" aria-label="Journey Overview: this release" aria-describedby="journey-hint" tabindex="0">
 
 ```mermaid
 %%{init: {"flowchart": {"curve": "linear", "nodeSpacing": 14, "rankSpacing": 8, "padding": 4}, "themeVariables": {"fontSize": "15px"}}}%%
 flowchart LR
     accTitle: Journey Overview: this release
-    accDescr: Region order and activity modes only. Select a node to open its journey guide. The map ends at the Public v0.57a cutoff.
+    accDescr: Follow the regions and their main activities. Select a node to open its guide.
     redroot["Redroot<br/>Town"]
     wilds["Redroot<br/>Wilds<br/>Travel"]
     aris["Aris<br/>Town /<br/>exploration"]
@@ -39,6 +39,6 @@ flowchart LR
 
 </div>
 <ol class="kt-map-compact-overview"><li><a href="guide/redroot.html#redroot">Redroot · Town</a></li><li><a href="guide/redroot.html#redroot-wilds">Redroot Wilds · Travel</a></li><li><a href="guide/aris.html#aris">Aris · Town / exploration</a></li><li><a href="guide/crystal-plains-shieldfall.html#crystal-plains">Crystal Plains · Travel</a></li><li><a href="guide/crystal-plains-shieldfall.html#question-mark-sequence">??? · Local activities</a></li><li><a href="guide/crystal-plains-shieldfall.html#shieldfall-vale">Shieldfall Vale · Travel / camp</a></li><li><a href="guide/spiceport.html#spiceport-early-excursions">Spiceport · Town / exploration</a></li><li><a href="guide/blueleaf-grove.html#blueleaf-grove">Blueleaf Grove · Camp / local activities</a></li><li><a href="guide/blueleaf-grove.html#where-public-v0.57a-ends">Public v0.57a cutoff</a></li></ol>
-<p class="kt-map-note">Region order and activity modes only. Select a node to open its journey guide. The map ends at the Public v0.57a cutoff.</p>
+<p class="kt-map-note">Follow the regions and their main activities. Select a node to open its guide.</p>
 <details class="kt-map-text-links"><summary>Text links</summary><p><a href="guide/redroot.html#redroot">Redroot · Town</a> · <a href="guide/redroot.html#redroot-wilds">Redroot Wilds · Travel</a> · <a href="guide/aris.html#aris">Aris · Town / exploration</a> · <a href="guide/crystal-plains-shieldfall.html#crystal-plains">Crystal Plains · Travel</a> · <a href="guide/crystal-plains-shieldfall.html#question-mark-sequence">??? · Local activities</a> · <a href="guide/crystal-plains-shieldfall.html#shieldfall-vale">Shieldfall Vale · Travel / camp</a> · <a href="guide/spiceport.html#spiceport-early-excursions">Spiceport · Town / exploration</a> · <a href="guide/blueleaf-grove.html#blueleaf-grove">Blueleaf Grove · Camp / local activities</a> · <a href="guide/blueleaf-grove.html#where-public-v0.57a-ends">Public v0.57a cutoff</a></p></details>
 </div>

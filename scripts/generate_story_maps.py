@@ -12,7 +12,9 @@ CONTRACT = json.loads((ROOT / 'scripts/story_map_contracts.json').read_text())
 ARROWS = {'optional': '-.->', 'confirmation': '==>', 'exclusion': '--x'}
 def generate(m, locale):
     mid=m['id'];title=m['title'][locale]
-    hint=('点击节点查正文；拖动平移，Ctrl／捏合缩放。完整图支持滚轮与触控板；方向键平移，＋／－缩放，0／F 重置视图，Esc 关闭。' if locale=='zh' else 'Select a node for the guide. Drag to pan; Ctrl / pinch to zoom. The full map supports wheel and trackpad, arrow keys, + / −, 0 / F to reset the view, and Esc to close.')
+    hint=('点击节点打开攻略；拖动平移，按住 Ctrl 滚轮缩放，或双指捏合。完整图支持滚轮与触控板；方向键平移，＋／－缩放，0／F 重置视图，Esc 关闭。' if locale=='zh' else 'Select a node to open its guide. Drag to pan; Ctrl-scroll or pinch to zoom. The full map supports wheel and trackpad, arrow keys, + / −, 0 / F to reset the view, and Esc to close.')
+    if mid != 'journey':
+        hint=hint.replace('点击节点打开攻略；拖动平移，按住 Ctrl 滚轮缩放，或双指捏合。','点击节点查正文；拖动平移，Ctrl／捏合缩放。').replace('Select a node to open its guide. Drag to pan; Ctrl-scroll or pinch to zoom.','Select a node for the guide. Drag to pan; Ctrl / pinch to zoom.')
     presentation=m.get('presentation',{})
     flowchart={'curve':'linear','nodeSpacing':22,'rankSpacing':28,'padding':10,**presentation.get('flowchart',{})}
     config={'flowchart':flowchart,'themeVariables':{'fontSize':'15px'}}

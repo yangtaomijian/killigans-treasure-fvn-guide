@@ -1,0 +1,18 @@
+/* Nodes remain real links; quiet default type and explicit hover/focus affordance. */
+:is(.kt-story-map,.kt-map-viewer) svg a .nodeLabel{text-decoration:none!important}
+:is(.kt-story-map,.kt-map-viewer) svg a:hover .nodeLabel{text-decoration:underline!important;text-underline-offset:3px}
+:is(.kt-story-map,.kt-map-viewer) svg a:focus-visible{outline:2px solid var(--kt-focus);outline-offset:3px}
+:is(.kt-story-map,.kt-map-viewer) svg a:focus-visible .nodeLabel{text-decoration:underline!important}
+/* One slate-blue family in both themes, across nodes, arrows and full viewer. */
+body.kt-home:not(.quarto-dark) :is(.kt-story-map,.kt-map-viewer){--kt-bg:#e7edf2;--kt-surface:#edf3f7;--kt-surface-panel:#dfe8ef;--kt-surface-muted:#d2dfe9;--kt-text:#273d4e;--kt-heading:#22394b;--kt-text-muted:#4b6273;--kt-link:#284e68;--kt-border:#a3b8c8;--kt-border-strong:#708da2;--kt-focus:#235d83;--kt-accent:#547d98;background:#dfe8ef;color:#273d4e;border-color:#a3b8c8}
+body.kt-home:not(.quarto-dark) .kt-map-text-links summary{background:#d2dfe9!important;color:#284e68!important;border-color:#a3b8c8!important}
+
+/* On narrow screens both leaves form one continuous sheet. The shared
+   intrinsic panel height, not the link count, owns its layered paper edge. */
+@media(max-width:767px){
+  #kt-reading .kt-home-entry,
+  #kt-reading.v9-tabs .kt-home-entry[hidden]{display:flex!important;flex-direction:column}
+  #kt-reading .kt-home-entry{box-shadow:3px 3px #b29c78,5px 5px #d8c49e,7px 7px #826647}
+  #kt-reading .v10-leaf-intro{flex:0 0 auto}
+  #kt-reading .v10-leaf-links{flex:1 0 auto;box-shadow:none;border-radius:0 0 7px 7px}
+}

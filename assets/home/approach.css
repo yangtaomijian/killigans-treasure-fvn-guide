@@ -1,0 +1,32 @@
+/* Camera approach and the actual interactive book, no duplicate or click gate. */
+.v4-night{transform:scale(calc(1.02 + var(--p,0)*.31));transform-origin:50% 66%}
+.v4-shortcuts{top:22px;bottom:auto;z-index:4}
+.v4-title{top:27%}
+body.kt-home #quarto-content{margin-top:-240px;padding-top:0;z-index:3;pointer-events:none}
+body.kt-home #quarto-document-content{pointer-events:auto}
+body.kt-home #quarto-content:before{top:240px;background:linear-gradient(to bottom,#0b1420 0%,#0b1420c9 26%,var(--bs-body-bg) 96%),url(camp-ai.webp) center 10%/cover no-repeat}
+body.kt-home .v4-notice{padding-top:0;color:#c4d1c9;text-shadow:0 1px 4px #000}
+#kt-reading.v5-book{animation:none!important;transform:perspective(1600px) translateY(calc((1 - var(--book-ready,1))*145px)) rotateX(calc((1 - var(--book-ready,1))*42deg)) scale(calc(.86 + var(--book-ready,1)*.14));transform-origin:50% 100%;will-change:transform;pointer-events:auto}
+.v4-reduced #kt-reading.v5-book{transform:none;will-change:auto}.v4-reduced body.kt-home #quarto-content{margin-top:0}
+@media(max-width:767px){body.kt-home #quarto-content{margin-top:-80px}.v4-shortcuts{top:16px;left:16px;right:16px;font-size:10px}.v4-shortcuts a{padding:8px 10px}.v4-title{top:34%}body.kt-home #quarto-content:before{top:80px}#kt-reading.v5-book{transform:none;will-change:auto}.v4-reduced body.kt-home #quarto-content{margin-top:0}}
+@media(prefers-reduced-motion:reduce){body.kt-home #quarto-content{margin-top:0}#kt-reading.v5-book{transform:none;will-change:auto}}
+#kt-reading.v5-book{transform-origin:50% 20%}
+#kt-reading.v5-book:target{transform:none!important}
+/* Interactive top-layer dialogs must not inherit the scene wrapper's hit-test pass-through. */
+body.kt-home #quarto-content dialog{pointer-events:auto}
+/* Scene controls sit at the viewport edges, independent of the book column. */
+.v4-shortcuts{left:max(24px,env(safe-area-inset-left));right:max(24px,env(safe-area-inset-right));top:12px}
+@media(max-width:767px){.v4-shortcuts{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));top:10px}.v4-shortcuts a,.v4-shortcuts button,.v4-shortcuts label{min-height:44px;display:inline-flex;align-items:center;box-sizing:border-box}}
+@media(max-width:767px){.v4-shortcuts button{margin-left:auto}}
+/* Keep motion control in the top row; the preference occupies a separate row. */
+@media(max-width:767px){.v4-shortcuts{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:6px 8px}.v4-shortcuts>a{grid-row:1}.v4-shortcuts>button{grid-column:3;grid-row:1;justify-self:end;white-space:nowrap;padding-inline:8px}.v4-shortcuts>label{grid-column:1/-1;grid-row:2;min-height:32px}}
+/* A retracting navbar must not leave a fixed 62px shelf above the scene. */
+.v4-stage{top:0}
+@media(max-width:991px){.v4-stage{top:var(--kt-mobile-panel-top,0px)}}
+/* Let the scene paint behind the retracting header, including the body's reserved header space. */
+body.kt-home .v4-journey{margin-top:calc(-1 * var(--kt-mobile-header-height,68px));padding-top:var(--kt-mobile-header-height,68px);box-sizing:content-box}
+body.kt-home .v4-stage{margin-top:calc(-1 * var(--kt-mobile-header-height,68px));height:100svh;top:0}
+.v4-shortcuts{top:calc(var(--kt-mobile-panel-top,68px) + 12px)}
+@media(max-width:767px){body.kt-home .v4-stage{height:82svh}.v4-shortcuts{top:calc(var(--kt-mobile-panel-top,109px) + 10px)}}
+@media(prefers-reduced-motion:reduce){body.kt-home .v4-stage{height:65svh}}
+.v4-reduced body.kt-home .v4-stage{height:65svh}

@@ -1,0 +1,9 @@
+#kt-reading.v9-tabs .kt-home-entry[hidden]{display:none!important}
+#kt-reading.v9-tabs .kt-home-entry{border:0!important;margin:0!important;padding:0!important}
+#kt-reading.v9-tabs .kt-home-entries{min-height:420px}
+#kt-reading.v9-tabs .v5-cover-inner{position:static}
+#kt-reading.v9-tabs .v5-cover nav [aria-selected=true]{color:#fff0bf!important;text-shadow:0 1px 2px #0008;border-bottom-color:#d9b779aa;background:linear-gradient(90deg,#d1b27f18,transparent)}
+#kt-reading.v9-tabs .v5-cover nav [aria-selected=true] b{opacity:1}
+#kt-reading.v9-tabs .kt-home-route{padding:10px 5px!important}
+#kt-reading.v9-tabs [role=tabpanel]:focus-visible{outline:2px solid #547678;outline-offset:5px}
+@media(max-width:767px){#kt-reading.v9-tabs .kt-home-entries{min-height:330px}.v9-tabs .v5-map{margin-top:9px}.v9-tabs .v5-cover nav a{padding:10px 0}}

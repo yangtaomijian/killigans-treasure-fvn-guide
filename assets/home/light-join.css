@@ -1,0 +1,6 @@
+/* Extend the night backdrop slightly under the scene boundary; no layout shift. */
+body.kt-home #quarto-content::before{top:220px}
+@media(max-width:767px){body.kt-home #quarto-content::before{top:60px}}
+/* A mist-toned map surface makes the light-page return gentler than pure white. */
+body.kt-home:not(.quarto-dark) :is(#旅程导航图,#journey-navigation-map)>h2{color:#f0f4ef!important;background:transparent!important;border-color:#9daeb5!important;text-shadow:0 1px 3px #13202d66}
+body.kt-home:not(.quarto-dark) .kt-story-map{--kt-bg:#e2e8e5;--kt-surface:#dfe6e2;--kt-surface-panel:#e4eae7;--kt-surface-muted:#d5ded9;--kt-text:#293b3e;--kt-heading:#24383d;--kt-text-muted:#465d61;--kt-border:#a6b7b6;--kt-link:#294e59;--kt-border-strong:#728e92;background:#dfe6e2;border-color:#a6b7b6;box-shadow:0 12px 28px #07111a18}

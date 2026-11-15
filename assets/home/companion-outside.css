@@ -1,0 +1,18 @@
+/* Companion sits beside the physical book, never replaces its ink illustrations. */
+.v12-book-companion{position:absolute;left:-178px;bottom:0;width:185px;height:177px;pointer-events:none;z-index:5}
+.v12-book-companion:before,.v12-scene-companion:before{content:"";position:absolute;bottom:-3px;left:5%;width:90%;height:16px;border-radius:50%;background:radial-gradient(ellipse,#020811aa,transparent 70%);z-index:-1}
+.v12-book-companion img,.v12-scene-companion img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(2px 4px 3px #02081255)}
+.v12-scene-companion{display:none}
+@media(max-width:1230px){.v12-book-companion{display:none}.v12-scene-companion{display:block;position:absolute;right:6%;bottom:102px;width:clamp(110px,19vw,180px);height:clamp(104px,18vw,172px);opacity:var(--night,0);pointer-events:none;isolation:isolate}}
+@media(max-width:767px){.v12-scene-companion{right:5%;bottom:38px;width:118px;height:112px}}
+/* Align title with copy; keep AnchorJS permalink out of text line wrapping. */
+#kt-reading .v10-leaf-intro h3{padding-left:0!important;margin-top:0!important;margin-bottom:14px!important;text-indent:0!important}
+#kt-reading .v10-leaf-intro h3 .anchorjs-link{position:absolute!important;right:100%;top:.2em;margin:0!important;padding:0 4px 0 0!important;font-size:15px!important}
+@media(max-width:767px){#kt-reading .v10-leaf-intro h3{margin-bottom:10px!important}}
+/* One continuous paper stack prevents opposing hard shadows making a stepped notch. */
+@media(min-width:768px){
+#kt-reading .kt-home-entries,body.quarto-dark #kt-reading .kt-home-entries{border-radius:7px;box-shadow:0 2px 0 #c6b38c,0 4px 0 #b09a72,0 5px 2px #6c5438}
+#kt-reading .v10-leaf-intro{box-shadow:inset 1px 0 #faf0cc}
+#kt-reading .v10-leaf-links{box-shadow:inset -1px 0 #eadbb8}
+#kt-reading .v10-leaf-intro::after{bottom:-3px;border-radius:0 0 50% 50%;background:linear-gradient(90deg,#61492b22,#38261788 50%,#81623922)}
+}

@@ -1,0 +1,22 @@
+.v10-camp-sketch{display:block;width:100%;max-width:270px;height:155px;object-fit:contain;margin:6px auto 0;mix-blend-mode:multiply;pointer-events:none}
+.v10-imprint{font:8px/1.5 Georgia,serif;letter-spacing:.18em;color:#8f7755;border-top:1px solid #9f865143;padding-top:9px;margin-top:5px;text-align:center}
+.v10-leaf-links{padding-top:31px;padding-bottom:40px}
+.v10-page-mark{position:absolute;bottom:15px;right:27px;font:italic 13px Georgia,serif;color:#947650}
+#kt-reading .kt-home-route-list{counter-reset:entry}
+#kt-reading .kt-home-route-list li{counter-increment:entry;border-bottom:1px solid #91754b38}
+#kt-reading .kt-home-route-list li:last-child{border:0}
+#kt-reading .kt-home-route:before{content:counter(entry,decimal-leading-zero);font:italic 11px Georgia,serif;color:#9b7a4d;margin-right:11px;flex:none}
+#kt-reading .kt-home-route{min-height:49px!important}
+@media(max-width:767px){.v10-camp-sketch{float:right;width:105px;height:71px;margin:-2px -5px 0 8px}.v10-imprint{display:none}.v10-leaf-intro{display:flow-root}.v10-leaf-links{padding-top:6px}.v10-page-mark{bottom:9px;font-size:11px}}
+#kt-reading .kt-home-route>span:first-child{flex:1;text-align:left}
+.v10-help-all{display:inline-block;margin:21px 4px 9px;font:13px/1.6 Georgia,"Songti SC",serif;color:#635034!important;text-underline-offset:4px}
+/* Share one intrinsic grid row: tallest category determines the book height.
+   Hidden panels contribute size but remain invisible, unfocusable and inert.
+   No-JS pages do not get v9-tabs, so their sections remain sequential. */
+#kt-reading.v9-tabs .kt-home-entries{display:grid!important;grid-template-columns:minmax(0,1fr);align-items:stretch}
+#kt-reading.v9-tabs .kt-home-entry{grid-area:1 / 1;align-self:stretch}
+#kt-reading.v9-tabs .kt-home-entry[hidden]{display:grid!important;visibility:hidden;pointer-events:none}
+@media(max-width:767px){#kt-reading.v9-tabs .kt-home-entry[hidden]{display:block!important}}
+#kt-reading .v10-reference-panel .kt-home-route{min-height:96px!important;align-items:center}
+.v10-route-copy{display:block}.v10-route-copy small{display:block;margin-top:8px;color:#786348;font:12px/1.65 Georgia,"Songti SC",serif}
+@media(max-width:767px){#kt-reading .v10-reference-panel .kt-home-route{min-height:0!important}.v10-route-copy small{font-size:11px;margin-top:5px}}

@@ -31,7 +31,7 @@ def enhance(text, locale, route):
     if 'id="kt-discovery-style"' in text:
         return text
     if route == 'index':
-        text = entry_routes(text, locale)
+        text = text if 'v10-leaf-intro' in text else entry_routes(text, locale)
     depth = '../' if locale == 'en' else ''
     head = f'<link id="kt-discovery-style" rel="stylesheet" href="{depth}assets/kt-discovery.css">\n'
     return text.replace('</head>', head + '</head>', 1)

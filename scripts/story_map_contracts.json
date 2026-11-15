@@ -791,7 +791,7 @@
       "id": "journey",
       "page": "index",
       "title": {
-        "zh": "Journey Overview：当前版本旅程",
+        "zh": "当前版本旅程",
         "en": "Journey Overview: this release"
       },
       "direction": "LR",
@@ -799,7 +799,7 @@
         {
           "id": "redroot",
           "label": {
-            "zh": "红根镇<br/>Town",
+            "zh": "红根镇<br/>城镇",
             "en": "Redroot<br/>Town"
           },
           "href": {
@@ -811,7 +811,7 @@
         {
           "id": "wilds",
           "label": {
-            "zh": "红根镇荒野<br/>Travel",
+            "zh": "红根镇荒野<br/>行进",
             "en": "Redroot Wilds<br/>Travel"
           },
           "href": {
@@ -823,7 +823,7 @@
         {
           "id": "aris",
           "label": {
-            "zh": "阿瑞斯<br/>Town / exploration",
+            "zh": "阿瑞斯<br/>城镇／探索",
             "en": "Aris<br/>Town / exploration"
           },
           "href": {
@@ -835,7 +835,7 @@
         {
           "id": "plains",
           "label": {
-            "zh": "水晶平原<br/>Travel",
+            "zh": "水晶平原<br/>行进",
             "en": "Crystal Plains<br/>Travel"
           },
           "href": {
@@ -847,7 +847,7 @@
         {
           "id": "unknown",
           "label": {
-            "zh": "???<br/>Local activities",
+            "zh": "???<br/>当地活动",
             "en": "???<br/>Local activities"
           },
           "href": {
@@ -859,7 +859,7 @@
         {
           "id": "vale",
           "label": {
-            "zh": "盾落谷<br/>Travel / camp",
+            "zh": "盾落谷<br/>行进／营地",
             "en": "Shieldfall Vale<br/>Travel / camp"
           },
           "href": {
@@ -871,7 +871,7 @@
         {
           "id": "spice",
           "label": {
-            "zh": "斯派斯港<br/>Town / exploration",
+            "zh": "斯派斯港<br/>城镇／探索",
             "en": "Spiceport<br/>Town / exploration"
           },
           "href": {
@@ -883,7 +883,7 @@
         {
           "id": "grove",
           "label": {
-            "zh": "蓝叶森林<br/>Camp / local activities",
+            "zh": "蓝叶森林<br/>营地／当地活动",
             "en": "Blueleaf Grove<br/>Camp / local activities"
           },
           "href": {
@@ -895,7 +895,7 @@
         {
           "id": "cutoff",
           "label": {
-            "zh": "Public v0.57a cutoff",
+            "zh": "Public v0.57a<br/>版本终点",
             "en": "Public v0.57a cutoff"
           },
           "href": {
@@ -980,11 +980,11 @@
         }
       ],
       "note": {
-        "zh": "只显示地区顺序与活动模式；点击节点回到旅程页。本图到 Public v0.57a 当前截止位置为止。",
-        "en": "Region order and activity modes only. Select a node to open its journey guide. The map ends at the Public v0.57a cutoff."
+        "zh": "按顺序查看各地区及主要活动；点击节点打开对应攻略。",
+        "en": "Follow the regions and their main activities. Select a node to open its guide."
       },
       "presentation": {
-        "inlineHeight": 260,
+        "inlineHeight": 150,
         "mobileHeight": 300,
         "flowchart": {
           "nodeSpacing": 14,

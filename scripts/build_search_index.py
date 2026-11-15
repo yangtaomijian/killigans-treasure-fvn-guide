@@ -197,6 +197,10 @@ def build_locale(locale):
             raise ValueError(f"Missing page title/content: {path}")
         title = clean(label(title_node))
         intro = direct_paragraph(level1)
+        if route == "index.html":
+            notes = next((node for node in main.walk() if node.tag == "details" and "v4-intro" in classes(node)), None)
+            if notes is not None:
+                intro = direct_paragraph(notes)
         if route == "reference/combat.html":
             # Its version line is a separate paragraph after the editorial pass.
             intro = next((clean(label(p)) for p in level1.children("p")

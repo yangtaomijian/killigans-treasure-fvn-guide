@@ -17,7 +17,7 @@ MAIN_RE = re.compile(
     r'(?:(<p class="kt-home-eyebrow">([^<]+)</p>)\s*)?'
     r'(?:(<nav class="kt-page-breadcrumb" aria-label="([^"]+)">'
     r'<ol>(.*?)</ol></nav>)\s*)?'
-    r'<h1\b[^>]*>.*?</h1>\s*<p\b[^>]*>.*?</p>', re.S,
+    r'<h1\b[^>]*>.*?</h1>\s*(?:<p\b[^>]*>.*?</p>|<section\b[^>]*id="kt-reading")', re.S,
 )
 LINK_RE = re.compile(r'<li><a href="([^"]+)">([^<]+)</a></li>')
 CURRENT_RE = re.compile(r'<li aria-current="page">([^<]+)</li>')

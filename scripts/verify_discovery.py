@@ -26,9 +26,11 @@ def main():
                 assert len(entries) == 4
                 hrefs = [n.attrs['href'].removeprefix('./') for entry in entries for n in entry.walk() if n.tag == 'a' and not n.attrs.get('class') == 'anchorjs-link']
                 expected = ['guide/redroot.html', 'guide/aris.html', 'guide/crystal-plains-shieldfall.html', 'guide/spiceport.html', 'guide/blueleaf-grove.html', 'reference/relationships.html', 'reference/personality.html', 'reference/combat.html', 'collectibles/memories.html', 'collectibles/codex.html', 'collectibles/equipment.html', 'collectibles/dressing-room.html', 'help.html']
+                help_anchors = (['没有旧存档还能从哪里继续','看过画面为什么某条-memories-仍锁着','提示拿到了东西却找不到','这些状态分别保存了什么'] if locale == 'zh' else ['no-old-save-where-can-i-continue','i-saw-the-scene.-why-is-its-memory-locked','i-got-an-item-notification-but-where-is-it','what-does-each-kind-of-state-keep'])
+                expected[-1:] = ['help.html#'+anchor for anchor in help_anchors] + ['help.html']
                 assert hrefs == expected, (locale, hrefs)
                 routes = [n for entry in entries for n in entry.walk() if 'kt-home-route' in n.attrs.get('class', '').split()]
-                assert len(routes) == 13
+                assert len(routes) == 16
                 assert all(not any(n.tag == 'a' for n in heading.walk()) for entry in entries for heading in entry.children('h3'))
                 assert all(n.tag == 'a' and len(n.children('span')) == 2 and n.children('span')[1].attrs.get('aria-hidden') == 'true' for n in routes)
                 assert all(key in nodes for key in ['kt-reading', 'kt-official', 'site-info', 'kt-site-info', 'kt-credits'])

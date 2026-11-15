@@ -1,0 +1,25 @@
+/* Private homepage only: the map inherits the blue-fire night, not brown cards. */
+body.kt-home.quarto-dark :is(.kt-story-map,.kt-map-viewer){
+ --kt-bg:#101b26;--kt-surface:#172736;--kt-surface-panel:#142330;--kt-surface-muted:#213647;
+ --kt-text:#e2e9eb;--kt-heading:#edf1ec;--kt-text-muted:#b5c5cd;--kt-link:#d7e8ed;
+ --kt-border:#344c5c;--kt-border-strong:#728c9b;--kt-focus:#b4dfed;--kt-accent:#aac9d4;
+ background:#142330;color:var(--kt-text);border-color:#344c5c;
+ box-shadow:0 16px 38px #0002;
+}
+body.kt-home.quarto-dark .kt-map-compact-overview a,body.kt-home.quarto-dark .kt-map-text-links a,body.kt-home.quarto-dark .kt-map-text-links summary{color:#d7e8ed}
+body.kt-home.quarto-dark .v4-intro{background:#152330;border-color:#344c5c;border-left-color:#9bb4bd;color:#e2e9eb}
+body.kt-home.quarto-dark .v4-intro summary{color:#e2e9eb}
+body.kt-home.quarto-dark :is(#旅程导航图,#journey-navigation-map)>h2{background:transparent!important;border-color:#738d9b!important;color:#e2e9eb!important}
+body.kt-home.quarto-dark .v4-intro{background:#152330!important;border-color:#344c5c!important;border-left-color:#9bb4bd!important;color:#e2e9eb!important}
+/* Reading notes live inside the night scene in both themes. Keep this local
+   surface independent from the light article-page palette. */
+body.kt-home:not(.quarto-dark) .v4-intro{background:#20313f!important;border:1px solid #526777!important;border-left:3px solid #a7bcc6!important;color:#e5ecee!important;box-shadow:0 12px 28px #07111a20}
+body.kt-home:not(.quarto-dark) .v4-intro :is(summary,p,strong){color:#e5ecee!important;background:transparent!important}
+body.kt-home:not(.quarto-dark) .v4-intro summary{border-color:#526777!important}
+body.kt-home:not(.quarto-dark) .v4-intro summary::marker{color:#b5d1db}
+body.kt-home:not(.quarto-dark) .v4-intro a{color:#d4eaf4!important;text-decoration:underline;text-underline-offset:3px}
+body.kt-home .v4-intro summary:focus-visible,body.kt-home .v4-intro a:focus-visible{outline:2px solid #b9dfe9!important;outline-offset:3px}
+body.kt-home .v4-intro summary{background:transparent!important;color:inherit!important}
+/* Uniform rounded border avoids the mixed-width corner join in WebKit. */
+body.kt-home:not(.quarto-dark) .v4-intro{border:1px solid #526777!important;box-shadow:inset 2px 0 0 #a7bcc6,0 12px 28px #07111a20;background-clip:padding-box;border-radius:5px}
+body.kt-home.quarto-dark .v4-intro{border:1px solid #344c5c!important;box-shadow:inset 2px 0 0 #9bb4bd;background-clip:padding-box;border-radius:5px}
