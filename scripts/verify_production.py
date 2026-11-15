@@ -4,10 +4,11 @@ import hashlib
 import os
 import re
 import struct
+from html import unescape
 from html.parser import HTMLParser
 from xml.etree import ElementTree as ET
 
-from enhance_production import FAVICON_ASSETS, ORIGIN, SOCIAL_IMAGES, canonical
+from enhance_production import FAVICON_ASSETS, ORIGIN, SOCIAL_IMAGES, PAGE_DESCRIPTIONS, canonical
 from verify_render import OUTPUT, PAGES, SITE
 
 
@@ -50,6 +51,7 @@ def main():
         assert hashlib.sha256((SITE / relative).read_bytes()).hexdigest() == digest, relative + ': public content checksum drift'
     assert not any((OUTPUT / prefix / "about.html").exists() for prefix in ("", "en/")), "About pages must be absent"
     expected = set()
+    seen_titles, seen_summaries = set(), set()
     for locale in ('', 'en/'):
         for page in PAGES:
             relative = locale + page + '.html'
@@ -69,6 +71,21 @@ def main():
                 if key in ('og:image', 'twitter:image'): assert values[0] == ORIGIN + '/' + SOCIAL_IMAGES['en' if locale else 'zh']
                 if key in ('og:image:type', 'og:image:width', 'og:image:height', 'twitter:card'):
                     assert values[0] == {'og:image:type':'image/png', 'og:image:width':'1200', 'og:image:height':'630', 'twitter:card':'summary_large_image'}[key], relative
+            title = unescape(re.search(r'<title>(.*?)</title>', source, re.S).group(1))
+            assert title not in seen_titles, relative + ': duplicate title'
+            seen_titles.add(title)
+            summary_value = next(x['content'] for x in h.meta if x.get('name') == 'description')
+            assert summary_value not in seen_summaries, relative + ': duplicate description'
+            seen_summaries.add(summary_value)
+            assert 'Killigan’s Treasure' in title, relative + ': missing game identity in title'
+            if page != 'index':
+                heading = unescape(re.sub(r'<[^>]+>', '', re.search(r'<h1\b[^>]*>(.*?)</h1>', source, re.S).group(1))).strip()
+                assert title.startswith(heading + ' · '), relative + ': title must describe the visible page'
+                summary = PAGE_DESCRIPTIONS[page][int(bool(locale))]
+                for key in ('description', 'og:description', 'twitter:description'):
+                    assert [x['content'] for x in h.meta if x.get('property', x.get('name')) == key] == [summary], relative + ': summary mismatch'
+            for key in ('og:title', 'twitter:title'):
+                assert [x['content'] for x in h.meta if x.get('property', x.get('name')) == key] == [title], relative + ': title mismatch'
             assert source.count('class="kt-publication-footer"') == 1, relative
             assert source.count('data-kt-analytics') == int(bool(os.environ.get('KT_CF_ANALYTICS_TOKEN'))), relative + ': analytics injection count'
             assert 'kt-discussion-environment' in source and 'kt-discussion-api' in source
