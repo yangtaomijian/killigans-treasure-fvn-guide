@@ -11,6 +11,8 @@ project:
     - assets/apple-touch-icon.png
     - assets/social/killigans-treasure-guide-zh.png
     - assets/social/killigans-treasure-guide-en.png
+    - assets/social/killigans-treasure-camp-zh.png
+    - assets/social/killigans-treasure-camp-en.png
     - "!en/_site/**"
   render:
     - index.md

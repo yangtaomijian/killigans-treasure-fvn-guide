@@ -103,11 +103,16 @@ def main():
         assert all(link.get('href') in expected for link in links)
     for locale in ('zh','en'):
         image = SOCIAL_IMAGES[locale]
-        assert image == f'assets/social/killigans-treasure-guide-{locale}.png', 'Social-card filenames must remain version-agnostic'
+        assert image == f'assets/social/killigans-treasure-camp-{locale}.png', 'Social-card filenames must remain version-agnostic'
         source_asset, target_asset = SITE / image, OUTPUT / image
         assert source_asset.is_file() and target_asset.is_file(), image
         assert png_size(source_asset) == png_size(target_asset) == (1200, 630), image
         assert source_asset.read_bytes() == target_asset.read_bytes(), image + ': output differs from source asset'
+    # Historical social URLs remain byte-identical for cached embeds.
+    legacy_social = {'assets/social/killigans-treasure-guide-zh.png': '72ebe102a447944ce170aee57875365eb5e4072421de672001ff9ad543a50863', 'assets/social/killigans-treasure-guide-en.png': '6bf452d40adbdacfccc4575493271f6ce5a49340ce5141bd3255497493488b8b'}
+    for image, digest in legacy_social.items():
+        for root in (SITE, OUTPUT):
+            assert hashlib.sha256((root / image).read_bytes()).hexdigest() == digest, image + ": historical social asset changed"
     svg = ET.parse(SITE / 'assets/favicon.svg').getroot()
     assert svg.get('width') == svg.get('height') == '64' and svg.get('viewBox') == '0 0 64 64'
     for locale in ('', 'en/'):

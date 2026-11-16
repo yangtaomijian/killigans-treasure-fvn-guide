@@ -12,7 +12,7 @@ from verify_render import OUTPUT, PAGES, SITE
 
 ORIGIN = "https://killigans-treasure.carambi.com"
 FAVICON_ASSETS = ('favicon.svg', 'favicon-32x32.png', 'apple-touch-icon.png')
-SOCIAL_IMAGES = {locale: f'assets/social/killigans-treasure-guide-{locale}.png' for locale in ('zh', 'en')}
+SOCIAL_IMAGES = {locale: f'assets/social/killigans-treasure-camp-{locale}.png' for locale in ('zh', 'en')}
 
 
 # Page-specific summaries describe existing public content; guide prose stays untouched.
