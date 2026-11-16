@@ -53,6 +53,8 @@ cp "$site_dir/assets/kt-mobile-header.css" "$site_dir/_site/assets/kt-mobile-hea
 cp "$site_dir/assets/kt-mobile-header.js" "$site_dir/_site/assets/kt-mobile-header.js"
 python3 -B "$site_dir/scripts/enhance_mobile_header.py"
 python3 -B "$site_dir/scripts/enhance_ask_guide.py"
+python3 -B "$site_dir/scripts/enhance_collection_finders.py"
+python3 -B "$site_dir/scripts/verify_collection_finders.py"
 find "$site_dir/_site" -type f -name .DS_Store -exec rm -f {} +
 python3 -B "$site_dir/scripts/enhance_homepage.py"
 python3 -B "$site_dir/scripts/enhance_production.py"
