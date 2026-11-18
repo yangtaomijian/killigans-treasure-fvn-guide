@@ -30,3 +30,38 @@ body.kt-home .v4-stage{margin-top:calc(-1 * var(--kt-mobile-header-height,68px))
 @media(max-width:767px){body.kt-home .v4-stage{height:100svh}.v4-shortcuts{top:calc(var(--kt-mobile-panel-top,109px) + 10px)}}
 @media(prefers-reduced-motion:reduce){body.kt-home .v4-stage{height:65svh}}
 .v4-reduced body.kt-home .v4-stage{height:65svh}
+
+.kt-cover-heading { position: absolute; left: 8%; right: 8%; top: 27%; pointer-events: none; }
+.kt-cover-heading .v4-title { position: static; }
+.kt-cover-links { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.kt-cover-links a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 8px 15px;
+  width: fit-content; pointer-events: auto; font-size: 13px; text-decoration: none;
+  background: #14283ce6; color: #fff; border: 1px solid #a6c7c875; border-radius: 3px;
+}
+.kt-cover-links a:first-child { background: #e3ebe1; color: #18342d; font-weight: 650; }
+.kt-cover-links a:focus-visible { outline: 3px solid #7fe8ee; outline-offset: 3px; }
+@media (max-width: 767px) {
+  .kt-cover-heading + .v4-shortcuts {
+    grid-template-columns: minmax(0, 1fr) auto; align-items: center;
+  }
+  .kt-cover-heading + .v4-shortcuts > label {
+    grid-area: 1 / 1; justify-self: start; min-height: 44px; margin: 0;
+  }
+  .kt-cover-heading + .v4-shortcuts > button { grid-area: 1 / 2; }
+  .kt-cover-heading { top: 34%; left: 24px; right: 18px; }
+  .kt-cover-links { gap: 8px; margin-top: 10px; }
+  .kt-cover-links a { font-size: 12px; padding-inline: 12px; }
+}
+@media (max-width: 767px) and (min-height: 760px) {
+  .kt-cover-links { position: absolute; bottom: calc(100% + 12px); margin: 0; }
+}
+@media (max-width: 767px) and (max-height: 759px) {
+  .kt-cover-heading { display: contents; }
+  .kt-cover-heading .v4-title { position: absolute; top: max(34%, calc(var(--kt-mobile-panel-top, 109px) + 118px)); }
+  .kt-cover-links {
+    position: absolute; z-index: 5; left: max(12px, env(safe-area-inset-left));
+    top: calc(var(--kt-mobile-panel-top, 109px) + 62px); margin: 0;
+  }
+  .kt-cover-links a { font-size: 10px; padding: 8px 10px; }
+}
