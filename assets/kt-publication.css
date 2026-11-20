@@ -74,6 +74,11 @@
   }
 }
 
+#quarto-header #navbarCollapse .navbar-nav.me-auto > .nav-item > .nav-link {
+  font-size: .93rem;
+  font-weight: 540;
+}
+
 #quarto-header .navbar-nav .nav-link {
   color: var(--kt-text-muted);
   border-radius: var(--kt-radius-sm);
